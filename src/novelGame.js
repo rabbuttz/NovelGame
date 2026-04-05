@@ -637,7 +637,7 @@ function applySay(payload, state, ui) {
   state.lastSpeakerLabel = speaker.label;
   state.lastSpeakerCharacterId = speaker.characterId;
   state.lastSpeakerPosition = speaker.position;
-  renderSpeakerBadge(ui, speaker.label, speaker.position);
+  renderSpeakerBadge(ui, speaker.label, speaker.position, speaker.characterId);
   ui.message.textContent = interpolateText(String(payload.text ?? ""), state.variables);
   ui.advanceButton.disabled = false;
 }
@@ -888,9 +888,10 @@ function clearChoices(ui) {
   ui.choices.innerHTML = "";
 }
 
-function renderSpeakerBadge(ui, label, position) {
+function renderSpeakerBadge(ui, label, position, characterId) {
   ui.speaker.textContent = label;
   ui.speaker.dataset.position = position ?? "narration";
+  ui.speaker.dataset.character = characterId ?? "";
 }
 
 function syncSpeakerBadgePosition(state, ui) {
@@ -900,7 +901,7 @@ function syncSpeakerBadgePosition(state, ui) {
 
   const position = findSpritePositionByCharacter(state.lastSpeakerCharacterId, state) ?? "narration";
   state.lastSpeakerPosition = position;
-  renderSpeakerBadge(ui, state.lastSpeakerLabel, position);
+  renderSpeakerBadge(ui, state.lastSpeakerLabel, position, state.lastSpeakerCharacterId);
 }
 
 function resolveSpeaker(speaker, state) {

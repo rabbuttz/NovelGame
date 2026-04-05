@@ -342,7 +342,9 @@ body {
   transition:
     left 420ms cubic-bezier(0.22, 1, 0.36, 1),
     transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
-    background 220ms ease;
+    background 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
 }
 
 .speaker-badge[data-position="narration"] {
@@ -363,6 +365,63 @@ body {
 .speaker-badge[data-position="right"] {
   --speaker-left: 80%;
   --speaker-shift: -50%;
+}
+
+/* ── キャラクター別カラー ──────────────────────────────────── */
+.speaker-badge[data-character="きりゅう"] {
+  background: linear-gradient(180deg, #62d2f2 0%, #2898d0 100%);
+  border-color: #3abce0;
+  box-shadow: 0 6px 0 rgba(26, 118, 164, 0.30);
+  text-shadow: 0 2px 0 rgba(18, 88, 128, 0.40);
+}
+
+.speaker-badge[data-character="アガサ"] {
+  background: linear-gradient(180deg, #7898d8 0%, #4468b0 100%);
+  border-color: #5878b8;
+  box-shadow: 0 6px 0 rgba(48, 72, 128, 0.30);
+  text-shadow: 0 2px 0 rgba(32, 54, 100, 0.40);
+}
+
+.speaker-badge[data-character="あむ"] {
+  background: linear-gradient(180deg, #f09040 0%, #cc5e18 100%);
+  border-color: #e07828;
+  box-shadow: 0 6px 0 rgba(156, 72, 14, 0.30);
+  text-shadow: 0 2px 0 rgba(120, 50, 8, 0.40);
+}
+
+.speaker-badge[data-character="うきわ"] {
+  background: linear-gradient(180deg, #3e82e8 0%, #1a52c8 100%);
+  border-color: #2a68d8;
+  box-shadow: 0 6px 0 rgba(16, 52, 138, 0.30);
+  text-shadow: 0 2px 0 rgba(10, 36, 100, 0.40);
+}
+
+.speaker-badge[data-character="ぐら"] {
+  background: linear-gradient(180deg, #8aa4b8 0%, #587488 100%);
+  border-color: #6e8ea8;
+  box-shadow: 0 6px 0 rgba(52, 78, 96, 0.28);
+  text-shadow: 0 2px 0 rgba(36, 56, 72, 0.36);
+}
+
+.speaker-badge[data-character="すずどら"] {
+  background: linear-gradient(180deg, #c83858 0%, #801858 100%);
+  border-color: #a02048;
+  box-shadow: 0 6px 0 rgba(96, 14, 58, 0.34);
+  text-shadow: 0 2px 0 rgba(64, 8, 40, 0.44);
+}
+
+.speaker-badge[data-character="ねむのみ"] {
+  background: linear-gradient(180deg, #c87830 0%, #8a4e10 100%);
+  border-color: #a86220;
+  box-shadow: 0 6px 0 rgba(106, 54, 8, 0.30);
+  text-shadow: 0 2px 0 rgba(78, 36, 4, 0.40);
+}
+
+.speaker-badge[data-character="餅虎"] {
+  background: linear-gradient(180deg, #7060c8 0%, #3838a0 100%);
+  border-color: #5848b8;
+  box-shadow: 0 6px 0 rgba(42, 34, 108, 0.30);
+  text-shadow: 0 2px 0 rgba(26, 20, 76, 0.40);
 }
 
 .text-box {

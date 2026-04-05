@@ -1,0 +1,480 @@
+title: アーク・ノクスの最後の整備士 第一章 接舷
+dateLabel: 記録開始
+
+variables:
+  flags:
+    heardRumor: false
+    trustedKiryu: false
+    watchedSuzudora: false
+    checkedTerminal: false
+    warnedUkiwa: false
+    comfortedMochitora: false
+    sawManualKey: false
+    chapter1Clear: false
+
+characters:
+  きりゅう:
+    name: きりゅう
+  アガサ:
+    name: アガサ
+  あむ:
+    name: あむ
+  うきわ:
+    name: うきわ
+  ぐら:
+    name: ぐら
+  すずどら:
+    name: すずどら
+  ねむのみ:
+    name: ねむのみ
+  餅虎:
+    name: 餅虎
+
+start: intro
+
+nodes:
+  intro:
+    - date: 接舷前
+    - background: station-evening
+    - say:
+        text: 灰色の海の上を、小型艇が風を裂いて進んでいた。行き先は、沈んだはずの封鎖船《アーク・ノクス》。
+    - say:
+        text: 船体に残された文字はかすれている。それでも、その名だけははっきり読めた。
+    - show:
+        character: アガサ
+        expression: default
+        position: left
+    - show:
+        character: きりゅう
+        expression: default
+        position: center
+    - show:
+        character: あむ
+        expression: default
+        position: right
+    - say:
+        speaker: きりゅう
+        text: 着いたら散るな。甲板に降りたら、俺の後ろを歩け。
+    - say:
+        speaker: あむ
+        text: はいはい、隊長殿。最初から空気が重すぎ。もっと気楽に行こうぜ。
+    - say:
+        speaker: アガサ
+        text: そう言いながら、一番まわりを見てるのはきみだけどねえ。
+    - goto: group_intro
+
+  group_intro:
+    - hide: {}
+    - show:
+        character: うきわ
+        expression: default
+        position: left
+    - show:
+        character: ぐら
+        expression: default
+        position: center
+    - show:
+        character: ねむのみ
+        expression: default
+        position: right
+    - say:
+        speaker: うきわ
+        text: ぼく、荷物運ぶ！ 掃除でも見張りでも、できることいっぱいやるよ！
+    - say:
+        speaker: ぐら
+        text: ん……動力が少しでも生きてたら、たぶん調べられる。たぶん。
+    - say:
+        speaker: ねむのみ
+        text: 無理はしないでね。嫌な感じがしたら、すぐ言っていいから。
+    - hide: {}
+    - show:
+        character: 餅虎
+        expression: default
+        position: left
+    - show:
+        character: すずどら
+        expression: default
+        position: right
+    - say:
+        speaker: 餅虎
+        text: こんなに引っ張ってきたんだから、退屈なハズレだったら許さないんだけど。
+    - say:
+        speaker: すずどら
+        text: 宝を漁りに来たつもりなら、引き返すがいい。あれは墓だ。
+    - say:
+        text: 艇内の空気が一段冷えた。誰も冗談とは受け取らなかった。
+    - goto: pre_board_choice
+
+  pre_board_choice:
+    - hide: {}
+    - show:
+        character: アガサ
+        expression: default
+        position: left
+    - show:
+        character: きりゅう
+        expression: default
+        position: center
+    - show:
+        character: すずどら
+        expression: default
+        position: right
+    - say:
+        text: 接舷まで、あとわずか。誰の言葉を拾うかで、船の見え方が少しだけ変わる。
+    - choice:
+        options:
+          - text: アガサに、この船の噂を聞く
+            set:
+              flags.heardRumor: true
+            goto: ask_agasa
+          - text: きりゅうに、今回の役割を確認する
+            set:
+              flags.trustedKiryu: true
+            goto: ask_kiryu
+          - text: すずどらの様子を見張る
+            set:
+              flags.watchedSuzudora: true
+            goto: watch_suzudora
+
+  ask_agasa:
+    - say:
+        speaker: アガサ
+        text: 選別船、って呼ばれてたよ。生きて出た者がいないから、尾ひれがついてるのかもしれないけどね。
+    - say:
+        speaker: アガサ
+        text: ただ、こういう噂はだいたい半分だけ本当だ。困るのは、その半分がいつもいちばん嫌な部分だってことさ。
+    - goto: approach
+
+  ask_kiryu:
+    - say:
+        speaker: きりゅう
+        text: 俺が先導する。ぐらが動力、アガサが記録確認、あむが索敵。うきわとねむのみは後ろの面倒を見ろ。
+    - say:
+        speaker: きりゅう
+        text: 何があっても、勝手に一人で動くな。守るべき相手を見失うのが一番まずい。
+    - goto: approach
+
+  watch_suzudora:
+    - say:
+        text: すずどらは窓の外の艦影を、まばたきもせず見ていた。獲物を見る目ではない。古い傷を見る目だった。
+    - say:
+        speaker: すずどら
+        text: 監視は好きにしろ。だが目を離すな。ここでは、知っている者ほど先に死ぬ。
+    - goto: approach
+
+  approach:
+    - date: 甲板接舷
+    - background: station-evening
+    - hide: {}
+    - show:
+        character: きりゅう
+        expression: default
+        position: center
+    - say:
+        text: 小型艇が古びた甲板に接続され、重い音とともに固定される。外では黒い雲が低く渦を巻いていた。
+    - say:
+        speaker: きりゅう
+        text: 降りる。前だけ見ろ。
+    - if:
+        condition: flags.heardRumor == true
+        then: rumor_echo
+        else: boarding_entry
+
+  rumor_echo:
+    - show:
+        character: アガサ
+        expression: default
+        position: left
+    - say:
+        speaker: アガサ
+        text: もし妙な放送が流れても、慌てないこと。古い船は、時々いやな形で礼儀正しいから。
+    - goto: boarding_entry
+
+  boarding_entry:
+    - date: 艦内侵入
+    - background: classroom-night
+    - hide: {}
+    - show:
+        character: アガサ
+        expression: default
+        position: left
+    - show:
+        character: きりゅう
+        expression: default
+        position: center
+    - show:
+        character: すずどら
+        expression: default
+        position: right
+    - say:
+        text: 格納庫は驚くほど静かだった。死んだ機械の匂いと、古い油の匂いだけが残っている。
+    - say:
+        text: その沈黙を裂くように、頭上から女の声が落ちてきた。
+    - say:
+        text: 適合候補、八名を確認。第七十四次継承試験を開始します。最終生存者にのみ、真相への到達権を付与。
+    - say:
+        text: 背後のハッチが、船を揺らすほど重い音とともに閉じた。
+    - say:
+        speaker: きりゅう
+        text: ちっ……閉じ込められたか。
+    - say:
+        speaker: アガサ
+        text: 思ったより悪いね。ずいぶん本気だ。
+    - say:
+        speaker: すずどら
+        text: 言ったはずだ。ここは墓だ。
+    - goto: lockdown_choice
+
+  lockdown_choice:
+    - hide: {}
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: ぐら
+        expression: default
+        position: center
+    - show:
+        character: すずどら
+        expression: default
+        position: right
+    - say:
+        text: 緊張が一気に張りつめる。次の一手を決める前に、視線だけがぶつかり合った。
+    - choice:
+        options:
+          - text: きりゅうの指示に従って隊列を整える
+            set:
+              flags.trustedKiryu: true
+            goto: follow_kiryu
+          - text: 近くの端末を確認する
+            set:
+              flags.checkedTerminal: true
+            goto: inspect_terminal
+          - text: すずどらに、何を知っているのか問う
+            set:
+              flags.watchedSuzudora: true
+            goto: confront_suzudora
+
+  follow_kiryu:
+    - say:
+        speaker: きりゅう
+        text: 俺が先頭、ぐらは中央、ねむのみとうきわは後衛だ。あむ、先の曲がり角を見ろ。勝手に死ぬな。
+    - say:
+        speaker: あむ
+        text: 了解。言い方は雑だけど、内容はまともなんだよなあ。
+    - goto: squad_moves
+
+  inspect_terminal:
+    - say:
+        text: 壁際の端末には、消えかけた文字だけが残っていた。継承試験。候補者。到達権。
+    - say:
+        speaker: ぐら
+        text: これ、まだ生きてる……でも変。人を迎える画面じゃない。誰かをふるい落とすための表示だ。
+    - goto: squad_moves
+
+  confront_suzudora:
+    - say:
+        speaker: すずどら
+        text: すべては知らぬ。だが最後の一人にのみ扉が開くことは知っている。だから壊しに来た。
+    - say:
+        speaker: きりゅう
+        text: その話は後だ。今は出口を探す。
+    - goto: squad_moves
+
+  squad_moves:
+    - hide: {}
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: うきわ
+        expression: default
+        position: center
+    - show:
+        character: 餅虎
+        expression: default
+        position: right
+    - say:
+        text: 一行は、きりゅうを先頭に細い通路へ進んだ。照明は途切れがちで、床材も所々ひび割れている。
+    - say:
+        speaker: 餅虎
+        text: ねえ、これ本当に歩いて大丈夫？ あたし、落ちる系のやつ嫌いなんだけど。
+    - say:
+        speaker: うきわ
+        text: だいじょうぶ！ ぼく、後ろもしっかり見るから！
+    - choice:
+        options:
+          - text: うきわに、前へ出すぎるなと釘を刺す
+            set:
+              flags.warnedUkiwa: true
+            goto: warn_ukiwa
+          - text: 餅虎を落ち着かせる
+            set:
+              flags.comfortedMochitora: true
+            goto: calm_mochitora
+          - text: 黙って通路のきしみを観察する
+            goto: observe_hall
+
+  warn_ukiwa:
+    - say:
+        speaker: きりゅう
+        text: うきわ、下がれ。動くのは悪くないが、先走るな。
+    - say:
+        speaker: うきわ
+        text: うん、わかった！ ちゃんと後ろで支える！
+    - goto: collapse_start
+
+  calm_mochitora:
+    - say:
+        speaker: 餅虎
+        text: ……なによ、その顔。大丈夫って言われると、ちょっとだけ腹立つけど、少しだけ安心するじゃん。
+    - say:
+        speaker: あむ
+        text: よかったな。落ちる前に機嫌が直って。
+    - goto: collapse_start
+
+  observe_hall:
+    - say:
+        text: 通路の継ぎ目が、不自然な間隔で軋んでいる。老朽化というより、誰かが踏み抜く瞬間を待っているみたいだった。
+    - goto: collapse_start
+
+  collapse_start:
+    - hide: {}
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: うきわ
+        expression: default
+        position: center
+    - show:
+        character: 餅虎
+        expression: default
+        position: right
+    - say:
+        text: その瞬間、通路の床が警告もなく割れた。
+    - say:
+        text: 甲板側の区画が開放され、空気が一気に引き抜かれる。全員の体が、裂け目の向こうへ吸われた。
+    - say:
+        speaker: 餅虎
+        text: きゃっ……！
+    - if:
+        condition: flags.warnedUkiwa == true
+        then: collapse_warned
+        else: collapse_normal
+
+  collapse_warned:
+    - say:
+        speaker: うきわ
+        text: 下がるって言ったけど……今は、こっち！
+    - goto: ukiwa_falls
+
+  collapse_normal:
+    - say:
+        speaker: うきわ
+        text: あぶない！
+    - goto: ukiwa_falls
+
+  ukiwa_falls:
+    - say:
+        text: 餅虎の足が滑る。次の瞬間、うきわが飛び込み、その体をこちら側へ突き返した。
+    - say:
+        speaker: きりゅう
+        text: うきわ、戻れ！
+    - say:
+        text: 伸ばされた手は、あと半歩届かない。うきわは裂け目の向こうへ滑りながら、何かを投げた。
+    - set:
+        flags.sawManualKey: true
+    - say:
+        speaker: うきわ
+        text: できること、いっぱいやる！ だから……任せて！
+    - say:
+        text: 小さな金属キーが床を跳ね、ぐらの足元へ止まる。同時に緊急隔壁が落ち、向こう側の景色ごと、うきわの姿を断ち切った。
+    - goto: aftermath
+
+  aftermath:
+    - hide: {}
+    - show:
+        character: ぐら
+        expression: default
+        position: left
+    - show:
+        character: きりゅう
+        expression: default
+        position: center
+    - show:
+        character: ねむのみ
+        expression: default
+        position: right
+    - say:
+        text: 誰も、すぐには声を出せなかった。隔壁の向こうからは、もう何も聞こえない。
+    - say:
+        speaker: ぐら
+        text: ……手動キー。こんな古い規格、まだ使ってたんだ。
+    - say:
+        speaker: ねむのみ
+        text: うきわくん……。
+    - say:
+        speaker: きりゅう
+        text: 船が殺した。忘れるな。
+    - if:
+        condition: flags.checkedTerminal == true
+        then: terminal_aftershock
+        else: suzu_aftershock_check
+
+  terminal_aftershock:
+    - say:
+        speaker: ぐら
+        text: 継承試験って、こういう意味だったのかな……。
+    - goto: suzu_aftershock_check
+
+  suzu_aftershock_check:
+    - if:
+        condition: flags.watchedSuzudora == true
+        then: suzu_aftershock
+        else: kiryu_aftershock_check
+
+  suzu_aftershock:
+    - hide: {}
+    - show:
+        character: すずどら
+        expression: default
+        position: right
+    - show:
+        character: きりゅう
+        expression: default
+        position: center
+    - say:
+        text: すずどらは、きりゅうとほぼ同時に裂け目へ踏み込んでいた。助けられなかった悔しさだけが、その沈黙に残っている。
+    - say:
+        speaker: すずどら
+        text: これで理解しただろう。試験は、もう始まっている。
+    - goto: kiryu_aftershock_check
+
+  kiryu_aftershock_check:
+    - if:
+        condition: flags.trustedKiryu == true
+        then: kiryu_vow
+        else: chapter_close
+
+  kiryu_vow:
+    - say:
+        speaker: きりゅう
+        text: 背中は預かる。だから前だけ見てろ。まだ全員は終わってない。
+    - goto: chapter_close
+
+  chapter_close:
+    - hide: {}
+    - say:
+        text: 頭上のスピーカーが、間を置いて再び起動する。
+    - say:
+        text: 第一脱落を確認。試験を継続します。次の評価区画を開放します。
+    - say:
+        text: 冷たい機械音が消えたあとも、その言葉だけが通路に残り続けた。
+    - set:
+        flags.chapter1Clear: true
+    - say:
+        text: 第一章 おわり。

@@ -1,0 +1,81 @@
+title: Twilight Platform
+dateLabel: 8月10日
+
+variables:
+  flags:
+    metAmu: false
+  affection:
+    amu: 0
+
+characters:
+  あむ:
+    name: あむ
+
+start: intro
+
+nodes:
+  intro:
+    - date: 8月10日
+    - background: station-evening
+    - show:
+        character: あむ
+        expression: default
+        position: right
+    - say:
+        speaker: あむ
+        text: ここが最初のシーン。背景、立ち絵、名前、台詞は YAML だけで制御できます。
+    - say:
+        speaker: あむ
+        text: 次は選択肢です。選んだ内容に応じて変数を更新して、別ノードへ分岐できます。
+    - choice:
+        options:
+          - text: 話しかける
+            set:
+              flags.metAmu: true
+              affection.amu: 1
+            goto: talk
+          - text: 黙って立ち去る
+            goto: leave
+
+  talk:
+    - show:
+        character: あむ
+        expression: default
+        position: right
+    - say:
+        speaker: あむ
+        text: ちゃんと選択肢から来ましたね。好感度を 1 にしました。
+    - if:
+        condition: affection.amu >= 1
+        then: warm_route
+        else: neutral_route
+
+  warm_route:
+    - background: classroom-night
+    - say:
+        speaker: あむ
+        text: 条件分岐も動いています。`if.condition` で変数を見てノードを切り替えられます。
+    - choice:
+        options:
+          - text: もう一度最初から見る
+            goto: intro
+          - text: このまま終える
+            goto: ending
+
+  neutral_route:
+    - say:
+        speaker: あむ
+        text: このルートは今回は通りませんが、条件が偽ならこちらへ来ます。
+    - goto: ending
+
+  leave:
+    - hide:
+        position: right
+    - say:
+        text: あなたは何も言わず、その場を後にした。
+    - goto: ending
+
+  ending:
+    - say:
+        speaker: あむ
+        text: ここまでがサンプルです。YAML を増やせばそのまま分岐付きのシナリオを拡張できます。

@@ -1,0 +1,33 @@
+{
+  "generatedAt": "2026-04-05T17:01:16.818Z",
+  "backgrounds": {
+    "classroom-night": "/assets/backgrounds/classroom-night.svg",
+    "station-evening": "/assets/backgrounds/station-evening.svg"
+  },
+  "characters": {
+    "あむ": {
+      "default": "/assets/characters/あむ-default.webp"
+    },
+    "うきわ": {
+      "default": "/assets/characters/うきわ-default.webp"
+    },
+    "きりゅう": {
+      "default": "/assets/characters/きりゅう-default.webp"
+    },
+    "ぐら": {
+      "default": "/assets/characters/ぐら-default.webp"
+    },
+    "すずどら": {
+      "default": "/assets/characters/すずどら-default.webp"
+    },
+    "ねむのみ": {
+      "default": "/assets/characters/ねむのみ-default.webp"
+    },
+    "アガサ": {
+      "default": "/assets/characters/アガサ-default.webp"
+    },
+    "餅虎": {
+      "default": "/assets/characters/餅虎-default.webp"
+    }
+  }
+}

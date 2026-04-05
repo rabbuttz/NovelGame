@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1c2541" />
+      <stop offset="52%" stop-color="#4a4e69" />
+      <stop offset="100%" stop-color="#9a6b53" />
+    </linearGradient>
+    <linearGradient id="ground" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1f2937" />
+      <stop offset="100%" stop-color="#111827" />
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#sky)" />
+  <circle cx="1240" cy="170" r="78" fill="#ffd6a5" opacity="0.88" />
+  <rect x="0" y="600" width="1600" height="300" fill="url(#ground)" />
+  <rect x="0" y="520" width="1600" height="24" fill="#d6ccc2" opacity="0.6" />
+  <rect x="120" y="240" width="40" height="360" fill="#2b2d42" />
+  <rect x="500" y="220" width="44" height="380" fill="#2b2d42" />
+  <rect x="980" y="250" width="40" height="350" fill="#2b2d42" />
+  <rect x="1380" y="230" width="36" height="370" fill="#2b2d42" />
+  <rect x="80" y="260" width="320" height="14" fill="#f2e9e4" opacity="0.5" />
+  <rect x="440" y="250" width="300" height="14" fill="#f2e9e4" opacity="0.5" />
+  <rect x="920" y="280" width="260" height="14" fill="#f2e9e4" opacity="0.5" />
+  <rect x="1240" y="250" width="220" height="14" fill="#f2e9e4" opacity="0.5" />
+  <path d="M0 648 L1600 690" stroke="#f4a261" stroke-width="6" opacity="0.5" />
+  <path d="M0 700 L1600 742" stroke="#f4a261" stroke-width="4" opacity="0.3" />
+</svg>

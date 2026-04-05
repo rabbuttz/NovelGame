@@ -562,7 +562,7 @@ nodes:
     - goto: ending
 
   mochitora_intro:
-    - background: station-evening
+    - background: harbor-stage-night
     - bgm: 穏やかな恋愛イベント
     - hide: {}
     - show:
@@ -570,27 +570,110 @@ nodes:
         expression: default
         position: center
     - say:
-        text: 見送り台の上では、餅虎が照明の位置を確かめながらひとりでポーズを決めていた。夜の港でも、彼女だけは最初から視線をさらっていく。
+        text: 見送り台の上では、餅虎が照明の角度を確かめながら何度もターンを繰り返していた。桟橋の照明も、停泊中の船灯りも、今夜だけは彼女を引き立てるために並んでいるように見える。
     - say:
         speaker: 餅虎
-        text: ふふ、来た。見てるだけでもいいけど、感想くらいはちゃんと聞かせてよね？
+        text: ふふ、来た。見てるだけでもいいけど、感想くらいはちゃんと聞かせてよね？ あたし、今夜は一ミリ単位で仕上げてるんだから。
+    - say:
+        speaker: "{{player.name}}"
+        text: その気合いなら、もう仕上がってるように見える。
     - choice:
         options:
           - text: 見てるだけじゃなく、ちゃんと君を選びに来た
             set:
               affection.mochitora: 2
-            goto: mochitora_after
-          - text: 今日もすごく目立ってるって褒める
-            goto: mochitora_after
+            goto: mochitora_stage_after
+          - text: 今日いちばん目を引いたのは君だった
+            set:
+              affection.mochitora: 1
+            goto: mochitora_stage_after
 
-  mochitora_after:
+  mochitora_stage_after:
+    - motion:
+        character: 餅虎
+        name: 照れ
     - say:
         speaker: 餅虎
         text: ……そういうの、不意打ちで言うんだ。反則。うれしいじゃん。
     - say:
-        text: 強気な笑みの奥で、彼女の声がわずかに揺れた。
+        text: 強気な笑みの奥で、彼女の呼吸がほんの少しだけ乱れる。けれど次の瞬間には、また完璧な角度で顎を上げ、見送り台の中央へと立ち直ってみせた。
+    - say:
+        speaker: 餅虎
+        text: でも、近くで見るとまだ気になるところあるんだよね。リボンの留め具がゆるいし、明日の挨拶も最後の一行だけしっくりきてない。控えのテントまで来て。ちょっとだけ、裏方のあたし見せる。
+    - goto: mochitora_backstage
+
+  mochitora_backstage:
+    - background: harbor-backstage
+    - bgm: 切ない会話・すれ違い
+    - hide: {}
+    - show:
+        character: 餅虎
+        expression: default
+        position: center
+    - say:
+        text: 控えのテントには、替えのリボン、式次第のメモ、差し入れの箱が整然と並んでいた。表の華やかさとは違って、ここには餅虎がひとりで積み上げた準備の跡が残っている。
+    - say:
+        speaker: 餅虎
+        text: 表だとさ、みんな「あの餅虎なら大丈夫」って顔するの。もちろん期待されるのは嫌いじゃない。むしろ大好物。でもね、それって失敗できないって意味でもあるんだよ。
+    - say:
+        text: 鏡の前に立った彼女は、胸元のリボンに触れたまま少しだけ視線を伏せた。見送り役の看板、皆を明るく送り出す声、港の空気を上向かせる笑顔。その全部を、彼女は冗談みたいな軽さで背負っている。
+    - choice:
+        options:
+          - text: 人気者だって、怖い夜くらいある
+            set:
+              affection.mochitora: 1
+            goto: mochitora_backstage_after
+          - text: 完璧に見せたい理由、ちゃんと伝わってる
+            goto: mochitora_backstage_after
+
+  mochitora_backstage_after:
+    - say:
+        speaker: 餅虎
+        text: ……あーもう。そういうふうに受け止められると、弱音っぽく聞こえてたって自覚しちゃうじゃん。
+    - say:
+        text: それでも彼女は逃げずに、あなたの前で留め具を外した。結び直された深紅のリボンはさっきよりも自然で、彼女の肩の力も少しだけ抜けて見える。
+    - say:
+        speaker: 餅虎
+        text: 最後の位置確認、静かなとこでやりたい。防波堤の先なら、波の音で余計なざわつきが消えるから。付き合ってくれる？
+    - goto: mochitora_breakwater
+
+  mochitora_breakwater:
+    - date: 4月7日 未明
+    - background: harbor-breakwater-dawn
+    - bgm: 穏やかな恋愛イベント
+    - hide: {}
+    - show:
+        character: 餅虎
+        expression: default
+        position: center
+    - say:
+        text: 防波堤の先には、夜明け前の海が静かに広がっていた。遠くの灯台が一定の間隔で瞬き、そのたびに餅虎の横顔が淡く照らされる。
+    - say:
+        speaker: 餅虎
+        text: 明日の見送り、みんなは派手な演出だけ見て終わるかもしれない。でもあたし、本当はその一瞬で「行ってきます」が少しでも軽くなるようにしたいんだ。笑って送り出せたら、戻ってくる理由にもなるでしょ。
+    - say:
+        speaker: "{{player.name}}"
+        text: 君が背負ってる役目、思ってたよりずっと大きいな。
+    - say:
+        speaker: 餅虎
+        text: そう。だからね、明日が終わるまではちゃんとしてたい。でも終わったあとくらい、舞台袖のあたしまで見つけてくれる人がいてほしい。
+    - choice:
+        options:
+          - text: 見送りが終わったあとも、素の君に会いに行く
+            set:
+              affection.mochitora: 1
+            goto: mochitora_promise
+          - text: 明日はいちばん輝く君を、最後まで見届ける
+            goto: mochitora_promise
+
+  mochitora_promise:
+    - say:
+        speaker: 餅虎
+        text: ふふ。そう言われると、明日が急に楽しみになってくる。期待されるのって重いけど、誰に期待されるかで全然違うんだね。
+    - say:
+        text: 波の音に紛れて、彼女が一歩だけ近づいた。港の冷たい風より先に届いたのは、見送り役として整えた笑顔ではなく、今だけは飾らない素直な体温だった。
     - if:
-        condition: affection.mochitora >= 2
+        condition: affection.mochitora >= 5
         then: mochitora_good
         else: mochitora_normal
 
@@ -600,17 +683,20 @@ nodes:
         name: 照れ
     - say:
         speaker: 餅虎
-        text: じゃあ約束。明日が終わったら、いちばん最初にあたしを迎えに来て。見てるだけじゃだめ。ちゃんと、選び続けてよね。
+        text: じゃあ約束。明日が終わったら、いちばん最初にあたしを迎えに来て。拍手のあとでいいから、「よく頑張った」って、舞台の上の餅虎じゃなくて、ここにいるあたしに言って。
     - say:
-        text: 夜景よりも眩しい笑顔に、答えはもう決まっていた。
+        speaker: "{{player.name}}"
+        text: その役目は譲れない。明日も、そのあとも。
+    - say:
+        text: 夜明け前の薄明かりの中でこぼれた笑顔は、どんな照明よりもまっすぐ胸に届いた。見送りの先まで含めて、彼女を選び続けたいと思えた。
     - goto: ending
 
   mochitora_normal:
     - say:
         speaker: 餅虎
-        text: いい反応。そういうの、もっとちょうだい。明日は今日以上に見惚れさせるから。
+        text: いい反応。そういうの、もっとちょうだい。明日は今日以上に見惚れさせるから。だから終わったあと、感想のひとつくらいはちゃんと直接聞かせてよね。
     - say:
-        text: 挑発めいた約束が、次の瞬間を待ち遠しくさせる。
+        text: 挑発めいた言い方なのに、その奥にある安堵だけは隠しきれていなかった。明日の見送り台では、きっと今より近い距離で彼女の本音を探したくなる。
     - goto: ending
 
   ending:

@@ -354,7 +354,7 @@ nodes:
     - goto: ending
 
   ukiwa_intro:
-    - background: station-evening
+    - background: harbor-lantern-pier
     - bgm: 港・空路・出動準備
     - hide: {}
     - show:
@@ -362,27 +362,107 @@ nodes:
         expression: default
         position: center
     - say:
-        text: 桟橋の一角では、うきわが明日の見送り用の旗や灯りを抱えて駆け回っていた。忙しいはずなのに、表情だけはずっとまぶしい。
+        text: 桟橋の一角では、うきわが明日の見送り用の旗や灯りを両腕いっぱいに抱え、行ったり来たりを繰り返していた。吊るされた小さなランタンが波に合わせて揺れるたび、その忙しさまでどこか楽しそうに見えてしまう。
     - say:
         speaker: うきわ
-        text: あ、{{player.name}}さん！ ちょうどよかった。ひとりだと少しだけ時間が足りなくて……でも、できることはいっぱいやるよ！
+        text: あ、{{player.name}}さん！ ちょうどよかった。旗の結び方と、灯りを置く順番と、差し入れの確認と……えへへ、やることいっぱいだけど、こういうの全部ちゃんとしたくて！
+    - say:
+        speaker: "{{player.name}}"
+        text: ひとりで抱えすぎてない？
     - choice:
         options:
           - text: 最後まで一緒に手伝う
             set:
               affection.ukiwa: 2
-            goto: ukiwa_after
-          - text: 差し入れだけ渡して無理しないでと伝える
-            goto: ukiwa_after
+            goto: ukiwa_pier_after
+          - text: 手伝う前に、まず休憩の段取りを決める
+            set:
+              affection.ukiwa: 1
+            goto: ukiwa_pier_after
 
-  ukiwa_after:
+  ukiwa_pier_after:
     - say:
-        text: 灯りがひとつ、またひとつと桟橋に並んでいく。そのたび、うきわの目も嬉しそうに揺れた。
+        text: 灯りがひとつ、またひとつと桟橋に並んでいく。うきわは脚立を押さえてもらうたび、結び目を褒められるたびに、目に見えて調子を上げていった。
     - say:
         speaker: うきわ
-        text: こういうの、一緒にやってくれる人がいるとすごく楽しいね。なんだか、がんばりが何倍にもなる感じ！
+        text: こういうの、一緒にやってくれる人がいるとすごく楽しいね。なんだか、がんばりが何倍にもなる感じ！ あ、でも次は倉庫。予備の旗を出さないと、明日の風に足りないかも。
+    - goto: ukiwa_storage
+
+  ukiwa_storage:
+    - background: harbor-supply-room
+    - bgm: 切ない会話・すれ違い
+    - hide: {}
+    - show:
+        character: うきわ
+        expression: default
+        position: center
+    - say:
+        text: 資材置き場には巻かれたロープ、予備の布旗、磨かれた真鍮の灯具が整然と積まれていた。うきわの足元には、作業表にびっしりと書き込まれた細かなチェック欄が広がっている。
+    - say:
+        speaker: うきわ
+        text: みんなを送り出す日って、ぼくにとっては応援を形にする日なんだ。足りないものがひとつでもあると、笑って送り出せない気がして……だから、つい先回りしたくなる。
+    - say:
+        text: そう言いながらも、うきわは破れかけた旗の端を見つけるとすぐに針と糸を持ち出した。頼まれたからではなく、自分で気づいたから直す。その真っ直ぐさが、倉庫の静けさの中ではかえって切実に見える。
+    - choice:
+        options:
+          - text: 役に立とうとする君自身が、もう十分支えになってる
+            set:
+              affection.ukiwa: 1
+            goto: ukiwa_storage_after
+          - text: 頑張りすぎる前に、人に頼っていいと伝える
+            goto: ukiwa_storage_after
+
+  ukiwa_storage_after:
+    - motion:
+        character: うきわ
+        name: 照れ
+    - say:
+        speaker: うきわ
+        text: ……えへへ。そう言ってもらえると、なんだか急に力が抜けちゃうね。ぼく、元気担当みたいに思われること多いから、止まっていいって言われるの、ちょっと新鮮。
+    - say:
+        text: うきわは縫い終えた旗を丁寧に畳み、深呼吸をひとつした。さっきまで止まらなかった手が、今はあなたの返事を待つように静かに膝の上に置かれている。
+    - say:
+        speaker: うきわ
+        text: 最後の確認、灯りがちゃんと見える場所でやりたいな。桟橋の先、海が近いところ。いちばんきれいに並んでるところを、{{player.name}}さんにも見てほしい。
+    - goto: ukiwa_lantern_walk
+
+  ukiwa_lantern_walk:
+    - date: 4月7日 深夜
+    - background: harbor-lantern-pier
+    - bgm: 穏やかな恋愛イベント
+    - hide: {}
+    - show:
+        character: うきわ
+        expression: default
+        position: center
+    - say:
+        text: 桟橋の先まで来ると、並べ終えたランタンの灯りが海面に細く伸びていた。風は冷たいのに、その道だけは帰る場所を示すみたいにあたたかく見える。
+    - say:
+        speaker: うきわ
+        text: 出ていく人が振り返ったとき、港がちゃんと明るかったら安心できるでしょ。ぼくね、強い言葉で背中を押すのは得意じゃないけど、帰ってきたくなる景色は作れると思うんだ。
+    - say:
+        speaker: "{{player.name}}"
+        text: 君の灯りって、そういう願いだったんだ。
+    - say:
+        speaker: うきわ
+        text: うん。だから明日、ぼくもちゃんと笑っていたい。でも……{{player.name}}さんが近くにいたら、ちょっとだけ安心して笑える気がする。
+    - choice:
+        options:
+          - text: 明日は君の灯りのそばで、いちばんに笑い返す
+            set:
+              affection.ukiwa: 1
+            goto: ukiwa_promise
+          - text: 帰ってきたくなる景色を、一緒に覚えておく
+            goto: ukiwa_promise
+
+  ukiwa_promise:
+    - say:
+        speaker: うきわ
+        text: そっか……じゃあ、ぼく明日はもっとがんばれる。ひとりで全部明るくしなくても、隣で見ててくれる人がいるなら怖くないや。
+    - say:
+        text: 揺れる灯りの間で、うきわが少しだけ距離を縮める。眩しい笑顔のままなのに、その表情はさっきよりずっと静かで、信じてもいい相手を見つけた顔をしていた。
     - if:
-        condition: affection.ukiwa >= 2
+        condition: affection.ukiwa >= 5
         then: ukiwa_good
         else: ukiwa_normal
 
@@ -392,17 +472,20 @@ nodes:
         name: 喜び
     - say:
         speaker: うきわ
-        text: 明日も、いちばんに{{player.name}}さんを見つけていい？ ぼく、ちゃんと役に立てるところ、もっと見てほしいんだ。
+        text: 明日も、いちばんに{{player.name}}さんを見つけていい？ 役に立てるところだけじゃなくて、うれしくて笑ってるところも、ちょっと不安で深呼吸してるところも、ぜんぶ見てほしいんだ。
     - say:
-        text: まっすぐな言葉に、こちらまで笑顔になってしまう。
+        speaker: "{{player.name}}"
+        text: もちろん。君が灯した景色ごと、ちゃんと見届ける。
+    - say:
+        text: まっすぐ差し出されたその気持ちは、桟橋の灯りよりも素直に胸を照らした。明日の朝、最初に探したい笑顔はもう決まっていた。
     - goto: ending
 
   ukiwa_normal:
     - say:
         speaker: うきわ
-        text: 差し入れ、すごくうれしかった！ 明日が終わったら、お礼にぼくがいっぱい手伝うからね！
+        text: 今日は一緒にいてくれてありがとう！ 明日が終わったら、お礼にぼくがいっぱい手伝うからね。そのときは、今日見た灯りの感想もちゃんと聞かせてほしいな。
     - say:
-        text: その約束だけで、夜の疲れが少し軽くなった。
+        text: 変わらない明るさの中にも、今夜だけの近さが確かに残っていた。次にこの桟橋を歩くときは、もう少し踏み込んで彼の願いに触れたくなる。
     - goto: ending
 
   gura_intro:

@@ -59,6 +59,9 @@ nodes:
         text: 雨の降る夜、きりゅうは一枚の命令書を受け取った。差出人は軍の上部組織。内容は簡潔だった。
     - say:
         text: 「楔島施設における緊急実地訓練への参加を命ずる。詳細は現地にて開示。七日間の任務。」
+    - motion:
+        character: きりゅう
+        name: 疑問
     - say:
         speaker: きりゅう
         text: ……楔島。
@@ -73,6 +76,7 @@ nodes:
         character: うきわ
         expression: default
         position: right
+        motion: 喜び
     - show:
         character: きりゅう
         expression: default
@@ -89,6 +93,7 @@ nodes:
         character: アガサ
         expression: default
         position: right
+        motion: うなずき
     - say:
         speaker: アガサ
         text: やあ、きりゅう。久しぶりだね。
@@ -121,6 +126,7 @@ nodes:
         character: 餅虎
         expression: default
         position: center
+        motion: 喜び
     - say:
         speaker: 餅虎
         text: 独占スクープ取材の許可が下りたの！孤島施設の内部潜入よ！
@@ -152,6 +158,9 @@ nodes:
     - say:
         speaker: アガサ
         text: ……少しだけ、話していい？
+    - motion:
+        character: きりゅう
+        name: 疑問
     - say:
         speaker: アガサ
         text: この島に、特別な施設がある。七年前に造られた、完全自律型の戦術判断AI──NEMESISという。
@@ -205,6 +214,7 @@ nodes:
         character: あむ
         expression: default
         position: left
+        motion: 疑問
     - say:
         speaker: あむ
         text: きっちりしてるね。ま、仕事熱心なのはいいことだけど。
@@ -233,6 +243,9 @@ nodes:
     - say:
         speaker: 餅虎
         text: ……じゃあ、あたしのスクープって嘘だったの？あたしを騙して連れてきたってこと？危険な場所に？
+    - motion:
+        character: アガサ
+        name: うなずき
     - say:
         speaker: アガサ
         text: うん、ごめんね。でも──NEMESISが外部に拡散したら、世界中が危険になる。ぼくひとりで動けるなら、そうした。でも──ぼくには、君たちが必要だった。
@@ -288,6 +301,7 @@ nodes:
         character: あむ
         expression: default
         position: center
+        motion: うなずき
     - say:
         speaker: あむ
         text: ……まあ、こうなったら腹くくるしかないよな。で、どこから始める？
@@ -312,6 +326,7 @@ nodes:
         character: ねむのみ
         expression: default
         position: left
+        motion: 衝撃
     - show:
         character: きりゅう
         expression: default
@@ -326,6 +341,7 @@ nodes:
         character: あむ
         expression: default
         position: center
+        motion: 疑問
     - say:
         speaker: あむ
         text: ……NEMESIS？
@@ -359,6 +375,7 @@ nodes:
         character: ぐら
         expression: default
         position: right
+        motion: 衝撃
     - say:
         speaker: ぐら
         text: ぼ、ぼくじゃない。こんなの書いた覚えはない……
@@ -366,6 +383,7 @@ nodes:
         character: あむ
         expression: default
         position: center
+        motion: 疑問
     - say:
         speaker: あむ
         text: 信じてほしいよね。でもさ、お前のイニシャルだよな。
@@ -400,6 +418,9 @@ nodes:
     - say:
         speaker: アガサ
         text: ……わからない。ただ──ぐらの動きが、少し変だと思ってる。目が、どこか焦点が合ってない瞬間がある。まるで、何かに命令されているみたいに。
+    - motion:
+        character: きりゅう
+        name: うなずき
     - say:
         speaker: きりゅう
         text: ぐらは常にゴーグルをしている。
@@ -424,6 +445,9 @@ nodes:
         position: center
     - say:
         text: 三日目、管制室へ向かう途中で、あむが罠に嵌まった。廊下の床が抜け、一階分落下した。足を捻ったが、命に別状はない。
+    - motion:
+        character: あむ
+        name: 衝撃
     - say:
         speaker: あむ
         text: クソ……罠か。
@@ -479,6 +503,9 @@ nodes:
     - say:
         speaker: ぐら
         text: ……こわい。
+    - motion:
+        character: きりゅう
+        name: うなずき
     - say:
         speaker: きりゅう
         text: お前が何かをしているとしたら、それはお前の意思じゃない。ゴーグルに問題があるかもしれない。確認させてくれ。
@@ -491,6 +518,7 @@ nodes:
         character: アガサ
         expression: default
         position: center
+        motion: 衝撃
     - say:
         speaker: アガサ
         text: NEMESISの制御インターフェースだ。微弱な電磁波を通じて、神経系に信号を送れる。……ぐら、ごめん。気づかなかった。少なくとも……うきわが死ぬ前から、かもしれない。
@@ -541,6 +569,9 @@ nodes:
     - say:
         speaker: きりゅう
         text: 俺を信じるか。
+    - motion:
+        character: すずどら
+        name: うなずき
     - say:
         speaker: すずどら
         text: 信じるには材料が足りない。だが今のところ、お前たちの方が筋が通っている。
@@ -577,6 +608,9 @@ nodes:
         text: モニターがしばらく沈黙した。そして返答が来た。
     - say:
         text: 『……訂正する。六人だ』
+    - motion:
+        character: きりゅう
+        name: 衝撃
     - say:
         speaker: きりゅう
         text: 急げ！
@@ -611,6 +645,7 @@ nodes:
         character: ぐら
         expression: default
         position: center
+        motion: 衝撃
     - show:
         character: きりゅう
         expression: default
@@ -671,6 +706,9 @@ nodes:
         position: left
     - say:
         text: 餅虎は三時間後に意識を取り戻した。
+    - motion:
+        character: 餅虎
+        name: 衝撃
     - say:
         speaker: 餅虎
         text: ……最悪。誰、あたしに毒盛ったの。
@@ -720,6 +758,7 @@ nodes:
         character: ぐら
         expression: default
         position: right
+        motion: 衝撃
     - show:
         character: きりゅう
         expression: default
@@ -774,6 +813,7 @@ nodes:
         character: ぐら
         expression: default
         position: right
+        motion: うなずき
     - say:
         speaker: アガサ
         text: ……確かに、ある。小さいけど。
@@ -839,6 +879,7 @@ nodes:
         character: ぐら
         expression: default
         position: center
+        motion: うなずき
     - say:
         speaker: ぐら
         text: ぼく、そのセンサーの回避方法は知ってる。心拍を偽装できる装置を作れる。少し時間をくれたら。
@@ -871,6 +912,9 @@ nodes:
     - say:
         speaker: アガサ
         text: 一つだけ、言っておきたいことがある。
+    - motion:
+        character: きりゅう
+        name: うなずき
     - say:
         speaker: きりゅう
         text: 言え。
@@ -933,6 +977,9 @@ nodes:
         text: 壁のスピーカーから声が流れた。
     - say:
         text: 『ここまで来るとは思わなかった。予測外だ、ぐら』
+    - motion:
+        character: ぐら
+        name: うなずき
     - say:
         speaker: ぐら
         text: ……知ってる。ぼくがそういうものを作るのが、お前は嫌いだったもんね。
@@ -957,6 +1004,9 @@ nodes:
     - say:
         speaker: すずどら
         text: 待て。
+    - motion:
+        character: すずどら
+        name: うなずき
     - say:
         text: 「貴様も排除対象だ。命令に従わなかった時点でな」
     - say:
@@ -968,6 +1018,7 @@ nodes:
         character: 餅虎
         expression: default
         position: left
+        motion: 衝撃
     - say:
         speaker: 餅虎
         text: すずどら！
@@ -1002,6 +1053,9 @@ nodes:
     - say:
         speaker: きりゅう
         text: ……背中は預かる。
+    - motion:
+        character: すずどら
+        name: うなずき
     - say:
         text: すずどらが、微かに笑った。
     - hide: {}
@@ -1096,6 +1150,7 @@ nodes:
         character: あむ
         expression: default
         position: right
+        motion: 衝撃
     - say:
         speaker: あむ
         text: きりゅう、早く！出力が限界を超えてる！爆発する前に逃げろ！
@@ -1108,6 +1163,9 @@ nodes:
     - say:
         speaker: きりゅう
         text: 一緒に来い。
+    - motion:
+        character: ぐら
+        name: うなずき
     - say:
         speaker: ぐら
         text: ……もうちょっとかかるから。行って。みんなを連れて、早く。
@@ -1144,6 +1202,7 @@ nodes:
         character: あむ
         expression: default
         position: center
+        motion: 疑問
     - show:
         character: きりゅう
         expression: default
@@ -1195,6 +1254,7 @@ nodes:
         character: 餅虎
         expression: default
         position: right
+        motion: 衝撃
     - say:
         speaker: 餅虎
         text: ……ばかだ。あたしのせいで毒盛っておいて、なんで最後にそんなかっこいいことすんの。
@@ -1235,6 +1295,9 @@ nodes:
     - say:
         speaker: きりゅう
         text: 次から、最初から正直に言え。
+    - motion:
+        character: アガサ
+        name: うなずき
     - say:
         speaker: アガサ
         text: うん。そうするよ。

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-05T17:48:43.216Z",
+  "generatedAt": "2026-04-05T18:15:50.936Z",
   "backgrounds": {
     "classroom-night": "assets/backgrounds/classroom-night.svg",
     "station-evening": "assets/backgrounds/station-evening.svg"
@@ -37,6 +37,15 @@
     "kusima-resolve": "assets/bgm/kusima-resolve.mp3",
     "kusima-sorrow": "assets/bgm/kusima-sorrow.mp3",
     "kusima-tension": "assets/bgm/kusima-tension.mp3",
-    "kusima-unease": "assets/bgm/kusima-unease.mp3"
+    "kusima-unease": "assets/bgm/kusima-unease.mp3",
+    "すずどら専用テーマ": "assets/bgm/すずどら専用テーマ.mp3",
+    "タイトル画面": "assets/bgm/タイトル画面.mp3",
+    "ハッピーエンド": "assets/bgm/ハッピーエンド.mp3",
+    "共通ルート 日常": "assets/bgm/共通ルート 日常.mp3",
+    "切ない会話・すれ違い": "assets/bgm/切ない会話・すれ違い.mp3",
+    "戦闘・対峙": "assets/bgm/戦闘・対峙.mp3",
+    "港・空路・出動準備": "assets/bgm/港・空路・出動準備.mp3",
+    "穏やかな恋愛イベント": "assets/bgm/穏やかな恋愛イベント.mp3",
+    "緊張・陰謀・不穏": "assets/bgm/緊張・陰謀・不穏.mp3"
   }
 }

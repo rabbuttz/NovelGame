@@ -48,6 +48,7 @@ nodes:
   intro:
     - date: 4月6日 夕暮れ
     - background: station-evening
+    - bgm: 港・空路・出動準備
     - say:
         text: 風待ち港ハルモニア。空路と海路が交わるこの街では、明朝の護送任務を前に、桟橋じゅうがせわしなく動いていた。
     - say:
@@ -121,6 +122,7 @@ nodes:
   briefing:
     - date: 4月6日 夜
     - background: classroom-night
+    - bgm: 共通ルート 日常
     - hide: {}
     - show:
         character: アガサ
@@ -188,6 +190,7 @@ nodes:
 
   kiryu_intro:
     - background: station-evening
+    - bgm: 切ない会話・すれ違い
     - hide: {}
     - show:
         character: きりゅう
@@ -242,6 +245,7 @@ nodes:
 
   agatha_intro:
     - background: classroom-night
+    - bgm: 穏やかな恋愛イベント
     - hide: {}
     - show:
         character: アガサ
@@ -296,6 +300,7 @@ nodes:
 
   amu_intro:
     - background: station-evening
+    - bgm: 穏やかな恋愛イベント
     - hide: {}
     - show:
         character: あむ
@@ -350,6 +355,7 @@ nodes:
 
   ukiwa_intro:
     - background: station-evening
+    - bgm: 港・空路・出動準備
     - hide: {}
     - show:
         character: うきわ
@@ -401,6 +407,7 @@ nodes:
 
   gura_intro:
     - background: classroom-night
+    - bgm: 切ない会話・すれ違い
     - hide: {}
     - show:
         character: ぐら
@@ -452,6 +459,7 @@ nodes:
 
   suzudora_intro:
     - background: station-evening
+    - bgm: すずどら専用テーマ
     - hide: {}
     - show:
         character: すずどら
@@ -503,6 +511,7 @@ nodes:
 
   nemunomi_intro:
     - background: classroom-night
+    - bgm: 穏やかな恋愛イベント
     - hide: {}
     - show:
         character: ねむのみ
@@ -554,6 +563,7 @@ nodes:
 
   mochitora_intro:
     - background: station-evening
+    - bgm: 穏やかな恋愛イベント
     - hide: {}
     - show:
         character: 餅虎
@@ -607,6 +617,7 @@ nodes:
     - hide: {}
     - date: 4月7日 夜明け前
     - background: station-evening
+    - bgm: ハッピーエンド
     - say:
         text: 港に吹く風が、夜から朝へと向きを変えていく。誰を選んだ夜だったのか、その熱だけが胸に残っていた。
     - say:

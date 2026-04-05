@@ -1,0 +1,22 @@
+[
+  {
+    "url": "scenarios/kushima.yaml",
+    "title": "楔島 ── 最後に残った者へ",
+    "description": "孤島に集められた8人。次々と仲間が倒れていく中、生き残った者だけが真実にたどり着く──"
+  },
+  {
+    "url": "scenarios/chapter1.yaml",
+    "title": "アーク・ノクスの最後の整備士 第一章",
+    "description": "巨大飛行艦アーク・ノクスで繰り広げられる物語の幕開け。"
+  },
+  {
+    "url": "scenarios/scenario1.yaml",
+    "title": "白環館の最後の一人",
+    "description": "満月の夜、謎に包まれた館へと迷い込んだ者が見たものとは──"
+  },
+  {
+    "url": "scenarios/demo.yaml",
+    "title": "放課後シグナル",
+    "description": "主人公名を決めて始める、放課後の短編恋愛シミュレーション。"
+  }
+]

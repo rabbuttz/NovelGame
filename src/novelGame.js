@@ -1,7 +1,93 @@
 import { parse } from "yaml";
 
-const DEFAULT_SCENARIO_URL = toAppUrl("scenarios/chapter1.yaml");
 const POSITIONS = ["left", "center", "right"];
+const ENTER_VARIANTS = new Set(["auto", "left", "right", "center", "soft", "none"]);
+const MOTION_ALIASES = {
+  shock: "衝撃",
+  surprised: "衝撃",
+  question: "疑問",
+  joy: "喜び",
+  blush: "照れ",
+  nod: "うなずき"
+};
+const MOTION_LIBRARY = {
+  衝撃: { className: "is-motion-shock", reaction: "!", durationMs: 820 },
+  疑問: { className: "is-motion-question", reaction: "?", durationMs: 960 },
+  喜び: { className: "is-motion-joy", reaction: "♪", durationMs: 920 },
+  照れ: { className: "is-motion-blush", reaction: "…", durationMs: 960 },
+  うなずき: { className: "is-motion-nod", reaction: "", durationMs: 700 }
+};
+
+function createBgmPlayer() {
+  let audio = null;
+  let currentId = null;
+  let timer = null;
+
+  function fadeTo(target, ms, done) {
+    clearInterval(timer);
+
+    if (!audio) {
+      done?.();
+      return;
+    }
+
+    const activeAudio = audio;
+    const start = activeAudio.volume;
+    const steps = Math.max(1, Math.round(ms / 50));
+    let step = 0;
+    timer = setInterval(() => {
+      step += 1;
+      activeAudio.volume = Math.max(0, Math.min(1, start + (target - start) * (step / steps)));
+
+      if (step >= steps) {
+        clearInterval(timer);
+        activeAudio.volume = target;
+        done?.();
+      }
+    }, 50);
+  }
+
+  function stopWithFade(done) {
+    if (!audio) {
+      done?.();
+      return;
+    }
+
+    const activeAudio = audio;
+    fadeTo(0, 500, () => {
+      activeAudio.pause();
+
+      if (audio === activeAudio) {
+        audio = null;
+        currentId = null;
+      }
+
+      done?.();
+    });
+  }
+
+  return {
+    play(src, id, { loop = true, volume = 0.75 } = {}) {
+      if (currentId === id) {
+        return;
+      }
+
+      stopWithFade(() => {
+        audio = new Audio(src);
+        audio.loop = loop;
+        audio.volume = 0;
+        currentId = id;
+        audio.play().catch(() => {});
+        fadeTo(volume, 1200);
+      });
+    },
+    stop() {
+      stopWithFade();
+    }
+  };
+}
+
+const bgmPlayer = createBgmPlayer();
 
 export function createGame(root) {
   root.innerHTML = `
@@ -11,7 +97,7 @@ export function createGame(root) {
         <header class="top-bar">
           <div class="date-ribbon" data-date-label>--月--日</div>
           <div class="story-meta">
-            <div class="scenario-tag" data-title>Loading</div>
+            <div class="scenario-tag" data-title>Novel Flow</div>
             <div class="node-indicator" data-node-indicator>node: -</div>
           </div>
         </header>
@@ -19,13 +105,17 @@ export function createGame(root) {
         <section class="hud">
           <div class="choices" data-choices hidden></div>
           <div class="dialog-shell">
-            <div class="speaker-badge" data-speaker>System</div>
+            <div class="speaker-badge" data-speaker data-position="narration">System</div>
             <div class="text-box">
-              <p class="message" data-message>シナリオを読み込んでいます。</p>
+              <p class="message" data-message>シナリオを選択してください。</p>
             </div>
-            <button class="advance-button" type="button" aria-label="次へ" data-advance></button>
+            <button class="advance-button" type="button" aria-label="次へ" data-advance disabled></button>
           </div>
           <div class="command-bar">
+            <button class="command-button" type="button" data-command="scenario" data-clickable="true">
+              <span class="command-icon">▶</span>
+              <span class="command-label">シナリオ選択</span>
+            </button>
             <button class="command-button" type="button" data-command="restart" data-clickable="true">
               <span class="command-icon">R</span>
               <span class="command-label">最初から</span>
@@ -50,14 +140,32 @@ export function createGame(root) {
               <span class="command-icon">B</span>
               <span class="command-label">Backlog</span>
             </button>
-            <button class="command-button" type="button" data-command="menu">
-              <span class="command-icon">M</span>
-              <span class="command-label">Menu</span>
-            </button>
           </div>
         </section>
       </section>
       <aside class="error-box" data-error hidden></aside>
+      <div class="player-setup" data-player-setup hidden>
+        <div class="player-card">
+          <p class="player-kicker">ROMANCE MODE</p>
+          <h1 class="player-title" data-player-title>主人公の名前を決める</h1>
+          <p class="player-copy" data-player-copy>呼ばれたい名前で物語を始めます。</p>
+          <form class="player-form" data-player-form>
+            <label class="player-field">
+              <span class="player-field-label" data-player-label>名前</span>
+              <input class="player-input" type="text" maxlength="20" autocomplete="nickname" data-player-input />
+            </label>
+            <div class="player-presets" data-player-presets></div>
+            <button class="player-submit" type="submit" data-player-submit>この名前で始める</button>
+          </form>
+        </div>
+      </div>
+      <div class="scenario-picker" data-scenario-picker>
+        <div class="picker-panel">
+          <h1 class="picker-title">シナリオ選択</h1>
+          <div class="picker-list" data-picker-list></div>
+          <button class="picker-close" type="button" data-picker-close hidden>✕ 閉じる</button>
+        </div>
+      </div>
     </main>
   `;
 
@@ -66,8 +174,25 @@ export function createGame(root) {
 
   ui.advanceButton.addEventListener("click", () => engine.advance());
   ui.restartButton.addEventListener("click", () => engine.restart());
+  ui.scenarioButton.addEventListener("click", () => openPicker(ui, engine));
+  ui.pickerClose.addEventListener("click", () => closePicker(ui));
+  ui.playerForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    engine.confirmPlayerName(ui.playerInput.value);
+  });
+  ui.playerPresets.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-player-preset]");
 
-  engine.load(DEFAULT_SCENARIO_URL);
+    if (!button) {
+      return;
+    }
+
+    ui.playerInput.value = button.dataset.playerPreset ?? "";
+    ui.playerInput.focus();
+    ui.playerInput.select();
+  });
+
+  openPicker(ui, engine);
 }
 
 function getUi(root) {
@@ -83,6 +208,18 @@ function getUi(root) {
     choices: root.querySelector("[data-choices]"),
     advanceButton: root.querySelector("[data-advance]"),
     restartButton: root.querySelector('[data-command="restart"]'),
+    scenarioButton: root.querySelector('[data-command="scenario"]'),
+    scenarioPicker: root.querySelector("[data-scenario-picker]"),
+    pickerList: root.querySelector("[data-picker-list]"),
+    pickerClose: root.querySelector("[data-picker-close]"),
+    playerSetup: root.querySelector("[data-player-setup]"),
+    playerForm: root.querySelector("[data-player-form]"),
+    playerTitle: root.querySelector("[data-player-title]"),
+    playerCopy: root.querySelector("[data-player-copy]"),
+    playerLabel: root.querySelector("[data-player-label]"),
+    playerInput: root.querySelector("[data-player-input]"),
+    playerPresets: root.querySelector("[data-player-presets]"),
+    playerSubmit: root.querySelector("[data-player-submit]"),
     error: root.querySelector("[data-error]")
   };
 }
@@ -96,15 +233,31 @@ function createEngine(ui) {
     sprites: {},
     dateLabel: "",
     waitingForChoice: false,
-    ended: false
+    ended: false,
+    awaitingPlayerName: false,
+    playerConfig: null,
+    lastPlayerName: "",
+    spriteSerial: 0,
+    motionSerial: 0,
+    lastSpeakerLabel: "System",
+    lastSpeakerCharacterId: null,
+    lastSpeakerPosition: "narration"
   };
 
   const api = {
     async load(url) {
       try {
         const scenario = await loadScenario(url);
-        prepareScenario(state, scenario);
+        bgmPlayer.stop();
+        prepareScenario(state, scenario, { playerName: state.lastPlayerName });
         renderShell(ui, state);
+
+        if (state.awaitingPlayerName) {
+          openPlayerSetup(ui, state);
+          return;
+        }
+
+        closePlayerSetup(ui);
         api.advance();
       } catch (error) {
         renderError(ui, formatError(error));
@@ -112,7 +265,7 @@ function createEngine(ui) {
     },
 
     advance() {
-      if (!state.scenario || state.waitingForChoice || state.ended) {
+      if (!state.scenario || state.waitingForChoice || state.ended || state.awaitingPlayerName) {
         return;
       }
 
@@ -126,9 +279,31 @@ function createEngine(ui) {
         return;
       }
 
-      prepareScenario(state, state.scenario);
+      bgmPlayer.stop();
+      prepareScenario(state, state.scenario, {
+        playerName: state.lastPlayerName || getByPath(state.variables, "player.name"),
+        skipPlayerPrompt: Boolean(state.playerConfig)
+      });
       renderShell(ui, state);
+      closePlayerSetup(ui);
       api.advance();
+    },
+
+    confirmPlayerName(rawValue) {
+      if (!state.playerConfig) {
+        return;
+      }
+
+      const playerName = normalizePlayerName(rawValue, state.playerConfig);
+      state.lastPlayerName = playerName;
+      setByPath(state.variables, "player.name", playerName);
+      state.awaitingPlayerName = false;
+      closePlayerSetup(ui);
+      api.advance();
+    },
+
+    isLoaded() {
+      return state.scenario !== null;
     }
   };
 
@@ -170,7 +345,8 @@ async function loadAssetManifest() {
 function createEmptyAssetManifest() {
   return {
     backgrounds: {},
-    characters: {}
+    characters: {},
+    bgm: {}
   };
 }
 
@@ -192,7 +368,7 @@ function validateScenario(scenario) {
   }
 }
 
-function prepareScenario(state, scenario) {
+function prepareScenario(state, scenario, options = {}) {
   state.scenario = scenario;
   state.variables = structuredClone(scenario.variables ?? {});
   state.currentNodeId = scenario.start;
@@ -201,14 +377,57 @@ function prepareScenario(state, scenario) {
   state.dateLabel = scenario.dateLabel ?? scenario.ui?.dateLabel ?? "";
   state.waitingForChoice = false;
   state.ended = false;
+  state.spriteSerial = 0;
+  state.motionSerial = 0;
+  state.lastSpeakerLabel = "System";
+  state.lastSpeakerCharacterId = null;
+  state.lastSpeakerPosition = "narration";
+  state.playerConfig = normalizePlayerConfig(scenario.player);
+
+  if (state.playerConfig) {
+    const initialName = normalizePlayerName(
+      options.playerName || getByPath(state.variables, "player.name"),
+      state.playerConfig
+    );
+    setByPath(state.variables, "player.name", initialName);
+    state.lastPlayerName = initialName;
+    state.awaitingPlayerName = !options.skipPlayerPrompt;
+  } else {
+    state.awaitingPlayerName = false;
+  }
+}
+
+function normalizePlayerConfig(player) {
+  if (!player || typeof player !== "object") {
+    return null;
+  }
+
+  const presets = Array.isArray(player.presets)
+    ? player.presets.map((value) => String(value).trim()).filter(Boolean).slice(0, 6)
+    : [];
+
+  return {
+    title: String(player.title ?? "主人公の名前を決める"),
+    prompt: String(player.prompt ?? "呼ばれたい名前を入力してください。"),
+    label: String(player.label ?? "主人公の名前"),
+    placeholder: String(player.placeholder ?? "例: 湊"),
+    confirmLabel: String(player.confirmLabel ?? "この名前で始める"),
+    defaultName: String(player.defaultName ?? player.default ?? "あなた"),
+    presets
+  };
+}
+
+function normalizePlayerName(rawValue, config) {
+  const value = String(rawValue ?? "").trim();
+  return value || config.defaultName || "あなた";
 }
 
 function renderShell(ui, state) {
   ui.title.textContent = state.scenario.title ?? "Novel Flow";
   ui.dateLabel.textContent = state.dateLabel || "--月--日";
   ui.background.style.backgroundImage = "";
-  ui.speaker.textContent = "System";
-  ui.message.textContent = "開始します。";
+  renderSpeakerBadge(ui, "System", "narration");
+  ui.message.textContent = state.awaitingPlayerName ? "主人公の名前を決めてください。" : "開始します。";
   ui.advanceButton.disabled = false;
   renderNodeIndicator(ui, state);
   renderSprites(ui, state);
@@ -222,7 +441,7 @@ function runUntilPause(state, ui, api) {
 
     if (!action) {
       state.ended = true;
-      ui.speaker.textContent = "System";
+      renderSpeakerBadge(ui, "System", "narration");
       ui.message.textContent = "シナリオの終端です。";
       ui.advanceButton.disabled = true;
       return;
@@ -266,6 +485,10 @@ function executeAction(action, state, ui, api) {
       applyHide(payload, state, ui);
       stepNext(state, ui);
       return false;
+    case "motion":
+      applyMotion(payload, state, ui);
+      stepNext(state, ui);
+      return false;
     case "say":
       applySay(payload, state, ui);
       stepNext(state, ui);
@@ -274,6 +497,10 @@ function executeAction(action, state, ui, api) {
       applyChoice(payload, state, ui, api);
       stepNext(state, ui);
       return true;
+    case "bgm":
+      applyBgm(payload, state);
+      stepNext(state, ui);
+      return false;
     case "set":
       applySet(payload, state);
       stepNext(state, ui);
@@ -314,32 +541,45 @@ function applyDate(payload, state, ui) {
 }
 
 function applyShow(payload, state, ui) {
+  if (!payload || typeof payload !== "object") {
+    throw new Error("show はオブジェクトで記述してください。");
+  }
+
   const position = payload.position ?? "center";
 
   if (!POSITIONS.includes(position)) {
     throw new Error(`show.position は ${POSITIONS.join(", ")} のいずれかです。`);
   }
 
-  state.sprites[position] = {
+  const motionName = ensureMotionName(payload.motion);
+  const sprite = {
+    key: `${payload.character}:${payload.expression ?? "default"}:${++state.spriteSerial}`,
     position,
+    characterId: payload.character,
     src: resolveCharacterSprite(payload, state.scenario),
-    alt: resolveCharacterName(payload.character, state.scenario)
+    alt: resolveCharacterName(payload.character, state.scenario),
+    enter: resolveEnterVariant(payload.enter, position),
+    motionName,
+    motionNonce: motionName ? ++state.motionSerial : 0
   };
 
+  state.sprites[position] = sprite;
   renderSprites(ui, state);
+  syncSpeakerBadgePosition(state, ui);
 }
 
 function applyHide(payload, state, ui) {
   if (typeof payload === "string") {
     delete state.sprites[payload];
     renderSprites(ui, state);
+    syncSpeakerBadgePosition(state, ui);
     return;
   }
 
-  if (payload.position) {
+  if (payload?.position) {
     delete state.sprites[payload.position];
-  } else if (payload.character) {
-    const match = Object.entries(state.sprites).find(([, sprite]) => sprite.alt === resolveCharacterName(payload.character, state.scenario));
+  } else if (payload?.character) {
+    const match = Object.entries(state.sprites).find(([, sprite]) => sprite.characterId === payload.character);
 
     if (match) {
       delete state.sprites[match[0]];
@@ -349,6 +589,43 @@ function applyHide(payload, state, ui) {
   }
 
   renderSprites(ui, state);
+  syncSpeakerBadgePosition(state, ui);
+}
+
+function applyMotion(payload, state, ui) {
+  let motionName = null;
+  let position = null;
+
+  if (typeof payload === "string") {
+    motionName = payload;
+    position = findSpritePositionByCharacter(state.lastSpeakerCharacterId, state);
+  } else if (payload && typeof payload === "object") {
+    motionName = payload.name ?? payload.motion ?? payload.effect;
+
+    if (payload.position) {
+      position = payload.position;
+    } else if (payload.character) {
+      position = findSpritePositionByCharacter(payload.character, state);
+    } else if (payload.target) {
+      position = findSpritePositionByTarget(payload.target, state);
+    } else {
+      position = findSpritePositionByCharacter(state.lastSpeakerCharacterId, state);
+    }
+  }
+
+  const normalizedMotion = ensureMotionName(motionName);
+
+  if (!normalizedMotion) {
+    throw new Error("motion.name にアニメーション名を指定してください。例: 衝撃, 疑問");
+  }
+
+  if (!position || !state.sprites[position]) {
+    throw new Error("motion の対象キャラクターが現在ステージ上にいません。");
+  }
+
+  state.sprites[position].motionName = normalizedMotion;
+  state.sprites[position].motionNonce = ++state.motionSerial;
+  renderSprites(ui, state);
 }
 
 function applySay(payload, state, ui) {
@@ -356,8 +633,12 @@ function applySay(payload, state, ui) {
     throw new Error("say は `speaker` と `text` を持つオブジェクトで記述してください。");
   }
 
-  ui.speaker.textContent = resolveSpeakerName(payload.speaker, state.scenario);
-  ui.message.textContent = payload.text ?? "";
+  const speaker = resolveSpeaker(payload.speaker, state);
+  state.lastSpeakerLabel = speaker.label;
+  state.lastSpeakerCharacterId = speaker.characterId;
+  state.lastSpeakerPosition = speaker.position;
+  renderSpeakerBadge(ui, speaker.label, speaker.position);
+  ui.message.textContent = interpolateText(String(payload.text ?? ""), state.variables);
   ui.advanceButton.disabled = false;
 }
 
@@ -381,7 +662,7 @@ function applyChoice(payload, state, ui, api) {
     const button = document.createElement("button");
     button.className = "choice-button";
     button.type = "button";
-    button.textContent = option.text;
+    button.textContent = interpolateText(String(option.text ?? ""), state.variables);
     button.addEventListener("click", () => {
       state.waitingForChoice = false;
       clearChoices(ui);
@@ -401,6 +682,30 @@ function applyChoice(payload, state, ui, api) {
     });
     ui.choices.append(button);
   }
+}
+
+function applyBgm(payload, state) {
+  const id = typeof payload === "string" ? payload : payload?.id;
+
+  if (!id || id === "stop") {
+    bgmPlayer.stop();
+    return;
+  }
+
+  const src = resolveBgm(id, state.scenario);
+
+  if (!src) {
+    console.warn(`[BGM] "${id}" がマニフェストに見つかりません。assets/bgm/${id}.* を配置してください。`);
+    return;
+  }
+
+  const loop = payload?.loop ?? true;
+  const volume = payload?.volume ?? 0.75;
+  bgmPlayer.play(toAppUrl(src), id, { loop, volume });
+}
+
+function resolveBgm(id, scenario) {
+  return scenario.bgm?.[id] ?? scenario.assetManifest?.bgm?.[id] ?? null;
 }
 
 function applySet(payload, state) {
@@ -453,27 +758,184 @@ function renderNodeIndicator(ui, state) {
 }
 
 function renderSprites(ui, state) {
-  ui.spriteLayer.innerHTML = "";
+  const existing = new Map(
+    Array.from(ui.spriteLayer.querySelectorAll(".sprite")).map((element) => [element.dataset.slot, element])
+  );
 
   for (const position of POSITIONS) {
     const sprite = state.sprites[position];
+    const currentElement = existing.get(position);
 
     if (!sprite) {
+      if (currentElement) {
+        removeSpriteElement(currentElement);
+      }
+
       continue;
     }
 
-    const image = document.createElement("img");
-    image.className = "sprite is-visible";
-    image.dataset.position = sprite.position;
-    image.src = sprite.src;
-    image.alt = sprite.alt;
-    ui.spriteLayer.append(image);
+    if (!currentElement) {
+      const element = createSpriteElement(sprite);
+      ui.spriteLayer.append(element);
+      animateSpriteIn(element, sprite);
+      continue;
+    }
+
+    if (currentElement.dataset.spriteKey !== sprite.key) {
+      removeSpriteElement(currentElement);
+      const element = createSpriteElement(sprite);
+      ui.spriteLayer.append(element);
+      animateSpriteIn(element, sprite);
+      continue;
+    }
+
+    syncSpriteMotion(currentElement, sprite);
   }
+}
+
+function createSpriteElement(sprite) {
+  const figure = document.createElement("figure");
+  figure.className = "sprite";
+  figure.dataset.slot = sprite.position;
+  figure.dataset.position = sprite.position;
+  figure.dataset.enter = sprite.enter;
+  figure.dataset.spriteKey = sprite.key;
+  figure.dataset.motionNonce = "0";
+
+  const image = document.createElement("img");
+  image.className = "sprite-image";
+  image.src = sprite.src;
+  image.alt = sprite.alt;
+
+  const reaction = document.createElement("span");
+  reaction.className = "sprite-reaction";
+  reaction.setAttribute("aria-hidden", "true");
+
+  figure.append(image, reaction);
+  return figure;
+}
+
+function animateSpriteIn(element, sprite) {
+  requestAnimationFrame(() => {
+    element.classList.add("is-visible");
+    syncSpriteMotion(element, sprite);
+  });
+}
+
+function removeSpriteElement(element) {
+  if (element.dataset.removing === "true") {
+    return;
+  }
+
+  element.dataset.removing = "true";
+  element.classList.remove("is-visible");
+  element.classList.add("is-leaving");
+
+  window.setTimeout(() => {
+    if (element.isConnected) {
+      element.remove();
+    }
+  }, 420);
+}
+
+function syncSpriteMotion(element, sprite) {
+  if (!sprite.motionName || !sprite.motionNonce) {
+    return;
+  }
+
+  const currentNonce = Number(element.dataset.motionNonce ?? "0");
+
+  if (currentNonce === sprite.motionNonce) {
+    return;
+  }
+
+  playSpriteMotion(element, sprite.motionName, sprite.motionNonce);
+}
+
+function playSpriteMotion(element, motionName, motionNonce) {
+  const motion = resolveMotionDefinition(motionName);
+
+  if (!motion) {
+    return;
+  }
+
+  for (const item of Object.values(MOTION_LIBRARY)) {
+    element.classList.remove(item.className);
+  }
+
+  clearTimeout(Number(element.dataset.motionTimerId || "0"));
+  element.dataset.motionNonce = String(motionNonce);
+  element.dataset.reaction = motion.reaction;
+
+  const reaction = element.querySelector(".sprite-reaction");
+  if (reaction) {
+    reaction.textContent = motion.reaction;
+  }
+
+  void element.offsetWidth;
+  element.classList.add(motion.className);
+
+  const timerId = window.setTimeout(() => {
+    element.classList.remove(motion.className);
+    delete element.dataset.reaction;
+  }, motion.durationMs);
+
+  element.dataset.motionTimerId = String(timerId);
 }
 
 function clearChoices(ui) {
   ui.choices.hidden = true;
   ui.choices.innerHTML = "";
+}
+
+function renderSpeakerBadge(ui, label, position) {
+  ui.speaker.textContent = label;
+  ui.speaker.dataset.position = position ?? "narration";
+}
+
+function syncSpeakerBadgePosition(state, ui) {
+  if (!state.lastSpeakerCharacterId) {
+    return;
+  }
+
+  const position = findSpritePositionByCharacter(state.lastSpeakerCharacterId, state) ?? "narration";
+  state.lastSpeakerPosition = position;
+  renderSpeakerBadge(ui, state.lastSpeakerLabel, position);
+}
+
+function resolveSpeaker(speaker, state) {
+  if (!speaker) {
+    return {
+      label: "Narration",
+      position: "narration",
+      characterId: null
+    };
+  }
+
+  if (speaker === "player" || speaker === "$player") {
+    return {
+      label: getByPath(state.variables, "player.name") ?? "あなた",
+      position: "narration",
+      characterId: null
+    };
+  }
+
+  const rawSpeaker = String(speaker);
+  const interpolated = interpolateText(rawSpeaker, state.variables);
+
+  if (interpolated !== rawSpeaker || rawSpeaker.includes("{{")) {
+    return {
+      label: interpolated,
+      position: "narration",
+      characterId: null
+    };
+  }
+
+  return {
+    label: resolveCharacterName(rawSpeaker, state.scenario),
+    position: findSpritePositionByCharacter(rawSpeaker, state) ?? "narration",
+    characterId: rawSpeaker
+  };
 }
 
 function renderError(ui, message) {
@@ -537,12 +999,81 @@ function resolveCharacterName(characterId, scenario) {
   return character?.name ?? characterId ?? "Unknown";
 }
 
-function resolveSpeakerName(speaker, scenario) {
-  if (!speaker) {
-    return "Narration";
+function resolveEnterVariant(value, position) {
+  if (value === undefined || value === null || value === "" || value === "auto") {
+    if (position === "left") {
+      return "left";
+    }
+
+    if (position === "right") {
+      return "right";
+    }
+
+    return "center";
   }
 
-  return resolveCharacterName(speaker, scenario);
+  const variant = String(value);
+
+  if (!ENTER_VARIANTS.has(variant)) {
+    throw new Error(`show.enter は ${Array.from(ENTER_VARIANTS).join(", ")} のいずれかです。`);
+  }
+
+  return variant;
+}
+
+function normalizeMotionName(value) {
+  if (value === undefined || value === null || value === "") {
+    return null;
+  }
+
+  const motion = String(value).trim();
+
+  if (MOTION_LIBRARY[motion]) {
+    return motion;
+  }
+
+  const alias = MOTION_ALIASES[motion.toLowerCase()];
+  return alias ?? motion;
+}
+
+function ensureMotionName(value) {
+  const motionName = normalizeMotionName(value);
+
+  if (!motionName) {
+    return null;
+  }
+
+  if (!MOTION_LIBRARY[motionName]) {
+    throw new Error(`未対応のモーションです: ${value}`);
+  }
+
+  return motionName;
+}
+
+function resolveMotionDefinition(value) {
+  const motionName = normalizeMotionName(value);
+  return motionName ? MOTION_LIBRARY[motionName] ?? null : null;
+}
+
+function findSpritePositionByCharacter(characterId, state) {
+  if (!characterId) {
+    return null;
+  }
+
+  const entry = Object.entries(state.sprites).find(([, sprite]) => sprite.characterId === characterId);
+  return entry?.[0] ?? null;
+}
+
+function findSpritePositionByTarget(target, state) {
+  if (!target) {
+    return null;
+  }
+
+  if (POSITIONS.includes(target)) {
+    return target;
+  }
+
+  return findSpritePositionByCharacter(target, state);
 }
 
 function isChoiceVisible(option, variables) {
@@ -599,6 +1130,13 @@ function evaluateCondition(condition, variables) {
     default:
       throw new Error(`未対応の比較演算子です: ${operator}`);
   }
+}
+
+function interpolateText(text, variables) {
+  return String(text ?? "").replace(/\{\{\s*([a-zA-Z0-9_.-]+)\s*\}\}/g, (full, path) => {
+    const value = getByPath(variables, path);
+    return value === undefined || value === null ? full : String(value);
+  });
 }
 
 function toAppUrl(value) {
@@ -669,6 +1207,81 @@ function setByPath(target, path, value) {
   }
 
   current[lastKey] = value;
+}
+
+function openPlayerSetup(ui, state) {
+  const config = state.playerConfig;
+
+  if (!config) {
+    closePlayerSetup(ui);
+    return;
+  }
+
+  ui.playerTitle.textContent = config.title;
+  ui.playerCopy.textContent = config.prompt;
+  ui.playerLabel.textContent = config.label;
+  ui.playerInput.placeholder = config.placeholder;
+  ui.playerInput.value = getByPath(state.variables, "player.name") ?? config.defaultName;
+  ui.playerSubmit.textContent = config.confirmLabel;
+  ui.playerPresets.innerHTML = config.presets
+    .map((preset) => `<button class="player-preset" type="button" data-player-preset="${escapeHtml(preset)}">${escapeHtml(preset)}</button>`)
+    .join("");
+  ui.playerSetup.hidden = false;
+
+  requestAnimationFrame(() => {
+    ui.playerInput.focus();
+    ui.playerInput.select();
+  });
+}
+
+function closePlayerSetup(ui) {
+  ui.playerSetup.hidden = true;
+}
+
+async function openPicker(ui, engine) {
+  ui.scenarioPicker.hidden = false;
+  ui.pickerClose.hidden = !engine.isLoaded();
+  ui.pickerList.innerHTML = '<p class="picker-loading">読み込み中…</p>';
+
+  try {
+    const response = await fetch(toAppUrl("scenarios/index.json"), { cache: "no-store" });
+
+    if (!response.ok) {
+      throw new Error(String(response.status));
+    }
+
+    const list = await response.json();
+    ui.pickerList.innerHTML = "";
+
+    for (const entry of list) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "picker-item";
+      button.innerHTML = `
+        <span class="picker-item-title">${escapeHtml(entry.title)}</span>
+        ${entry.description ? `<span class="picker-item-desc">${escapeHtml(entry.description)}</span>` : ""}
+      `;
+      button.addEventListener("click", () => {
+        closePicker(ui);
+        engine.load(toAppUrl(entry.url));
+      });
+      ui.pickerList.append(button);
+    }
+  } catch (error) {
+    ui.pickerList.innerHTML = `<p class="picker-error">シナリオ一覧を読み込めませんでした。(${escapeHtml(error.message)})</p>`;
+  }
+}
+
+function closePicker(ui) {
+  ui.scenarioPicker.hidden = true;
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
 }
 
 function formatError(error) {

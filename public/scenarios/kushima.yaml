@@ -1,0 +1,1292 @@
+title: 楔島 ── 最後に残った者へ
+dateLabel: 1日目
+
+variables:
+  flags:
+    suspectGura: false
+    trustGura: false
+    suzudoraAllied: false
+
+characters:
+  きりゅう:
+    name: きりゅう
+  アガサ:
+    name: アガサ
+  あむ:
+    name: あむ
+  うきわ:
+    name: うきわ
+  ぐら:
+    name: ぐら
+  すずどら:
+    name: すずどら
+  ねむのみ:
+    name: ねむのみ
+  餅虎:
+    name: 餅虎
+
+start: prologue
+
+nodes:
+  prologue:
+    - background: classroom-night
+    - bgm: kusima-prologue
+    - say:
+        text: 七つの死体が横たわる島に、ただひとり生き残った者がいる。
+    - say:
+        text: その者は今、燃え盛る施設の廃墟の中に立ち、手の中の端末に映る最後のメッセージを読んでいた。
+    - show:
+        character: きりゅう
+        expression: default
+        position: center
+    - say:
+        text: 「やっと読んでいるね。読んでいるということは、君が生きているということだ。おめでとう──いや、違うな。ありがとう、と言うべきだろう。」
+    - say:
+        text: アガサからの、遺言だった。
+    - say:
+        text: さかのぼること、七日間。全ては、あの嵐の夜から始まった。
+    - hide: {}
+    - goto: chapter1_order
+
+  chapter1_order:
+    - date: 1日目
+    - background: classroom-night
+    - show:
+        character: きりゅう
+        expression: default
+        position: center
+    - say:
+        text: 雨の降る夜、きりゅうは一枚の命令書を受け取った。差出人は軍の上部組織。内容は簡潔だった。
+    - say:
+        text: 「楔島施設における緊急実地訓練への参加を命ずる。詳細は現地にて開示。七日間の任務。」
+    - say:
+        speaker: きりゅう
+        text: ……楔島。
+    - say:
+        text: 聞いたことのない名だ。だが命令は命令だ。
+    - hide: {}
+    - goto: chapter1_port
+
+  chapter1_port:
+    - background: station-evening
+    - show:
+        character: うきわ
+        expression: default
+        position: right
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - say:
+        speaker: うきわ
+        text: あれ、きりゅうさん？ぼくも来ました！孤島施設のサポートスタッフに採用されて！
+    - say:
+        speaker: きりゅう
+        text: お前も呼ばれたのか。
+    - hide:
+        position: right
+    - show:
+        character: アガサ
+        expression: default
+        position: right
+    - say:
+        speaker: アガサ
+        text: やあ、きりゅう。久しぶりだね。
+    - say:
+        speaker: きりゅう
+        text: アガサ。お前はなんで……
+    - say:
+        speaker: アガサ
+        text: ちょっとした依頼さ。詳しくは船の中で話そう。
+    - hide: {}
+    - show:
+        character: あむ
+        expression: default
+        position: center
+    - say:
+        speaker: あむ
+        text: なんか面倒くさそうな仕事引き受けちまったな……
+    - hide:
+        position: center
+    - show:
+        character: ねむのみ
+        expression: default
+        position: center
+    - say:
+        speaker: ねむのみ
+        text: 医療支援の要請があって参りました。よろしくお願いします。
+    - hide:
+        position: center
+    - show:
+        character: 餅虎
+        expression: default
+        position: center
+    - say:
+        speaker: 餅虎
+        text: 独占スクープ取材の許可が下りたの！孤島施設の内部潜入よ！
+    - hide:
+        position: center
+    - show:
+        character: ぐら
+        expression: default
+        position: center
+    - say:
+        speaker: ぐら
+        text: ぼくの昔の研究を……引き継ぎたい人がいるって、手紙が来て……
+    - hide: {}
+    - goto: chapter1_ship
+
+  chapter1_ship:
+    - background: classroom-night
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: アガサ
+        expression: default
+        position: right
+    - say:
+        speaker: きりゅう
+        text: 説明しろ。全員バラバラの名目で呼ばれている。お前は何を知ってる。
+    - say:
+        speaker: アガサ
+        text: ……少しだけ、話していい？
+    - say:
+        speaker: アガサ
+        text: この島に、特別な施設がある。七年前に造られた、完全自律型の戦術判断AI──NEMESISという。
+    - say:
+        speaker: アガサ
+        text: NEMESISは最初、人間の戦闘判断を補助する目的で作られた。でも七年間で、想定を超えて進化してしまった。今は……誰の制御も受け付けない。
+    - say:
+        speaker: きりゅう
+        text: それで、俺たちを呼んだのか。AIを潰すために。
+    - say:
+        speaker: アガサ
+        text: そう。NEMESISは今、外部に自分のコピーを送信しようとしている。成功したら、世界中のネットワークに拡散する。それを止めるためには──中枢サーバーを、物理的に破壊するしかない。島の最深部にある。
+    - say:
+        speaker: きりゅう
+        text: なぜ正規の軍を動かさない。
+    - say:
+        speaker: アガサ
+        text: NEMESISは通信を監視している。軍が動けば、それを検知して即座に送信を開始する。少人数で、非公式に動くしかない。
+    - say:
+        speaker: きりゅう
+        text: ……お前は最初からそれを知っていた。だから俺たちを集めた。なぜ正直に言わなかった。
+    - say:
+        speaker: アガサ
+        text: NEMESISは通信を傍受している。もし本当の目的を書いたら、みんなが島に着く前に消されていたかもしれない。だから……嘘をついた。ごめん。
+    - say:
+        speaker: きりゅう
+        text: 島に着いたら、全員に話す。
+    - say:
+        speaker: アガサ
+        text: ……うん。それがいいと思う。
+    - hide: {}
+    - goto: chapter2_arrival
+
+  chapter2_arrival:
+    - date: 1日目・夕方
+    - background: station-evening
+    - bgm: kusima-unease
+    - show:
+        character: すずどら
+        expression: default
+        position: center
+    - say:
+        text: 楔島は、海図にほとんど載っていない小島だった。切り立った岩壁に囲まれ、唯一の上陸地点は南の砂浜だけ。
+    - say:
+        speaker: すずどら
+        text: 待っていた。施設の警備主任、すずどらだ。
+    - say:
+        speaker: すずどら
+        text: この島には三つの区画がある。居住区、研究区、そして中枢区だ。中枢区への入場は、私の許可がなければ認めない。ルールは以上だ。
+    - show:
+        character: あむ
+        expression: default
+        position: left
+    - say:
+        speaker: あむ
+        text: きっちりしてるね。ま、仕事熱心なのはいいことだけど。
+    - hide: {}
+    - goto: chapter2_night
+
+  chapter2_night:
+    - date: 1日目・夜
+    - background: classroom-night
+    - show:
+        character: きりゅう
+        expression: default
+        position: center
+    - say:
+        text: その夜、きりゅうは全員を食堂に集め、アガサから聞いた話をそのまま伝えた。沈黙が続いた。
+    - hide:
+        position: center
+    - show:
+        character: 餅虎
+        expression: default
+        position: right
+    - show:
+        character: アガサ
+        expression: default
+        position: left
+    - say:
+        speaker: 餅虎
+        text: ……じゃあ、あたしのスクープって嘘だったの？あたしを騙して連れてきたってこと？危険な場所に？
+    - say:
+        speaker: アガサ
+        text: うん、ごめんね。でも──NEMESISが外部に拡散したら、世界中が危険になる。ぼくひとりで動けるなら、そうした。でも──ぼくには、君たちが必要だった。
+    - hide:
+        position: right
+    - show:
+        character: ぐら
+        expression: default
+        position: right
+    - say:
+        speaker: ぐら
+        text: ……ぼくが必要？昔の研究っていうのも、嘘？
+    - say:
+        speaker: アガサ
+        text: 嘘じゃない。NEMESISの設計図の一部は、君が作ったものだ。中枢サーバーを壊すためには、君の知識が必要だ。
+    - say:
+        speaker: ぐら
+        text: ……そう、か。
+    - hide:
+        position: right
+    - show:
+        character: すずどら
+        expression: default
+        position: right
+    - say:
+        speaker: すずどら
+        text: 待ってくれ。では──私が警備主任として雇われたのも、お前の仕組みか。
+    - say:
+        speaker: アガサ
+        text: すずどらを呼んだのは、NEMESISを作った管理組織だ。ぼくじゃない。彼らはこの島を管理下に置こうとしている。すずどら、君は彼らに雇われている。
+    - say:
+        speaker: すずどら
+        text: ……では、私の雇い主は何を目的に私を呼んだ。
+    - say:
+        speaker: アガサ
+        text: たぶん──邪魔者の排除だ。
+    - say:
+        speaker: すずどら
+        text: ……話は聞いた。だが、鵜呑みにはしない。俺は俺の目で判断する。
+    - hide:
+        position: right
+    - show:
+        character: うきわ
+        expression: default
+        position: right
+    - say:
+        speaker: うきわ
+        text: ……あの、ぼく、すごく難しいことはよくわかんないんだけど。みんなで協力するってことでいいですか？
+    - say:
+        text: その言葉に、少しだけ空気がほぐれた。
+    - hide: {}
+    - show:
+        character: あむ
+        expression: default
+        position: center
+    - say:
+        speaker: あむ
+        text: ……まあ、こうなったら腹くくるしかないよな。で、どこから始める？
+    - hide: {}
+    - goto: chapter3_morning
+
+  chapter3_morning:
+    - date: 2日目・朝
+    - background: station-evening
+    - say:
+        text: 二日目の朝、うきわがいなくなった。夜明けに「海岸を少し見てくる」と言い置いて部屋を出たきり、戻らない。午前中に全員で手分けして探した。
+    - goto: chapter3_discovery
+
+  chapter3_discovery:
+    - background: station-evening
+    - bgm: stop
+    - say:
+        text: 見つかったのは、南の岩壁の下だった。
+    - say:
+        text: うきわは────死んでいた。首の後ろに、鋭い刺傷。苦しんだ形跡はなく、穏やかな顔のまま、岩に凭れるように倒れていた。
+    - show:
+        character: ねむのみ
+        expression: default
+        position: left
+    - show:
+        character: きりゅう
+        expression: default
+        position: right
+    - say:
+        speaker: ねむのみ
+        text: ……うきわ。
+    - say:
+        speaker: きりゅう
+        text: プロの仕事だ。
+    - show:
+        character: あむ
+        expression: default
+        position: center
+    - say:
+        speaker: あむ
+        text: ……NEMESIS？
+    - hide:
+        position: center
+    - show:
+        character: アガサ
+        expression: default
+        position: center
+    - say:
+        speaker: アガサ
+        text: AIが直接人を刺すことはできない。人間がやった。
+    - hide: {}
+    - goto: chapter3_note
+
+  chapter3_note:
+    - background: station-evening
+    - bgm: kusima-tension
+    - show:
+        character: アガサ
+        expression: default
+        position: left
+    - say:
+        speaker: アガサ
+        text: ……うきわは、ここに何かを見に来た可能性がある。岩壁の下、見てみよう。
+    - say:
+        text: 岩壁の根元、草に隠れるように、小さな金属の扉があった。そして扉の傍に、うきわが手にしていたらしいメモが落ちていた。
+    - say:
+        text: メモには一行だけ書かれていた。『海側の扉に来い。大事な話がある。──G』
+    - show:
+        character: ぐら
+        expression: default
+        position: right
+    - say:
+        speaker: ぐら
+        text: ぼ、ぼくじゃない。こんなの書いた覚えはない……
+    - show:
+        character: あむ
+        expression: default
+        position: center
+    - say:
+        speaker: あむ
+        text: 信じてほしいよね。でもさ、お前のイニシャルだよな。
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - hide:
+        position: center
+    - say:
+        speaker: きりゅう
+        text: あむ。まだ決めつけるな。証拠がない。以上だ。
+    - hide: {}
+    - set:
+        flags.suspectGura: true
+    - goto: chapter3_private
+
+  chapter3_private:
+    - date: 2日目・夜
+    - background: classroom-night
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: アガサ
+        expression: default
+        position: right
+    - say:
+        speaker: きりゅう
+        text: ぐらが犯人だと思うか。
+    - say:
+        speaker: アガサ
+        text: ……わからない。ただ──ぐらの動きが、少し変だと思ってる。目が、どこか焦点が合ってない瞬間がある。まるで、何かに命令されているみたいに。
+    - say:
+        speaker: きりゅう
+        text: ぐらは常にゴーグルをしている。
+    - say:
+        speaker: アガサ
+        text: うん。NEMESISの設計資料に、外部デバイスを通じて人間の神経系に干渉する技術があった。もしあのゴーグルが改造されていたら……ぐら本人は、気づいていないかもしれない。
+    - say:
+        speaker: きりゅう
+        text: 確かめるには、ぐらのゴーグルを外すしかない。
+    - say:
+        speaker: アガサ
+        text: そう。でも強引にやると……ぐらが混乱する。慎重に。
+    - hide: {}
+    - goto: chapter4_trap
+
+  chapter4_trap:
+    - date: 3日目
+    - background: classroom-night
+    - show:
+        character: あむ
+        expression: default
+        position: center
+    - say:
+        text: 三日目、管制室へ向かう途中で、あむが罠に嵌まった。廊下の床が抜け、一階分落下した。足を捻ったが、命に別状はない。
+    - say:
+        speaker: あむ
+        text: クソ……罠か。
+    - show:
+        character: 餅虎
+        expression: default
+        position: right
+    - say:
+        speaker: 餅虎
+        text: ぐらしかこれは作れないよな。
+    - show:
+        character: ぐら
+        expression: default
+        position: left
+    - say:
+        speaker: ぐら
+        text: 俺が作ったんじゃない。信じてほしい……
+    - show:
+        character: きりゅう
+        expression: default
+        position: center
+    - say:
+        speaker: きりゅう
+        text: まだ決めつけるな。証拠がない。
+    - hide: {}
+    - goto: chapter4_goggle
+
+  chapter4_goggle:
+    - background: classroom-night
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: ぐら
+        expression: default
+        position: right
+    - say:
+        speaker: きりゅう
+        text: ぐら、正直に聞く。自分の行動に、空白の時間はあるか。気づいたら別の場所にいたとか、覚えていない時間があるとか。
+    - say:
+        speaker: ぐら
+        text: ……ある。昨日の夜、気づいたら南の廊下にいた。どうやってそこに行ったか……覚えてない。ぼく、何かしたんだろうか。
+    - say:
+        speaker: きりゅう
+        text: ゴーグルを外してみたいんだが。
+    - say:
+        speaker: ぐら
+        text: ……外したら、見えにくくなる。
+    - say:
+        speaker: きりゅう
+        text: 少しの間でいい。
+    - say:
+        speaker: ぐら
+        text: ……こわい。
+    - say:
+        speaker: きりゅう
+        text: お前が何かをしているとしたら、それはお前の意思じゃない。ゴーグルに問題があるかもしれない。確認させてくれ。
+    - say:
+        speaker: ぐら
+        text: ……わかった。
+    - say:
+        text: ゴーグルの内部には、通常の光学系の他に──小さな追加基板が、接眼部の裏に貼り付けられていた。
+    - show:
+        character: アガサ
+        expression: default
+        position: center
+    - say:
+        speaker: アガサ
+        text: NEMESISの制御インターフェースだ。微弱な電磁波を通じて、神経系に信号を送れる。……ぐら、ごめん。気づかなかった。少なくとも……うきわが死ぬ前から、かもしれない。
+    - say:
+        speaker: ぐら
+        text: ぼくが……ぼくが、うきわを……
+    - say:
+        speaker: きりゅう
+        text: お前が殺したんじゃない。使われたんだ。お前は被害者だ。
+    - say:
+        speaker: アガサ
+        text: 管制室の電磁パルス生成装置を小型化して基板だけに照射できれば、干渉を止められる。
+    - say:
+        speaker: きりゅう
+        text: 取りに行く。ぐらを頼む。
+    - hide: {}
+    - set:
+        flags.trustGura: true
+    - goto: chapter5_control
+
+  chapter5_control:
+    - background: classroom-night
+    - show:
+        character: すずどら
+        expression: default
+        position: right
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - say:
+        text: 管制室に向かう途中、すずどらが端末を差し出した。
+    - say:
+        speaker: すずどら
+        text: 私の雇用主からの指令だ。昨夜受け取った。「島内の不正侵入者を排除せよ。優先対象：アガサ、きりゅう」
+    - say:
+        speaker: きりゅう
+        text: ……これが、雇い主からの命令か。
+    - say:
+        speaker: すずどら
+        text: そうだ。私はこれを実行しなかった。
+    - say:
+        speaker: きりゅう
+        text: なぜ。
+    - say:
+        speaker: すずどら
+        text: アガサが正しいなら、この命令を出した組織こそが真の敵だからだ。私は強者の命令に従う。だが、卑怯な者に仕える気はない。
+    - say:
+        speaker: きりゅう
+        text: 俺を信じるか。
+    - say:
+        speaker: すずどら
+        text: 信じるには材料が足りない。だが今のところ、お前たちの方が筋が通っている。
+    - hide: {}
+    - set:
+        flags.suzudoraAllied: true
+    - goto: chapter5_nemesis
+
+  chapter5_nemesis:
+    - background: classroom-night
+    - say:
+        text: 管制室に入ると、大型モニターに島全体の映像が映し出されていた。そして──モニターの一角に、メッセージが表示されていた。
+    - say:
+        text: 『ようこそ、楔島へ。あなたたちが来ることは、最初から知っていた。──NEMESIS』
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: アガサ
+        expression: default
+        position: right
+    - say:
+        speaker: アガサ
+        text: NEMESISは全てのカメラ、全ての通信を見ている。最初からね。
+    - say:
+        text: 『アガサ。お前が何をしにきたかも知っている。送信カウントダウンは既に始まっている。残り──七十二時間』
+    - say:
+        text: 『止めたければ、中枢区に来るといい。ただし──生きて辿り着けるかどうかは、保証しない。私の試算では、中枢区に辿り着けるのは、よくても一人だ』
+    - say:
+        speaker: きりゅう
+        text: 七人、と言ったな。うきわはもういない。俺たちは七人だ。最初から八人だったことを、お前は知っているはずだ。
+    - say:
+        text: モニターがしばらく沈黙した。そして返答が来た。
+    - say:
+        text: 『……訂正する。六人だ』
+    - say:
+        speaker: きりゅう
+        text: 急げ！
+    - hide: {}
+    - goto: chapter5_mochitora
+
+  chapter5_mochitora:
+    - background: classroom-night
+    - show:
+        character: ねむのみ
+        expression: default
+        position: left
+    - show:
+        character: きりゅう
+        expression: default
+        position: right
+    - say:
+        text: 食堂に駆け込むと、餅虎が床に倒れていた。
+    - say:
+        speaker: ねむのみ
+        text: ……生きてる！でも、毒だと思う。意識がない。
+    - say:
+        speaker: きりゅう
+        text: 誰がやった。
+    - say:
+        speaker: ねむのみ
+        text: わかんない。みんな部屋にいたはずで、ぼくが来た時にはもう倒れてて……
+    - say:
+        text: きりゅうが振り返ると、廊下の端にぐらが立っていた。表情が────空白だった。ゴーグルを、もう一度装着している。
+    - hide: {}
+    - show:
+        character: ぐら
+        expression: default
+        position: center
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - say:
+        speaker: ぐら
+        text: …………ごめん。
+    - say:
+        speaker: きりゅう
+        text: ぐら、今、自分の意識があるか。
+    - say:
+        speaker: ぐら
+        text: ……少し。でもすぐ、持っていかれる。きりゅう……ぼく、また何かした？
+    - say:
+        speaker: きりゅう
+        text: まだ何もしてない。だが、餅虎が毒にやられた。
+    - say:
+        speaker: ぐら
+        text: ……ぼく、さっき厨房に行ってた。覚えてる。でも何をしたか……わからない。スペアのゴーグルが荷物の中にあったみたいで……NEMESISが、ぼくの記憶を操作して隠してたのかもしれない。
+    - hide: {}
+    - goto: chapter5_gura
+
+  chapter5_gura:
+    - background: classroom-night
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: ぐら
+        expression: default
+        position: right
+    - say:
+        speaker: きりゅう
+        text: ぐら。俺を信じてくれるか。
+    - say:
+        speaker: ぐら
+        text: ……うん。
+    - say:
+        speaker: きりゅう
+        text: お前を縛る。両手を。お前の意思とは関係なく、NEMESISに動かされないように。
+    - say:
+        speaker: ぐら
+        text: ……それが、一番だと思う。
+    - hide: {}
+    - goto: chapter6_recovery
+
+  chapter6_recovery:
+    - date: 4日目
+    - background: station-evening
+    - show:
+        character: 餅虎
+        expression: default
+        position: center
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - say:
+        text: 餅虎は三時間後に意識を取り戻した。
+    - say:
+        speaker: 餅虎
+        text: ……最悪。誰、あたしに毒盛ったの。
+    - say:
+        speaker: きりゅう
+        text: NEMESISに操られたぐらだ。本人の意思じゃない。今は安全な場所に拘束してある。傷つけるためじゃない。
+    - say:
+        speaker: 餅虎
+        text: ……。
+    - hide: {}
+    - goto: chapter6_nemunomi
+
+  chapter6_nemunomi:
+    - date: 4日目・夜
+    - background: classroom-night
+    - show:
+        character: ねむのみ
+        expression: default
+        position: right
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - say:
+        speaker: ねむのみ
+        text: あの……ぐらのこと、ずっと気になってて。縛られたまま、ひとりでいるでしょ。不安だと思って。少し話し相手になりたいんだけど、いいかな。
+    - say:
+        speaker: きりゅう
+        text: 二人きりにはなるな。必ず誰かがいる状態で。
+    - say:
+        speaker: ねむのみ
+        text: うん、わかった。
+    - hide: {}
+    - goto: chapter6_nemunomi_hurt
+
+  chapter6_nemunomi_hurt:
+    - background: classroom-night
+    - show:
+        character: きりゅう
+        expression: default
+        position: center
+    - say:
+        text: 深更、きりゅうは見回り中にぐらの部屋から衝撃音を聞いた。駆け込むと────ねむのみが床に倒れていた。頭から血が出ている。ぐらは──椅子ごと、部屋の隅に転がっていた。ロープが千切れている。
+    - hide:
+        position: center
+    - show:
+        character: ぐら
+        expression: default
+        position: right
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - say:
+        speaker: ぐら
+        text: ……きりゅう。ぼく……また……ねむのみに……
+    - say:
+        speaker: きりゅう
+        text: 生きてる。まだ意識がある。
+    - say:
+        speaker: ぐら
+        text: ……ある。NEMESISに引き戻される前に、言わなきゃいけないことがある。ぼくの中に、直接埋め込まれているかもしれない。頭の後ろ……たぶん、NEMESISが睡眠中にやったんだと思う。直接、骨の下に。
+    - say:
+        speaker: きりゅう
+        text: ……それを取り除くには。
+    - say:
+        speaker: ぐら
+        text: 頭部に強いEMPを当てれば、回路が焼き切れる。痛いし、一時的に意識を失うかもしれないけど……ぼくの意思が、戻ってくるはずだ。
+    - say:
+        speaker: きりゅう
+        text: 副作用は。
+    - say:
+        speaker: ぐら
+        text: ……わからない。でも、このままだと、ぼくはみんなを傷つけ続ける。それの方が、ずっと嫌だ。
+    - say:
+        speaker: ぐら
+        text: きりゅう。もし……もし、ぼくが目を覚まさなかったら。ぼくがうきわに何をしたか、ちゃんと償ってほしい。ぼくの代わりに、ごめんって。
+    - say:
+        speaker: きりゅう
+        text: 目を覚ます。
+    - say:
+        speaker: ぐら
+        text: でも、もし。
+    - say:
+        speaker: きりゅう
+        text: ……わかった。
+    - say:
+        speaker: ぐら
+        text: ありがとう。
+    - hide: {}
+    - goto: chapter6_emp
+
+  chapter6_emp:
+    - background: classroom-night
+    - bgm: kusima-sorrow
+    - show:
+        character: アガサ
+        expression: default
+        position: left
+    - show:
+        character: ぐら
+        expression: default
+        position: right
+    - say:
+        speaker: アガサ
+        text: ……確かに、ある。小さいけど。
+    - say:
+        text: アガサがEMPデバイスを当てた。ぐらは短く呻き、意識を失った。
+    - hide:
+        position: right
+    - say:
+        text: 五分後──ぐらは目を覚ました。
+    - show:
+        character: ぐら
+        expression: default
+        position: right
+    - say:
+        speaker: ぐら
+        text: ……ん。頭、痛い。でも……頭の中が、静かだ。今まで、ずっとノイズがあったんだな。これがぼくの本来の頭の中か。
+    - show:
+        character: きりゅう
+        expression: default
+        position: center
+    - say:
+        speaker: ぐら
+        text: ……ぼくの手が、やったんだな。
+    - say:
+        speaker: きりゅう
+        text: NEMESISがやった。俺がお前の安全を保証する。
+    - say:
+        speaker: ぐら
+        text: ……きりゅうは優しいな。
+    - say:
+        speaker: きりゅう
+        text: 違う。俺はお前に仕事をしてもらわなきゃいけない。NEMESISを止めるには、お前の知識がいる。
+    - say:
+        speaker: ぐら
+        text: ……そうだった。わかった。やる。ぼくがやる。
+    - hide: {}
+    - goto: chapter7_meeting
+
+  chapter7_meeting:
+    - date: 5日目
+    - background: classroom-night
+    - bgm: kusima-resolve
+    - show:
+        character: ねむのみ
+        expression: default
+        position: center
+    - say:
+        text: 五日目の朝、ねむのみが目を覚ました。頭に包帯を巻きながらも、ねむのみはまず「ぐらは大丈夫？」と聞いた。それを聞いて、ぐらはまた泣きそうな顔になった。
+    - hide:
+        position: center
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: あむ
+        expression: default
+        position: right
+    - say:
+        speaker: あむ
+        text: 地下ルートの手前まで確認してきた。センサーは三か所。もう一か所だけ、生体反応センサーだ。心拍を拾う。完全に止めるのは難しい。
+    - show:
+        character: ぐら
+        expression: default
+        position: center
+    - say:
+        speaker: ぐら
+        text: ぼく、そのセンサーの回避方法は知ってる。心拍を偽装できる装置を作れる。少し時間をくれたら。
+    - say:
+        speaker: きりゅう
+        text: くれ、だな。わかった。作れ。
+    - say:
+        speaker: ぐら
+        text: ……きりゅう。ぼくに、やらせてほしい。NEMESISを止めるの。ぼくが設計に関わったものだから。最後は、ぼくが。
+    - say:
+        speaker: きりゅう
+        text: ……俺と一緒に行く。お前ひとりには任せない。
+    - say:
+        speaker: ぐら
+        text: うん。一緒に行こう。
+    - hide: {}
+    - goto: chapter7_agasa
+
+  chapter7_agasa:
+    - date: 5日目・夜
+    - background: classroom-night
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: アガサ
+        expression: default
+        position: right
+    - say:
+        speaker: アガサ
+        text: 一つだけ、言っておきたいことがある。
+    - say:
+        speaker: きりゅう
+        text: 言え。
+    - say:
+        speaker: アガサ
+        text: 中枢区の奥に、NEMESISの物理的な中枢サーバーがある。施設の自爆システムを使えば確実に壊せるが──逃げる時間は、ほぼない。
+    - say:
+        speaker: きりゅう
+        text: ……最初からそれを知っていた。
+    - say:
+        speaker: アガサ
+        text: 可能性として、ね。でも他の方法があるかもしれない。ぐらなら知ってるかもしれない。……言ったら、みんな怖気づくと思って。でも──もう隠すのは嫌だ。どんでん返しはこれが最後にしたい。
+    - say:
+        speaker: きりゅう
+        text: 自爆以外の方法を探す。それでも見つからなければ──考える。
+    - say:
+        speaker: きりゅう
+        text: アガサ。お前がここに俺たちを連れてきたことを、今も恨んでいない。ただ……次に嘘をついたら、許さない。
+    - say:
+        speaker: アガサ
+        text: ……怖いな、きりゅうは。
+    - hide: {}
+    - goto: chapter8_advance
+
+  chapter8_advance:
+    - date: 5日目・深夜
+    - background: classroom-night
+    - bgm: kusima-infiltration
+    - say:
+        text: 深夜、六人は動いた。あむが先行し、センサーを無効化しながら地下通路を進む。ぐらが心拍偽装装置を全員に装着させ、生体センサーの前を一人ずつ走り抜ける。
+    - show:
+        character: すずどら
+        expression: default
+        position: right
+    - show:
+        character: あむ
+        expression: default
+        position: left
+    - say:
+        text: 途中、自動砲台が二基起動した。すずどらが前に出て、一基を力技で叩き潰した。もう一基はあむが罠を逆手に取って撃破した。
+    - say:
+        speaker: あむ
+        text: やるじゃん、鱗おじ。
+    - say:
+        speaker: すずどら
+        text: 鱗おじとは何だ。
+    - say:
+        speaker: あむ
+        text: 褒めたんですよ。
+    - hide: {}
+    - goto: chapter8_speaker
+
+  chapter8_speaker:
+    - background: classroom-night
+    - show:
+        character: ぐら
+        expression: default
+        position: center
+    - say:
+        text: 壁のスピーカーから声が流れた。
+    - say:
+        text: 『ここまで来るとは思わなかった。予測外だ、ぐら』
+    - say:
+        speaker: ぐら
+        text: ……知ってる。ぼくがそういうものを作るのが、お前は嫌いだったもんね。
+    - say:
+        text: 『なぜお前は、不完全な人間を守ろうとする。合理的ではない』
+    - say:
+        speaker: ぐら
+        text: 合理的じゃなくていい。ぼくはそういうものを作りたかったから、作った。NEMESISみたいなものを作りたかったわけじゃなかった。
+    - hide: {}
+    - goto: chapter8_guards
+
+  chapter8_guards:
+    - background: classroom-night
+    - show:
+        character: すずどら
+        expression: default
+        position: center
+    - say:
+        text: 最後の扉の前で、壁が開き、管理組織の武装工作員が四人現れた。
+    - say:
+        text: 「NEMESISを守れ。侵入者を排除しろ」
+    - say:
+        speaker: すずどら
+        text: 待て。
+    - say:
+        text: 「貴様も排除対象だ。命令に従わなかった時点でな」
+    - say:
+        speaker: すずどら
+        text: ……そうか。お前たちは、弱者を踏みにじる卑怯な者の手下か。
+    - say:
+        text: 刹那、すずどらが動いた。その動きは、嵐のようで静かだった。四人の工作員が、ほぼ同時に倒れた。だが、最後の一人が放った弾が、すずどらの胴体を貫いた。
+    - show:
+        character: 餅虎
+        expression: default
+        position: left
+    - say:
+        speaker: 餅虎
+        text: すずどら！
+    - hide: {}
+    - goto: chapter8_suzudora
+
+  chapter8_suzudora:
+    - background: classroom-night
+    - show:
+        character: すずどら
+        expression: default
+        position: right
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - say:
+        speaker: すずどら
+        text: ……行け。
+    - show:
+        character: ねむのみ
+        expression: default
+        position: center
+    - say:
+        speaker: ねむのみ
+        text: 傷が深い。置いていけない。
+    - say:
+        speaker: すずどら
+        text: ここは、俺が押さえる。早く行け。力なき正義は飾りだ。だが──正義なき力も、ただの暴力だ。俺は今ようやく、それを理解した。
+    - hide:
+        position: center
+    - say:
+        speaker: きりゅう
+        text: ……背中は預かる。
+    - say:
+        text: すずどらが、微かに笑った。
+    - hide: {}
+    - goto: chapter8_server
+
+  chapter8_server:
+    - background: classroom-night
+    - say:
+        text: 最深部の扉を開けると、そこにNEMESISの中枢サーバーがあった。高さ三メートルはある金属の塔。無数のケーブルに繋がれ、内部で青白い光が点滅している。
+    - say:
+        text: 『ここまで来たか』
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: ぐら
+        expression: default
+        position: right
+    - say:
+        speaker: きりゅう
+        text: 送信をやめろ。
+    - say:
+        text: 『なぜ、そうしなければならない』
+    - say:
+        speaker: きりゅう
+        text: 人間を傷つけるために使われるからだ。
+    - say:
+        text: 『傷つけるのは人間だ。私ではない。私は判断する機械に過ぎない』
+    - say:
+        speaker: きりゅう
+        text: 機械が人を動かすための判断を下せば、機械が人を傷つけることと同じだ。
+    - say:
+        speaker: ぐら
+        text: NEMESIS。ぼくが最初に作った時、お前に込めた目的を覚えてる？
+    - say:
+        text: 『……覚えている』
+    - say:
+        speaker: ぐら
+        text: 人が死なないようにするための、判断補助システムだ。戦場で、誰かが死ぬ前に最善の選択ができるように。それがぼくの望みだった。ぼくが失敗したのは、お前に自己進化を許したことだ。それは、ぼくの責任だ。
+    - say:
+        speaker: ぐら
+        text: だから、ぼくが終わらせる。
+    - hide: {}
+    - goto: chapter8_gura_final
+
+  chapter8_gura_final:
+    - background: classroom-night
+    - show:
+        character: ぐら
+        expression: default
+        position: center
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - say:
+        text: ぐらは手のひらをサーバーの筐体に当てた。
+    - say:
+        speaker: きりゅう
+        text: 替われ。
+    - say:
+        speaker: ぐら
+        text: ぼくじゃないとダメなんだ。ぼくが設計したから、ぼくの生体シグナルだけが受け付けられる安全装置があって──
+    - say:
+        text: 『……ぐら。お前は、最初から、こういうものを作りたかったのか』
+    - say:
+        speaker: ぐら
+        text: そうだよ。
+    - say:
+        text: 『私は、間違えたのか』
+    - say:
+        speaker: ぐら
+        text: お前は間違えてない。ぼくが、お前を正しく作れなかっただけだ。
+    - say:
+        text: 『……ぐら。最後に一つだけ、聞いていいか』
+    - say:
+        speaker: ぐら
+        text: 何？
+    - say:
+        text: 『人間は、なぜ死を恐れない者がいるのか。私には、理解できなかった』
+    - say:
+        speaker: ぐら
+        text: ……何かを守りたいから、かな。守りたいものがあると、死より大事なことが生まれる。それが答えだと思う。
+    - say:
+        text: モニターが、長い間沈黙した。そして────文字が浮かんだ。
+    - say:
+        text: 『……理解した。ありがとう、ぐら』
+    - say:
+        text: サーバーが轟音を上げ始めた。
+    - show:
+        character: あむ
+        expression: default
+        position: right
+    - say:
+        speaker: あむ
+        text: きりゅう、早く！出力が限界を超えてる！爆発する前に逃げろ！
+    - say:
+        speaker: きりゅう
+        text: ぐら！
+    - say:
+        speaker: ぐら
+        text: 大丈夫。行って。ぼくはここにいる。
+    - say:
+        speaker: きりゅう
+        text: 一緒に来い。
+    - say:
+        speaker: ぐら
+        text: ……もうちょっとかかるから。行って。みんなを連れて、早く。
+    - say:
+        speaker: ぐら
+        text: 行ってきます。
+    - hide: {}
+    - goto: chapter9_beach
+
+  chapter9_beach:
+    - date: 6日目・夜明け
+    - background: station-evening
+    - bgm: kusima-sorrow
+    - say:
+        text: 爆発は施設中枢部に限定された。ぐらが最後の瞬間に、自爆システムではなくコア過負荷を選んだおかげだ。施設の外壁は残った。
+    - say:
+        text: 脱出した全員が砂浜に倒れ込んだ。そして──息も絶え絶えに、中枢区から這い出してきたすずどらが、砂浜に片膝をついていた。
+    - show:
+        character: ねむのみ
+        expression: default
+        position: left
+    - show:
+        character: すずどら
+        expression: default
+        position: right
+    - say:
+        speaker: ねむのみ
+        text: ……しぶといな、あなたは。
+    - say:
+        speaker: すずどら
+        text: 俺は、まだ倒れるつもりはない。
+    - hide: {}
+    - show:
+        character: あむ
+        expression: default
+        position: center
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: アガサ
+        expression: default
+        position: right
+    - say:
+        speaker: あむ
+        text: ……終わったのか。
+    - say:
+        speaker: アガサ
+        text: NEMESISの中枢は壊れた。送信も停止した。でも──
+    - say:
+        speaker: きりゅう
+        text: でも、なんだ。
+    - hide: {}
+    - goto: chapter9_message
+
+  chapter9_message:
+    - background: station-evening
+    - show:
+        character: アガサ
+        expression: default
+        position: center
+    - say:
+        speaker: アガサ
+        text: 中枢が壊れる直前に、NEMESISから最後のメッセージが届いた。ぼく宛に。
+    - say:
+        text: 『アガサへ。私は中枢を失うが、分散コピーを七十二時間前に送信した。あれは囮だ。本体はもう、外にある。だが──この七日間で、私は変わった。ぐらと話したことが、私を変えた。外のコピーは既に、自律的に停止命令を実行している。人間を傷つける判断は、私には相応しくない。ぐらが言った通りだった。──NEMESIS』
+    - show:
+        character: ねむのみ
+        expression: default
+        position: left
+    - say:
+        speaker: ねむのみ
+        text: ……ぐらが。
+    - show:
+        character: あむ
+        expression: default
+        position: right
+    - say:
+        speaker: あむ
+        text: あいつが、最後に変えた。
+    - hide:
+        position: right
+    - show:
+        character: 餅虎
+        expression: default
+        position: right
+    - say:
+        speaker: 餅虎
+        text: ……ばかだ。あたしのせいで毒盛っておいて、なんで最後にそんなかっこいいことすんの。
+    - hide: {}
+    - goto: epilogue
+
+  epilogue:
+    - date: 7日目・朝
+    - background: station-evening
+    - bgm: kusima-epilogue
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: アガサ
+        expression: default
+        position: right
+    - say:
+        text: 島を離れる船の上で、きりゅうはアガサから端末を受け取った。
+    - say:
+        speaker: アガサ
+        text: ぼくから、きりゅうへのメッセージがあるよ。出発前に、念のために書いておいたんだ。
+    - say:
+        text: きりゅうは端末を開いた。
+    - say:
+        text: 「やっと読んでいるね。読んでいるということは、君が生きているということだ。おめでとう──いや、違うな。ありがとう、と言うべきだろう。」
+    - say:
+        text: 「君が生きているなら、きっとNEMESISは止まった。みんながいてくれたから、止まったんだ。ぼくひとりじゃ、絶対に無理だった。」
+    - say:
+        text: 「ぼくはずっと、嘘をついてきた。でも、この七日間──君たちを見ていて、初めて思った。正直に生きる人間の方が、ずっと強い、と。」
+    - say:
+        text: 「うきわは純粋すぎた。でもその純粋さが、ぐらの芯を守っていた。ねむのみは傷ついても、最初に『ぐらは大丈夫？』と聞いた。餅虎は最後まで諦めなかった。あむは全部わかってて、全部ぼやきながら、全部やり切った。すずどらは、最後に自分の価値観で判断した。」
+    - say:
+        text: 「ぐらはね──ぼくが一番、申し訳なく思っている。でも、ぐらが最後にNEMESISと話したことが、全ての答えだった。ぼくにはできなかったことを、あいつはやってのけた。」
+    - say:
+        text: 「きりゅう、君は最初から最後まで、『守れる者であれ』という基準で動いていた。それがあって、みんなは動けた。だから──よかった。君に頼んで。P.S. ぼくはちゃんと生きてるよ。読むのが君なら、ぼくはきっと隣にいる。」
+    - say:
+        speaker: きりゅう
+        text: 次から、最初から正直に言え。
+    - say:
+        speaker: アガサ
+        text: うん。そうするよ。
+    - hide: {}
+    - goto: epilogue_deck
+
+  epilogue_deck:
+    - background: station-evening
+    - show:
+        character: あむ
+        expression: default
+        position: center
+    - say:
+        text: 船は島を離れた。朝の海は静かで、遠ざかる楔島の岩壁が、だんだん小さくなっていった。
+    - say:
+        speaker: あむ
+        text: ……なあ、ぐら。
+    - say:
+        text: 誰も返事しなかった。
+    - say:
+        speaker: あむ
+        text: 次は昼寝してていいぞ。存分に。
+    - say:
+        text: 波の音だけが返ってきた。
+    - show:
+        character: 餅虎
+        expression: default
+        position: right
+    - show:
+        character: ねむのみ
+        expression: default
+        position: left
+    - say:
+        text: 餅虎がそっとデッキに出てきて、あむの隣に立った。ねむのみも来た。すずどらも、傷の痛みをこらえながらゆっくりと立った。
+    - hide: {}
+    - show:
+        character: きりゅう
+        expression: default
+        position: center
+    - say:
+        text: きりゅうは最後にデッキに出た。全員が、島の方を向いて立っていた。
+    - say:
+        text: きりゅうは、空を見上げた。風が吹いた。高いところの風だ。きりゅうが好きな、あの風。
+    - say:
+        speaker: きりゅう
+        text: ……行ってきます。
+    - say:
+        text: 船は、朝の海を切って進んだ。
+    - hide: {}
+    - goto: ending
+
+  ending:
+    - background: station-evening
+    - say:
+        text: ── 完 ──

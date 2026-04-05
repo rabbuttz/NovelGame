@@ -6,18 +6,22 @@ const publicDir = path.join(rootDir, "public");
 const assetsDir = path.join(publicDir, "assets");
 const backgroundsDir = path.join(assetsDir, "backgrounds");
 const charactersDir = path.join(assetsDir, "characters");
+const bgmDir = path.join(assetsDir, "bgm");
 const outputFile = path.join(assetsDir, "manifest.json");
 const imageExtensions = new Set([".png", ".jpg", ".jpeg", ".webp", ".avif", ".svg"]);
+const audioExtensions = new Set([".mp3", ".ogg", ".wav", ".m4a", ".opus", ".flac"]);
 
 const manifest = {
   generatedAt: new Date().toISOString(),
   backgrounds: {},
-  characters: {}
+  characters: {},
+  bgm: {}
 };
 
 await mkdir(assetsDir, { recursive: true });
 await collectBackgrounds();
 await collectCharacters();
+await collectBgm();
 await writeFile(outputFile, `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
 
 async function collectBackgrounds() {
@@ -47,6 +51,18 @@ async function collectCharacters() {
     const [, characterId, expression] = match;
     manifest.characters[characterId] ??= {};
     manifest.characters[characterId][expression] = toPublicUrl(file);
+  }
+}
+
+async function collectBgm() {
+  const entries = await safeReadDir(bgmDir);
+
+  for (const entry of entries) {
+    if (entry.isDirectory()) continue;
+    const ext = path.extname(entry.name).toLowerCase();
+    if (!audioExtensions.has(ext)) continue;
+    const id = entry.name.slice(0, -ext.length);
+    manifest.bgm[id] = toPublicUrl(path.join(bgmDir, entry.name));
   }
 }
 

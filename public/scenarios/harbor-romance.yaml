@@ -1,0 +1,615 @@
+title: 風待ち港の約束
+dateLabel: 4月6日
+
+player:
+  title: 主人公の名前を決める
+  prompt: 風の港で、気になる相手に呼ばれたい名前を入れてください。
+  label: 主人公の名前
+  placeholder: "例: 湊"
+  confirmLabel: この名前で始める
+  defaultName: 湊
+  presets:
+    - 湊
+    - 悠真
+    - 凪
+
+variables:
+  affection:
+    kiryu: 0
+    agatha: 0
+    amu: 0
+    ukiwa: 0
+    gura: 0
+    suzudora: 0
+    nemunomi: 0
+    mochitora: 0
+
+characters:
+  きりゅう:
+    name: きりゅう
+  アガサ:
+    name: アガサ
+  あむ:
+    name: あむ
+  うきわ:
+    name: うきわ
+  ぐら:
+    name: ぐら
+  すずどら:
+    name: すずどら
+  ねむのみ:
+    name: ねむのみ
+  餅虎:
+    name: 餅虎
+
+start: intro
+
+nodes:
+  intro:
+    - date: 4月6日 夕暮れ
+    - background: station-evening
+    - say:
+        text: 風待ち港ハルモニア。空路と海路が交わるこの街では、明朝の護送任務を前に、桟橋じゅうがせわしなく動いていた。
+    - say:
+        text: 今日からこの港の調整役を任されたあなたは、最初の顔合わせに呼ばれていた。
+    - show:
+        character: アガサ
+        expression: default
+        position: left
+    - show:
+        character: きりゅう
+        expression: default
+        position: center
+    - show:
+        character: あむ
+        expression: default
+        position: right
+        motion: 疑問
+    - say:
+        speaker: きりゅう
+        text: 新任の{{player.name}}だな。明日の出立までは俺たちと動いてもらう。迷ったら止まれ。勝手に抱えるな。
+    - say:
+        speaker: アガサ
+        text: ふふ、ずいぶん歓迎の仕方が硬いねえ。でも安心して。困ったら、ぼくが落としどころを探してあげるよ。
+    - say:
+        speaker: あむ
+        text: オレは索敵担当。ま、見ての通り足は速い。あんたが迷子になっても、一応は拾ってやるよ。
+    - goto: crew_intro
+
+  crew_intro:
+    - hide: {}
+    - show:
+        character: うきわ
+        expression: default
+        position: left
+        motion: 喜び
+    - show:
+        character: ぐら
+        expression: default
+        position: center
+    - show:
+        character: ねむのみ
+        expression: default
+        position: right
+    - say:
+        speaker: うきわ
+        text: ぼく、うきわ！ 荷物運びも掃除も応援もできるよ。{{player.name}}さんも困ったら言って！
+    - say:
+        speaker: ぐら
+        text: ん……整備と調整は、たぶん任せて。静かな場所なら、もう少しうまく話せる。
+    - say:
+        speaker: ねむのみ
+        text: 緊張していたら、深呼吸してね。ここは風の音が大きいぶん、少しだけ心が落ち着くから。
+    - hide: {}
+    - show:
+        character: 餅虎
+        expression: default
+        position: left
+        motion: 喜び
+    - show:
+        character: すずどら
+        expression: default
+        position: right
+    - say:
+        speaker: 餅虎
+        text: あたしは餅虎。明日の見送り式、主役は当然あたしってわけ。ちゃんと見ててよね？
+    - say:
+        speaker: すずどら
+        text: すずどらだ。任務に私情を混ぜるな。だが己の矜持まで捨てる必要もない。
+    - goto: briefing
+
+  briefing:
+    - date: 4月6日 夜
+    - background: classroom-night
+    - hide: {}
+    - show:
+        character: アガサ
+        expression: default
+        position: left
+    - show:
+        character: きりゅう
+        expression: default
+        position: center
+    - show:
+        character: 餅虎
+        expression: default
+        position: right
+    - say:
+        text: 簡単な作戦会議が終わる頃には、窓の外はすっかり群青に沈んでいた。出立までの残り時間は、もう多くない。
+    - say:
+        speaker: きりゅう
+        text: 各自、最終確認に入る。散るが、単独行動はするな。夜が明けたら一気に動く。
+    - say:
+        speaker: アガサ
+        text: さて、今のうちに誰かの手を借りるのも悪くない。今夜の選び方で、明日の空気はずいぶん変わるはずだよ。
+    - say:
+        speaker: 餅虎
+        text: もたもたしてると、人気者から埋まっちゃうかもよ？
+    - goto: free_time_choice
+
+  free_time_choice:
+    - hide: {}
+    - say:
+        text: 港の夜気は冷たい。それでも、誰かのそばへ向かう理由には十分だった。
+    - choice:
+        options:
+          - text: きりゅうの点検に付き合う
+            set:
+              affection.kiryu: 1
+            goto: kiryu_intro
+          - text: アガサと記録室で話す
+            set:
+              affection.agatha: 1
+            goto: agatha_intro
+          - text: あむの見回りに同行する
+            set:
+              affection.amu: 1
+            goto: amu_intro
+          - text: うきわの手伝いをする
+            set:
+              affection.ukiwa: 1
+            goto: ukiwa_intro
+          - text: ぐらの工房をのぞく
+            set:
+              affection.gura: 1
+            goto: gura_intro
+          - text: すずどらの巡回についていく
+            set:
+              affection.suzudora: 1
+            goto: suzudora_intro
+          - text: ねむのみの休憩所へ向かう
+            set:
+              affection.nemunomi: 1
+            goto: nemunomi_intro
+          - text: 餅虎の見送り式リハーサルを見る
+            set:
+              affection.mochitora: 1
+            goto: mochitora_intro
+
+  kiryu_intro:
+    - background: station-evening
+    - hide: {}
+    - show:
+        character: きりゅう
+        expression: default
+        position: center
+    - say:
+        text: 飛行甲板の端で、きりゅうは機体の固定具を一つずつ確かめていた。吹きつける風の中でも、その手つきに迷いはない。
+    - say:
+        speaker: きりゅう
+        text: 来たか。寒いぞ。用が済んだら中に戻れ。
+    - say:
+        speaker: "{{player.name}}"
+        text: ひとりで全部見るつもり？
+    - choice:
+        options:
+          - text: 背中だけじゃなく、隣も預かりたい
+            set:
+              affection.kiryu: 2
+            goto: kiryu_after
+          - text: 邪魔をしないよう、黙って点検表を受け取る
+            goto: kiryu_after
+
+  kiryu_after:
+    - say:
+        speaker: きりゅう
+        text: ……そういう言い方をするやつは珍しい。大抵は、俺の後ろに隠れたがる。
+    - say:
+        text: きりゅうは手袋越しの指で、点検表の端を軽く叩いた。その癖だけが、わずかな照れを隠しきれていない。
+    - if:
+        condition: affection.kiryu >= 2
+        then: kiryu_good
+        else: kiryu_normal
+
+  kiryu_good:
+    - motion:
+        character: きりゅう
+        name: うなずき
+    - say:
+        speaker: きりゅう
+        text: 背中は預かる。だが明日からは、隣も空けておく。お前がそこに立つなら、俺はもっと前へ出られる。
+    - say:
+        text: 冷たい風のはずなのに、胸の奥だけが不思議と熱かった。
+    - goto: ending
+
+  kiryu_normal:
+    - say:
+        speaker: きりゅう
+        text: 気が利くな。そういう支え方も嫌いじゃない。明日もその調子でついてこい。
+    - say:
+        text: ぶっきらぼうな言葉の奥に、確かな信頼がにじんでいた。
+    - goto: ending
+
+  agatha_intro:
+    - background: classroom-night
+    - hide: {}
+    - show:
+        character: アガサ
+        expression: default
+        position: center
+    - say:
+        text: 記録室には紙束と地図、それに湯気の立つティーカップが並んでいた。アガサはあなたを見るなり、椅子をひとつ引く。
+    - say:
+        speaker: アガサ
+        text: ちょうどよかった。ひとりで飲むお茶は味気ないからね。きみも付き合ってくれる？
+    - say:
+        speaker: "{{player.name}}"
+        text: アガサは、みんなの本音を見抜くのがうまいよね。
+    - choice:
+        options:
+          - text: じゃあ今度は、あなたの本音を聞かせて
+            set:
+              affection.agatha: 2
+            goto: agatha_after
+          - text: そうやって笑っていられるの、すごいと思う
+            goto: agatha_after
+
+  agatha_after:
+    - say:
+        speaker: アガサ
+        text: 参ったな。そこを突かれると、さすがに煙に巻ききれない。
+    - say:
+        text: カップのふちをなぞる仕草はいつも通り優雅なのに、視線だけが少しだけ真剣だった。
+    - if:
+        condition: affection.agatha >= 2
+        then: agatha_good
+        else: agatha_normal
+
+  agatha_good:
+    - motion:
+        character: アガサ
+        name: 喜び
+    - say:
+        speaker: アガサ
+        text: ぼくはね、明日の任務が終わったあとも、きみとこうしてお茶を飲みたい。落としどころを探したら、どうやらきみの隣に行き着いたみたいだ。
+    - say:
+        text: やわらかい笑みの奥に、はっきりとした熱が宿っていた。
+    - goto: ending
+
+  agatha_normal:
+    - say:
+        speaker: アガサ
+        text: 買いかぶりだよ。でも、きみにそう言われるのは悪くない。また今度、もう少し長い話をしようか。
+    - say:
+        text: その誘いは穏やかで、けれど確かに次を期待させた。
+    - goto: ending
+
+  amu_intro:
+    - background: station-evening
+    - hide: {}
+    - show:
+        character: あむ
+        expression: default
+        position: center
+    - say:
+        text: 倉庫の上を渡る細い通路で、あむは手すりにもたれて夜景を眺めていた。見張りのはずなのに、どこか昼寝前みたいな顔をしている。
+    - say:
+        speaker: あむ
+        text: なんだ、あんたか。危ないから来るなって言いたいとこだけど……まあ、来たなら落ちるなよ。
+    - say:
+        speaker: "{{player.name}}"
+        text: いつもそんなふうに、さりげなく助けてくれてるよね。
+    - choice:
+        options:
+          - text: ちゃんと頼りにしてるって伝える
+            set:
+              affection.amu: 2
+            goto: amu_after
+          - text: さぼりに見えるってからかう
+            goto: amu_after
+
+  amu_after:
+    - say:
+        speaker: あむ
+        text: ……そういうの、真正面から来ると困るんだけど。軽口で流せなくなるじゃん。
+    - say:
+        text: 半目のままなのに、耳の先だけがわずかに落ち着かない。
+    - if:
+        condition: affection.amu >= 2
+        then: amu_good
+        else: amu_normal
+
+  amu_good:
+    - motion:
+        character: あむ
+        name: 照れ
+    - say:
+        speaker: あむ
+        text: 別に、あんただけ特別に見てるわけじゃ……いや、ちょっとはある。明日も危なそうなら、真っ先に拾いに行く。だから勝手にいなくなるなよ。
+    - say:
+        text: ぶっきらぼうな独占欲が、夜風より先に胸へ届いた。
+    - goto: ending
+
+  amu_normal:
+    - say:
+        speaker: あむ
+        text: まあ、目につくやつは放っとけないんだよ。明日も近くにいたら、ついでに見ててやる。
+    - say:
+        text: ついでと言い張る声が、少しだけ優しかった。
+    - goto: ending
+
+  ukiwa_intro:
+    - background: station-evening
+    - hide: {}
+    - show:
+        character: うきわ
+        expression: default
+        position: center
+    - say:
+        text: 桟橋の一角では、うきわが明日の見送り用の旗や灯りを抱えて駆け回っていた。忙しいはずなのに、表情だけはずっとまぶしい。
+    - say:
+        speaker: うきわ
+        text: あ、{{player.name}}さん！ ちょうどよかった。ひとりだと少しだけ時間が足りなくて……でも、できることはいっぱいやるよ！
+    - choice:
+        options:
+          - text: 最後まで一緒に手伝う
+            set:
+              affection.ukiwa: 2
+            goto: ukiwa_after
+          - text: 差し入れだけ渡して無理しないでと伝える
+            goto: ukiwa_after
+
+  ukiwa_after:
+    - say:
+        text: 灯りがひとつ、またひとつと桟橋に並んでいく。そのたび、うきわの目も嬉しそうに揺れた。
+    - say:
+        speaker: うきわ
+        text: こういうの、一緒にやってくれる人がいるとすごく楽しいね。なんだか、がんばりが何倍にもなる感じ！
+    - if:
+        condition: affection.ukiwa >= 2
+        then: ukiwa_good
+        else: ukiwa_normal
+
+  ukiwa_good:
+    - motion:
+        character: うきわ
+        name: 喜び
+    - say:
+        speaker: うきわ
+        text: 明日も、いちばんに{{player.name}}さんを見つけていい？ ぼく、ちゃんと役に立てるところ、もっと見てほしいんだ。
+    - say:
+        text: まっすぐな言葉に、こちらまで笑顔になってしまう。
+    - goto: ending
+
+  ukiwa_normal:
+    - say:
+        speaker: うきわ
+        text: 差し入れ、すごくうれしかった！ 明日が終わったら、お礼にぼくがいっぱい手伝うからね！
+    - say:
+        text: その約束だけで、夜の疲れが少し軽くなった。
+    - goto: ending
+
+  gura_intro:
+    - background: classroom-night
+    - hide: {}
+    - show:
+        character: ぐら
+        expression: default
+        position: center
+    - say:
+        text: 工房の奥では、ぐらが小さなランプの下で工具を広げていた。静かな金属音だけが、夜更けの部屋に整然と響いている。
+    - say:
+        speaker: ぐら
+        text: ……来たんだ。ごめん、散らかってる。明日の補助翼、もう少しで調整が終わるから。
+    - choice:
+        options:
+          - text: 急がなくていい。終わるまでそばにいる
+            set:
+              affection.gura: 2
+            goto: gura_after
+          - text: 手が空いたら休むように言う
+            goto: gura_after
+
+  gura_after:
+    - say:
+        text: ねじを締める音が止み、ぐらはようやく小さく息をついた。集中が切れた途端、眠たげな表情が少しだけ戻る。
+    - say:
+        speaker: ぐら
+        text: 静かなの、嫌いじゃないけど……きみがいると、静かでもちゃんとあたたかいね。
+    - if:
+        condition: affection.gura >= 2
+        then: gura_good
+        else: gura_normal
+
+  gura_good:
+    - motion:
+        character: ぐら
+        name: 照れ
+    - say:
+        speaker: ぐら
+        text: 明日が終わったら、今度は修理じゃなくて、ただ一緒に夜を過ごしたい。きみとなら……たぶん、眠くなる前にちゃんと話せるから。
+    - say:
+        text: 小さな声なのに、不思議なくらい真っ直ぐ胸へ落ちてきた。
+    - goto: ending
+
+  gura_normal:
+    - say:
+        speaker: ぐら
+        text: ありがとう。急かされないだけで、すごく助かる。直せたら、いちばんにきみに見せるよ。
+    - say:
+        text: その言葉は、控えめな彼なりの特別扱いに思えた。
+    - goto: ending
+
+  suzudora_intro:
+    - background: station-evening
+    - hide: {}
+    - show:
+        character: すずどら
+        expression: default
+        position: center
+    - say:
+        text: 港外れの監視塔で、すずどらは黙って空路を見下ろしていた。夜の風景すら、その威圧感の前では張りつめて見える。
+    - say:
+        speaker: すずどら
+        text: 来たか。怖じて逃げるなら今だぞ。ここは強さの値踏みをする場所だ。
+    - choice:
+        options:
+          - text: 明日は隣で、その強さの証明を見届ける
+            set:
+              affection.suzudora: 2
+            goto: suzudora_after
+          - text: あなたの強さには圧倒されると伝える
+            goto: suzudora_after
+
+  suzudora_after:
+    - say:
+        speaker: すずどら
+        text: ほう。言葉だけではない目をしているな。上辺の称賛と、覚悟を決めた眼差しの違いくらいは分かる。
+    - say:
+        text: その声は冷たいのに、拒絶の色はなかった。
+    - if:
+        condition: affection.suzudora >= 2
+        then: suzudora_good
+        else: suzudora_normal
+
+  suzudora_good:
+    - motion:
+        character: すずどら
+        name: うなずき
+    - say:
+        speaker: すずどら
+        text: 我を畏れず、なお隣に立つか。ならば覚えておけ。明日の勝負を越えてなお、お前の名は我の中に残る。
+    - say:
+        text: 威圧感の奥にある選別は、どうやら通過できたらしい。
+    - goto: ending
+
+  suzudora_normal:
+    - say:
+        speaker: すずどら
+        text: 圧倒されるだけでは足りぬ。だが悪くない視線だ。明日もその目で見届けるがいい。
+    - say:
+        text: 試すような言葉の中に、次を許す余白があった。
+    - goto: ending
+
+  nemunomi_intro:
+    - background: classroom-night
+    - hide: {}
+    - show:
+        character: ねむのみ
+        expression: default
+        position: center
+    - say:
+        text: 休憩所には温かい布と湯気の立つマグカップが用意されていた。ねむのみはあなたを見ると、そっと場所を空ける。
+    - say:
+        speaker: ねむのみ
+        text: おつかれさま。無理してない？ ここでは少しくらい肩の力を抜いても大丈夫だよ。
+    - choice:
+        options:
+          - text: 少しだけ、甘えてもいい？
+            set:
+              affection.nemunomi: 2
+            goto: nemunomi_after
+          - text: ねむのみこそ休めてるか聞く
+            goto: nemunomi_after
+
+  nemunomi_after:
+    - say:
+        text: 差し出されたマグの熱が手に広がる。ねむのみの隣に座るだけで、張っていた気持ちがゆっくりゆるんでいった。
+    - say:
+        speaker: ねむのみ
+        text: きみがちゃんと息をつけてるなら、それだけでうれしい。ぼく、そういう役目でいたいから。
+    - if:
+        condition: affection.nemunomi >= 2
+        then: nemunomi_good
+        else: nemunomi_normal
+
+  nemunomi_good:
+    - motion:
+        character: ねむのみ
+        name: 喜び
+    - say:
+        speaker: ねむのみ
+        text: 明日が終わっても、疲れた時はここに来て。きみが帰ってこられる場所に、ぼくはなりたい。
+    - say:
+        text: その穏やかな願いは、どんな告白よりも深く沁みた。
+    - goto: ending
+
+  nemunomi_normal:
+    - say:
+        speaker: ねむのみ
+        text: ありがとう。気にかけてもらえるの、すごく安心する。また眠れない夜があったら、いつでも声をかけてね。
+    - say:
+        text: そのやわらかな声は、明日への緊張まで静かにほどいてくれた。
+    - goto: ending
+
+  mochitora_intro:
+    - background: station-evening
+    - hide: {}
+    - show:
+        character: 餅虎
+        expression: default
+        position: center
+    - say:
+        text: 見送り台の上では、餅虎が照明の位置を確かめながらひとりでポーズを決めていた。夜の港でも、彼女だけは最初から視線をさらっていく。
+    - say:
+        speaker: 餅虎
+        text: ふふ、来た。見てるだけでもいいけど、感想くらいはちゃんと聞かせてよね？
+    - choice:
+        options:
+          - text: 見てるだけじゃなく、ちゃんと君を選びに来た
+            set:
+              affection.mochitora: 2
+            goto: mochitora_after
+          - text: 今日もすごく目立ってるって褒める
+            goto: mochitora_after
+
+  mochitora_after:
+    - say:
+        speaker: 餅虎
+        text: ……そういうの、不意打ちで言うんだ。反則。うれしいじゃん。
+    - say:
+        text: 強気な笑みの奥で、彼女の声がわずかに揺れた。
+    - if:
+        condition: affection.mochitora >= 2
+        then: mochitora_good
+        else: mochitora_normal
+
+  mochitora_good:
+    - motion:
+        character: 餅虎
+        name: 照れ
+    - say:
+        speaker: 餅虎
+        text: じゃあ約束。明日が終わったら、いちばん最初にあたしを迎えに来て。見てるだけじゃだめ。ちゃんと、選び続けてよね。
+    - say:
+        text: 夜景よりも眩しい笑顔に、答えはもう決まっていた。
+    - goto: ending
+
+  mochitora_normal:
+    - say:
+        speaker: 餅虎
+        text: いい反応。そういうの、もっとちょうだい。明日は今日以上に見惚れさせるから。
+    - say:
+        text: 挑発めいた約束が、次の瞬間を待ち遠しくさせる。
+    - goto: ending
+
+  ending:
+    - hide: {}
+    - date: 4月7日 夜明け前
+    - background: station-evening
+    - say:
+        text: 港に吹く風が、夜から朝へと向きを変えていく。誰を選んだ夜だったのか、その熱だけが胸に残っていた。
+    - say:
+        text: 明日、空へ出るとき。きっとその人の言葉が、あなたの背中を押してくれる。
+    - say:
+        text: おしまい。

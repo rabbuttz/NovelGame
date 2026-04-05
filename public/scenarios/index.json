@@ -1,5 +1,10 @@
 [
   {
+    "url": "scenarios/harbor-romance.yaml",
+    "title": "風待ち港の約束",
+    "description": "任務前夜の港で、8人の仲間の誰と過ごすかを選ぶ短編恋愛シミュレーション。"
+  },
+  {
     "url": "scenarios/kushima.yaml",
     "title": "楔島 ── 最後に残った者へ",
     "description": "孤島に集められた8人。次々と仲間が倒れていく中、生き残った者だけが真実にたどり着く──"

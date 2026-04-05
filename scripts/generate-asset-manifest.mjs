@@ -83,7 +83,7 @@ async function safeReadDir(directory) {
 }
 
 function toPublicUrl(filePath) {
-  return `/${normalizePath(path.relative(publicDir, filePath))}`;
+  return normalizePath(path.relative(publicDir, filePath));
 }
 
 function normalizePath(value) {

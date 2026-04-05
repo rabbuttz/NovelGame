@@ -149,6 +149,7 @@ body {
 
 .sprite-layer {
   position: relative;
+  z-index: 1;
   display: flex;
   align-items: end;
   justify-content: center;
@@ -158,7 +159,7 @@ body {
 .sprite {
   --offset: 0px;
   position: absolute;
-  bottom: 72px;
+  bottom: 18px;
   max-height: min(72vh, 840px);
   width: min(34vw, 430px);
   object-fit: contain;
@@ -192,15 +193,22 @@ body {
 
 .hud {
   position: relative;
+  z-index: 2;
   display: grid;
   gap: 10px;
   align-self: end;
 }
 
 .choices {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 18px);
+  z-index: 3;
   display: grid;
   gap: 10px;
-  padding: 0 28px;
+  width: min(560px, calc(100vw - 48px));
+  padding: 0;
+  transform: translateX(-50%);
 }
 
 .choices[hidden] {
@@ -411,7 +419,7 @@ body {
   .sprite {
     width: min(48vw, 360px);
     max-height: 62vh;
-    bottom: 62px;
+    bottom: 8px;
   }
 
   .sprite[data-position="left"] {
@@ -453,7 +461,12 @@ body {
   .sprite {
     width: min(58vw, 320px);
     max-height: 50vh;
-    bottom: 42px;
+    bottom: 0;
+  }
+
+  .choices {
+    bottom: calc(100% + 14px);
+    width: min(520px, calc(100vw - 32px));
   }
 
   .speaker-badge {
@@ -527,5 +540,10 @@ body {
 
   .choice-button {
     font-size: 0.94rem;
+  }
+
+  .choices {
+    bottom: calc(100% + 10px);
+    width: calc(100vw - 24px);
   }
 }

@@ -1,6 +1,6 @@
 import { parse } from "yaml";
 
-const DEFAULT_SCENARIO_URL = "/scenarios/chapter1.yaml";
+const DEFAULT_SCENARIO_URL = toAppUrl("scenarios/chapter1.yaml");
 const POSITIONS = ["left", "center", "right"];
 
 export function createGame(root) {
@@ -155,7 +155,7 @@ async function loadScenario(url) {
 
 async function loadAssetManifest() {
   try {
-    const response = await fetch("/assets/manifest.json", { cache: "no-store" });
+    const response = await fetch(toAppUrl("assets/manifest.json"), { cache: "no-store" });
 
     if (!response.ok) {
       return createEmptyAssetManifest();
@@ -489,15 +489,15 @@ function renderError(ui, message) {
 
 function resolveBackground(payload, scenario) {
   if (typeof payload === "string") {
-    return scenario.backgrounds?.[payload] ?? scenario.assetManifest?.backgrounds?.[payload] ?? payload;
+    return toAppUrl(scenario.backgrounds?.[payload] ?? scenario.assetManifest?.backgrounds?.[payload] ?? payload);
   }
 
   if (payload?.image) {
-    return payload.image;
+    return toAppUrl(payload.image);
   }
 
   if (payload?.id) {
-    return scenario.backgrounds?.[payload.id] ?? scenario.assetManifest?.backgrounds?.[payload.id] ?? payload.id;
+    return toAppUrl(scenario.backgrounds?.[payload.id] ?? scenario.assetManifest?.backgrounds?.[payload.id] ?? payload.id);
   }
 
   throw new Error("background は背景IDか image を指定してください。背景IDは public/assets/backgrounds/<id>.* から自動解決されます。");
@@ -509,7 +509,7 @@ function resolveCharacterSprite(payload, scenario) {
   }
 
   if (payload.image) {
-    return payload.image;
+    return toAppUrl(payload.image);
   }
 
   const character = scenario.characters?.[payload.character];
@@ -529,7 +529,7 @@ function resolveCharacterSprite(payload, scenario) {
     );
   }
 
-  return sprite;
+  return toAppUrl(sprite);
 }
 
 function resolveCharacterName(characterId, scenario) {
@@ -599,6 +599,28 @@ function evaluateCondition(condition, variables) {
     default:
       throw new Error(`未対応の比較演算子です: ${operator}`);
   }
+}
+
+function toAppUrl(value) {
+  if (typeof value !== "string" || value.length === 0) {
+    return value;
+  }
+
+  if (/^(?:[a-z]+:)?\/\//i.test(value) || value.startsWith("data:") || value.startsWith("blob:")) {
+    return value;
+  }
+
+  if (value.startsWith("./") || value.startsWith("../")) {
+    return value;
+  }
+
+  const baseUrl = import.meta.env.BASE_URL || "/";
+
+  if (value.startsWith("/")) {
+    return `${baseUrl.replace(/\/$/, "")}${value}`;
+  }
+
+  return `${baseUrl}${value.replace(/^\//, "")}`;
 }
 
 function parseConditionValue(value, variables) {

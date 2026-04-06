@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6ab4e8"/>
+      <stop offset="60%" stop-color="#a8d4f0"/>
+      <stop offset="100%" stop-color="#d8eef8"/>
+    </linearGradient>
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c8b89a"/>
+      <stop offset="100%" stop-color="#a09070"/>
+    </linearGradient>
+    <linearGradient id="gate_red" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c82020"/>
+      <stop offset="100%" stop-color="#901010"/>
+    </linearGradient>
+    <linearGradient id="roof1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#404040"/>
+      <stop offset="100%" stop-color="#282828"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fffacc"/>
+      <stop offset="100%" stop-color="#fffacc" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="1280" height="720" fill="url(#sky)"/>
+
+  <!-- Sun halo -->
+  <ellipse cx="900" cy="120" rx="80" ry="80" fill="url(#sun)" opacity="0.5"/>
+  <circle cx="900" cy="120" r="32" fill="#fff8cc" opacity="0.9"/>
+
+  <!-- Distant buildings (background) -->
+  <rect x="0" y="240" width="180" height="320" fill="#c8c0b8" opacity="0.6"/>
+  <rect x="160" y="200" width="120" height="360" fill="#d0c8be" opacity="0.55"/>
+  <rect x="1000" y="220" width="150" height="340" fill="#c0b8b0" opacity="0.6"/>
+  <rect x="1120" y="180" width="160" height="380" fill="#c8bfb5" opacity="0.55"/>
+
+  <!-- Asakusa-dori street -->
+  <rect x="0" y="520" width="1280" height="200" fill="url(#ground)"/>
+  <rect x="0" y="520" width="1280" height="6" fill="#b0a080" opacity="0.5"/>
+
+  <!-- Street lines -->
+  <rect x="0" y="560" width="1280" height="3" fill="#a09070" opacity="0.3"/>
+
+  <!-- Kaminarimon Gate - central structure -->
+  <!-- Left pillar -->
+  <rect x="460" y="340" width="60" height="220" fill="url(#gate_red)"/>
+  <!-- Right pillar -->
+  <rect x="760" y="340" width="60" height="220" fill="url(#gate_red)"/>
+  <!-- Horizontal beam top -->
+  <rect x="440" y="310" width="400" height="40" fill="url(#gate_red)"/>
+  <!-- Roof shape (trapezoid approximation) -->
+  <polygon points="420,310 860,310 900,265 380,265" fill="#404040"/>
+  <polygon points="430,265 870,265 900,245 400,245" fill="#505050"/>
+  <rect x="400" y="235" width="480" height="12" fill="#404040"/>
+  <!-- Roof ridge end decorations -->
+  <rect x="390" y="230" width="25" height="25" rx="3" fill="#303030"/>
+  <rect x="865" y="230" width="25" height="25" rx="3" fill="#303030"/>
+
+  <!-- Lantern (chochin) hanging center -->
+  <rect x="610" y="340" width="60" height="5" fill="#604020"/>
+  <ellipse cx="640" cy="360" rx="30" ry="8" fill="#c04010"/>
+  <rect x="618" y="360" width="44" height="70" rx="4" fill="#d84010"/>
+  <ellipse cx="640" cy="430" rx="30" ry="8" fill="#c04010"/>
+  <!-- Lantern tassel -->
+  <line x1="630" y1="438" x2="626" y2="460" stroke="#8b2000" stroke-width="2"/>
+  <line x1="636" y1="440" x2="636" y2="462" stroke="#8b2000" stroke-width="2"/>
+  <line x1="642" y1="440" x2="644" y2="462" stroke="#8b2000" stroke-width="2"/>
+  <line x1="648" y1="438" x2="652" y2="460" stroke="#8b2000" stroke-width="2"/>
+  <!-- Lantern writing lines (kanji decoration) -->
+  <rect x="625" y="375" width="30" height="4" rx="1" fill="#801000" opacity="0.5"/>
+  <rect x="625" y="385" width="30" height="4" rx="1" fill="#801000" opacity="0.5"/>
+  <rect x="625" y="395" width="30" height="4" rx="1" fill="#801000" opacity="0.5"/>
+  <rect x="625" y="405" width="30" height="4" rx="1" fill="#801000" opacity="0.5"/>
+
+  <!-- Shop buildings left -->
+  <!-- Shop 1 -->
+  <rect x="0" y="380" width="160" height="200" fill="#d4b896"/>
+  <rect x="0" y="380" width="160" height="14" fill="#c04010"/>
+  <rect x="10" y="400" width="60" height="60" fill="#a09060" opacity="0.6"/>
+  <rect x="90" y="400" width="60" height="60" fill="#a09060" opacity="0.6"/>
+  <rect x="10" y="470" width="60" height="50" fill="#806040" opacity="0.5"/>
+  <rect x="90" y="470" width="60" height="50" fill="#806040" opacity="0.5"/>
+  <!-- Shop sign -->
+  <rect x="20" y="383" width="120" height="10" rx="1" fill="#ffeedd" opacity="0.6"/>
+
+  <!-- Shop 2 -->
+  <rect x="170" y="390" width="120" height="180" fill="#ccc0a0"/>
+  <rect x="170" y="390" width="120" height="12" fill="#902010"/>
+  <rect x="180" y="408" width="45" height="55" fill="#a08858" opacity="0.6"/>
+  <rect x="235" y="408" width="45" height="55" fill="#a08858" opacity="0.6"/>
+
+  <!-- Shop buildings right -->
+  <!-- Shop 3 -->
+  <rect x="1100" y="380" width="180" height="200" fill="#d4b896"/>
+  <rect x="1100" y="380" width="180" height="14" fill="#c04010"/>
+  <rect x="1110" y="400" width="65" height="60" fill="#a09060" opacity="0.6"/>
+  <rect x="1195" y="400" width="65" height="60" fill="#a09060" opacity="0.6"/>
+  <rect x="1110" y="470" width="65" height="50" fill="#806040" opacity="0.5"/>
+  <rect x="1195" y="470" width="65" height="50" fill="#806040" opacity="0.5"/>
+  <rect x="1120" y="383" width="140" height="10" rx="1" fill="#ffeedd" opacity="0.6"/>
+
+  <!-- Shop 4 -->
+  <rect x="990" y="390" width="100" height="180" fill="#ccc0a0"/>
+  <rect x="990" y="390" width="100" height="12" fill="#902010"/>
+  <rect x="1000" y="408" width="35" height="55" fill="#a08858" opacity="0.6"/>
+  <rect x="1045" y="408" width="35" height="55" fill="#a08858" opacity="0.6"/>
+
+  <!-- Street lanterns on poles -->
+  <!-- Left side -->
+  <line x1="300" y1="370" x2="300" y2="530" stroke="#604020" stroke-width="5"/>
+  <ellipse cx="300" cy="360" rx="16" ry="5" fill="#c04010"/>
+  <rect x="288" y="360" width="24" height="36" rx="3" fill="#d84010"/>
+  <ellipse cx="300" cy="396" rx="16" ry="5" fill="#c04010"/>
+
+  <!-- Right side -->
+  <line x1="980" y1="370" x2="980" y2="530" stroke="#604020" stroke-width="5"/>
+  <ellipse cx="980" cy="360" rx="16" ry="5" fill="#c04010"/>
+  <rect x="968" y="360" width="24" height="36" rx="3" fill="#d84010"/>
+  <ellipse cx="980" cy="396" rx="16" ry="5" fill="#c04010"/>
+
+  <!-- Crowd silhouettes on street -->
+  <!-- Person pairs -->
+  <ellipse cx="380" cy="518" rx="12" ry="6" fill="#2a2018"/>
+  <rect x="374" y="492" width="14" height="28" rx="3" fill="#2a2018"/>
+  <ellipse cx="405" cy="518" rx="11" ry="6" fill="#1e1810"/>
+  <rect x="399" y="494" width="13" height="26" rx="3" fill="#1e1810"/>
+
+  <ellipse cx="850" cy="518" rx="12" ry="6" fill="#1e1a14"/>
+  <rect x="844" y="492" width="14" height="28" rx="3" fill="#1e1a14"/>
+  <ellipse cx="875" cy="518" rx="11" ry="6" fill="#252015"/>
+  <rect x="869" y="494" width="13" height="26" rx="3" fill="#252015"/>
+
+  <ellipse cx="200" cy="515" rx="10" ry="5" fill="#2a1e14"/>
+  <rect x="195" y="492" width="11" height="25" rx="3" fill="#2a1e14"/>
+
+  <ellipse cx="1060" cy="515" rx="10" ry="5" fill="#201a10"/>
+  <rect x="1055" y="492" width="11" height="25" rx="3" fill="#201a10"/>
+
+  <!-- Foreground shadow -->
+  <rect y="660" width="1280" height="60" fill="#100c08" opacity="0.5"/>
+
+  <!-- Light clouds -->
+  <ellipse cx="200" cy="100" rx="90" ry="30" fill="white" opacity="0.6"/>
+  <ellipse cx="240" cy="95" rx="70" ry="22" fill="white" opacity="0.55"/>
+  <ellipse cx="160" cy="105" rx="60" ry="20" fill="white" opacity="0.5"/>
+
+  <ellipse cx="1050" cy="80" rx="80" ry="25" fill="white" opacity="0.5"/>
+  <ellipse cx="1090" cy="76" rx="55" ry="18" fill="white" opacity="0.45"/>
+</svg>

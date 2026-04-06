@@ -32,7 +32,11 @@
     "校庭": "assets/backgrounds/校庭.png",
     "校舎外・夕方": "assets/backgrounds/校舎外・夕方.svg",
     "職員室": "assets/backgrounds/職員室.svg",
-    "部室": "assets/backgrounds/部室.png"
+    "部室": "assets/backgrounds/部室.png",
+    "東京・浅草・昼": "assets/backgrounds/東京・浅草・昼.svg",
+    "東京・夜景": "assets/backgrounds/東京・夜景.svg",
+    "ホテル・ロビー": "assets/backgrounds/ホテル・ロビー.svg",
+    "ホテル・客室・夜": "assets/backgrounds/ホテル・客室・夜.svg"
   },
   "characters": {
     "i5": {

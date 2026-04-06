@@ -1,0 +1,165 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="nightsky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#06091a"/>
+      <stop offset="50%" stop-color="#0d1530"/>
+      <stop offset="100%" stop-color="#1a1e3a"/>
+    </linearGradient>
+    <linearGradient id="horizon_glow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff6030" stop-opacity="0.0"/>
+      <stop offset="40%" stop-color="#ff7844" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#ff9060" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="tower_body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff6020"/>
+      <stop offset="100%" stop-color="#e04010"/>
+    </linearGradient>
+    <radialGradient id="city_glow" cx="50%" cy="100%" r="60%">
+      <stop offset="0%" stop-color="#ff8844" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#ff8844" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur_light">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+    <filter id="soft_blur">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+  </defs>
+
+  <!-- Night sky -->
+  <rect width="1280" height="720" fill="url(#nightsky)"/>
+
+  <!-- Stars -->
+  <circle cx="80" cy="40" r="1.2" fill="white" opacity="0.8"/>
+  <circle cx="150" cy="70" r="1" fill="white" opacity="0.7"/>
+  <circle cx="220" cy="30" r="1.5" fill="white" opacity="0.9"/>
+  <circle cx="310" cy="55" r="1" fill="white" opacity="0.6"/>
+  <circle cx="400" cy="20" r="1.2" fill="white" opacity="0.8"/>
+  <circle cx="500" cy="45" r="1" fill="white" opacity="0.7"/>
+  <circle cx="600" cy="25" r="1.3" fill="white" opacity="0.85"/>
+  <circle cx="700" cy="60" r="1" fill="white" opacity="0.6"/>
+  <circle cx="780" cy="35" r="1.4" fill="white" opacity="0.9"/>
+  <circle cx="870" cy="15" r="1" fill="white" opacity="0.75"/>
+  <circle cx="960" cy="50" r="1.2" fill="white" opacity="0.8"/>
+  <circle cx="1040" cy="30" r="1" fill="white" opacity="0.65"/>
+  <circle cx="1120" cy="65" r="1.5" fill="white" opacity="0.9"/>
+  <circle cx="1200" cy="20" r="1" fill="white" opacity="0.7"/>
+  <circle cx="1250" cy="48" r="1.2" fill="white" opacity="0.8"/>
+  <!-- Dim stars -->
+  <circle cx="120" cy="110" r="0.8" fill="white" opacity="0.5"/>
+  <circle cx="260" cy="90" r="0.8" fill="white" opacity="0.4"/>
+  <circle cx="450" cy="80" r="0.8" fill="white" opacity="0.5"/>
+  <circle cx="640" cy="100" r="0.8" fill="white" opacity="0.4"/>
+  <circle cx="830" cy="85" r="0.8" fill="white" opacity="0.5"/>
+  <circle cx="1010" cy="95" r="0.8" fill="white" opacity="0.4"/>
+  <circle cx="1180" cy="105" r="0.8" fill="white" opacity="0.5"/>
+
+  <!-- Horizon city glow -->
+  <rect x="0" y="380" width="1280" height="340" fill="url(#city_glow)"/>
+
+  <!-- Distant city skyline (far background) -->
+  <rect x="0" y="400" width="100" height="160" fill="#0e1228" opacity="0.8"/>
+  <rect x="90" y="360" width="70" height="200" fill="#101428" opacity="0.8"/>
+  <rect x="150" y="410" width="90" height="150" fill="#0c1020" opacity="0.8"/>
+  <rect x="230" y="380" width="50" height="180" fill="#101428" opacity="0.9"/>
+  <rect x="270" y="420" width="80" height="140" fill="#0e1228" opacity="0.8"/>
+  <rect x="340" y="390" width="60" height="170" fill="#0c1020" opacity="0.9"/>
+  <rect x="390" y="440" width="100" height="120" fill="#0e1228" opacity="0.8"/>
+  <rect x="480" y="370" width="55" height="190" fill="#101428" opacity="0.9"/>
+  <rect x="520" y="415" width="85" height="145" fill="#0c1020" opacity="0.8"/>
+  <rect x="590" y="395" width="65" height="165" fill="#0e1228" opacity="0.9"/>
+  <rect x="640" y="435" width="90" height="125" fill="#101428" opacity="0.8"/>
+  <rect x="720" y="380" width="55" height="180" fill="#0c1020" opacity="0.9"/>
+  <rect x="760" y="410" width="80" height="150" fill="#0e1228" opacity="0.8"/>
+  <rect x="830" y="395" width="70" height="165" fill="#101428" opacity="0.9"/>
+  <rect x="890" y="430" width="95" height="130" fill="#0c1020" opacity="0.8"/>
+  <rect x="970" y="380" width="55" height="180" fill="#0e1228" opacity="0.9"/>
+  <rect x="1010" y="415" width="80" height="145" fill="#101428" opacity="0.8"/>
+  <rect x="1080" y="400" width="60" height="160" fill="#0c1020" opacity="0.9"/>
+  <rect x="1130" y="370" width="90" height="190" fill="#0e1228" opacity="0.8"/>
+  <rect x="1210" y="410" width="70" height="150" fill="#101428" opacity="0.9"/>
+
+  <!-- Building windows (lit up) -->
+  <!-- Random lit windows in various buildings -->
+  <rect x="95" y="375" width="5" height="7" fill="#ffd090" opacity="0.7"/>
+  <rect x="105" y="385" width="5" height="7" fill="#ffd090" opacity="0.5"/>
+  <rect x="235" y="395" width="4" height="6" fill="#ffd090" opacity="0.7"/>
+  <rect x="245" y="405" width="4" height="6" fill="#80c8ff" opacity="0.6"/>
+  <rect x="350" y="400" width="5" height="7" fill="#ffd090" opacity="0.5"/>
+  <rect x="490" y="385" width="5" height="6" fill="#ffd090" opacity="0.7"/>
+  <rect x="500" y="395" width="5" height="6" fill="#80c8ff" opacity="0.5"/>
+  <rect x="530" y="425" width="4" height="6" fill="#ffd090" opacity="0.6"/>
+  <rect x="600" y="410" width="5" height="7" fill="#ffd090" opacity="0.7"/>
+  <rect x="730" y="390" width="4" height="6" fill="#ffd090" opacity="0.5"/>
+  <rect x="740" y="400" width="4" height="6" fill="#80c8ff" opacity="0.7"/>
+  <rect x="835" y="405" width="5" height="7" fill="#ffd090" opacity="0.6"/>
+  <rect x="980" y="390" width="4" height="6" fill="#ffd090" opacity="0.7"/>
+  <rect x="1090" y="415" width="5" height="6" fill="#80c8ff" opacity="0.5"/>
+  <rect x="1140" y="380" width="5" height="7" fill="#ffd090" opacity="0.7"/>
+
+  <!-- Tokyo Tower (iconic) -->
+  <!-- Tower base legs -->
+  <polygon points="560,560 580,400 600,400 620,560" fill="url(#tower_body)" opacity="0.95"/>
+  <polygon points="610,560 625,430 635,430 650,560" fill="url(#tower_body)" opacity="0.9"/>
+  <!-- Tower body center struts -->
+  <line x1="580" y1="400" x2="590" y2="340" stroke="#e04010" stroke-width="6"/>
+  <line x1="600" y1="400" x2="590" y2="340" stroke="#e04010" stroke-width="6"/>
+  <!-- Mid section -->
+  <rect x="576" y="336" width="28" height="8" fill="#c03008"/>
+  <!-- Upper section -->
+  <line x1="581" y1="336" x2="587" y2="270" stroke="#e04010" stroke-width="4"/>
+  <line x1="599" y1="336" x2="593" y2="270" stroke="#e04010" stroke-width="4"/>
+  <rect x="581" y="266" width="18" height="6" fill="#c03008"/>
+  <!-- Antenna/spire -->
+  <line x1="590" y1="266" x2="590" y2="200" stroke="#e05020" stroke-width="3"/>
+  <line x1="590" y1="266" x2="590" y2="200" stroke="#ff8040" stroke-width="1" opacity="0.7"/>
+  <!-- Tower warning lights -->
+  <circle cx="590" cy="204" r="3" fill="#ff4000" opacity="0.9" filter="url(#blur_light)"/>
+  <circle cx="590" cy="270" r="2.5" fill="#ff6020" opacity="0.8" filter="url(#blur_light)"/>
+  <circle cx="590" cy="340" r="2" fill="#ff6020" opacity="0.7"/>
+
+  <!-- Tower light glow -->
+  <ellipse cx="590" cy="480" rx="100" ry="40" fill="#ff6820" opacity="0.1" filter="url(#soft_blur)"/>
+
+  <!-- Rainbow Bridge suggestion (foreground) -->
+  <path d="M 0,560 Q 200,490 400,500 Q 640,510 880,500 Q 1080,492 1280,560" stroke="#aac0e0" stroke-width="3" fill="none" opacity="0.4"/>
+  <!-- Bridge cables -->
+  <line x1="300" y1="500" x2="300" y2="460" stroke="#aac0e0" stroke-width="1.5" opacity="0.4"/>
+  <line x1="640" y1="498" x2="640" y2="455" stroke="#aac0e0" stroke-width="1.5" opacity="0.4"/>
+  <line x1="980" y1="500" x2="980" y2="460" stroke="#aac0e0" stroke-width="1.5" opacity="0.4"/>
+  <ellipse cx="300" cy="458" rx="8" ry="8" fill="#c8d8f0" opacity="0.5"/>
+  <ellipse cx="640" cy="452" rx="8" ry="8" fill="#c8d8f0" opacity="0.5"/>
+  <ellipse cx="980" cy="458" rx="8" ry="8" fill="#c8d8f0" opacity="0.5"/>
+
+  <!-- Water / bay reflection -->
+  <rect x="0" y="560" width="1280" height="160" fill="#050918" opacity="0.95"/>
+  <!-- Water reflections of city lights -->
+  <rect x="0" y="562" width="1280" height="2" fill="#1a2040" opacity="0.5"/>
+  <!-- Tower reflection in water -->
+  <line x1="590" y1="570" x2="586" y2="640" stroke="#ff5010" stroke-width="2" opacity="0.3"/>
+  <line x1="590" y1="570" x2="594" y2="640" stroke="#ff5010" stroke-width="2" opacity="0.3"/>
+  <!-- City light reflections on water (scattered dots/ripples) -->
+  <ellipse cx="200" cy="600" rx="30" ry="5" fill="#ffd090" opacity="0.08"/>
+  <ellipse cx="450" cy="610" rx="25" ry="4" fill="#ffd090" opacity="0.07"/>
+  <ellipse cx="700" cy="595" rx="35" ry="6" fill="#ff8040" opacity="0.1"/>
+  <ellipse cx="950" cy="608" rx="28" ry="5" fill="#ffd090" opacity="0.08"/>
+  <ellipse cx="1150" cy="598" rx="22" ry="4" fill="#80c8ff" opacity="0.07"/>
+
+  <!-- Foreground dark silhouette (railing/lookout) -->
+  <rect x="0" y="640" width="1280" height="80" fill="#060810" opacity="0.9"/>
+  <rect x="0" y="638" width="1280" height="5" fill="#0e1224" opacity="0.7"/>
+  <!-- Railing -->
+  <rect x="0" y="638" width="1280" height="3" fill="#1a2040" opacity="0.6"/>
+  <line x1="100" y1="638" x2="100" y2="655" stroke="#1a2040" stroke-width="2" opacity="0.5"/>
+  <line x1="200" y1="638" x2="200" y2="655" stroke="#1a2040" stroke-width="2" opacity="0.5"/>
+  <line x1="300" y1="638" x2="300" y2="655" stroke="#1a2040" stroke-width="2" opacity="0.5"/>
+  <line x1="400" y1="638" x2="400" y2="655" stroke="#1a2040" stroke-width="2" opacity="0.5"/>
+  <line x1="500" y1="638" x2="500" y2="655" stroke="#1a2040" stroke-width="2" opacity="0.5"/>
+  <line x1="600" y1="638" x2="600" y2="655" stroke="#1a2040" stroke-width="2" opacity="0.5"/>
+  <line x1="700" y1="638" x2="700" y2="655" stroke="#1a2040" stroke-width="2" opacity="0.5"/>
+  <line x1="800" y1="638" x2="800" y2="655" stroke="#1a2040" stroke-width="2" opacity="0.5"/>
+  <line x1="900" y1="638" x2="900" y2="655" stroke="#1a2040" stroke-width="2" opacity="0.5"/>
+  <line x1="1000" y1="638" x2="1000" y2="655" stroke="#1a2040" stroke-width="2" opacity="0.5"/>
+  <line x1="1100" y1="638" x2="1100" y2="655" stroke="#1a2040" stroke-width="2" opacity="0.5"/>
+  <line x1="1200" y1="638" x2="1200" y2="655" stroke="#1a2040" stroke-width="2" opacity="0.5"/>
+</svg>

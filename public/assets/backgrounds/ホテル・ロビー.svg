@@ -1,0 +1,164 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="ceiling_hotel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1610"/>
+      <stop offset="100%" stop-color="#2a2218"/>
+    </linearGradient>
+    <linearGradient id="marble_floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8e0d0"/>
+      <stop offset="100%" stop-color="#c8c0b0"/>
+    </linearGradient>
+    <linearGradient id="wall_warm" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a2218"/>
+      <stop offset="100%" stop-color="#1e1a10"/>
+    </linearGradient>
+    <linearGradient id="counter_grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3a2e1e"/>
+      <stop offset="100%" stop-color="#1e1810"/>
+    </linearGradient>
+    <radialGradient id="chandelier_glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff8e0" stop-opacity="1"/>
+      <stop offset="40%" stop-color="#ffe8a0" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#ffc840" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="wall_light" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffe890" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#ffa800" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow_hotel">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft_glow">
+      <feGaussianBlur stdDeviation="14" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Ceiling -->
+  <rect width="1280" height="160" fill="url(#ceiling_hotel)"/>
+
+  <!-- Back wall -->
+  <rect x="0" y="0" width="1280" height="720" fill="url(#wall_warm)"/>
+
+  <!-- Marble floor -->
+  <rect x="0" y="520" width="1280" height="200" fill="url(#marble_floor)"/>
+  <!-- Marble pattern lines -->
+  <line x1="0" y1="522" x2="1280" y2="522" stroke="#d0c8b8" stroke-width="1" opacity="0.4"/>
+  <line x1="0" y1="560" x2="1280" y2="560" stroke="#d0c8b8" stroke-width="1" opacity="0.3"/>
+  <line x1="0" y1="600" x2="1280" y2="600" stroke="#d0c8b8" stroke-width="1" opacity="0.3"/>
+  <line x1="320" y1="520" x2="320" y2="720" stroke="#d0c8b8" stroke-width="1" opacity="0.3"/>
+  <line x1="640" y1="520" x2="640" y2="720" stroke="#d0c8b8" stroke-width="1" opacity="0.3"/>
+  <line x1="960" y1="520" x2="960" y2="720" stroke="#d0c8b8" stroke-width="1" opacity="0.3"/>
+  <!-- Marble shine -->
+  <ellipse cx="640" cy="524" rx="500" ry="8" fill="white" opacity="0.12"/>
+
+  <!-- Floor reflection of chandelier -->
+  <ellipse cx="640" cy="526" rx="200" ry="15" fill="#ffe890" opacity="0.08" filter="url(#soft_glow)"/>
+
+  <!-- Back wall decorative panels -->
+  <rect x="100" y="100" width="200" height="400" rx="4" fill="#2e2618" opacity="0.6"/>
+  <rect x="104" y="104" width="192" height="392" rx="3" fill="none" stroke="#6a5830" stroke-width="1" opacity="0.5"/>
+  <rect x="980" y="100" width="200" height="400" rx="4" fill="#2e2618" opacity="0.6"/>
+  <rect x="984" y="104" width="192" height="392" rx="3" fill="none" stroke="#6a5830" stroke-width="1" opacity="0.5"/>
+
+  <!-- Central back wall -->
+  <rect x="340" y="80" width="600" height="440" fill="#242018" opacity="0.5"/>
+  <rect x="345" y="85" width="590" height="430" fill="none" stroke="#5a4820" stroke-width="1" opacity="0.4"/>
+
+  <!-- Wall sconce lights (left side) -->
+  <ellipse cx="120" cy="260" rx="55" ry="55" fill="url(#wall_light)" filter="url(#soft_glow)"/>
+  <rect x="108" y="248" width="24" height="32" rx="3" fill="#b8901a"/>
+  <rect x="110" y="250" width="20" height="28" rx="2" fill="#ffe890" opacity="0.8"/>
+  <line x1="120" y1="248" x2="120" y2="235" stroke="#8a6810" stroke-width="3"/>
+  <rect x="112" y="232" width="16" height="5" rx="2" fill="#8a6810"/>
+
+  <!-- Wall sconce lights (right side) -->
+  <ellipse cx="1160" cy="260" rx="55" ry="55" fill="url(#wall_light)" filter="url(#soft_glow)"/>
+  <rect x="1148" y="248" width="24" height="32" rx="3" fill="#b8901a"/>
+  <rect x="1150" y="250" width="20" height="28" rx="2" fill="#ffe890" opacity="0.8"/>
+  <line x1="1160" y1="248" x2="1160" y2="235" stroke="#8a6810" stroke-width="3"/>
+  <rect x="1152" y="232" width="16" height="5" rx="2" fill="#8a6810"/>
+
+  <!-- Chandelier - center ceiling -->
+  <ellipse cx="640" cy="55" rx="180" ry="15" fill="url(#chandelier_glow)" filter="url(#soft_glow)"/>
+  <!-- Main chandelier body -->
+  <line x1="640" y1="0" x2="640" y2="60" stroke="#a08840" stroke-width="4"/>
+  <ellipse cx="640" cy="62" rx="40" ry="12" fill="#b89830"/>
+  <!-- Chandelier arms -->
+  <line x1="600" y1="68" x2="560" y2="90" stroke="#a08840" stroke-width="2"/>
+  <line x1="620" y1="72" x2="600" y2="100" stroke="#a08840" stroke-width="2"/>
+  <line x1="640" y1="74" x2="640" y2="105" stroke="#a08840" stroke-width="2"/>
+  <line x1="660" y1="72" x2="680" y2="100" stroke="#a08840" stroke-width="2"/>
+  <line x1="680" y1="68" x2="720" y2="90" stroke="#a08840" stroke-width="2"/>
+  <!-- Chandelier lights -->
+  <circle cx="558" cy="94" r="4" fill="#fff8a0" filter="url(#glow_hotel)"/>
+  <circle cx="598" cy="104" r="4" fill="#fff8a0" filter="url(#glow_hotel)"/>
+  <circle cx="640" cy="109" r="5" fill="#fff8a0" filter="url(#glow_hotel)"/>
+  <circle cx="682" cy="104" r="4" fill="#fff8a0" filter="url(#glow_hotel)"/>
+  <circle cx="722" cy="94" r="4" fill="#fff8a0" filter="url(#glow_hotel)"/>
+  <!-- Chandelier glow pool -->
+  <ellipse cx="640" cy="160" rx="280" ry="60" fill="#ffe890" opacity="0.07"/>
+
+  <!-- Hotel front desk (reception counter) -->
+  <rect x="300" y="390" width="680" height="140" rx="5" fill="url(#counter_grad)"/>
+  <rect x="300" y="390" width="680" height="8" rx="3" fill="#5a4620"/>
+  <!-- Counter top surface shine -->
+  <rect x="302" y="390" width="676" height="3" fill="#8a7040" opacity="0.4"/>
+  <!-- Counter panel decoration -->
+  <rect x="320" y="400" width="200" height="100" rx="3" fill="#2a2010" opacity="0.5"/>
+  <rect x="322" y="402" width="196" height="96" rx="2" fill="none" stroke="#4a3a18" stroke-width="1" opacity="0.5"/>
+  <rect x="550" y="400" width="180" height="100" rx="3" fill="#2a2010" opacity="0.5"/>
+  <rect x="552" y="402" width="176" height="96" rx="2" fill="none" stroke="#4a3a18" stroke-width="1" opacity="0.5"/>
+  <rect x="760" y="400" width="200" height="100" rx="3" fill="#2a2010" opacity="0.5"/>
+  <rect x="762" y="402" width="196" height="96" rx="2" fill="none" stroke="#4a3a18" stroke-width="1" opacity="0.5"/>
+
+  <!-- Computer screens on desk -->
+  <rect x="370" y="410" width="80" height="55" rx="2" fill="#0a1830"/>
+  <rect x="372" y="412" width="76" height="51" rx="1" fill="#0d2240"/>
+  <rect x="380" y="418" width="60" height="8" rx="1" fill="#4080c0" opacity="0.6"/>
+  <rect x="380" y="430" width="45" height="5" rx="1" fill="#4080c0" opacity="0.4"/>
+  <rect x="380" y="438" width="50" height="5" rx="1" fill="#4080c0" opacity="0.3"/>
+
+  <!-- Hotel logo / signage on back wall -->
+  <rect x="480" y="140" width="320" height="60" rx="4" fill="#1e1a0e" opacity="0.7"/>
+  <rect x="482" y="142" width="316" height="56" rx="3" fill="none" stroke="#6a5820" stroke-width="1" opacity="0.5"/>
+  <rect x="510" y="155" width="260" height="12" rx="2" fill="#c8a840" opacity="0.6"/>
+  <rect x="540" y="172" width="200" height="8" rx="2" fill="#c8a840" opacity="0.4"/>
+
+  <!-- Decorative plants (left and right) -->
+  <!-- Left plant -->
+  <ellipse cx="200" cy="510" rx="30" ry="12" fill="#2a1808" opacity="0.7"/>
+  <ellipse cx="200" cy="500" rx="25" ry="10" fill="#1a3010" opacity="0.8"/>
+  <ellipse cx="185" cy="478" rx="20" ry="30" fill="#1e3814"/>
+  <ellipse cx="205" cy="465" rx="18" ry="32" fill="#224018"/>
+  <ellipse cx="220" cy="475" rx="16" ry="28" fill="#1e3814"/>
+  <ellipse cx="193" cy="458" rx="12" ry="20" fill="#2a4a1c"/>
+  <ellipse cx="215" cy="455" rx="10" ry="18" fill="#2a4a1c"/>
+
+  <!-- Right plant -->
+  <ellipse cx="1080" cy="510" rx="30" ry="12" fill="#2a1808" opacity="0.7"/>
+  <ellipse cx="1080" cy="500" rx="25" ry="10" fill="#1a3010" opacity="0.8"/>
+  <ellipse cx="1065" cy="478" rx="20" ry="30" fill="#1e3814"/>
+  <ellipse cx="1085" cy="465" rx="18" ry="32" fill="#224018"/>
+  <ellipse cx="1100" cy="475" rx="16" ry="28" fill="#1e3814"/>
+  <ellipse cx="1073" cy="458" rx="12" ry="20" fill="#2a4a1c"/>
+  <ellipse cx="1095" cy="455" rx="10" ry="18" fill="#2a4a1c"/>
+
+  <!-- Lounge seating area (left) -->
+  <rect x="0" y="450" width="200" height="70" rx="4" fill="#3a2e1a" opacity="0.8"/>
+  <rect x="0" y="440" width="200" height="14" rx="3" fill="#4a3e28" opacity="0.7"/>
+  <!-- Right seating -->
+  <rect x="1080" y="450" width="200" height="70" rx="4" fill="#3a2e1a" opacity="0.8"/>
+  <rect x="1080" y="440" width="200" height="14" rx="3" fill="#4a3e28" opacity="0.7"/>
+
+  <!-- Staff silhouette behind counter -->
+  <ellipse cx="640" cy="392" rx="14" ry="7" fill="#1a1408"/>
+  <rect x="632" y="360" width="16" height="34" rx="3" fill="#1a1408"/>
+
+  <!-- Ambient light on floor from desk area -->
+  <ellipse cx="640" cy="522" rx="300" ry="10" fill="#ffe890" opacity="0.06"/>
+
+  <!-- Foreground shadow -->
+  <rect y="680" width="1280" height="40" fill="#0a0804" opacity="0.7"/>
+</svg>

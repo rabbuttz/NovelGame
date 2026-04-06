@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="room_wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1614"/>
+      <stop offset="100%" stop-color="#100e0c"/>
+    </linearGradient>
+    <linearGradient id="floor_room" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a201a"/>
+      <stop offset="100%" stop-color="#180e0a"/>
+    </linearGradient>
+    <linearGradient id="bed_sheets" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8e4e0"/>
+      <stop offset="100%" stop-color="#d0ccc8"/>
+    </linearGradient>
+    <linearGradient id="bed_frame" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4a3828"/>
+      <stop offset="100%" stop-color="#2e2018"/>
+    </linearGradient>
+    <linearGradient id="window_view" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#060918"/>
+      <stop offset="60%" stop-color="#0d1530"/>
+      <stop offset="100%" stop-color="#1a2040"/>
+    </linearGradient>
+    <radialGradient id="lamp_glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffd890" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#ffb840" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#ff9000" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="city_night_glow" cx="50%" cy="80%" r="60%">
+      <stop offset="0%" stop-color="#ff6820" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#0d1530" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft_room">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="lamp_blur">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+
+  <!-- Room walls -->
+  <rect width="1280" height="720" fill="url(#room_wall)"/>
+
+  <!-- Floor -->
+  <rect x="0" y="540" width="1280" height="180" fill="url(#floor_room)"/>
+  <rect x="0" y="540" width="1280" height="2" fill="#3a2a20" opacity="0.4"/>
+
+  <!-- Large window (center-left, city view) -->
+  <rect x="100" y="80" width="500" height="420" rx="4" fill="url(#window_view)"/>
+  <rect x="102" y="82" width="496" height="416" rx="3" fill="none" stroke="#3a3028" stroke-width="3"/>
+  <!-- Window frame cross -->
+  <rect x="100" y="285" width="500" height="6" fill="#3a3028"/>
+  <rect x="347" y="80" width="6" height="420" fill="#3a3028"/>
+  <!-- Window city glow overlay -->
+  <rect x="102" y="82" width="496" height="416" fill="url(#city_night_glow)" opacity="0.6"/>
+
+  <!-- City lights in window (tiny dots) -->
+  <circle cx="160" cy="180" r="1.5" fill="#ffd090" opacity="0.8"/>
+  <circle cx="190" cy="200" r="1" fill="#ffd090" opacity="0.6"/>
+  <circle cx="220" cy="160" r="1.5" fill="#80c8ff" opacity="0.7"/>
+  <circle cx="250" cy="220" r="1" fill="#ffd090" opacity="0.6"/>
+  <circle cx="170" cy="260" r="1.2" fill="#ffd090" opacity="0.7"/>
+  <circle cx="210" cy="300" r="1" fill="#80c8ff" opacity="0.6"/>
+  <circle cx="280" cy="190" r="1" fill="#ffd090" opacity="0.5"/>
+  <circle cx="310" cy="240" r="1.5" fill="#ffd090" opacity="0.8"/>
+  <circle cx="140" cy="330" r="1" fill="#ffd090" opacity="0.6"/>
+  <circle cx="240" cy="350" r="1.2" fill="#ffd090" opacity="0.7"/>
+  <circle cx="190" cy="380" r="1" fill="#80c8ff" opacity="0.5"/>
+  <circle cx="270" cy="400" r="1.5" fill="#ffd090" opacity="0.7"/>
+  <circle cx="150" cy="420" r="1" fill="#ffd090" opacity="0.6"/>
+  <circle cx="320" cy="320" r="1" fill="#ffd090" opacity="0.5"/>
+  <circle cx="360" cy="150" r="1.5" fill="#ffd090" opacity="0.7"/>
+  <circle cx="400" cy="200" r="1" fill="#80c8ff" opacity="0.6"/>
+  <circle cx="430" cy="260" r="1.2" fill="#ffd090" opacity="0.8"/>
+  <circle cx="460" cy="180" r="1" fill="#ffd090" opacity="0.6"/>
+  <circle cx="500" cy="300" r="1.5" fill="#ffd090" opacity="0.7"/>
+  <circle cx="520" cy="380" r="1" fill="#80c8ff" opacity="0.5"/>
+  <circle cx="540" cy="220" r="1.2" fill="#ffd090" opacity="0.6"/>
+  <circle cx="570" cy="350" r="1" fill="#ffd090" opacity="0.7"/>
+  <!-- Tokyo Tower hint in window -->
+  <line x1="350" y1="430" x2="350" y2="320" stroke="#ff5010" stroke-width="1.5" opacity="0.4"/>
+  <line x1="348" y1="390" x2="352" y2="390" stroke="#ff5010" stroke-width="2" opacity="0.3"/>
+  <circle cx="350" cy="322" r="2" fill="#ff4000" opacity="0.6"/>
+
+  <!-- Window reflection (subtle) -->
+  <rect x="100" y="80" width="500" height="420" fill="white" opacity="0.02"/>
+
+  <!-- Night curtains (partially open) -->
+  <!-- Left curtain -->
+  <rect x="0" y="60" width="120" height="480" rx="3" fill="#1e1a16"/>
+  <rect x="2" y="62" width="115" height="476" rx="2" fill="#28221c" opacity="0.6"/>
+  <!-- Right curtain (of left window) -->
+  <rect x="580" y="60" width="100" height="480" rx="3" fill="#1e1a16"/>
+  <rect x="582" y="62" width="96" height="476" rx="2" fill="#28221c" opacity="0.6"/>
+
+  <!-- Right wall area (headboard side) -->
+  <rect x="700" y="60" width="580" height="500" fill="#181410" opacity="0.4"/>
+
+  <!-- Bedside lamp (right) -->
+  <!-- Lamp glow aura -->
+  <ellipse cx="1080" cy="340" rx="140" ry="120" fill="url(#lamp_glow)" filter="url(#lamp_blur)"/>
+  <!-- Lamp shade -->
+  <polygon points="1055,290 1105,290 1120,340 1040,340" fill="#c8a060"/>
+  <polygon points="1060,292 1100,292 1112,294 1048,294" fill="#d8b070" opacity="0.5"/>
+  <!-- Lamp bulb glow -->
+  <ellipse cx="1080" cy="292" rx="12" ry="5" fill="#fff8d0" opacity="0.9"/>
+  <!-- Lamp base -->
+  <rect x="1073" y="340" width="14" height="55" fill="#806840"/>
+  <rect x="1060" y="395" width="40" height="8" rx="2" fill="#604820"/>
+
+  <!-- Lamp glow on wall -->
+  <ellipse cx="1150" cy="360" rx="80" ry="100" fill="#ffd870" opacity="0.04"/>
+
+  <!-- Nightstand (right) -->
+  <rect x="1010" y="404" width="140" height="100" rx="3" fill="#3a2818"/>
+  <rect x="1012" y="404" width="136" height="6" rx="2" fill="#4a3828"/>
+  <!-- Drawer -->
+  <rect x="1020" y="420" width="120" height="45" rx="2" fill="#2e2010" opacity="0.6"/>
+  <rect x="1072" y="438" width="16" height="8" rx="2" fill="#6a4820" opacity="0.7"/>
+
+  <!-- Bed (main, center-right) -->
+  <!-- Bed frame base -->
+  <rect x="650" y="400" width="600" height="200" rx="5" fill="url(#bed_frame)"/>
+  <!-- Mattress -->
+  <rect x="655" y="390" width="590" height="50" rx="3" fill="#c8c0b8"/>
+  <!-- Sheets / bedding -->
+  <rect x="655" y="380" width="590" height="80" rx="3" fill="url(#bed_sheets)"/>
+  <!-- Pillow left -->
+  <rect x="670" y="365" width="130" height="50" rx="8" fill="#f0ece8"/>
+  <rect x="672" y="367" width="126" height="46" rx="7" fill="none" stroke="#d8d4d0" stroke-width="1" opacity="0.5"/>
+  <!-- Pillow right -->
+  <rect x="820" y="365" width="130" height="50" rx="8" fill="#f0ece8"/>
+  <rect x="822" y="367" width="126" height="46" rx="7" fill="none" stroke="#d8d4d0" stroke-width="1" opacity="0.5"/>
+  <!-- Headboard -->
+  <rect x="648" y="300" width="606" height="100" rx="5" fill="#3a2818"/>
+  <rect x="655" y="308" width="590" height="85" rx="4" fill="#2e2010" opacity="0.4"/>
+  <!-- Headboard panel stitching suggestion -->
+  <rect x="665" y="315" width="180" height="65" rx="3" fill="#362010" opacity="0.5"/>
+  <rect x="855" y="315" width="180" height="65" rx="3" fill="#362010" opacity="0.5"/>
+  <rect x="1045" y="315" width="180" height="65" rx="3" fill="#362010" opacity="0.5"/>
+  <!-- Bedsheet fold -->
+  <rect x="655" y="380" width="590" height="8" rx="3" fill="#e8e4e0" opacity="0.5"/>
+
+  <!-- Nightstand (left) -->
+  <rect x="560" y="404" width="80" height="100" rx="3" fill="#3a2818"/>
+  <rect x="562" y="404" width="76" height="6" rx="2" fill="#4a3828"/>
+
+  <!-- Ambient floor lamp glow (left side) -->
+  <ellipse cx="180" cy="540" rx="120" ry="20" fill="#ffe890" opacity="0.04"/>
+
+  <!-- Room floor shadow/depth -->
+  <rect x="0" y="620" width="1280" height="100" fill="#0a0806" opacity="0.6"/>
+
+  <!-- Faint city glow from window on floor -->
+  <ellipse cx="350" cy="545" rx="200" ry="30" fill="#0d1530" opacity="0.4"/>
+
+  <!-- Subtle ceiling molding -->
+  <rect x="0" y="58" width="1280" height="5" fill="#2a2218" opacity="0.5"/>
+  <rect x="0" y="55" width="1280" height="3" fill="#3a3228" opacity="0.4"/>
+</svg>

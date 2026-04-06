@@ -1,0 +1,725 @@
+title: 風見塔のラストノート 番外編 あむと、東京の続き
+dateLabel: 5月4日
+
+player:
+  title: 主人公の名前を決める
+  prompt: 呼ばれたい名前を入力してください。
+  defaultName: 湊
+  presets:
+    - 湊
+    - 悠真
+
+variables:
+  flags:
+    amuTokyoClear: false
+    boughtSouvenirWithAmu: false
+    sawTokyoNightTogether: false
+    stayedWithAmu: false
+  affection:
+    amu: 6
+
+characters:
+  あむ:
+    name: あむ
+
+start: morning_message
+
+nodes:
+  morning_message:
+    - date: 5月4日 朝
+    - background: 教室・昼
+    - bgm:
+        id: 共通ルート 日常
+        volume: 0.4
+        loop: true
+    - say:
+        text: ゴールデンウィーク、四日目。昨日まで家でだらだらしていたら、朝の九時にスマホが振動した。
+    - say:
+        text: 送り主は、あむだった。
+    - say:
+        speaker: あむ
+        text: 今日暇？ 俺東京行きたくて。一人だとつまんないんだけど、一緒に来ない？
+    - say:
+        text: 続けてもう一通。
+    - say:
+        speaker: あむ
+        text: 浅草行ったことないんだよね。なんか食いたいし、夜景も見たい。日帰りのつもりだけど、ちゃんとした計画はない。
+    - say:
+        text: 計画がないことだけは正直に書いてある。あむらしい。
+    - choice:
+        options:
+          - text: 「行く」と返す
+            set:
+              affection.amu: 1
+            goto: agree_go
+          - text: 「何時に出発？」と聞いてから決める
+            goto: ask_time
+
+  ask_time:
+    - say:
+        speaker: "{{player.name}}"
+        text: 何時に出発？
+    - say:
+        speaker: あむ
+        text: 今すぐ出れば十時台の電車に乗れる。着いたら昼前には浅草。
+    - say:
+        text: 計算は正確だった。
+    - set:
+        affection.amu: 1
+    - goto: agree_go
+
+  agree_go:
+    - say:
+        speaker: "{{player.name}}"
+        text: わかった。行く。
+    - say:
+        speaker: あむ
+        text: やった！ じゃあ駅で。急いで。
+    - say:
+        text: スタンプが三つ届いた。うるさい。でも嫌いじゃない。
+    - goto: station_platform
+
+  station_platform:
+    - date: 5月4日 10:20
+    - background: station-evening
+    - hide: {}
+    - show:
+        character: あむ
+        expression: default
+        position: center
+    - bgm:
+        id: 共通ルート 日常
+        volume: 0.42
+        loop: true
+    - say:
+        text: 駅のホームに着くと、あむはもう来ていた。ジーンズに白いシャツ、肩にトートバッグ。制服じゃないあむを見るのは久しぶりだ。
+    - say:
+        speaker: あむ
+        text: おー来た来た。ちょっと待った。
+    - say:
+        speaker: "{{player.name}}"
+        text: 何分？
+    - say:
+        speaker: あむ
+        text: 三分。でも気にしてない。
+    - say:
+        text: そういう人間だった。
+    - say:
+        speaker: あむ
+        text: 電車来るよ。乗ろ。
+    - goto: train_ride
+
+  train_ride:
+    - hide: {}
+    - say:
+        text: 窓の外を景色が流れていく。あむは隣の席で地図アプリを開いては閉じ、また開いた。
+    - say:
+        speaker: あむ
+        text: 仲見世通りって人多いかな。
+    - say:
+        speaker: "{{player.name}}"
+        text: ゴールデンウィークだから多いと思う。
+    - say:
+        speaker: あむ
+        text: だよな。まあいいや、混んでても楽しいし。
+    - say:
+        text: あむはそういうタイプだった。混雑を前に沈まない。むしろそこに飛び込んでいく。
+    - say:
+        speaker: あむ
+        text: {{player.name}}って浅草行ったことある？
+    - say:
+        speaker: "{{player.name}}"
+        text: 一回だけ。
+    - say:
+        speaker: あむ
+        text: じゃあ俺より詳しいじゃん。先導してよ。
+    - say:
+        speaker: "{{player.name}}"
+        text: あんまり覚えてない。
+    - say:
+        speaker: あむ
+        text: じゃあ一緒に迷子になろう。
+    - say:
+        text: あむが笑った。電車の揺れの中で、その顔が窓の光にほんのり照らされていた。
+    - goto: asakusa_arrive
+
+  asakusa_arrive:
+    - date: 5月4日 11:50
+    - background: 東京・浅草・昼
+    - show:
+        character: あむ
+        expression: default
+        position: right
+    - bgm:
+        id: 穏やかな恋愛イベント
+        volume: 0.38
+        loop: true
+    - say:
+        text: 浅草に着くと、人の多さが最初に来た。仲見世通りは歩くのも一苦労で、あむはすぐに目を輝かせた。
+    - say:
+        speaker: あむ
+        text: うわ、すごい。こんなんなの。
+    - say:
+        speaker: "{{player.name}}"
+        text: 言ったじゃん、ゴールデンウィークって。
+    - say:
+        speaker: あむ
+        text: でも楽しい。なんかいい匂いする。あれ食べていい？
+    - say:
+        text: あむが指差した先に、揚げまんじゅうの屋台があった。列が少し伸びている。
+    - choice:
+        options:
+          - text: 一緒に並ぶ
+            set:
+              affection.amu: 1
+            goto: buy_snack
+          - text: 先に門の方に行こうと提案する
+            goto: skip_snack
+
+  skip_snack:
+    - say:
+        speaker: "{{player.name}}"
+        text: 先に雷門見てから戻ろう。
+    - say:
+        speaker: あむ
+        text: 確かに。じゃあ帰りに買う。
+    - goto: kaminarimon
+
+  buy_snack:
+    - say:
+        text: 二人で列に並んだ。あむは待つ間もきょろきょろしていて、この人は本当に止まれないのだと思った。
+    - say:
+        speaker: あむ
+        text: あ、あのお土産のやつ見て。「浅草土産」ってそのまますぎる。
+    - say:
+        speaker: "{{player.name}}"
+        text: 正直でいいじゃん。
+    - say:
+        speaker: あむ
+        text: 確かに。……あ、番来た。
+    - say:
+        text: 揚げまんじゅうを二つ買った。
+    - say:
+        speaker: あむ
+        text: うまい。なんでこんなうまいの。
+    - say:
+        speaker: "{{player.name}}"
+        text: 外で食べると何でもうまい。
+    - say:
+        speaker: あむ
+        text: 本当それ。外で食う飯はだいたいうまい。
+    - set:
+        flags.boughtSouvenirWithAmu: true
+    - goto: kaminarimon
+
+  kaminarimon:
+    - say:
+        text: 雷門の前まで来た。大きな赤い提灯が、青空の下にくっきりと映えている。あむが立ち止まって、しばらく見上げた。
+    - say:
+        speaker: あむ
+        text: でかい。写真撮っていい？
+    - say:
+        speaker: "{{player.name}}"
+        text: どうぞ。
+    - say:
+        text: あむがスマホを構える。何枚か撮って、こちらを振り返った。
+    - say:
+        speaker: あむ
+        text: 一緒に撮ろ。
+    - say:
+        text: 言う前に隣に来ていた。肩が触れる距離で、あむがカメラを持ち上げた。
+    - say:
+        speaker: "{{player.name}}"
+        text: ……撮るなら先に言え。
+    - say:
+        speaker: あむ
+        text: はい、ちーず。
+    - say:
+        text: シャッター音。あむが画面を確認して、「いい感じじゃん」と言った。こちらは微妙な顔をしていた気がするが、あむは満足そうだった。
+    - goto: nakamise
+
+  nakamise:
+    - say:
+        text: 仲見世通りをゆっくり歩いた。あむはものを見るたびに立ち止まり、見るたびに何か言った。一緒に歩く人間がいるから余計にそうなるのかもしれない。
+    - say:
+        speaker: あむ
+        text: この扇子、めっちゃかっこよくない？
+    - say:
+        speaker: "{{player.name}}"
+        text: 買うの？
+    - say:
+        speaker: あむ
+        text: 買わない。でもかっこいい。
+    - say:
+        text: 結局、あむは何も買わなかった。でも全部楽しんでいた。それがこの人の旅行の仕方なのかもしれない。
+    - say:
+        speaker: あむ
+        text: 腹減った。飯にしよ。なんか食いたいものある？
+    - say:
+        speaker: "{{player.name}}"
+        text: あむが決めていいよ。
+    - say:
+        speaker: あむ
+        text: じゃあ天ぷら。ここまで来たら天ぷらでしょ。
+    - goto: lunch
+
+  lunch:
+    - date: 5月4日 13:00
+    - say:
+        text: 仲見世から少し外れた路地に、天ぷら定食の店があった。並んで二十分待って、カウンターに座った。
+    - say:
+        speaker: あむ
+        text: エビが二本ある。
+    - say:
+        speaker: "{{player.name}}"
+        text: そりゃそうじゃん。
+    - say:
+        speaker: あむ
+        text: でもなんか、二本あるとうれしいじゃん。
+    - say:
+        text: うれしそうに食べていた。大したことじゃないのに、あむは本当によく笑う。
+    - say:
+        speaker: あむ
+        text: なあ、{{player.name}}って東京に住みたいとか思う？
+    - say:
+        speaker: "{{player.name}}"
+        text: 考えたことなかった。あむは？
+    - say:
+        speaker: あむ
+        text: 俺も正直ちゃんと考えてないけど……こういうとこ来ると、いろんな人がいてさ。なんかいいなって思う。
+    - say:
+        text: 箸を持ったまま、あむが少し遠くを見た。
+    - say:
+        speaker: あむ
+        text: 全部知らない人の街って、なんか気楽なんだよな。変な話だけど。
+    - say:
+        speaker: "{{player.name}}"
+        text: わかる気がする。
+    - say:
+        speaker: あむ
+        text: わかってくれる人と来てよかった。
+    - say:
+        text: あむが笑った。いつもの笑顔だったけど、少しだけ違う空気があった。
+    - goto: afternoon_walk
+
+  afternoon_walk:
+    - date: 5月4日 15:00
+    - say:
+        text: 午後は特に目的もなく歩いた。隅田川沿いを歩いて、橋の上で川面を見た。空が広かった。
+    - say:
+        speaker: あむ
+        text: 今日、思ったより楽しいな。
+    - say:
+        speaker: "{{player.name}}"
+        text: 思ったより、って。
+    - say:
+        speaker: あむ
+        text: 行き当たりばったりだから、どうなるかわかんなかったんだよ。でもよかった。
+    - say:
+        text: 川の向こうで、遠くにスカイツリーが見えた。あむが少し目を細めた。
+    - say:
+        speaker: あむ
+        text: 夜になったら夜景見に行こう。東京タワーが見える場所。
+    - say:
+        speaker: "{{player.name}}"
+        text: 帰りの電車は？
+    - say:
+        speaker: あむ
+        text: ……夜のうちに帰れればいいか、くらいに思ってた。
+    - say:
+        text: 「くらいに」というのが引っかかった。
+    - say:
+        speaker: "{{player.name}}"
+        text: ちゃんと決めてなかったのか。
+    - say:
+        speaker: あむ
+        text: だってゴールデンウィークじゃん。明日も休みだし。
+    - say:
+        text: あむが少し視線を逸らした。いつもの笑顔が一瞬止まったように見えた。
+    - goto: evening_plan
+
+  evening_plan:
+    - bgm:
+        id: 穏やかな恋愛イベント
+        volume: 0.35
+        loop: true
+    - say:
+        speaker: あむ
+        text: ……ちょっと言っていい？
+    - say:
+        speaker: "{{player.name}}"
+        text: 言えば。
+    - say:
+        speaker: あむ
+        text: 今夜、泊まれる場所探してた。一人じゃ気まずいから、来てくれるかなって思って……誘おうか迷ってたんだよな。
+    - say:
+        text: あむが後ろ頭をかいた。珍しく、はっきり言えない顔をしていた。
+    - say:
+        speaker: あむ
+        text: 変なこと言ってたらごめんな。
+    - choice:
+        options:
+          - text: 「一緒にいるよ」と答える
+            set:
+              flags.stayedWithAmu: true
+              affection.amu: 3
+            goto: decide_stay
+          - text: 「一泊って、どういうつもりで言ってる？」と確かめる
+            set:
+              affection.amu: 2
+            goto: confirm_intent
+
+  confirm_intent:
+    - say:
+        speaker: "{{player.name}}"
+        text: 一泊って、どういうつもりで言ってるんだ。
+    - say:
+        speaker: あむ
+        text: ……どういうつもり、か。
+    - say:
+        text: あむが川の方を向いたまま、少し間を置いた。
+    - say:
+        speaker: あむ
+        text: 正直に言う。{{player.name}}のことが好きだ。それが全部。
+    - say:
+        text: 風が川面を渡った。あむの横顔が、ちゃんと真剣だった。
+    - say:
+        speaker: あむ
+        text: だから変な意図があるとかじゃなくて……ただ、もう少し一緒にいたかった。
+    - set:
+        flags.stayedWithAmu: true
+        affection.amu: 1
+    - goto: decide_stay
+
+  decide_stay:
+    - say:
+        speaker: "{{player.name}}"
+        text: わかった。一緒にいる。
+    - say:
+        speaker: あむ
+        text: ……本当に？
+    - say:
+        speaker: "{{player.name}}"
+        text: 本当に。
+    - say:
+        text: あむが少しだけ息を吐いた。ほっとしたような、信じられないような顔だった。
+    - say:
+        speaker: あむ
+        text: ……ありがとう。じゃあホテル、ちゃんと探す。
+    - goto: night_view
+
+  night_view:
+    - date: 5月4日 19:30
+    - background: 東京・夜景
+    - hide: {}
+    - show:
+        character: あむ
+        expression: default
+        position: right
+    - bgm:
+        id: 穏やかな恋愛イベント
+        volume: 0.4
+        loop: true
+    - say:
+        text: 日が落ちると、東京は別の顔になった。光の数が増えて、街全体が暗さの中で輝いている。
+    - say:
+        text: 夜景が見えるスポットに着くと、あむが柵の前に立って、しばらく黙った。
+    - say:
+        speaker: あむ
+        text: ……すごい。
+    - say:
+        text: 「すごい」だけだった。でも、その一言に全部入っている感じがした。
+    - say:
+        speaker: "{{player.name}}"
+        text: 来た甲斐あったな。
+    - say:
+        speaker: あむ
+        text: うん。……{{player.name}}と来てよかった。
+    - say:
+        text: あむが前を向いたまま言った。東京タワーの灯りが、遠くで静かに燃えている。
+    - set:
+        flags.sawTokyoNightTogether: true
+    - goto: night_view_talk
+
+  night_view_talk:
+    - say:
+        speaker: あむ
+        text: 俺さ、誰かと出かける時ってだいたい一人のほうが楽だなって思ったりするんだよ。気を遣うから。
+    - say:
+        speaker: "{{player.name}}"
+        text: そうなのか。
+    - say:
+        speaker: あむ
+        text: でも今日は違った。{{player.name}}といると、気を遣う感じがしないんだよな。なんでだろ。
+    - say:
+        text: あむが少し首を傾けた。
+    - say:
+        speaker: あむ
+        text: 一緒にいて、楽なのに、どきどきする。変な感じ。
+    - say:
+        speaker: "{{player.name}}"
+        text: ……それ、さっき言ったやつの続き？
+    - say:
+        speaker: あむ
+        text: そう。続き。
+    - say:
+        text: あむが横を向いた。夜景を背負って、こちらを見ている。
+    - say:
+        speaker: あむ
+        text: 改めて言う。{{player.name}}のことが好きだ。今日一日、ずっとそう思ってた。
+    - goto: player_response
+
+  player_response:
+    - choice:
+        options:
+          - text: 「俺も、好きだ」と答える
+            set:
+              affection.amu: 3
+            goto: mutual_feeling
+          - text: あむの手を握る
+            set:
+              affection.amu: 3
+            goto: hold_hand
+
+  hold_hand:
+    - say:
+        text: 答える代わりに、柵に置いたあむの手に、自分の手を重ねた。
+    - say:
+        speaker: あむ
+        text: ……っ。
+    - say:
+        text: あむが少し固まった。夜風が吹いた。
+    - say:
+        speaker: あむ
+        text: ……それって、どういう意味？
+    - say:
+        speaker: "{{player.name}}"
+        text: 同じ意味。
+    - goto: mutual_feeling
+
+  mutual_feeling:
+    - bgm:
+        id: 切ない会話・すれ違い
+        volume: 0.35
+        loop: true
+    - say:
+        text: あむが、笑った。今日一番、力の抜けた笑顔だった。
+    - say:
+        speaker: あむ
+        text: よかった。……本当によかった。
+    - say:
+        text: 二人でしばらく、東京の夜景を見ていた。光の数が多すぎて、どこを見ていいかわからないくらいだった。
+    - say:
+        text: でも隣にあむがいることは、ちゃんとわかった。
+    - goto: hotel_checkin
+
+  hotel_checkin:
+    - date: 5月4日 21:00
+    - background: ホテル・ロビー
+    - hide: {}
+    - show:
+        character: あむ
+        expression: default
+        position: right
+    - bgm:
+        id: 穏やかな恋愛イベント
+        volume: 0.3
+        loop: true
+    - say:
+        text: 夜景のスポットから歩いて十分のところに、あむが探していたホテルがあった。シンプルで清潔なシティホテル。ロビーには暖かい照明が灯っている。
+    - say:
+        speaker: あむ
+        text: 空いてるって。チェックインしよう。
+    - say:
+        text: フロントで手続きをするあむの後ろに立っていた。こういう時のあむは、ちゃんとしている。笑ってないかわりに、落ち着いている。
+    - say:
+        speaker: あむ
+        text: ツインでいい？
+    - say:
+        text: こちらを振り返って、静かに聞いた。
+    - say:
+        speaker: "{{player.name}}"
+        text: いい。
+    - say:
+        text: あむが少し間を置いてから、フロントに向き直った。
+    - goto: hotel_room
+
+  hotel_room:
+    - background: ホテル・客室・夜
+    - hide: {}
+    - show:
+        character: あむ
+        expression: default
+        position: right
+    - bgm:
+        id: 穏やかな恋愛イベント
+        volume: 0.28
+        loop: true
+    - say:
+        text: 部屋は十五階だった。窓の外に東京の夜景が広がっている。
+    - say:
+        speaker: あむ
+        text: うわ、窓から夜景見える。ラッキー。
+    - say:
+        text: あむが窓の前に立って、外を見た。さっきより高いから、光の広がりが違う。
+    - say:
+        speaker: "{{player.name}}"
+        text: きれいだな。
+    - say:
+        speaker: あむ
+        text: うん。……{{player.name}}、こっち来て。
+    - say:
+        text: あむが振り返らずに言った。
+    - say:
+        text: 窓の前に並んで立った。肩が触れるくらいの距離。外の光が二人を薄く照らしている。
+    - say:
+        speaker: あむ
+        text: 今日、長かったな。
+    - say:
+        speaker: "{{player.name}}"
+        text: 楽しかったけど。
+    - say:
+        speaker: あむ
+        text: 俺も。……すごく。
+    - goto: room_closer
+
+  room_closer:
+    - bgm:
+        id: 切ない会話・すれ違い
+        volume: 0.3
+        loop: true
+    - say:
+        text: あむが少しだけ、こちらに向いた。夜景を背に、あむの顔が近い。
+    - say:
+        speaker: あむ
+        text: さっき手繋いだまま歩いてたの、恥ずかしかったけど嬉しかった。
+    - say:
+        speaker: "{{player.name}}"
+        text: 恥ずかしかったのか。
+    - say:
+        speaker: あむ
+        text: そりゃそうだろ、人通りある道で。
+    - say:
+        text: あむが笑った。耳が少し赤い。
+    - say:
+        speaker: あむ
+        text: でも離したくなかった。
+    - say:
+        text: あむが、こちらに手を伸ばしてきた。問いかけるように、ゆっくり。
+    - choice:
+        options:
+          - text: その手を取る
+            set:
+              affection.amu: 2
+            goto: take_hand
+          - text: あむの方に向き直る
+            set:
+              affection.amu: 2
+            goto: face_amu
+
+  take_hand:
+    - say:
+        text: あむの手を取った。あむの指が、しっかりと絡んできた。
+    - say:
+        speaker: あむ
+        text: ……{{player.name}}。
+    - say:
+        text: あむが一歩、近づいてきた。
+    - goto: night_kiss
+
+  face_amu:
+    - say:
+        text: あむの方に正面を向いた。あむも、こちらを見ている。夜景の光の中で、二人の距離が縮まっていく。
+    - say:
+        speaker: あむ
+        text: ……いい？
+    - say:
+        speaker: "{{player.name}}"
+        text: いい。
+    - goto: night_kiss
+
+  night_kiss:
+    - say:
+        text: あむの唇が触れた。
+    - say:
+        text: 東京の夜景が窓の向こうで輝いていた。あむの体温が近い。どちらからともなく、もっと深く引き寄せた。
+    - say:
+        speaker: あむ
+        text: ……好きだよ、{{player.name}}。
+    - say:
+        text: あむの声が、普段より低くて、静かだった。いつもの軽さが全部抜けたような声だった。
+    - goto: night_together
+
+  night_together:
+    - bgm: stop
+    - say:
+        text: 夜景を映す窓の前で、二人の距離はもうなかった。
+    - say:
+        text: あむの手が頬に触れた。ゆっくりと、確かめるように。
+    - say:
+        text: 東京の夜は、静かに深かった。
+    - goto: morning
+
+  morning:
+    - date: 5月5日 朝
+    - background: ホテル・客室・夜
+    - hide: {}
+    - show:
+        character: あむ
+        expression: default
+        position: right
+    - bgm:
+        id: 共通ルート 日常
+        volume: 0.35
+        loop: true
+    - say:
+        text: 朝の光が、カーテンの隙間から細く差し込んできた。
+    - say:
+        text: あむはすでに起きていて、窓際に座って外を見ていた。夜景だった場所が、今は青い朝になっている。
+    - say:
+        speaker: あむ
+        text: おはよ。
+    - say:
+        speaker: "{{player.name}}"
+        text: おはよう。
+    - say:
+        speaker: あむ
+        text: 昨日のこと、ちゃんと覚えてる？
+    - say:
+        speaker: "{{player.name}}"
+        text: 覚えてる。
+    - say:
+        speaker: あむ
+        text: よかった。夢じゃなかった。
+    - say:
+        text: あむが笑った。照れを隠せていない、あむらしくない笑い方だった。
+    - say:
+        speaker: あむ
+        text: 帰る前にどこか寄っていく？ 今日もせっかくだし。
+    - say:
+        speaker: "{{player.name}}"
+        text: あむが決めていいよ。
+    - say:
+        speaker: あむ
+        text: じゃあ朝ごはん。腹減った。
+    - say:
+        text: あむが立ち上がって、こちらに手を差し出してきた。昨日と同じように、当たり前のように。
+    - say:
+        text: その手を取ると、あむが少しだけ目を細めた。今日は誤魔化さずに、まっすぐこちらを見ていた。
+    - set:
+        flags.amuTokyoClear: true
+    - goto: ending
+
+  ending:
+    - bgm: stop
+    - hide: {}
+    - say:
+        text: 東京の朝は早い。街はもうとっくに動き出している。
+    - say:
+        text: あむの隣を歩きながら、昨日の一日を思い返した。計画のない旅だった。でも、何一つ無駄じゃなかった気がする。
+    - say:
+        text: あむが前を向いたまま、手を少しだけ強く握った。
+    - say:
+        text: それだけで、十分だった。
+    - say:
+        text: 番外編・了

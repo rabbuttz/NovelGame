@@ -1,5 +1,10 @@
 [
   {
+    "url": "scenarios/kazamito-amu-tokyo-date.yaml",
+    "title": "風見塔のラストノート 番外編 あむと、東京の続き",
+    "description": "ゴールデンウィーク、あむに誘われて東京へ。浅草観光から夜景、そしてホテルの夜へ続く番外編。"
+  },
+  {
     "url": "scenarios/kazamito-sawaden-onsen.yaml",
     "title": "風見塔のラストノート 番外編 さわでんと、湯けむりの夜",
     "description": "星潮祭の準備が一段落した後、チームで行く温泉一泊旅行。深夜の貸切露天風呂でさわでんと二人きりになる番外編。"

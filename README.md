@@ -1,6 +1,6 @@
 # Novel Flow
 
-YAML で制御する軽量なノベルゲーム基盤です。背景、立ち絵、名前、本文、選択肢、変数、条件分岐をブラウザ上で動かせます。
+YAML で制御する軽量なノベルゲーム基盤です。背景、立ち絵、名前、本文、選択肢、変数、条件分岐に加えて、主人公名入力、発話者名の位置追従、立ち絵モーションもブラウザ上で動かせます。
 
 ## セットアップ
 
@@ -31,6 +31,14 @@ src/
 ```yaml
 title: Sample Story
 dateLabel: 8月10日
+
+player:
+  title: 主人公の名前を決める
+  prompt: 呼ばれたい名前を入力してください。
+  defaultName: 湊
+  presets:
+    - 湊
+    - 悠真
 
 variables:
   flags:
@@ -106,6 +114,7 @@ nodes:
 
 `position` は `left | center | right` です。
 立ち絵は `characters.sprites` に明示指定するか、命名規則から自動解決されます。
+`motion` を付けると、表示直後に一回だけ感情モーションを再生できます。
 
 ### `hide`
 
@@ -133,6 +142,19 @@ nodes:
 ```
 
 地の文は `speaker` を省略できます。
+本文と発話者名では `{{player.name}}` のような変数展開が使えます。
+
+### `motion`
+
+表示中の立ち絵に一時的なアニメーションを再生します。
+
+```yaml
+- motion:
+    character: heroine
+    name: 衝撃
+```
+
+`character` の代わりに `position` も使えます。現在は `衝撃` `疑問` `喜び` `照れ` `うなずき` が使えます。
 
 ### `choice`
 
@@ -146,6 +168,52 @@ nodes:
         goto: talk_more
       - text: 帰る
         goto: ending
+```
+
+### `bgm`
+
+BGM を再生または停止します。
+
+```yaml
+- bgm: タイトル画面
+```
+
+詳細指定:
+
+```yaml
+- bgm:
+    id: 穏やかな恋愛イベント
+    volume: 0.65
+    loop: true
+```
+
+停止:
+
+```yaml
+- bgm: stop
+```
+
+### `sound`
+
+効果音を再生または停止します。`se` と `sfx` も同じ意味で使えます。
+
+```yaml
+- sound: 驚く
+```
+
+詳細指定:
+
+```yaml
+- sound:
+    id: 心臓の鼓動1
+    volume: 0.8
+    loop: false
+```
+
+停止:
+
+```yaml
+- sound: stop
 ```
 
 ### `set`

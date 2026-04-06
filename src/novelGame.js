@@ -2,6 +2,10 @@ import { parse } from "yaml";
 
 const POSITIONS = ["left", "center", "right"];
 const ENTER_VARIANTS = new Set(["auto", "left", "right", "center", "soft", "none"]);
+const DEFAULT_BGM_VOLUME = 0.75;
+const DEFAULT_SOUND_VOLUME = 0.8;
+const BGM_VOLUME_STORAGE_KEY = "novel-flow-bgm-volume";
+const SOUND_VOLUME_STORAGE_KEY = "novel-flow-sound-volume";
 const MOTION_ALIASES = {
   shock: "衝撃",
   surprised: "衝撃",
@@ -22,6 +26,25 @@ function createBgmPlayer() {
   let audio = null;
   let currentId = null;
   let timer = null;
+  let resumeHandlers = null;
+  let trackVolume = DEFAULT_BGM_VOLUME;
+  let masterVolume = loadVolumePreference(BGM_VOLUME_STORAGE_KEY, DEFAULT_BGM_VOLUME);
+
+  function effectiveVolume(volume = trackVolume) {
+    return Math.max(0, Math.min(1, volume * masterVolume));
+  }
+
+  function clearResumeHandlers() {
+    if (!resumeHandlers) {
+      return;
+    }
+
+    for (const [type, listener] of resumeHandlers) {
+      window.removeEventListener(type, listener, true);
+    }
+
+    resumeHandlers = null;
+  }
 
   function fadeTo(target, ms, done) {
     clearInterval(timer);
@@ -48,6 +71,8 @@ function createBgmPlayer() {
   }
 
   function stopWithFade(done) {
+    clearResumeHandlers();
+
     if (!audio) {
       done?.();
       return;
@@ -66,9 +91,56 @@ function createBgmPlayer() {
     });
   }
 
+  function scheduleResume(activeAudio, volume) {
+    clearResumeHandlers();
+
+    const resume = () => {
+      if (audio !== activeAudio) {
+        clearResumeHandlers();
+        return;
+      }
+
+      activeAudio
+        .play()
+        .then(() => {
+          clearResumeHandlers();
+          fadeTo(effectiveVolume(volume), 1200);
+        })
+        .catch((error) => {
+          console.warn("[BGM] 再試行に失敗しました。", error);
+        });
+    };
+
+    resumeHandlers = [
+      ["pointerdown", resume],
+      ["keydown", resume]
+    ];
+
+    for (const [type, listener] of resumeHandlers) {
+      window.addEventListener(type, listener, true);
+    }
+  }
+
+  function startPlayback(activeAudio, volume) {
+    activeAudio
+      .play()
+      .then(() => {
+        clearResumeHandlers();
+        fadeTo(effectiveVolume(volume), 1200);
+      })
+      .catch((error) => {
+        console.warn("[BGM] 自動再生が保留されました。次の操作で再試行します。", error);
+        scheduleResume(activeAudio, volume);
+      });
+  }
+
   return {
     play(src, id, { loop = true, volume = 0.75 } = {}) {
-      if (currentId === id) {
+      trackVolume = volume;
+
+      if (currentId === id && audio) {
+        audio.loop = loop;
+        startPlayback(audio, trackVolume);
         return;
       }
 
@@ -77,9 +149,20 @@ function createBgmPlayer() {
         audio.loop = loop;
         audio.volume = 0;
         currentId = id;
-        audio.play().catch(() => {});
-        fadeTo(volume, 1200);
+        startPlayback(audio, trackVolume);
       });
+    },
+    setMasterVolume(value) {
+      masterVolume = normalizeVolume(value, DEFAULT_BGM_VOLUME);
+      saveVolumePreference(BGM_VOLUME_STORAGE_KEY, masterVolume, DEFAULT_BGM_VOLUME);
+
+      if (audio) {
+        clearInterval(timer);
+        audio.volume = effectiveVolume();
+      }
+    },
+    getMasterVolume() {
+      return masterVolume;
     },
     stop() {
       stopWithFade();
@@ -87,7 +170,57 @@ function createBgmPlayer() {
   };
 }
 
+function createSoundPlayer() {
+  const activeAudio = new Map();
+  let masterVolume = loadVolumePreference(SOUND_VOLUME_STORAGE_KEY, DEFAULT_SOUND_VOLUME);
+
+  function effectiveVolume(volume = 1) {
+    return Math.max(0, Math.min(1, volume * masterVolume));
+  }
+
+  function release(audio) {
+    activeAudio.delete(audio);
+  }
+
+  return {
+    play(src, { loop = false, volume = 1 } = {}) {
+      const audio = new Audio(src);
+      const trackVolume = normalizeVolume(volume, 1);
+      const cleanup = () => release(audio);
+
+      audio.loop = loop;
+      audio.volume = effectiveVolume(trackVolume);
+      activeAudio.set(audio, trackVolume);
+      audio.addEventListener("ended", cleanup, { once: true });
+      audio.addEventListener("error", cleanup, { once: true });
+      audio.play().catch((error) => {
+        release(audio);
+        console.warn("[SOUND] 再生に失敗しました。", error);
+      });
+    },
+    setMasterVolume(value) {
+      masterVolume = normalizeVolume(value, DEFAULT_SOUND_VOLUME);
+      saveVolumePreference(SOUND_VOLUME_STORAGE_KEY, masterVolume, DEFAULT_SOUND_VOLUME);
+
+      for (const [audio, trackVolume] of activeAudio) {
+        audio.volume = effectiveVolume(trackVolume);
+      }
+    },
+    getMasterVolume() {
+      return masterVolume;
+    },
+    stop() {
+      for (const audio of activeAudio.keys()) {
+        audio.pause();
+      }
+
+      activeAudio.clear();
+    }
+  };
+}
+
 const bgmPlayer = createBgmPlayer();
+const soundPlayer = createSoundPlayer();
 
 export function createGame(root) {
   root.innerHTML = `
@@ -120,6 +253,10 @@ export function createGame(root) {
               <span class="command-icon">R</span>
               <span class="command-label">最初から</span>
             </button>
+            <button class="command-button" type="button" data-command="volume" data-clickable="true" aria-expanded="false">
+              <span class="command-icon">♪</span>
+              <span class="command-label">音量</span>
+            </button>
             <button class="command-button" type="button" data-command="qsave">
               <span class="command-icon">S</span>
               <span class="command-label">Q.Save</span>
@@ -140,6 +277,18 @@ export function createGame(root) {
               <span class="command-icon">B</span>
               <span class="command-label">Backlog</span>
             </button>
+          </div>
+          <div class="volume-panel" data-volume-panel hidden>
+            <label class="volume-control">
+              <span class="volume-label">BGM 音量</span>
+              <input class="volume-slider" type="range" min="0" max="100" step="1" value="75" data-bgm-volume-slider />
+              <span class="volume-value" data-bgm-volume-value>75%</span>
+            </label>
+            <label class="volume-control">
+              <span class="volume-label">効果音 音量</span>
+              <input class="volume-slider" type="range" min="0" max="100" step="1" value="80" data-sound-volume-slider />
+              <span class="volume-value" data-sound-volume-value>80%</span>
+            </label>
           </div>
         </section>
       </section>
@@ -175,7 +324,16 @@ export function createGame(root) {
   ui.advanceButton.addEventListener("click", () => engine.advance());
   ui.restartButton.addEventListener("click", () => engine.restart());
   ui.scenarioButton.addEventListener("click", () => openPicker(ui, engine));
+  ui.volumeButton.addEventListener("click", () => toggleVolumePanel(ui));
   ui.pickerClose.addEventListener("click", () => closePicker(ui));
+  ui.bgmVolumeSlider.addEventListener("input", (event) => {
+    engine.setBgmVolume(event.target.value);
+    syncVolumeControl(ui.bgmVolumeSlider, ui.bgmVolumeValue, engine.getBgmVolume());
+  });
+  ui.soundVolumeSlider.addEventListener("input", (event) => {
+    engine.setSoundVolume(event.target.value);
+    syncVolumeControl(ui.soundVolumeSlider, ui.soundVolumeValue, engine.getSoundVolume());
+  });
   ui.playerForm.addEventListener("submit", (event) => {
     event.preventDefault();
     engine.confirmPlayerName(ui.playerInput.value);
@@ -192,6 +350,8 @@ export function createGame(root) {
     ui.playerInput.select();
   });
 
+  syncVolumeControl(ui.bgmVolumeSlider, ui.bgmVolumeValue, engine.getBgmVolume());
+  syncVolumeControl(ui.soundVolumeSlider, ui.soundVolumeValue, engine.getSoundVolume());
   openPicker(ui, engine);
 }
 
@@ -209,6 +369,12 @@ function getUi(root) {
     advanceButton: root.querySelector("[data-advance]"),
     restartButton: root.querySelector('[data-command="restart"]'),
     scenarioButton: root.querySelector('[data-command="scenario"]'),
+    volumeButton: root.querySelector('[data-command="volume"]'),
+    volumePanel: root.querySelector("[data-volume-panel]"),
+    bgmVolumeSlider: root.querySelector("[data-bgm-volume-slider]"),
+    bgmVolumeValue: root.querySelector("[data-bgm-volume-value]"),
+    soundVolumeSlider: root.querySelector("[data-sound-volume-slider]"),
+    soundVolumeValue: root.querySelector("[data-sound-volume-value]"),
     scenarioPicker: root.querySelector("[data-scenario-picker]"),
     pickerList: root.querySelector("[data-picker-list]"),
     pickerClose: root.querySelector("[data-picker-close]"),
@@ -249,6 +415,7 @@ function createEngine(ui) {
       try {
         const scenario = await loadScenario(url);
         bgmPlayer.stop();
+        soundPlayer.stop();
         prepareScenario(state, scenario, { playerName: state.lastPlayerName });
         renderShell(ui, state);
 
@@ -280,6 +447,7 @@ function createEngine(ui) {
       }
 
       bgmPlayer.stop();
+      soundPlayer.stop();
       prepareScenario(state, state.scenario, {
         playerName: state.lastPlayerName || getByPath(state.variables, "player.name"),
         skipPlayerPrompt: Boolean(state.playerConfig)
@@ -300,6 +468,18 @@ function createEngine(ui) {
       state.awaitingPlayerName = false;
       closePlayerSetup(ui);
       api.advance();
+    },
+    setBgmVolume(rawValue) {
+      bgmPlayer.setMasterVolume(Number(rawValue) / 100);
+    },
+    getBgmVolume() {
+      return Math.round(bgmPlayer.getMasterVolume() * 100);
+    },
+    setSoundVolume(rawValue) {
+      soundPlayer.setMasterVolume(Number(rawValue) / 100);
+    },
+    getSoundVolume() {
+      return Math.round(soundPlayer.getMasterVolume() * 100);
     },
 
     isLoaded() {
@@ -346,7 +526,8 @@ function createEmptyAssetManifest() {
   return {
     backgrounds: {},
     characters: {},
-    bgm: {}
+    bgm: {},
+    sound: {}
   };
 }
 
@@ -499,6 +680,12 @@ function executeAction(action, state, ui, api) {
       return true;
     case "bgm":
       applyBgm(payload, state);
+      stepNext(state, ui);
+      return false;
+    case "sound":
+    case "se":
+    case "sfx":
+      applySound(payload, state);
       stepNext(state, ui);
       return false;
     case "set":
@@ -706,6 +893,30 @@ function applyBgm(payload, state) {
 
 function resolveBgm(id, scenario) {
   return scenario.bgm?.[id] ?? scenario.assetManifest?.bgm?.[id] ?? null;
+}
+
+function applySound(payload, state) {
+  const id = typeof payload === "string" ? payload : payload?.id;
+
+  if (!id || id === "stop") {
+    soundPlayer.stop();
+    return;
+  }
+
+  const src = resolveSound(id, state.scenario);
+
+  if (!src) {
+    console.warn(`[SOUND] "${id}" がマニフェストに見つかりません。assets/sound/${id}.* を配置してください。`);
+    return;
+  }
+
+  const loop = payload?.loop ?? false;
+  const volume = payload?.volume ?? 1;
+  soundPlayer.play(toAppUrl(src), { loop, volume });
+}
+
+function resolveSound(id, scenario) {
+  return scenario.sound?.[id] ?? scenario.assetManifest?.sound?.[id] ?? null;
 }
 
 function applySet(payload, state) {
@@ -1275,6 +1486,46 @@ async function openPicker(ui, engine) {
 
 function closePicker(ui) {
   ui.scenarioPicker.hidden = true;
+}
+
+function toggleVolumePanel(ui) {
+  const isOpen = ui.volumePanel.hidden;
+  ui.volumePanel.hidden = !isOpen;
+  ui.volumeButton.setAttribute("aria-expanded", String(isOpen));
+}
+
+function syncVolumeControl(slider, valueLabel, value) {
+  const normalized = String(Math.round(Number(value) || 0));
+  slider.value = normalized;
+  valueLabel.textContent = `${normalized}%`;
+}
+
+function normalizeVolume(value, fallback = 1) {
+  if (!Number.isFinite(value)) {
+    return fallback;
+  }
+
+  return Math.max(0, Math.min(1, value));
+}
+
+function loadVolumePreference(storageKey, fallback) {
+  try {
+    const rawValue = window.localStorage.getItem(storageKey);
+
+    if (rawValue === null) {
+      return fallback;
+    }
+
+    return normalizeVolume(Number(rawValue), fallback);
+  } catch {
+    return fallback;
+  }
+}
+
+function saveVolumePreference(storageKey, value, fallback) {
+  try {
+    window.localStorage.setItem(storageKey, String(normalizeVolume(value, fallback)));
+  } catch {}
 }
 
 function escapeHtml(value) {

@@ -23,6 +23,7 @@
 
 - `title`
 - `dateLabel`
+- `player`
 - `variables`
 - `characters`
 - `start`
@@ -33,6 +34,14 @@
 ```yaml
 title: シナリオタイトル
 dateLabel: 8月10日
+
+player:
+  title: 主人公の名前を決める
+  prompt: 呼ばれたい名前を入力してください。
+  defaultName: 湊
+  presets:
+    - 湊
+    - 悠真
 
 variables:
   flags:
@@ -88,6 +97,7 @@ nodes:
     character: あむ
     expression: default
     position: right
+    motion: 疑問
 ```
 
 `position` に使える値:
@@ -95,6 +105,8 @@ nodes:
 - `left`
 - `center`
 - `right`
+
+`motion` を付けると、表示直後に一度だけモーションを再生できます。
 
 ### 4. `hide`
 
@@ -128,6 +140,8 @@ nodes:
     text: 窓から夏の光が差し込んでいた。
 ```
 
+本文と発話者名には `{{player.name}}` のような変数展開が使えます。
+
 ### 6. `choice`
 
 選択肢を表示します。各選択肢では `text` と `goto` を基本に使い、必要なら `set` と `condition` を併用できます。
@@ -156,7 +170,53 @@ nodes:
         goto: ending
 ```
 
-### 7. `set`
+### 7. `bgm`
+
+BGM を再生または停止します。
+
+```yaml
+- bgm: タイトル画面
+```
+
+詳細指定:
+
+```yaml
+- bgm:
+    id: 穏やかな恋愛イベント
+    volume: 0.65
+    loop: true
+```
+
+停止:
+
+```yaml
+- bgm: stop
+```
+
+### 8. `sound`
+
+効果音を再生または停止します。`se` と `sfx` も同じ意味で使えます。
+
+```yaml
+- sound: 驚く
+```
+
+詳細指定:
+
+```yaml
+- sound:
+    id: 心臓の鼓動1
+    volume: 0.8
+    loop: false
+```
+
+停止:
+
+```yaml
+- sound: stop
+```
+
+### 9. `set`
 
 変数を更新します。ドット区切りでネストを指定できます。
 
@@ -166,7 +226,7 @@ nodes:
     flags.openedDoor: true
 ```
 
-### 8. `if`
+### 10. `if`
 
 条件分岐です。
 
@@ -177,13 +237,39 @@ nodes:
     else: normal_route
 ```
 
-### 9. `goto`
+### 11. `goto`
 
 別ノードへジャンプします。
 
 ```yaml
 - goto: ending
 ```
+
+### 12. `motion`
+
+表示中の立ち絵に一時的な動きを付けます。
+
+```yaml
+- motion:
+    character: あむ
+    name: 衝撃
+```
+
+または位置指定:
+
+```yaml
+- motion:
+    position: right
+    name: 疑問
+```
+
+使える値:
+
+- `衝撃`
+- `疑問`
+- `喜び`
+- `照れ`
+- `うなずき`
 
 ## `condition` の書式
 
@@ -268,6 +354,8 @@ YAML:
 - 画像が存在しない表情を勝手に使わないでください
 - 現在は各キャラのニュートラル表情しか保証されていないので、基本は `expression: default` を使ってください
 - `characters` には、シナリオ中で `speaker` や `show.character` に使うキャラだけを書いてください
+- 主人公名入力を使いたい場合だけ `player` を書いてください
+- `{{player.name}}` を使う場合は `player.defaultName` も入れてください
 - `choice.options` は空にしないでください
 - `goto` 先ノードは必ず定義してください
 - 無限ループを作る場合は意図があるときだけにしてください

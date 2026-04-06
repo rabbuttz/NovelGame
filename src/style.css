@@ -524,6 +524,44 @@ body {
   padding: 0 30px;
 }
 
+.volume-panel {
+  display: grid;
+  justify-content: center;
+  gap: 10px;
+  padding: 2px 30px 0;
+}
+
+.volume-panel[hidden] {
+  display: none;
+}
+
+.volume-control {
+  display: grid;
+  grid-template-columns: auto minmax(180px, 280px) auto;
+  align-items: center;
+  gap: 12px;
+  width: min(100%, 520px);
+  padding: 12px 18px;
+  border: 3px solid rgba(53, 142, 190, 0.32);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 8px 16px rgba(49, 104, 136, 0.12);
+}
+
+.volume-label,
+.volume-value {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.volume-slider {
+  width: 100%;
+  accent-color: var(--sky-deep);
+  cursor: pointer;
+}
+
 .command-button {
   display: inline-flex;
   align-items: center;
@@ -1047,6 +1085,19 @@ body {
   .command-bar {
     padding: 82px 0 0;
     gap: 8px;
+  }
+
+  .volume-panel {
+    padding-inline: 0;
+  }
+
+  .volume-control {
+    grid-template-columns: 1fr;
+    justify-items: stretch;
+  }
+
+  .volume-value {
+    text-align: right;
   }
 
   .command-button {

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-05T18:39:21.039Z",
+  "generatedAt": "2026-04-06T12:06:57.435Z",
   "backgrounds": {
     "classroom-night": "assets/backgrounds/classroom-night.svg",
     "harbor-backstage": "assets/backgrounds/harbor-backstage.svg",
@@ -7,7 +7,16 @@
     "harbor-lantern-pier": "assets/backgrounds/harbor-lantern-pier.svg",
     "harbor-stage-night": "assets/backgrounds/harbor-stage-night.svg",
     "harbor-supply-room": "assets/backgrounds/harbor-supply-room.svg",
-    "station-evening": "assets/backgrounds/station-evening.svg"
+    "station-evening": "assets/backgrounds/station-evening.svg",
+    "体育館": "assets/backgrounds/体育館.png",
+    "保健室": "assets/backgrounds/保健室.png",
+    "図書館": "assets/backgrounds/図書館.png",
+    "帰り道": "assets/backgrounds/帰り道.png",
+    "廊下": "assets/backgrounds/廊下.png",
+    "教室・夕方": "assets/backgrounds/教室・夕方.png",
+    "教室・昼": "assets/backgrounds/教室・昼.png",
+    "校庭": "assets/backgrounds/校庭.png",
+    "部室": "assets/backgrounds/部室.png"
   },
   "characters": {
     "あむ": {
@@ -52,5 +61,17 @@
     "港・空路・出動準備": "assets/bgm/港・空路・出動準備.mp3",
     "穏やかな恋愛イベント": "assets/bgm/穏やかな恋愛イベント.mp3",
     "緊張・陰謀・不穏": "assets/bgm/緊張・陰謀・不穏.mp3"
+  },
+  "sound": {
+    "しょげる": "assets/sound/しょげる.mp3",
+    "ビシッとツッコミ2": "assets/sound/ビシッとツッコミ2.mp3",
+    "心臓の鼓動1": "assets/sound/心臓の鼓動1.mp3",
+    "爆発1": "assets/sound/爆発1.mp3",
+    "目が点になる": "assets/sound/目が点になる.mp3",
+    "運命1": "assets/sound/運命1.mp3",
+    "間抜け3": "assets/sound/間抜け3.mp3",
+    "食べ物をパクッ": "assets/sound/食べ物をパクッ.mp3",
+    "驚く": "assets/sound/驚く.mp3",
+    "鳩時計2": "assets/sound/鳩時計2.mp3"
   }
 }

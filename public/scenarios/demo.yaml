@@ -1,81 +1,196 @@
-title: Twilight Platform
-dateLabel: 8月10日
+title: 放課後シグナル
+dateLabel: 4月6日
+
+player:
+  title: 主人公の名前を決める
+  prompt: 気になる相手に呼ばれたい名前を入れてください。
+  label: 主人公の名前
+  placeholder: "例: 湊"
+  confirmLabel: この名前で始める
+  defaultName: 湊
+  presets:
+    - 湊
+    - 悠真
+    - 蓮
 
 variables:
-  flags:
-    metAmu: false
   affection:
     amu: 0
+    agatha: 0
+  flags:
+    invitedAmu: false
+    honestAnswer: false
 
 characters:
   あむ:
     name: あむ
+  アガサ:
+    name: アガサ
 
 start: intro
 
 nodes:
   intro:
-    - date: 8月10日
+    - date: 4月6日 放課後
     - background: station-evening
     - show:
+        character: アガサ
+        expression: default
+        position: left
+    - show:
         character: あむ
         expression: default
         position: right
+        motion: 疑問
+    - say:
+        speaker: アガサ
+        text: ねえ、{{player.name}}。あむがずっとそわそわしてる。少しくらい気づいてあげたら？
     - say:
         speaker: あむ
-        text: ここが最初のシーン。背景、立ち絵、名前、台詞は YAML だけで制御できます。
+        text: ちょ、ちょっとアガサ。そういう言い方しないでよ。
+    - motion:
+        character: あむ
+        name: 照れ
     - say:
         speaker: あむ
-        text: 次は選択肢です。選んだ内容に応じて変数を更新して、別ノードへ分岐できます。
+        text: でも……来てくれてよかった。{{player.name}}に、帰る前に渡したいものがあって。
     - choice:
         options:
-          - text: 話しかける
+          - text: もちろん。ふたりきりで話そう
             set:
-              flags.metAmu: true
               affection.amu: 1
-            goto: talk
-          - text: 黙って立ち去る
-            goto: leave
+              flags.invitedAmu: true
+            goto: hall_after
+          - text: アガサも一緒の方が安心する
+            set:
+              affection.agatha: 1
+            goto: with_agatha
 
-  talk:
+  with_agatha:
+    - motion:
+        character: アガサ
+        name: 喜び
+    - say:
+        speaker: アガサ
+        text: ふふ、頼られるのは嫌いじゃないよ。じゃあ教室まで送ってあげる。
+    - say:
+        speaker: あむ
+        text: うう……それ、全然ふたりきりじゃないじゃん。
+    - goto: hall_after
+
+  hall_after:
+    - date: 4月6日 夕方
+    - background: classroom-night
+    - show:
+        character: アガサ
+        expression: default
+        position: left
     - show:
         character: あむ
         expression: default
         position: right
     - say:
-        speaker: あむ
-        text: ちゃんと選択肢から来ましたね。好感度を 1 にしました。
-    - if:
-        condition: affection.amu >= 1
-        then: warm_route
-        else: neutral_route
-
-  warm_route:
-    - background: classroom-night
-    - say:
-        speaker: あむ
-        text: 条件分岐も動いています。`if.condition` で変数を見てノードを切り替えられます。
-    - choice:
-        options:
-          - text: もう一度最初から見る
-            goto: intro
-          - text: このまま終える
-            goto: ending
-
-  neutral_route:
-    - say:
-        speaker: あむ
-        text: このルートは今回は通りませんが、条件が偽ならこちらへ来ます。
-    - goto: ending
-
-  leave:
+        speaker: アガサ
+        text: じゃあわたしは廊下で待ってる。終わったらちゃんと呼んでね。
+    - hide:
+        position: left
     - hide:
         position: right
+    - show:
+        character: あむ
+        expression: default
+        position: center
     - say:
-        text: あなたは何も言わず、その場を後にした。
+        speaker: あむ
+        text: こうして真正面に立たれると、余計に緊張する……。
+    - say:
+        speaker: "{{player.name}}"
+        text: そんなに固くならなくても大丈夫だよ。
+    - motion:
+        character: あむ
+        name: 衝撃
+    - say:
+        speaker: あむ
+        text: い、今のは反則。名前まで優しく呼ばれたら、心の準備がなくなるから。
+    - choice:
+        options:
+          - text: 気持ちを聞かせてほしい
+            set:
+              affection.amu: 2
+              flags.honestAnswer: true
+            goto: confession
+          - text: まずは手紙を受け取る
+            goto: letter
+
+  letter:
+    - say:
+        speaker: あむ
+        text: これ、手紙。今日ずっと渡すタイミングを探してたの。
+    - motion:
+        character: あむ
+        name: 疑問
+    - say:
+        speaker: あむ
+        text: ねえ、{{player.name}}。読んだあとでも、ちゃんとここにいてくれる？
+    - choice:
+        options:
+          - text: もちろん、最後まで聞く
+            set:
+              affection.amu: 2
+              flags.honestAnswer: true
+            goto: confession
+          - text: 今はまだ答えられない
+            goto: shy_end
+
+  confession:
+    - motion:
+        character: あむ
+        name: 照れ
+    - say:
+        speaker: あむ
+        text: わたし、{{player.name}}のことが好き。放課後になるたび、今日こそ言おうって決めてた。
+    - say:
+        speaker: "{{player.name}}"
+        text: 俺も、あむのことをもっと知りたいと思ってた。
+    - motion:
+        character: あむ
+        name: 喜び
+    - say:
+        speaker: あむ
+        text: ほんとに？ じゃあ次の放課後も、わたしの隣を予約しておいて。
+    - goto: happy_end
+
+  shy_end:
+    - show:
+        character: アガサ
+        expression: default
+        position: left
+        motion: 疑問
+    - say:
+        speaker: アガサ
+        text: 返事は急がなくていいけど、黙ったままはだめ。恋は待たせすぎると拗れるから。
+    - say:
+        speaker: あむ
+        text: ……うん。今日はここまでにする。でも、次は逃がさないからね。
+    - goto: ending
+
+  happy_end:
+    - hide:
+        position: left
+    - hide:
+        position: center
+    - show:
+        character: あむ
+        expression: default
+        position: right
+        motion: 喜び
+    - say:
+        text: 窓の向こうで夜の色が濃くなる。けれどその教室だけは、少しだけ明るく見えた。
+    - say:
+        speaker: あむ
+        text: 放課後シグナル、ちゃんと届いたよ。これからはわたしが、{{player.name}}を一番に見つける。
     - goto: ending
 
   ending:
     - say:
-        speaker: あむ
-        text: ここまでがサンプルです。YAML を増やせばそのまま分岐付きのシナリオを拡張できます。
+        text: おしまい。

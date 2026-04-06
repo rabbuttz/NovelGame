@@ -425,7 +425,10 @@ function createEngine(ui) {
     motionSerial: 0,
     lastSpeakerLabel: "System",
     lastSpeakerCharacterId: null,
-    lastSpeakerPosition: "narration"
+    lastSpeakerPosition: "narration",
+    typing: false,
+    typingTimer: null,
+    typingFullText: ""
   };
 
   const api = {
@@ -451,6 +454,11 @@ function createEngine(ui) {
 
     advance() {
       if (!state.scenario || state.waitingForChoice || state.ended || state.awaitingPlayerName) {
+        return;
+      }
+
+      if (state.typing) {
+        completeTypewriter(ui, state);
         return;
       }
 
@@ -581,6 +589,9 @@ function prepareScenario(state, scenario, options = {}) {
   state.lastSpeakerLabel = "System";
   state.lastSpeakerCharacterId = null;
   state.lastSpeakerPosition = "narration";
+  cancelTypewriter(state);
+  state.typing = false;
+  state.typingFullText = "";
   state.playerConfig = normalizePlayerConfig(scenario.player);
 
   if (state.playerConfig) {
@@ -824,8 +835,23 @@ function applyMotion(payload, state, ui) {
     throw new Error("motion.name にアニメーション名を指定してください。例: 衝撃, 疑問");
   }
 
+  if (
+    !position &&
+    state.lastSpeakerPosition &&
+    state.lastSpeakerPosition !== "narration" &&
+    state.sprites[state.lastSpeakerPosition]?.characterId === state.lastSpeakerCharacterId
+  ) {
+    position = state.lastSpeakerPosition;
+  }
+
   if (!position || !state.sprites[position]) {
-    throw new Error("motion の対象キャラクターが現在ステージ上にいません。");
+    console.warn("[MOTION] 対象キャラクターが現在ステージ上にいないため、モーションをスキップしました。", {
+      payload,
+      currentNodeId: state.currentNodeId,
+      lastSpeakerCharacterId: state.lastSpeakerCharacterId,
+      lastSpeakerPosition: state.lastSpeakerPosition
+    });
+    return;
   }
 
   state.sprites[position].motionName = normalizedMotion;
@@ -843,7 +869,8 @@ function applySay(payload, state, ui) {
   state.lastSpeakerCharacterId = speaker.characterId;
   state.lastSpeakerPosition = speaker.position;
   renderSpeakerBadge(ui, speaker.label, speaker.position, speaker.characterId);
-  ui.message.textContent = interpolateText(String(payload.text ?? ""), state.variables);
+  const text = interpolateText(String(payload.text ?? ""), state.variables);
+  startTypewriter(text, ui, state);
   ui.advanceButton.disabled = false;
 }
 
@@ -1118,9 +1145,47 @@ function clearChoices(ui) {
 }
 
 function renderSpeakerBadge(ui, label, position, characterId) {
+  const isNarration = label === "Narration" || label === "System";
+  ui.speaker.hidden = isNarration;
   ui.speaker.textContent = label;
   ui.speaker.dataset.position = position ?? "narration";
   ui.speaker.dataset.character = characterId ?? "";
+}
+
+function startTypewriter(text, ui, state) {
+  cancelTypewriter(state);
+  state.typingFullText = text;
+  state.typing = true;
+  ui.message.textContent = "";
+  let index = 0;
+
+  function tick() {
+    index++;
+    ui.message.textContent = text.slice(0, index);
+
+    if (index >= text.length) {
+      state.typing = false;
+      state.typingTimer = null;
+      return;
+    }
+
+    state.typingTimer = setTimeout(tick, 35);
+  }
+
+  tick();
+}
+
+function cancelTypewriter(state) {
+  if (state.typingTimer !== null) {
+    clearTimeout(state.typingTimer);
+    state.typingTimer = null;
+  }
+}
+
+function completeTypewriter(ui, state) {
+  cancelTypewriter(state);
+  ui.message.textContent = state.typingFullText;
+  state.typing = false;
 }
 
 function syncSpeakerBadgePosition(state, ui) {

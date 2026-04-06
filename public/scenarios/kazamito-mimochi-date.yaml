@@ -1,0 +1,365 @@
+title: 風見塔のラストノート 番外編 みもちと、言葉の余白
+dateLabel: 5月17日
+
+player:
+  title: 主人公の名前を決める
+  prompt: 呼ばれたい名前を入力してください。
+  defaultName: 湊
+  presets:
+    - 湊
+    - 悠真
+
+variables:
+  flags:
+    mimochiDateClear: false
+    teasedMimochi: false
+    keptMimochiWords: false
+    checkedLightOutside: false
+    reassuredMimochi: false
+  affection:
+    mimochi: 4
+
+characters:
+  みもち:
+    name: みもち
+
+start: library_after_school
+
+nodes:
+  library_after_school:
+    - date: 5月17日 土曜日 夕方
+    - background: 図書館
+    - bgm:
+        id: 共通ルート 日常
+        volume: 0.43
+        loop: true
+    - say:
+        text: 委員会の片づけが長引いた放課後、{{player.name}}が図書館へ顔を出すと、閲覧席のいちばん奥にまだ灯りが残っていた。
+    - show:
+        character: みもち
+        expression: default
+        position: center
+    - say:
+        text: みもちは机いっぱいに写真とメモを広げて、展示札の下書きを見比べていた。消しゴムのかすが、白い紙の端に小さく積もっている。
+    - say:
+        speaker: みもち
+        text: あ……{{player.name}}。もう帰ったと思ってた。
+    - say:
+        speaker: "{{player.name}}"
+        text: みもちこそ。まだ作業してたんだ。
+    - say:
+        speaker: みもち
+        text: うん。展示の説明札、あと少しなんだけど……少し、じゃないかも。
+    - say:
+        speaker: みもち
+        text: 一枚だけ、どうしても文が決まらなくて。短くしたいのに、短くすると違う気がして。
+    - choice:
+        options:
+          - text: 手伝うよ
+            goto: offer_help
+          - text: 二人きりで居残りって、ちょっと特別だね
+            set:
+              flags.teasedMimochi: true
+            goto: tease_help
+
+  tease_help:
+    - say:
+        speaker: "{{player.name}}"
+        text: 二人きりで居残りって、ちょっと特別だね。
+    - say:
+        speaker: みもち
+        text: ……そういう言い方、ずるい。
+    - say:
+        text: みもちは否定しきらないまま視線をノートに落とした。耳だけ少し赤い。
+    - say:
+        speaker: "{{player.name}}"
+        text: じゃあ、特別ついでに手伝わせて。
+    - say:
+        speaker: みもち
+        text: それなら……お願い。ひとりだと、考えすぎて止まるから。
+    - goto: caption_drafts
+
+  offer_help:
+    - say:
+        speaker: "{{player.name}}"
+        text: 手伝うよ。みもちがそこで固まってるなら、二人で見たほうが早い。
+    - say:
+        speaker: みもち
+        text: ……うん。助かる。ありがとう。
+    - goto: caption_drafts
+
+  caption_drafts:
+    - say:
+        text: 机の上には、夕方の校舎を撮った写真が置かれていた。人気のない廊下の窓に、橙色の光が斜めに射している。
+    - say:
+        speaker: みもち
+        text: この写真の札。候補は二つあるの。
+    - say:
+        speaker: みもち
+        text: 一つは「放課後の校舎に残る光」。短くて、展示向き。
+    - say:
+        speaker: みもち
+        text: もう一つは「誰もいない時間ほど、その場所に残った気配が見える」。こっちは……少し長い。
+    - say:
+        speaker: "{{player.name}}"
+        text: みもちらしいのは後ろのほうだね。
+    - say:
+        speaker: みもち
+        text: そうなんだけど、らしい方を出していいのか、まだわからない。
+    - say:
+        speaker: みもち
+        text: 読む人の邪魔はしたくないし。でも、削りすぎると、そこにいた人の気持ちまで消えそうで。
+    - choice:
+        options:
+          - text: みもちの言葉を残したほうがいい
+            set:
+              flags.keptMimochiWords: true
+              affection.mimochi: 5
+            goto: keep_words
+          - text: 実際の景色を見て決めよう
+            set:
+              flags.checkedLightOutside: true
+            goto: go_check_light
+
+  keep_words:
+    - say:
+        speaker: "{{player.name}}"
+        text: 短い方も綺麗だけど、みもちが残したかったものは後ろの文なんじゃない？
+    - say:
+        speaker: みもち
+        text: ……うん。たぶん、そう。
+    - say:
+        speaker: "{{player.name}}"
+        text: だったら、そこを消さない方がいい。展示って整理だけじゃなくて、誰かが受け取れる形で残すことでもあるし。
+    - say:
+        text: みもちは紙の上に置いた指を少しだけゆるめた。張っていた力が、そこだけ先にほどけたみたいだった。
+    - say:
+        speaker: みもち
+        text: その言い方、助かる。私が迷ってたところ、ちゃんと同じ場所だった。
+    - say:
+        speaker: みもち
+        text: でも、最後に一回だけ本物の光を見たい。写真の中の色、今と同じか確かめたいから。
+    - goto: hallway_to_exit
+
+  go_check_light:
+    - say:
+        speaker: "{{player.name}}"
+        text: 文を机の上だけで決めるより、今の景色を見たほうが早いかも。写真の元になった光と同じ時間なんでしょ。
+    - say:
+        speaker: みもち
+        text: ……それ、思った。けど一人で行って、違ったら余計に迷いそうで。
+    - say:
+        speaker: "{{player.name}}"
+        text: じゃあ一緒に見に行こう。
+    - say:
+        speaker: みもち
+        text: うん。そうする。
+    - goto: hallway_to_exit
+
+  hallway_to_exit:
+    - background: 廊下
+    - hide: {}
+    - show:
+        character: みもち
+        expression: default
+        position: right
+    - bgm:
+        id: 穏やかな恋愛イベント
+        volume: 0.45
+        loop: true
+    - say:
+        text: 図書館を出ると、廊下の床に長い光が伸びていた。窓の外の空はまだ明るいのに、校舎の中だけが先に夕方へ沈み始めている。
+    - say:
+        speaker: みもち
+        text: この時間の学校、好き。人が少なくて、音がちゃんと聞こえるから。
+    - say:
+        speaker: "{{player.name}}"
+        text: 足音とか、窓の音とか？
+    - say:
+        speaker: みもち
+        text: それもあるし……誰かが帰ったあとに残る気配みたいなもの。うまく言えないけど。
+    - say:
+        text: みもちは歩幅を合わせるみたいに、{{player.name}}の半歩うしろを歩いていた。急がなくても置いていかれない距離を、たしかめるように。
+    - goto: school_exterior
+
+  school_exterior:
+    - date: 5月17日 土曜日 夕方
+    - background: 校舎外・夕方
+    - hide: {}
+    - show:
+        character: みもち
+        expression: default
+        position: center
+    - say:
+        text: 校舎を出ると、夕日の色がいっそう濃くなった。窓ガラスの反射が写真とよく似ていて、みもちは小さく息を呑む。
+    - say:
+        speaker: みもち
+        text: あ、やっぱり。写真の時と同じだ。光だけじゃなくて、空気まで似てる。
+    - say:
+        speaker: "{{player.name}}"
+        text: じゃあ、あの文は外してなかった。
+    - say:
+        speaker: みもち
+        text: うん。……よかった。
+    - say:
+        text: みもちは持ってきた写真と実際の景色を見比べてから、ノートの端に何か書き足した。
+    - say:
+        speaker: "{{player.name}}"
+        text: 何を書いたの？
+    - say:
+        speaker: みもち
+        text: 「残った気配」って言葉、やっぱり入れる。大げさかなって思ってたけど、今見ると、それ以外だと足りない。
+    - say:
+        speaker: みもち
+        text: 私、言葉を削るのは平気なんだけど、本当に残したいところまで切るのは苦手で。そこを切ると、あとで自分でも見つけられなくなる気がするから。
+    - choice:
+        options:
+          - text: ゆっくり選べばいい
+            set:
+              flags.reassuredMimochi: true
+              affection.mimochi: 6
+            goto: reassure_choice
+          - text: みもちの言葉、ちゃんと届いてるよ
+            set:
+              affection.mimochi: 6
+            goto: praise_choice
+
+  reassure_choice:
+    - say:
+        speaker: "{{player.name}}"
+        text: ゆっくり選べばいいよ。急いで整えるより、みもちが残したいって思った場所を残したほうがいい。
+    - say:
+        speaker: みもち
+        text: ……そう言われると、ちゃんと息ができる。
+    - say:
+        text: みもちは笑うというより、ようやく肩の力を抜いた。夕方の風が、前髪の先だけを揺らしていく。
+    - goto: toward_station
+
+  praise_choice:
+    - say:
+        speaker: "{{player.name}}"
+        text: みもちの言葉、ちゃんと届いてるよ。少なくとも俺には、削る前の気持ちまで見えてる。
+    - say:
+        speaker: みもち
+        text: ……それ、かなりうれしい。
+    - say:
+        text: 目を伏せたみもちの声は小さかったけれど、ごまかさないままこちらに置かれた。
+    - goto: toward_station
+
+  toward_station:
+    - background: 帰り道
+    - hide: {}
+    - show:
+        character: みもち
+        expression: default
+        position: left
+    - bgm:
+        id: 切ない会話・すれ違い
+        volume: 0.4
+        loop: true
+    - say:
+        text: 作業の続きは明日にして、二人で校門を出た。住宅地へ向かう道には夕飯の匂いが流れ、学校の緊張だけが少しずつほどけていく。
+    - say:
+        speaker: みもち
+        text: 今日、付き合ってもらえて助かった。文だけじゃなくて、たぶん私自身も。
+    - say:
+        speaker: "{{player.name}}"
+        text: そこまで大げさ？
+    - say:
+        speaker: みもち
+        text: 私にとっては、わりと。
+    - say:
+        speaker: みもち
+        text: 一人で考えてると、正しい形にしなきゃって固まる。でも{{player.name}}がいると、途中のままでも話していい気がする。
+    - say:
+        text: 少し歩いてから、みもちは鞄の内ポケットから細い紙片を取り出した。展示札の試し刷りらしい。
+    - say:
+        speaker: みもち
+        text: これ、持ってて。最終稿の前のやつだけど。
+    - say:
+        speaker: "{{player.name}}"
+        text: いいの？
+    - say:
+        speaker: みもち
+        text: うん。今日いちばん最初に、これを見せたの{{player.name}}だから。
+    - goto: station_confession
+
+  station_confession:
+    - background: station-evening
+    - hide: {}
+    - show:
+        character: みもち
+        expression: default
+        position: center
+    - say:
+        text: 駅前まで来ると、空は藍色に変わり始めていた。ホームへ降りる人の波から少し外れた場所で、みもちは立ち止まる。
+    - say:
+        speaker: みもち
+        text: ねえ、ひとつだけ。今日のこと、展示の相談だけじゃなくて……私、たぶん最初から、少し違うつもりで声かけてた。
+    - say:
+        speaker: "{{player.name}}"
+        text: 違うつもり？
+    - say:
+        speaker: みもち
+        text: うん。{{player.name}}と二人で静かな場所にいたかった。ちゃんと話したかったし、黙ってる時間も一緒に持ってみたかった。
+    - say:
+        speaker: みもち
+        text: それでわかった。私、{{player.name}}といると安心する。急いで答えを出さなくていいし、うまく話せなくても怖くない。
+    - say:
+        text: みもちはそこで一度言葉を切った。でも、逃げずにこちらを見た。
+    - say:
+        speaker: みもち
+        text: そういう相手、たぶん簡単にはいない。だから……好きなんだと思う。
+    - choice:
+        options:
+          - text: 俺も、みもちといると落ち着く
+            goto: mutual_confession
+          - text: その特別、これからも増やしたい
+            goto: direct_confession
+
+  mutual_confession:
+    - say:
+        speaker: "{{player.name}}"
+        text: 俺も、みもちといると落ち着く。静かな時間が気まずくならないの、すごく特別だと思う。
+    - say:
+        speaker: みもち
+        text: ……ほんとに？
+    - say:
+        speaker: "{{player.name}}"
+        text: ほんとに。だから、好きになった。
+    - say:
+        text: みもちは目を丸くしたあと、ようやく息を吐いた。張りつめていたものがほどけて、やわらかい顔になる。
+    - say:
+        speaker: みもち
+        text: そっか。じゃあ今日、ちゃんと声かけてよかった。
+    - goto: ending
+
+  direct_confession:
+    - say:
+        speaker: "{{player.name}}"
+        text: その特別、これからも増やしたい。相談の続きでも、帰り道でも、もっと一緒にいたいよ。
+    - say:
+        speaker: みもち
+        text: ……それ、かなりだめ。
+    - say:
+        speaker: "{{player.name}}"
+        text: だめ？
+    - say:
+        speaker: みもち
+        text: うれしすぎて、たぶん今ちゃんとした顔できてないから。
+    - say:
+        text: みもちが俯いた拍子に、指先が少しだけ{{player.name}}の袖をつまんだ。離す理由より、もう少し触れていたい気持ちの方が先に出たみたいだった。
+    - say:
+        speaker: みもち
+        text: 私も、一緒にいたい。……好き。
+    - goto: ending
+
+  ending:
+    - set:
+        flags.mimochiDateClear: true
+    - bgm: stop
+    - hide: {}
+    - say:
+        text: 電車の来る音が遠くで鳴っていた。それでも二人とも、すぐにはホームへ降りなかった。少し黙って、それでも気まずくない時間が、もう答えみたいだった。
+    - say:
+        text: ポケットの中の紙片には、みもちの整った字でこう書かれていた。「誰もいない時間ほど、その場所に残った気配が見える」。その文はたぶん、今日のことも少しだけ言い当てていた。

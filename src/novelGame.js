@@ -6,6 +6,7 @@ const DEFAULT_BGM_VOLUME = 0.75;
 const DEFAULT_SOUND_VOLUME = 0.8;
 const BGM_VOLUME_STORAGE_KEY = "novel-flow-bgm-volume";
 const SOUND_VOLUME_STORAGE_KEY = "novel-flow-sound-volume";
+const BACKLOG_LIMIT = 200;
 const SCENE_TRANSITION_LOGO_PATH = "assets/logo/風見塔のラストノート.png";
 const SCENE_TRANSITION_SOUND_ID = "革靴で走る";
 const SCENE_TRANSITION_MIN_MS = 900;
@@ -307,7 +308,7 @@ export function createGame(root) {
               <span class="command-icon">»</span>
               <span class="command-label">Skip</span>
             </button>
-            <button class="command-button" type="button" data-command="backlog">
+            <button class="command-button" type="button" data-command="backlog" data-clickable="true" aria-expanded="false">
               <span class="command-icon">B</span>
               <span class="command-label">Backlog</span>
             </button>
@@ -327,6 +328,18 @@ export function createGame(root) {
         </section>
       </section>
       <aside class="error-box" data-error hidden></aside>
+      <div class="backlog-panel" data-backlog-panel hidden>
+        <div class="backlog-card">
+          <div class="backlog-header">
+            <div>
+              <p class="backlog-kicker">LOG</p>
+              <h1 class="backlog-title">Backlog</h1>
+            </div>
+            <button class="backlog-close" type="button" data-backlog-close aria-label="Backlog を閉じる">✕</button>
+          </div>
+          <div class="backlog-list" data-backlog-list></div>
+        </div>
+      </div>
       <div class="player-setup" data-player-setup hidden>
         <div class="player-card">
           <p class="player-kicker">ROMANCE MODE</p>
@@ -357,8 +370,21 @@ export function createGame(root) {
 
   ui.advanceButton.addEventListener("click", () => engine.advance());
   ui.restartButton.addEventListener("click", () => engine.restart());
-  ui.scenarioButton.addEventListener("click", () => openPicker(ui, engine));
-  ui.volumeButton.addEventListener("click", () => toggleVolumePanel(ui));
+  ui.scenarioButton.addEventListener("click", () => {
+    engine.closeBacklog();
+    openPicker(ui, engine);
+  });
+  ui.volumeButton.addEventListener("click", () => {
+    engine.closeBacklog();
+    toggleVolumePanel(ui);
+  });
+  ui.backlogButton.addEventListener("click", () => engine.toggleBacklog());
+  ui.backlogClose.addEventListener("click", () => engine.closeBacklog());
+  ui.backlogPanel.addEventListener("click", (event) => {
+    if (event.target === ui.backlogPanel) {
+      engine.closeBacklog();
+    }
+  });
   ui.pickerClose.addEventListener("click", () => closePicker(ui));
   ui.bgmVolumeSlider.addEventListener("input", (event) => {
     engine.setBgmVolume(event.target.value);
@@ -383,6 +409,11 @@ export function createGame(root) {
     ui.playerInput.focus();
     ui.playerInput.select();
   });
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      engine.closeBacklog();
+    }
+  });
 
   syncVolumeControl(ui.bgmVolumeSlider, ui.bgmVolumeValue, engine.getBgmVolume());
   syncVolumeControl(ui.soundVolumeSlider, ui.soundVolumeValue, engine.getSoundVolume());
@@ -406,11 +437,15 @@ function getUi(root) {
     restartButton: root.querySelector('[data-command="restart"]'),
     scenarioButton: root.querySelector('[data-command="scenario"]'),
     volumeButton: root.querySelector('[data-command="volume"]'),
+    backlogButton: root.querySelector('[data-command="backlog"]'),
     volumePanel: root.querySelector("[data-volume-panel]"),
     bgmVolumeSlider: root.querySelector("[data-bgm-volume-slider]"),
     bgmVolumeValue: root.querySelector("[data-bgm-volume-value]"),
     soundVolumeSlider: root.querySelector("[data-sound-volume-slider]"),
     soundVolumeValue: root.querySelector("[data-sound-volume-value]"),
+    backlogPanel: root.querySelector("[data-backlog-panel]"),
+    backlogList: root.querySelector("[data-backlog-list]"),
+    backlogClose: root.querySelector("[data-backlog-close]"),
     scenarioPicker: root.querySelector("[data-scenario-picker]"),
     pickerList: root.querySelector("[data-picker-list]"),
     pickerClose: root.querySelector("[data-picker-close]"),
@@ -448,7 +483,9 @@ function createEngine(ui) {
     lastSpeakerPosition: "narration",
     typing: false,
     typingTimer: null,
-    typingFullText: ""
+    typingFullText: "",
+    backlog: [],
+    backlogOpen: false
   };
 
   const api = {
@@ -526,6 +563,17 @@ function createEngine(ui) {
     },
     getSoundVolume() {
       return Math.round(soundPlayer.getMasterVolume() * 100);
+    },
+    toggleBacklog() {
+      if (state.backlogOpen) {
+        closeBacklog(ui, state);
+        return;
+      }
+
+      openBacklog(ui, state);
+    },
+    closeBacklog() {
+      closeBacklog(ui, state);
     },
 
     isLoaded() {
@@ -614,6 +662,8 @@ function prepareScenario(state, scenario, options = {}) {
   cancelTypewriter(state);
   state.typing = false;
   state.typingFullText = "";
+  state.backlog = [];
+  state.backlogOpen = false;
   state.playerConfig = normalizePlayerConfig(scenario.player);
 
   if (state.playerConfig) {
@@ -665,6 +715,7 @@ function renderShell(ui, state) {
   renderNodeIndicator(ui, state);
   renderSprites(ui, state);
   clearChoices(ui);
+  closeBacklog(ui, state);
   renderError(ui, "");
 }
 
@@ -929,6 +980,10 @@ function applySay(payload, state, ui) {
   state.lastSpeakerPosition = speaker.position;
   renderSpeakerBadge(ui, speaker.label, speaker.position, speaker.characterId);
   const text = interpolateText(String(payload.text ?? ""), state.variables);
+  appendBacklogEntry(state, {
+    speaker: payload.speaker ? speaker.label : "",
+    text
+  });
   startTypewriter(text, ui, state);
   ui.advanceButton.disabled = false;
 }
@@ -953,10 +1008,16 @@ function applyChoice(payload, state, ui, api) {
     const button = document.createElement("button");
     button.className = "choice-button";
     button.type = "button";
-    button.textContent = interpolateText(String(option.text ?? ""), state.variables);
+    const optionText = interpolateText(String(option.text ?? ""), state.variables);
+    button.textContent = optionText;
     button.addEventListener("click", () => {
       state.waitingForChoice = false;
       clearChoices(ui);
+      appendBacklogEntry(state, {
+        speaker: getByPath(state.variables, "player.name") ?? "あなた",
+        text: optionText,
+        isChoice: true
+      });
 
       if (option.set) {
         applySet(option.set, state);
@@ -1351,6 +1412,75 @@ function renderError(ui, message) {
 
   ui.error.hidden = false;
   ui.error.textContent = message;
+}
+
+function appendBacklogEntry(state, entry) {
+  const text = String(entry?.text ?? "").trim();
+
+  if (!text) {
+    return;
+  }
+
+  state.backlog.push({
+    speaker: String(entry?.speaker ?? "").trim(),
+    text,
+    isChoice: Boolean(entry?.isChoice)
+  });
+
+  if (state.backlog.length > BACKLOG_LIMIT) {
+    state.backlog.splice(0, state.backlog.length - BACKLOG_LIMIT);
+  }
+}
+
+function openBacklog(ui, state) {
+  renderBacklog(ui, state);
+  state.backlogOpen = true;
+  ui.backlogPanel.hidden = false;
+  ui.backlogButton.setAttribute("aria-expanded", "true");
+}
+
+function closeBacklog(ui, state) {
+  state.backlogOpen = false;
+  ui.backlogPanel.hidden = true;
+  ui.backlogButton.setAttribute("aria-expanded", "false");
+}
+
+function renderBacklog(ui, state) {
+  ui.backlogList.innerHTML = "";
+
+  if (!state.backlog.length) {
+    const empty = document.createElement("p");
+    empty.className = "backlog-empty";
+    empty.textContent = "履歴はまだありません。";
+    ui.backlogList.append(empty);
+    return;
+  }
+
+  for (const entry of state.backlog) {
+    const article = document.createElement("article");
+    article.className = "backlog-entry";
+
+    if (entry.isChoice) {
+      article.dataset.kind = "choice";
+    } else if (!entry.speaker) {
+      article.dataset.kind = "narration";
+    }
+
+    if (entry.speaker) {
+      const speaker = document.createElement("div");
+      speaker.className = "backlog-speaker";
+      speaker.textContent = entry.speaker;
+      article.append(speaker);
+    }
+
+    const text = document.createElement("p");
+    text.className = "backlog-text";
+    text.textContent = entry.text;
+    article.append(text);
+    ui.backlogList.append(article);
+  }
+
+  ui.backlogList.scrollTop = ui.backlogList.scrollHeight;
 }
 
 function resolveBackground(payload, scenario) {

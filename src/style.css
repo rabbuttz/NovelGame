@@ -763,6 +763,120 @@ body {
   white-space: pre-wrap;
 }
 
+.backlog-panel {
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    linear-gradient(180deg, rgba(12, 18, 28, 0.18), rgba(12, 18, 28, 0.58)),
+    rgba(13, 13, 18, 0.58);
+  backdrop-filter: blur(8px);
+}
+
+.backlog-panel[hidden] {
+  display: none;
+}
+
+.backlog-card {
+  display: grid;
+  gap: 16px;
+  width: min(880px, calc(100vw - 32px));
+  max-height: min(78vh, 860px);
+  padding: 24px 24px 20px;
+  border: 3px solid rgba(123, 198, 226, 0.48);
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(241, 249, 255, 0.94)),
+    var(--paper);
+  box-shadow:
+    0 0 0 8px rgba(255, 255, 255, 0.08),
+    0 24px 60px rgba(18, 52, 78, 0.28);
+}
+
+.backlog-header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.backlog-kicker {
+  margin: 0 0 6px;
+  color: rgba(46, 133, 182, 0.88);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+}
+
+.backlog-title {
+  margin: 0;
+  color: #5e3a2c;
+  font-family: "Shippori Mincho", serif;
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
+  letter-spacing: 0.08em;
+}
+
+.backlog-close {
+  width: 44px;
+  height: 44px;
+  border: 2px solid rgba(68, 150, 191, 0.34);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  color: var(--ink-soft);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.backlog-list {
+  display: grid;
+  gap: 12px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.backlog-entry {
+  display: grid;
+  gap: 6px;
+  padding: 14px 16px;
+  border: 2px solid rgba(97, 166, 201, 0.2);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.84);
+}
+
+.backlog-entry[data-kind="choice"] {
+  border-color: rgba(62, 169, 215, 0.36);
+  background: linear-gradient(180deg, rgba(230, 248, 255, 0.96), rgba(255, 255, 255, 0.9));
+}
+
+.backlog-entry[data-kind="narration"] {
+  background: rgba(250, 246, 241, 0.9);
+}
+
+.backlog-speaker {
+  color: rgba(52, 121, 161, 0.96);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.backlog-text {
+  margin: 0;
+  color: var(--ink);
+  font-size: 1rem;
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+.backlog-empty {
+  margin: 0;
+  padding: 18px 4px 4px;
+  color: rgba(84, 102, 114, 0.9);
+  text-align: center;
+}
+
 /* ── 主人公名入力 ──────────────────────────────────────────── */
 .player-setup {
   position: absolute;
@@ -1257,6 +1371,12 @@ body {
   .player-card {
     padding: 30px 22px 24px;
   }
+
+  .backlog-card {
+    width: calc(100vw - 24px);
+    max-height: 82vh;
+    padding: 20px 18px 16px;
+  }
 }
 
 @media (max-width: 520px) {
@@ -1321,5 +1441,24 @@ body {
   .player-submit {
     width: 100%;
     min-width: 0;
+  }
+
+  .backlog-panel {
+    padding: 12px;
+  }
+
+  .backlog-card {
+    width: calc(100vw - 12px);
+    max-height: 84vh;
+    border-radius: 22px;
+  }
+
+  .backlog-entry {
+    padding: 12px 14px;
+    border-radius: 18px;
+  }
+
+  .backlog-text {
+    font-size: 0.96rem;
   }
 }

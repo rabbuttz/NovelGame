@@ -1,0 +1,451 @@
+title: 風見塔のラストノート 番外編 潮風遠足
+dateLabel: 4月20日
+
+player:
+  title: 主人公の名前を決める
+  prompt: 呼ばれたい名前を入力してください。
+  defaultName: 湊
+  presets:
+    - 湊
+    - 悠真
+
+variables:
+  flags:
+    seaTripClear: false
+    helpedDuringSeaTrouble: false
+    sawTeamAtSea: false
+  affection:
+    kiryu: 3
+    agasa: 4
+    amu: 3
+    ukiwa: 4
+    gura: 2
+    sawaden: 3
+    dori: 3
+    nemunomi: 2
+    mochitora: 2
+    mimochi: 2
+    suzudora: 1
+
+characters:
+  きりゅう:
+    name: きりゅう
+  アガサ:
+    name: アガサ
+  あむ:
+    name: あむ
+  うきわ:
+    name: うきわ
+  ぐら:
+    name: ぐら
+  さわでん:
+    name: さわでん
+  どり:
+    name: どり
+  ねむのみ:
+    name: ねむのみ
+  餅虎:
+    name: 餅虎
+  みもち:
+    name: みもち
+  すずどら:
+    name: すずどら
+  ロクロ:
+    name: ロクロ
+
+start: departure
+
+nodes:
+  departure:
+    - date: 4月20日 朝
+    - background: kazamito-sea-trip-morning
+    - bgm:
+        id: 港・空路・出動準備
+        volume: 0.6
+        loop: true
+    - say:
+        text: 風見塔の展示と装飾の参考にするため、企画チームは臨海公園まで遠足に出ることになった。名目は資料集めだが、半分くらいは息抜きでもある。
+    - show:
+        character: うきわ
+        expression: smile
+        position: left
+    - show:
+        character: あむ
+        expression: default
+        position: center
+    - show:
+        character: 餅虎
+        expression: smile
+        position: right
+    - say:
+        speaker: うきわ
+        text: 遠足って言っていいんだよね、これ！ ぼく、おやつ持ってきた！
+    - say:
+        speaker: あむ
+        text: 資料集めより先に食う気だろ、それ。
+    - say:
+        speaker: 餅虎
+        text: でも海で写真撮るならテンションは大事。曇ってても、楽しそうな顔があるだけで絵は持つから。
+    - hide: {}
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: アガサ
+        expression: smile
+        position: center
+    - show:
+        character: どり
+        expression: default
+        position: right
+    - say:
+        speaker: きりゅう
+        text: 浮かれるのはいいが、海辺は足元が不安定だ。勝手な単独行動は禁止。時間ごとに点呼を取る。
+    - say:
+        speaker: アガサ
+        text: 監督役が本気すぎて遠足感が薄れるなあ。
+    - say:
+        speaker: どり
+        text: でも必要。荷物も多いし、潮が上がる時間もあるから。
+    - say:
+        text: そうして、少しだけ大所帯の海辺遠足が始まった。
+    - goto: seaside_mood
+
+  seaside_mood:
+    - background: kazamito-sea-trip-shore
+    - hide: {}
+    - show:
+        character: みもち
+        expression: default
+        position: left
+    - show:
+        character: ねむのみ
+        expression: smile
+        position: center
+    - show:
+        character: さわでん
+        expression: default
+        position: right
+    - say:
+        text: 海沿いの遊歩道には、風で鳴る金具の音と、遠くの波音が混ざっていた。皆がそれぞれの目的で散っていく。
+    - say:
+        speaker: みもち
+        text: 海の色、思ってたよりやわらかいね。塔の展示に入れるなら、空の写真と並べたいかも。
+    - say:
+        speaker: ねむのみ
+        text: 休憩場所の候補も見ておこうか。日陰の位置、風の抜け方、座れる場所。遠足でも結局そういうの見ちゃうね。
+    - say:
+        speaker: さわでん
+        text: あ、あれ見て。流木に変な刻印ついてる。なんか拾いたくなるやつ。
+    - say:
+        text: さわでんが何気なくしゃがみ込んだ瞬間、うしろからきりゅうの声が飛ぶ。
+    - goto: split_assignments
+
+  split_assignments:
+    - hide: {}
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: ぐら
+        expression: default
+        position: center
+    - show:
+        character: すずどら
+        expression: default
+        position: right
+    - say:
+        speaker: きりゅう
+        text: さわでん、単独で岩場に寄るな。ぐら、潮位の見方わかるか。
+    - say:
+        speaker: ぐら
+        text: だいたい。今はまだ平気。でも一時間後は危ない場所ある。
+    - say:
+        speaker: すずどら
+        text: 遠足のつもりで気が緩んでいるなら締め直せ。海は校内より早く事故になる。
+    - say:
+        text: 厳しい声なのに、誰も反発しない。今日ばかりは全員、波の近さに少し気圧されていた。
+    - set:
+        flags.sawTeamAtSea: true
+    - goto: lunch_scene
+
+  lunch_scene:
+    - date: 4月20日 昼
+    - background: kazamito-sea-trip-hut
+    - hide: {}
+    - show:
+        character: アガサ
+        expression: default
+        position: left
+    - show:
+        character: うきわ
+        expression: smile
+        position: center
+    - show:
+        character: どり
+        expression: default
+        position: right
+    - say:
+        text: 昼は休憩所代わりの古い倉庫を借りて、持ってきた昼食を広げた。外の風は強いが、中は思ったより静かだ。
+    - say:
+        speaker: うきわ
+        text: やっぱ遠足っぽい！ ほら見て、海苔のおにぎり持ってきた！
+    - say:
+        speaker: アガサ
+        text: そこだけ聞くと、完全にただの楽しい日だね。
+    - say:
+        speaker: どり
+        text: ただの楽しい日でもいいと思うけど。ずっと張ってると、午後に気が抜ける。
+    - say:
+        text: その言葉の直後、外からあむの声がした。
+    - sound: 驚く
+    - say:
+        speaker: あむ
+        text: きりゅう！ さわでんがいない！
+    - goto: trouble_start
+
+  trouble_start:
+    - background: kazamito-sea-trip-shore
+    - hide: {}
+    - show:
+        character: あむ
+        expression: troubled
+        position: left
+    - show:
+        character: きりゅう
+        expression: default
+        position: center
+    - show:
+        character: さわでん
+        expression: default
+        position: right
+    - say:
+        text: 全員で外へ飛び出すと、さわでんは防波堤の先ではなく、その脇の岩場にいた。手には錆びた金具。だが問題はそこではない。
+    - say:
+        text: 潮が思ったより早く満ち始め、さっきまで渡れた岩の道が細くなっている。帰るには今すぐ動くしかない。
+    - say:
+        speaker: きりゅう
+        text: さわでん、その場を動くな。飛ぶなよ。滑る。
+    - say:
+        speaker: さわでん
+        text: ごめん、すぐ戻るつもりだった。これ拾ったら呼ぼうと思ってて。
+    - say:
+        speaker: あむ
+        text: 呼ぶ前に道なくなってるじゃん！
+    - hide:
+        position: right
+    - show:
+        character: ぐら
+        expression: default
+        position: right
+    - say:
+        speaker: ぐら
+        text: ロープ使える。斜めに渡せば、足場の短いとこ避けられる。
+    - goto: rescue_sequence
+
+  rescue_sequence:
+    - hide: {}
+    - show:
+        character: どり
+        expression: default
+        position: left
+    - show:
+        character: きりゅう
+        expression: default
+        position: center
+    - show:
+        character: ねむのみ
+        expression: default
+        position: right
+    - bgm:
+        id: 緊張・陰謀・不穏
+        volume: 0.55
+        loop: true
+    - say:
+        text: きりゅうとぐらがロープを張り、どりが足場を確認し、ねむのみが戻った後の保温用タオルを準備する。遊びの空気は一瞬で消え、全員が自分の役割に入った。
+    - say:
+        speaker: どり
+        text: "{{player.name}}、ロープの張り見て。たるんだらすぐ言って。"
+    - say:
+        speaker: きりゅう
+        text: さわでん、金具はポケットに入れろ。両手を空けて、右足から。目線は下じゃなく前。
+    - say:
+        speaker: さわでん
+        text: 了解。……うわ、思ったよりこわ。
+    - say:
+        text: 一歩、また一歩。波が岩に当たるたび、白いしぶきが足元をかすめる。細い道を渡りきるまでの数秒が、やけに長い。
+    - sound: 心臓の鼓動1
+    - say:
+        text: 最後の一歩を踏み出したところで、さわでんの足が少しだけ滑る。
+    - say:
+        speaker: "{{player.name}}"
+        text: さわでん、前！
+    - say:
+        text: きりゅうがロープを引き、どりが腕を掴み、さわでんはそのままこちら側へ倒れ込んだ。
+    - set:
+        flags.helpedDuringSeaTrouble: true
+    - goto: after_rescue
+
+  after_rescue:
+    - background: kazamito-sea-trip-hut
+    - hide: {}
+    - show:
+        character: さわでん
+        expression: troubled
+        position: center
+    - show:
+        character: ねむのみ
+        expression: default
+        position: right
+    - say:
+        text: 倉庫へ戻ると、ねむのみが乾いたタオルをさわでんの肩にかけた。皆が無事だった安堵のせいか、誰もしばらく大きな声を出さない。
+    - say:
+        speaker: ねむのみ
+        text: 怪我はないね。震えてるだけ。深呼吸して。
+    - say:
+        speaker: さわでん
+        text: ……ごめん。ほんとに、ちょっと拾うだけのつもりだった。
+    - hide:
+        position: right
+    - show:
+        character: きりゅう
+        expression: default
+        position: right
+    - say:
+        speaker: きりゅう
+        text: わかってる。だから余計に危ないんだ。悪気がないまま踏み込む時が一番止めにくい。
+    - hide:
+        position: right
+    - show:
+        character: アガサ
+        expression: troubled
+        position: right
+    - say:
+        speaker: アガサ
+        text: 君は「平気そう」に見えるからね。自分でも、たぶんそう見せるのが上手い。
+    - goto: sawaden_past
+
+  sawaden_past:
+    - say:
+        speaker: さわでん
+        text: ……昔からなんだよ。ちょっとくらい平気な顔しとけば、周りが困らないかなって思うの。
+    - say:
+        speaker: "{{player.name}}"
+        text: 昔から？
+    - say:
+        speaker: さわでん
+        text: 小学校の時、海で弟が流されたことあるんだ。そんな大事故じゃなかった。近くの大人がすぐ助けてくれたし、命も無事だった。
+    - bgm:
+        id: 切ない会話・すれ違い
+        volume: 0.54
+        loop: true
+    - say:
+        speaker: さわでん
+        text: でも俺、その時、弟の手を離したんだよ。貝殻拾おうとして、ちょっとだけ目を離して。母さん、弟抱きしめながら泣いてて、父さんは何も言わなかった。
+    - say:
+        speaker: さわでん
+        text: 俺だけ濡れてもなくて、怪我もなくて、ただ立ってた。だから「俺は平気」って顔しとこうって思った。そしたら、誰にも余計な心配かけないで済む気がして。
+    - say:
+        speaker: さわでん
+        text: でもほんとは、平気なわけないんだよな。今日みたいに、またやったって思うとさ。
+    - say:
+        text: 明るくて、抜けていて、距離が近い。その全部が、最初から軽いわけではなかった。さわでんは気まずさと後悔の上に、わざと柔らかい自分を乗せていたのだ。
+    - goto: group_response
+
+  group_response:
+    - hide: {}
+    - show:
+        character: どり
+        expression: default
+        position: left
+    - show:
+        character: きりゅう
+        expression: default
+        position: center
+    - show:
+        character: アガサ
+        expression: default
+        position: right
+    - say:
+        speaker: どり
+        text: 今日のこと、止められなかった側にも責任はある。気づいたら声をかける。そこはチームでやるしかない。
+    - say:
+        speaker: きりゅう
+        text: 次からは一人で拾いに行くな。拾いたい物があったら呼べ。面倒でも付き合う。
+    - say:
+        speaker: アガサ
+        text: 君が平気そうでも、こちらは勝手に信じないことにするよ。便利な顔色は、ときどき役に立たないから。
+    - choice:
+        options:
+          - text: 一人で抱えなくていいと伝える
+            set:
+              affection.sawaden: 2
+            goto: player_end_1
+          - text: 次は一緒に拾いに行くと伝える
+            set:
+              affection.sawaden: 3
+            goto: player_end_2
+
+  player_end_1:
+    - show:
+        character: さわでん
+        expression: troubled
+        position: center
+    - say:
+        speaker: "{{player.name}}"
+        text: 一人で平気な顔しなくていいよ。今日みたいに、先に見つけたらちゃんと呼んで。
+    - say:
+        speaker: さわでん
+        text: ……うん。たぶん俺、呼ぶの下手だから、気づいたらそっちからも来て。
+    - goto: closing
+
+  player_end_2:
+    - show:
+        character: さわでん
+        expression: smile
+        position: center
+    - say:
+        speaker: "{{player.name}}"
+        text: 次に何か拾いたくなったら、一緒に行く。勝手に危ない方まで行く前に、ちゃんと声かけて。
+    - say:
+        speaker: さわでん
+        text: それ、たぶん助かる。俺、気になるとすぐ寄っちゃうからさ。
+    - goto: closing
+
+  closing:
+    - background: kazamito-sea-trip-evening
+    - hide: {}
+    - show:
+        character: うきわ
+        expression: smile
+        position: left
+    - show:
+        character: 餅虎
+        expression: default
+        position: center
+    - show:
+        character: みもち
+        expression: default
+        position: right
+    - say:
+        text: 帰るころには空が少しだけ晴れていた。遠足は予定通りではなかったが、海辺で集めた写真や流木やガラス片は、ちゃんと袋に入っている。
+    - say:
+        speaker: うきわ
+        text: 今日は大変だったけど、なんか……みんなで来てよかったね。
+    - say:
+        speaker: 餅虎
+        text: こういうハプニング込みで、あとから話すと強いのよね。今は笑えないけど。
+    - say:
+        speaker: みもち
+        text: でも、無事で終われてよかった。ほんとに。
+    - set:
+        flags.seaTripClear: true
+    - bgm: stop
+    - say:
+        text: こうして海辺の遠足は、ただの気晴らしでは終わらなかった。けれどそのぶん、皆がそれぞれの危うさと支え方を少しずつ知る日にもなった。
+    - say:
+        text: 用意する海の背景が来たら、この日の空気はもっとはっきり形になるだろう。
+    - say:
+        text: 番外編・了

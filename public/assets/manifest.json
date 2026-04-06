@@ -1,10 +1,11 @@
 {
-  "generatedAt": "2026-04-06T14:12:44.845Z",
+  "generatedAt": "2026-04-06T15:19:14.624Z",
   "backgrounds": {
     "aonagi-gate-morning": "assets/backgrounds/aonagi-gate-morning.png",
     "aonagi-oldtower-corridor-morning": "assets/backgrounds/aonagi-oldtower-corridor-morning.png",
     "classroom-night": "assets/backgrounds/classroom-night.png",
     "Gemini_Generated_Image_7b0m0h7b0m0h7b0m": "assets/backgrounds/Gemini_Generated_Image_7b0m0h7b0m0h7b0m.png",
+    "Gemini_Generated_Image_u1szymu1szymu1sz": "assets/backgrounds/Gemini_Generated_Image_u1szymu1szymu1sz.png",
     "harbor-backstage": "assets/backgrounds/harbor-backstage.png",
     "harbor-breakwater-dawn": "assets/backgrounds/harbor-breakwater-dawn.png",
     "harbor-lantern-pier": "assets/backgrounds/harbor-lantern-pier.png",
@@ -13,6 +14,10 @@
     "kazamito-backyard-shrubbery-morning": "assets/backgrounds/kazamito-backyard-shrubbery-morning.png",
     "kazamito-entrance-morning": "assets/backgrounds/kazamito-entrance-morning.png",
     "kazamito-night-overlook": "assets/backgrounds/kazamito-night-overlook.png",
+    "kazamito-sea-trip-evening": "assets/backgrounds/kazamito-sea-trip-evening.png",
+    "kazamito-sea-trip-hut": "assets/backgrounds/kazamito-sea-trip-hut.png",
+    "kazamito-sea-trip-morning": "assets/backgrounds/kazamito-sea-trip-morning.png",
+    "kazamito-sea-trip-shore": "assets/backgrounds/kazamito-sea-trip-shore.png",
     "project-meeting-classroom-evening": "assets/backgrounds/project-meeting-classroom-evening.png",
     "station-evening": "assets/backgrounds/station-evening.png",
     "体育館": "assets/backgrounds/体育館.png",

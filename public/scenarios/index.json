@@ -1,5 +1,10 @@
 [
   {
+    "url": "scenarios/kazamito-sea-trip.yaml",
+    "title": "風見塔のラストノート 番外編 潮風遠足",
+    "description": "海辺の遠足でチーム全員がトラブルに巻き込まれ、支え合い方を知る番外編。"
+  },
+  {
     "url": "scenarios/kazamito-chapter7.yaml",
     "title": "風見塔のラストノート 第七章",
     "description": "さわでんが野球部に誘われ、野球を始めた理由とやめた理由に向き合う共通ルート第七章。"

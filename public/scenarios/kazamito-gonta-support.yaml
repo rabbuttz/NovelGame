@@ -1,0 +1,469 @@
+title: 風見塔のラストノート 番外編 ごんた先生の救助メニュー
+dateLabel: 4月18日
+
+player:
+  title: 主人公の名前を決める
+  prompt: 呼ばれたい名前を入力してください。
+  defaultName: 湊
+  presets:
+    - 湊
+    - 悠真
+
+variables:
+  flags:
+    chapter1Clear: true
+    chapter2Clear: true
+    chapter3Clear: true
+    chapter4Clear: true
+    chapter5Clear: true
+    chapter6Clear: true
+    chapter7Clear: true
+    chapter8Clear: true
+    gontaEpisodeClear: false
+    metGonta: false
+    focusedSupplies: false
+    focusedTeam: false
+    trustedGonta: false
+    followedRescueMenu: false
+    fixedFlow: false
+    fixedAid: false
+    rehearsalSaved: false
+  affection:
+    kiryu: 2
+    amu: 3
+    agasa: 4
+    ukiwa: 4
+    dori: 3
+    mimochi: 2
+    gonta: 0
+
+characters:
+  きりゅう:
+    name: きりゅう
+  アガサ:
+    name: アガサ
+  あむ:
+    name: あむ
+  うきわ:
+    name: うきわ
+  どり:
+    name: どり
+  みもち:
+    name: みもち
+  ロクロ:
+    name: ロクロ
+  ごんた:
+    name: ごんた
+
+start: prep_room
+
+nodes:
+  prep_room:
+    - date: 4月18日 放課後
+    - background: project-meeting-classroom-evening
+    - bgm:
+        id: 共通ルート 日常
+        volume: 0.6
+        loop: true
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: あむ
+        expression: troubled
+        position: center
+    - show:
+        character: うきわ
+        expression: troubled
+        position: right
+    - say:
+        text: 星潮祭の追加見学日に向けて、風見塔の見学導線をもう一度確認することになった。けれど放課後の準備室は、確認どころか立て直しの空気になっている。
+    - say:
+        speaker: きりゅう
+        text: 校庭で使う予定だったカラーコーンとマットが、来週の体力測定準備に回された。体育館倉庫の棚も、別の授業で組み替え済みだ。
+    - say:
+        speaker: あむ
+        text: 案内板もまだ運べてないし、みもちの展示札も残ってる。なんで忙しい日ってまとめて来るんだよ……。
+    - say:
+        speaker: うきわ
+        text: ぼく、走ればまだ間に合うと思ってたんだけど、走る先が増えすぎて逆にこんがらがってきた……。
+    - say:
+        text: 今夜中に模擬導線の確認結果をまとめて、明日の朝までにロクロへ提出する必要がある。このままでは、試す前に時間切れだ。
+    - choice:
+        options:
+          - text: 足りない備品から確認する
+            set:
+              flags.focusedSupplies: true
+            goto: check_supplies
+          - text: まず疲れている人の様子を見る
+            set:
+              flags.focusedTeam: true
+            goto: check_team
+
+  check_supplies:
+    - say:
+        speaker: "{{player.name}}"
+        text: まずは何が足りないか整理しよう。探し回る前に、欠けてるものを揃えたい。
+    - say:
+        speaker: きりゅう
+        text: 助かる。必要なのはコーン、導線用ロープ、段差再現用の薄マット、それと案内板を運ぶ人手だ。
+    - say:
+        speaker: あむ
+        text: つまり全部足りてない！ よし、逆にわかりやすい！
+    - goto: gym_path
+
+  check_team:
+    - say:
+        speaker: "{{player.name}}"
+        text: 備品も大事だけど、このまま全員が焦ったままだと判断を誤る。まず呼吸を整えよう。
+    - say:
+        speaker: うきわ
+        text: う……図星。ぼく、今たぶん、元気なふりで押し切ろうとしてた。
+    - say:
+        speaker: あむ
+        text: みもちも座る暇なくてさ。俺も三往復目あたりから、だいぶ思考が筋肉任せ。
+    - goto: gym_path
+
+  gym_path:
+    - background: 廊下
+    - hide: {}
+    - show:
+        character: どり
+        expression: default
+        position: left
+    - show:
+        character: みもち
+        expression: troubled
+        position: right
+    - say:
+        text: 廊下へ出ると、どりが折りたたみ案内板を抱え、みもちは展示札の束を両腕で支えていた。どちらも急いではいるが、手数より疲労が先に見える。
+    - say:
+        speaker: どり
+        text: 体育館側の倉庫なら代用品があるかもしれない。けど今、授業終わりで鍵の管理が動いてる。
+    - say:
+        speaker: みもち
+        text: 私は大丈夫……たぶん。札だけ先に並べられれば、展示側はどうにかできるから。
+    - sound: 間抜け3
+    - say:
+        text: その時、体育館のほうから妙に張りのある声が響いた。「肩を回せー。困った時ほど肩甲骨は黙らないぞー」
+    - say:
+        text: 変な号令だと思った次の瞬間、入口から大きな人影がひょいと顔を出した。
+    - goto: meet_gonta
+
+  meet_gonta:
+    - background: 体育館
+    - hide: {}
+    - show:
+        character: あむ
+        expression: default
+        position: left
+    - show:
+        character: ごんた
+        expression: default
+        position: center
+    - show:
+        character: きりゅう
+        expression: default
+        position: right
+    - set:
+        flags.metGonta: true
+        affection.gonta: 1
+    - say:
+        text: ジャージ姿の教師は、なぜか片足立ちのままこちらを見ていた。姿勢は妙だが、目だけはまっすぐ状況を見ている。
+    - say:
+        speaker: ごんた
+        text: よし、止まった。止まれたならまだ大丈夫だな。俺はごんた。体育教師。今の顔、だいぶ「助けてください」寄りだぞ。
+    - say:
+        speaker: あむ
+        text: うわ、ごんた先生だ。来た瞬間から変だけど助かりそうな人！
+    - say:
+        speaker: きりゅう
+        text: あむ、失礼だ。……先生、今、倉庫の備品を少し借りられないか相談したくて。
+    - choice:
+        options:
+          - text: 素直に助けを頼む
+            set:
+              flags.trustedGonta: true
+              affection.gonta: 2
+            goto: gonta_accept
+          - text: まず状況を説明する
+            set:
+              affection.gonta: 1
+            goto: gonta_accept
+
+  gonta_accept:
+    - say:
+        speaker: "{{player.name}}"
+        text: 風見塔の追加見学に向けて、模擬導線を組みたいんです。物も人手も少し足りなくて。
+    - say:
+        speaker: ごんた
+        text: なるほど。物が足りない日は工夫の日、人手が足りない日は順番の日だ。両方足りない日は、俺みたいなのを呼ぶ日だな。
+    - say:
+        speaker: ごんた
+        text: カラーコーン、ロープ、薄マット、台車。貸せる。ついでに運び方も直す。重い物は根性で持つな、流れで持て。
+    - say:
+        speaker: きりゅう
+        text: ……ありがたいです。正直、今はその一言でかなり救われます。
+    - say:
+        speaker: ごんた
+        text: よし。まず運ぶ、次に休む、最後に歩線を引く。救助メニュー第一番だ。
+    - goto: carry_lesson
+
+  carry_lesson:
+    - hide: {}
+    - show:
+        character: どり
+        expression: default
+        position: left
+    - show:
+        character: ごんた
+        expression: default
+        position: center
+    - show:
+        character: あむ
+        expression: default
+        position: right
+    - sound: ビシッとツッコミ2
+    - say:
+        text: ごんたは案内板の大きさと人数を一目で見て、持ち手の位置を変え、運ぶ順番を組み直した。気合いで持ち上げる空気が消え、動きが急に静かになる。
+    - say:
+        speaker: ごんた
+        text: どりは後ろ、あむは前。背の高さが違う時は斜めに持つな。台車は角を曲がる前に一回止まれ。止まるのは負けじゃない、技術だ。
+    - say:
+        speaker: どり
+        text: 持ち方だけでこんなに違うのか。力が分散する。
+    - say:
+        speaker: あむ
+        text: 走ってないのに、さっきより速い……。なんだこれ、魔法？
+    - say:
+        speaker: ごんた
+        text: 体育教師の魔法は地味だぞ。だいたい姿勢と水分だ。
+    - choice:
+        options:
+          - text: ごんたの段取り通りに五分休憩を入れる
+            set:
+              flags.followedRescueMenu: true
+              affection.gonta: 3
+            goto: break_scene_rest
+          - text: このまま一気に終わらせたいと言う
+            set:
+              affection.gonta: 2
+            goto: break_scene_forced
+
+  break_scene_rest:
+    - background: 保健室
+    - hide: {}
+    - show:
+        character: ごんた
+        expression: default
+        position: left
+    - show:
+        character: みもち
+        expression: troubled
+        position: center
+    - show:
+        character: うきわ
+        expression: troubled
+        position: right
+    - say:
+        text: 備品を運び終えたところで、ごんたの指示どおり短い休憩を挟む。保健室の前のベンチに座るだけで、張っていた息が少し落ちた。
+    - say:
+        speaker: ごんた
+        text: いい判断だ。休憩を先に取れるやつは、あとでちゃんと踏ん張れる。
+    - say:
+        speaker: みもち
+        text: さっきまで、座ったら迷惑かなって思ってた。けど今、だいぶ頭が戻ってきたよ。
+    - say:
+        speaker: うきわ
+        text: ぼくも。止まると置いていかれそうで怖かったけど、止まったほうが見えることもあるんだね。
+    - goto: route_rehearsal
+
+  break_scene_forced:
+    - background: 保健室
+    - hide: {}
+    - show:
+        character: ごんた
+        expression: default
+        position: left
+    - show:
+        character: みもち
+        expression: troubled
+        position: center
+    - show:
+        character: うきわ
+        expression: troubled
+        position: right
+    - say:
+        speaker: "{{player.name}}"
+        text: ここまで来たなら、このまま最後まで片づけたいです。
+    - say:
+        speaker: ごんた
+        text: 却下。無理して倒れるのがいちばん運動効率悪い。だから今は休め。次にちゃんと動くためにな。
+    - say:
+        text: 押し返される口調ではないのに、妙に逆らえなかった。気づけば全員、保健室前のベンチに座らされている。
+    - say:
+        speaker: みもち
+        text: ……ちょっと助かった。私、あと少しで札を落とすところだった。
+    - say:
+        speaker: うきわ
+        text: ぼくも足が空回りしてたかも。止めてもらわなかったら、そのまま走ってた。
+    - goto: route_rehearsal
+
+  route_rehearsal:
+    - background: 校庭
+    - hide: {}
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: ごんた
+        expression: default
+        position: center
+    - show:
+        character: アガサ
+        expression: default
+        position: right
+    - say:
+        text: 校庭の端にコーンとロープを並べ、薄マットで段差を再現する。塔のらせん階段そのものではないが、人が詰まりやすい箇所と視界の死角はこれで十分に試せる。
+    - say:
+        speaker: アガサ
+        text: へえ、屋外でここまで組めるんだ。見学導線だけじゃなくて、救護動線も同時に見えるのがいいね。
+    - say:
+        speaker: ごんた
+        text: 人の流れは、水と同じだ。細いところで詰まるし、逃げ道がないと音もなくあふれる。だから先に出口を作る。
+    - say:
+        speaker: きりゅう
+        text: 塔の二階踊り場に近い。ここで立ち止まる人が重なると、後ろが詰まるな。
+    - choice:
+        options:
+          - text: 来場者の流れを広げる配置に直す
+            set:
+              flags.fixedFlow: true
+            goto: save_rehearsal
+          - text: 救護と誘導の抜け道を先に確保する
+            set:
+              flags.fixedAid: true
+            goto: save_rehearsal
+
+  save_rehearsal:
+    - hide: {}
+    - show:
+        character: あむ
+        expression: default
+        position: left
+    - show:
+        character: どり
+        expression: default
+        position: center
+    - show:
+        character: ごんた
+        expression: default
+        position: right
+    - say:
+        text: 修正を入れた直後、仮置きした案内板の一枚が風で傾いた。うきわが反射的に走り出しかけるより早く、ごんたが長い歩幅で間へ入る。
+    - say:
+        speaker: ごんた
+        text: 追うな。板は横から押さえる。人は正面から止める。覚えやすいだろ。
+    - say:
+        text: ごんたはロープを二本足し、台車の支柱とコーンを使って案内板を固定し直した。簡易なのに無駄がなく、さっきまでの不安定さが嘘みたいに消える。
+    - say:
+        speaker: どり
+        text: これなら風が抜けても倒れにくい。支える人手も減らせるな。
+    - say:
+        speaker: あむ
+        text: 先生、さっきから助け方がいちいち多いんだよな。物も、人も、空気も。
+    - set:
+        flags.rehearsalSaved: true
+    - goto: teacher_inspection
+
+  teacher_inspection:
+    - hide: {}
+    - show:
+        character: ロクロ
+        expression: default
+        position: left
+    - show:
+        character: ごんた
+        expression: default
+        position: center
+    - show:
+        character: きりゅう
+        expression: default
+        position: right
+    - say:
+        text: 記録用のメモをまとめていると、校庭の入口でロクロが足を止めた。視線はコーンの配置、ロープの張り方、そしてこちらの疲労具合まで順に見ていく。
+    - say:
+        speaker: ロクロ
+        text: 体育用具がずいぶん外に出ているね。説明を聞こうか。
+    - say:
+        speaker: ごんた
+        text: 俺が立ち会った。風見塔の追加見学に向けた安全導線の仮検証だよ。体力差と搬送経路も一緒に見た。今日の分は俺の管理で戻す。
+    - say:
+        speaker: きりゅう
+        text: 死角と滞留箇所の修正案も取れました。見学者の列だけじゃなく、救護の抜け道も確認済みです。
+    - say:
+        speaker: ロクロ
+        text: ……なるほど。机上で詰めるより、よほど実感がある結果だ。
+    - say:
+        speaker: ロクロ
+        text: 提出書類には、その検証結果を必ず書き込んで。ごんた先生の立会いがあるなら、今日の確認は有効な下調べとして扱える。
+    - say:
+        speaker: ごんた
+        text: コメント欄、俺も一筆入れとくよ。変なことは書かない。たぶん。
+    - say:
+        speaker: ロクロ
+        text: 最後の一言だけで少し不安になるけど、頼りにはしている。
+    - goto: evening_talk
+
+  evening_talk:
+    - background: 帰り道
+    - hide: {}
+    - show:
+        character: あむ
+        expression: smile
+        position: left
+    - show:
+        character: ごんた
+        expression: default
+        position: center
+    - show:
+        character: アガサ
+        expression: smile
+        position: right
+    - say:
+        text: 日が落ちるころには、持ち込んだ備品も記録用紙もきれいに片づいていた。最初の混乱が嘘みたいに、帰り道の足取りは軽い。
+    - say:
+        speaker: あむ
+        text: ごんた先生、今日はまじで助かった。変だけど、めちゃくちゃ助かった。
+    - say:
+        speaker: ごんた
+        text: 変はわりと褒め言葉だな。覚えやすいだろ、俺のこと。
+    - say:
+        speaker: アガサ
+        text: 実際、困った時に思い出しやすい先生って強いよ。今日だけで、だいぶ助けられた。
+    - say:
+        speaker: "{{player.name}}"
+        text: 先生、どうしてここまで手を貸してくれたんですか。
+    - say:
+        speaker: ごんた
+        text: 体育教師って、走るのが速いやつを見るだけの仕事じゃないんだよ。転びそうなやつを先に見つけて、転んでも起き上がれる形にしとく。俺はそれが好きなんだ。
+    - say:
+        speaker: ごんた
+        text: それに、お前ら、ちゃんと助けを受け取れた。そこはえらい。無理して一人で抱えるより、ずっと強いぞ。
+    - say:
+        text: ごんたはそう言うと、なぜか後ろ向きのまま軽くジョギングを始めた。クールダウン兼見回りらしい。最後まで妙だったが、その背中はたしかに頼もしかった。
+    - goto: ending
+
+  ending:
+    - set:
+        flags.gontaEpisodeClear: true
+    - bgm: stop
+    - hide: {}
+    - say:
+        text: こうして、追加見学日に向けた最終調整はどうにか形になった。備品も手順も足りなかった一日だったが、それ以上に「助け方」を教わる日でもあった。
+    - say:
+        text: ごんた先生は、やさしくて、ちょっと変で、困った時には驚くほど頼りになる。そんな新しい味方として、風見塔の記録に静かに加わった。
+    - say:
+        text: 番外編・了

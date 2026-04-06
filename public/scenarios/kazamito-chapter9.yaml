@@ -1,0 +1,412 @@
+title: 風見塔のラストノート 第九章 線を引くひと
+dateLabel: 4月18日
+
+player:
+  title: 主人公の名前を決める
+  prompt: 呼ばれたい名前を入力してください。
+  defaultName: 湊
+  presets:
+    - 湊
+    - 悠真
+
+variables:
+  flags:
+    chapter1Clear: true
+    chapter2Clear: true
+    chapter3Clear: true
+    chapter4Clear: true
+    chapter5Clear: true
+    chapter6Clear: true
+    chapter7Clear: true
+    chapter8Clear: true
+    chapter9Clear: false
+    heardRokuroReason: false
+    heardGontaReason: false
+    acceptedAdultBurden: false
+    backedKiryuResponsibility: false
+    sawClosedRecordName: false
+    believedRecordsWereHidden: false
+    believedRecordsWereScattered: false
+  affection:
+    kiryu: 3
+    agasa: 4
+    amu: 4
+    mimochi: 3
+    gonta: 1
+  trust:
+    teacherSide: 0
+  lore:
+    closedTowerRecord: 0
+
+characters:
+  ロクロ:
+    name: ロクロ
+  ごんた:
+    name: ごんた
+  きりゅう:
+    name: きりゅう
+  アガサ:
+    name: アガサ
+  あむ:
+    name: あむ
+  みもち:
+    name: みもち
+
+start: morning_revision_request
+
+nodes:
+  morning_revision_request:
+    - date: 4月18日 朝
+    - background: 教室・昼
+    - bgm:
+        id: 共通ルート 日常
+        volume: 0.58
+        loop: true
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: ロクロ
+        expression: default
+        position: center
+    - show:
+        character: あむ
+        expression: troubled
+        position: right
+    - say:
+        text: 前日の模擬導線確認をまとめた書類は、提出して終わりにはならなかった。ロクロが机に置いた新しい紙束には、赤い付箋が何枚も刺さっている。
+    - say:
+        speaker: ロクロ
+        text: 導線確認は助かった。でも、これだけでは通せない。必要なのは見学者の流れだけじゃない。転倒時の搬送、体調不良者の離脱経路、教員側の責任分界も追記して。
+    - say:
+        speaker: あむ
+        text: また増えた……。いや必要なのはわかるけど、毎回「ここから本番」って顔で増えてくるじゃん。
+    - say:
+        speaker: きりゅう
+        text: 愚痴はあとだ。どこまで必要かをまず正確に聞く。
+    - say:
+        text: 書類の重さより、求められている責任の重さのほうが先に伝わってくる。ロクロはいつもよりはっきり、逃がさない声をしていた。
+    - choice:
+        options:
+          - text: なぜそこまで細かい説明が必要なのか聞く
+            set:
+              flags.acceptedAdultBurden: true
+              trust.teacherSide: 1
+            goto: ask_rokuro_reason
+          - text: まず足りない項目を埋めようと提案する
+            set:
+              affection.kiryu: 1
+            goto: move_to_action
+
+  ask_rokuro_reason:
+    - say:
+        speaker: "{{player.name}}"
+        text: 導線を組み直すだけじゃ、まだ足りないんですね。
+    - say:
+        speaker: ロクロ
+        text: 足りない。事故は「起きないようにする」だけじゃだめなんだ。起きた時に、誰が何をするかまで書けなければ、責任の所在が曖昧になる。
+    - say:
+        speaker: ロクロ
+        text: 曖昧な責任で開けた場所は、あとからいちばん弱い人に返っていく。僕はそれを見たことがある。
+    - say:
+        text: 最後の一言だけ、教室の空気が少し下がった。あむも続きを挟まず、ロクロの机上の紙を見た。
+    - goto: move_to_action
+
+  move_to_action:
+    - hide: {}
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: アガサ
+        expression: default
+        position: center
+    - show:
+        character: あむ
+        expression: default
+        position: right
+    - say:
+        speaker: アガサ
+        text: なら、机上の空欄を埋めるだけじゃだめだね。実際に救護動線と教員配置を見たほうが早い。
+    - say:
+        speaker: きりゅう
+        text: 体育館側の備品と担架経路も確認する。現場目線がほしい。
+    - say:
+        speaker: あむ
+        text: そういう時にちょうどよく呼べる大人、最近ひとり増えたよな。
+    - say:
+        text: あむの言い方は軽かったが、全員同じ顔をした。助けがほしい時に思い出せる教師がいる。それ自体が、昨日までより少し大きい変化だった。
+    - goto: gonta_safety_walkthrough
+
+  gonta_safety_walkthrough:
+    - background: 体育館
+    - hide: {}
+    - show:
+        character: ごんた
+        expression: default
+        position: left
+    - show:
+        character: きりゅう
+        expression: default
+        position: center
+    - show:
+        character: アガサ
+        expression: default
+        position: right
+    - say:
+        text: 体育館裏の用具棚で事情を話すと、ごんたは準備運動の途中みたいな姿勢のまま顎に手を当てた。妙な格好なのに、視線だけはまっすぐこちらの説明をなぞっている。
+    - say:
+        speaker: ごんた
+        text: なるほどな。見学の流れは見えてきた。でも事故ってのは、本番の真ん中より帰り際とか油断した時に出る。だから救護側の導線は、見せたい景色より先に確保する。
+    - say:
+        speaker: アガサ
+        text: やっぱりそこなんだ。広報側はどうしても、見栄えのいい流れを優先したくなるから。
+    - say:
+        speaker: ごんた
+        text: 見栄えは大事。でも怪我人を運ぶ時だけ裏口が消える企画は、きれいでも危ない。体育祭も同じだぞ。拍手の裏で、先生は担架の角度を見てる。
+    - say:
+        speaker: きりゅう
+        text: ……わかる。通したい側ほど、見られる景色に気を取られやすい。
+    - choice:
+        options:
+          - text: 救護搬送の経路を優先して聞く
+            set:
+              flags.heardGontaReason: true
+              trust.teacherSide: 1
+              affection.gonta: 1
+            goto: ask_rescue_route
+          - text: 見学者の滞留対策を優先して聞く
+            set:
+              flags.heardGontaReason: true
+              trust.teacherSide: 1
+            goto: ask_crowd_route
+
+  ask_rescue_route:
+    - say:
+        speaker: "{{player.name}}"
+        text: もし誰かが途中で動けなくなったら、どこから出すのが一番安全ですか。
+    - say:
+        speaker: ごんた
+        text: 一番近い出口じゃない。一番空けやすい出口だ。近くても人波とぶつかるなら遅い。担架は最短距離じゃなく、曲がれる距離で考える。
+    - say:
+        speaker: ごんた
+        text: それと、運ぶ人を増やしすぎるな。善意で集まった人数が多いほど、逆に通路が詰まる。助ける時ほど役を絞れ。
+    - goto: kiryu_hallway_talk
+
+  ask_crowd_route:
+    - say:
+        speaker: "{{player.name}}"
+        text: 人が止まりやすい場所は、どこから崩すべきですか。
+    - say:
+        speaker: ごんた
+        text: 先頭じゃなく、二番目だな。先頭で止まるやつは見える。でも二番目で立ち止まるやつは、後ろからは急に詰まって見える。
+    - say:
+        speaker: ごんた
+        text: だから声かけ役は、前だけじゃなく真ん中にも置く。混雑ってのは、先頭の問題より途中の遠慮で膨らむんだ。
+    - goto: kiryu_hallway_talk
+
+  kiryu_hallway_talk:
+    - background: 廊下
+    - hide: {}
+    - show:
+        character: きりゅう
+        expression: default
+        position: center
+    - say:
+        text: 体育館を出たあと、きりゅうは廊下の窓際でいったん足を止めた。すぐ先に皆がいるのに、その数歩だけを切り離したみたいな静けさがある。
+    - say:
+        speaker: きりゅう
+        text: 止める側の言い分はわかる。むしろ、前よりわかるようになった。……でも、わかるだけで通す理由にはならないんだよな。
+    - say:
+        speaker: "{{player.name}}"
+        text: きりゅう先輩。
+    - say:
+        speaker: きりゅう
+        text: 責任を取るって、たぶん好かれることじゃない。誰かに面倒だと思われても、線を引く側に回るってことだ。ロクロ先生を見てると、余計そう思う。
+    - choice:
+        options:
+          - text: 一緒に嫌われ役を引き受けると言う
+            set:
+              flags.backedKiryuResponsibility: true
+              affection.kiryu: 2
+            goto: kiryu_support_strong
+          - text: きりゅうの判断を支えると言う
+            set:
+              flags.backedKiryuResponsibility: true
+              affection.kiryu: 1
+            goto: kiryu_support_soft
+
+  kiryu_support_strong:
+    - say:
+        speaker: "{{player.name}}"
+        text: 一人で背負わなくていいです。嫌われ役が必要なら、俺もそっちに立ちます。
+    - say:
+        speaker: きりゅう
+        text: ……簡単に言うな。そういうのは、引き返せなくなってから重いぞ。
+    - say:
+        speaker: "{{player.name}}"
+        text: それでも、先輩だけに持たせるよりはいい。
+    - say:
+        text: きりゅうはすぐには返さなかった。だが、視線をそらさないまま小さくうなずいた。
+    - goto: library_record_check
+
+  kiryu_support_soft:
+    - say:
+        speaker: "{{player.name}}"
+        text: 線を引くのは先輩でいいです。その代わり、引いた線を支える役はやります。
+    - say:
+        speaker: きりゅう
+        text: それでも充分重いぞ。
+    - say:
+        speaker: "{{player.name}}"
+        text: 一人分よりは軽くなります。
+    - say:
+        speaker: きりゅう
+        text: ……そうだな。なら、支えてくれ。
+    - goto: library_record_check
+
+  library_record_check:
+    - date: 4月18日 夕方
+    - background: 図書館
+    - hide: {}
+    - show:
+        character: みもち
+        expression: default
+        position: left
+    - show:
+        character: アガサ
+        expression: default
+        position: center
+    - show:
+        character: ロクロ
+        expression: default
+        position: right
+    - say:
+        text: 夕方、みもちが古い校内報と貸出記録の束を図書館の机に並べた。紙の色はどれも違うのに、閉鎖時期の記述だけが妙に揃っていない。
+    - say:
+        speaker: みもち
+        text: これ、変なんだ。閉鎖の理由が資料ごとに少しずつ違う。事故って書いてあるものもあるし、保全工事って書いてあるものもあるし、公開停止だけで終わってるものもある。
+    - say:
+        speaker: アガサ
+        text: 記録の揺れ方が雑だね。隠したいなら、もっときれいに揃えるはずだ。
+    - say:
+        speaker: ロクロ
+        text: 実際、揃っていないんだ。正式記録と、現場で共有された話と、あとから校内で噂になった話が、途中で一緒くたになった。
+    - say:
+        text: ロクロの言い方は淡々としている。でも「知っている人間の話し方」だった。
+    - choice:
+        options:
+          - text: 欠けているのは意図的だと思う
+            set:
+              flags.believedRecordsWereHidden: true
+              lore.closedTowerRecord: 1
+            goto: hidden_record_view
+          - text: 混乱の中で散った可能性を考える
+            set:
+              flags.believedRecordsWereScattered: true
+              lore.closedTowerRecord: 1
+            goto: scattered_record_view
+
+  hidden_record_view:
+    - say:
+        speaker: "{{player.name}}"
+        text: ここまで噛み合わないなら、誰かが意図して欠けさせたんじゃないですか。
+    - say:
+        speaker: ロクロ
+        text: その可能性はある。けれど、隠した人間だけを責めれば済む話でもない。隠したくなるだけの混乱が、当時すでにあった。
+    - say:
+        speaker: みもち
+        text: つまり、消された記録と、最初から残らなかった記録が混ざってるかもしれないんだね。
+    - goto: rokuro_confession
+
+  scattered_record_view:
+    - say:
+        speaker: "{{player.name}}"
+        text: 誰かが消したというより、混乱の中で散ったのかもしれませんね。
+    - say:
+        speaker: ロクロ
+        text: それもある。あの時は「整理して残す」より、「まず止める」が先に来た。だから残すべきものまで切り捨てた。
+    - say:
+        speaker: アガサ
+        text: 止める判断はできても、残す判断までは回らなかったってことか。
+    - goto: rokuro_confession
+
+  rokuro_confession:
+    - hide: {}
+    - show:
+        character: ロクロ
+        expression: default
+        position: center
+    - say:
+        text: 図書館の明かりが少しだけ落ちる。閉館前の静けさの中で、ロクロは並んだ資料のいちばん端に手を置いた。
+    - say:
+        speaker: ロクロ
+        text: 閉鎖が決まった時、僕は今よりずっと経験が浅かった。でも、最終判断の場にはいた。止め切れなかったこともあるし、逆に必要以上に一括で止めたものもある。
+    - say:
+        speaker: ロクロ
+        text: あの時の記録が歪んだのは、悪意だけじゃない。責任の押し付け合いと、保身と、誰かを守りたい気持ちが、全部同じ場所でぶつかったからだ。
+    - say:
+        speaker: "{{player.name}}"
+        text: だから今回も、そこまで慎重なんですね。
+    - say:
+        speaker: ロクロ
+        text: そうだよ。僕は反対しているんじゃない。繰り返させない形を見ている。君たちの熱意を疑っているんじゃない。熱意だけで開ける場所じゃないと知っているだけだ。
+    - set:
+        flags.heardRokuroReason: true
+        trust.teacherSide: 2
+    - say:
+        text: 声は静かなままだった。けれど、そこに含まれている後悔だけは、今まででいちばんはっきりしていた。
+    - goto: record_name_hook
+
+  record_name_hook:
+    - hide: {}
+    - show:
+        character: みもち
+        expression: troubled
+        position: left
+    - show:
+        character: アガサ
+        expression: default
+        position: center
+    - show:
+        character: ロクロ
+        expression: default
+        position: right
+    - sound: 驚く
+    - say:
+        text: 紙束を戻そうとした時、みもちの指先が一枚の薄い控えを止めた。正式書類に挟まり損ねたような、罫線のずれた補足記録だった。
+    - say:
+        speaker: みもち
+        text: 待って。これ、閉鎖当日の救護対応表……。署名欄、見て。
+    - say:
+        text: そこには、ロクロの名前とは別に、保健体育補助担当としてもう一つ署名があった。見慣れた、今の丸い字だ。
+    - say:
+        speaker: アガサ
+        text: ……ごんた先生。
+    - say:
+        text: 一瞬、誰も声を足せなかった。ごんたはただの新しい助っ人ではなかった。風見塔が閉じたその日、すでに現場にいたのだ。
+    - set:
+        flags.sawClosedRecordName: true
+        lore.closedTowerRecord: 2
+    - say:
+        speaker: ロクロ
+        text: その紙が残っていたのか。
+    - say:
+        text: ロクロの呟きは驚きよりも、観念に近かった。
+    - say:
+        text: 止める側にも、支える側にも、まだ言っていない過去がある。そう知った瞬間、風見塔の閉鎖は「昔あった事故」ではなく、いま目の前に続いている出来事へ変わった。
+    - goto: ending
+
+  ending:
+    - set:
+        flags.chapter9Clear: true
+    - bgm: stop
+    - hide: {}
+    - say:
+        text: こうして{{player.name}}は、風見塔を止めてきた理由が、ただの保守や臆病ではないと知った。大人たちは熱意に水を差していたのではなく、責任が誰か一人に落ちる瞬間を知っていたのだ。
+    - say:
+        text: そして閉鎖当日の記録には、ロクロだけでなくごんたの名も残っていた。やさしくて妙な体育教師が、なぜあの塔に詳しいのか。その答えは、まだ紙束の奥に隠れている。
+    - say:
+        text: 第九章・了

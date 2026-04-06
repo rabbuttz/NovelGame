@@ -333,10 +333,10 @@ body {
   border-radius: 16px;
   background: linear-gradient(180deg, #8fdfff 0%, #57b6e2 100%);
   color: #ffffff;
-  font-family: "Shippori Mincho", serif;
-  font-size: 1.15rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-family: "M PLUS Rounded 1c", "Zen Kaku Gothic New", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
   text-align: center;
   text-shadow: 0 2px 0 rgba(40, 110, 142, 0.38);
   box-shadow: 0 6px 0 rgba(65, 149, 186, 0.22);
@@ -347,6 +347,10 @@ body {
     background 220ms ease,
     border-color 220ms ease,
     box-shadow 220ms ease;
+}
+
+.speaker-badge[hidden] {
+  display: none !important;
 }
 
 .speaker-badge[data-position="narration"] {

@@ -26,6 +26,7 @@ variables:
     agasa: 0
     ukiwa: 0
     gura: 0
+    mimochi: 0
     suzudora: 0
     nemunomi: 0
     mochitora: 0
@@ -41,6 +42,8 @@ characters:
     name: うきわ
   ぐら:
     name: ぐら
+  みもち:
+    name: みもち
   すずどら:
     name: すずどら
   ねむのみ:
@@ -289,6 +292,19 @@ nodes:
     - say:
         speaker: ねむのみ
         text: 緊張してるよね。座って、少し水飲もうか。
+    - hide:
+        position: center
+    - show:
+        character: みもち
+        expression: troubled
+        position: center
+    - set:
+        affection.mimochi: 1
+    - say:
+        speaker: みもち
+        text: 私、みもち。人が多いとちょっと落ち着かないけど……記録の整理とか、静かな作業ならたぶん役に立てる。
+    - say:
+        text: 青い犬の彼は、大きなおなかをかばうみたいに資料束を抱え直し、控えめに会釈した。
     - hide: {}
     - show:
         character: 餅虎

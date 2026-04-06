@@ -1,5 +1,10 @@
 [
   {
+    "url": "scenarios/kazamito-chapter7.yaml",
+    "title": "風見塔のラストノート 第七章",
+    "description": "さわでんが野球部に誘われ、野球を始めた理由とやめた理由に向き合う共通ルート第七章。"
+  },
+  {
     "url": "scenarios/kazamito-chapter6.yaml",
     "title": "風見塔のラストノート 第六章",
     "description": "どりが誰より先に足りない所を埋める理由と、雨の日に残ったつらい過去を掘る共通ルート第六章。"

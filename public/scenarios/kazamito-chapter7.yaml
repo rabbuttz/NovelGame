@@ -1,0 +1,295 @@
+title: 風見塔のラストノート 第七章 白線の外側
+dateLabel: 4月16日
+
+player:
+  title: 主人公の名前を決める
+  prompt: 呼ばれたい名前を入力してください。
+  defaultName: 湊
+  presets:
+    - 湊
+    - 悠真
+
+variables:
+  flags:
+    chapter1Clear: true
+    chapter2Clear: true
+    chapter3Clear: true
+    chapter4Clear: true
+    chapter5Clear: true
+    chapter6Clear: true
+    chapter7Clear: false
+    learnedSawadenPast: false
+    sawadenWillVisitBaseball: false
+    encouragedSawadenToReturn: false
+  affection:
+    sawaden: 1
+    kiryu: 2
+    agasa: 4
+    amu: 3
+    ukiwa: 4
+    gura: 2
+    dori: 3
+    nemunomi: 2
+    mochitora: 2
+    mimochi: 2
+    suzudora: 1
+
+characters:
+  さわでん:
+    name: さわでん
+  アガサ:
+    name: アガサ
+
+start: request_net
+
+nodes:
+  request_net:
+    - date: 4月16日 朝
+    - background: 廊下
+    - bgm:
+        id: 共通ルート 日常
+        volume: 0.6
+        loop: true
+    - show:
+        character: アガサ
+        expression: smile
+        position: left
+    - show:
+        character: さわでん
+        expression: default
+        position: right
+    - say:
+        text: 風見塔入口の導線を組み直す話になり、仮の区切りとして防球ネットを借りられないか、という案が出た。校庭の端で余っている古いネットがあるらしい。
+    - say:
+        speaker: アガサ
+        text: 借用申請は通しておくよ。受け取りだけお願いしたいんだ。場所は野球部の倉庫前。ちょうど練習後に顔を出せば話が早い。
+    - say:
+        speaker: さわでん
+        text: じゃあ俺、行く。校庭のほう、帰り道に近いし。
+    - say:
+        speaker: アガサ
+        text: 一人で行かせると、なぜか別のものまで拾って帰ってきそうなんだよね。{{player.name}}、付き添ってくれる？
+    - say:
+        speaker: "{{player.name}}"
+        text: それ、信頼してるのか警戒してるのかわからないですね。
+    - say:
+        speaker: アガサ
+        text: 両方かな。
+    - goto: baseball_ground
+
+  baseball_ground:
+    - date: 4月16日 放課後
+    - background: 校庭
+    - hide: {}
+    - show:
+        character: さわでん
+        expression: default
+        position: center
+    - say:
+        text: 放課後の校庭には、金属バットの乾いた音が響いていた。白線の内側で駆ける声、整然と積まれたボールかご、湿った土の匂い。野球部の練習は、思ったよりきっちりしている。
+    - say:
+        speaker: さわでん
+        text: あー……なんか、久しぶりだな。こういう音。
+    - say:
+        text: さわでんはぼんやりした顔のまま立ち止まった。懐かしいだけではない色が、その横顔に一瞬だけ混ざる。
+    - say:
+        speaker: 野球部主将
+        text: 倉庫のネット借りに来た人？ 申請の話、聞いてるよ。……って、お前、もしかしてさわでんじゃね？
+    - say:
+        speaker: さわでん
+        text: え。あ、うわ、主将の人、覚えてるんだ。
+    - say:
+        speaker: 野球部主将
+        text: そりゃ覚えてるだろ。中学の時、練習試合でライト前を三塁打にしたやつなんてそうそういない。
+    - sound: 驚く
+    - say:
+        text: さわでんが曖昧に笑う。否定しないということは、冗談でもないらしい。
+    - goto: invitation_scene
+
+  invitation_scene:
+    - say:
+        speaker: 野球部主将
+        text: ちょうど人足りてないんだよ。今からでも遅くないし、よかったらうち来いよ。体験でもいい。
+    - say:
+        speaker: さわでん
+        text: いや、俺そういうの……今はちょっと。
+    - say:
+        speaker: 野球部主将
+        text: そこをなんとか。ほら、せっかくだし一球だけでも投げてけって。
+    - say:
+        text: 倉庫前で部員の一人が転がしていたボールが足元へ来る。さわでんは反射みたいに拾い上げ、何でもない顔で軽く投げ返した。
+    - say:
+        text: 山なりでも暴投でもない。無駄のない軌道で、ボールはまっすぐ部員の胸に収まった。
+    - say:
+        speaker: 野球部主将
+        text: ほら、投げられるじゃん。やっぱ戻ってこいって。
+    - say:
+        speaker: さわでん
+        text: ……そういうの、困る。
+    - say:
+        text: 声は弱いのに、その一言だけが少し固かった。さわでんは借用書に目を落とし、主将の視線から逃げるみたいに倉庫の陰へ入る。
+    - goto: quiet_corner
+
+  quiet_corner:
+    - background: 部室
+    - hide: {}
+    - show:
+        character: さわでん
+        expression: troubled
+        position: center
+    - say:
+        text: 倉庫の脇にある古い部室の軒下は、校庭よりずっと静かだった。外ではまだ掛け声が続いているのに、ここだけ時間の流れが少し遅い。
+    - say:
+        speaker: "{{player.name}}"
+        text: さわでん、野球やってたのか。
+    - say:
+        speaker: さわでん
+        text: うん。中学までは、けっこう真面目に。……たぶんみんなが思ってるより、ちゃんとやってたよ。
+    - say:
+        speaker: "{{player.name}}"
+        text: なんで始めたの。
+    - say:
+        speaker: さわでん
+        text: 最初は兄ちゃんのせい。うちの兄ちゃん、野球好きでさ。俺が小さい時、庭でずっとキャッチボールしてた。
+    - say:
+        speaker: さわでん
+        text: でも兄ちゃん、高校入る前に病気になって、入院が長くなって。走れないし、外にも出られなくなった。
+    - say:
+        text: さわでんの声は相変わらず平坦なのに、言葉の置き方だけが妙に慎重だった。思い出しているのではなく、いまもまだそこを踏まないようにしている感じだった。
+    - say:
+        speaker: さわでん
+        text: だから俺が野球始めた。試合に出たら、帰ってから全部話せるじゃん。今日はヒット打ったとか、エラーしたとか、先輩が怖かったとか。兄ちゃん、それ聞くの好きだったから。
+    - goto: painful_past
+
+  painful_past:
+    - bgm:
+        id: 切ない会話・すれ違い
+        volume: 0.54
+        loop: true
+    - say:
+        speaker: さわでん
+        text: 中三の夏、やっとベンチ入りしてさ。次の試合、出られるかもって言われてた。兄ちゃんも「絶対見る」って、病院でめちゃくちゃ楽しみにしてた。
+    - say:
+        speaker: さわでん
+        text: でも前の日の夜に、急に容体が悪くなって。試合の朝、連絡来た時にはもう終わってた。
+    - sound:
+        id: しょげる
+        volume: 0.75
+        loop: false
+    - say:
+        speaker: さわでん
+        text: 俺、その日もユニフォーム着てたんだよ。バッグにスパイク入れたまま病院行って、廊下で母さんに抱きつかれて。で、その格好のまま兄ちゃんと会った。
+    - say:
+        speaker: "{{player.name}}"
+        text: ……。
+    - say:
+        speaker: さわでん
+        text: なんか、そこから野球見るだけで変な感じになった。好きなのに、胸の奥がぐちゃってするっていうか。やればやるほど、兄ちゃんの続きを俺だけ勝手にやってるみたいで。
+    - say:
+        speaker: さわでん
+        text: 高校で誘われても、全部「また今度」で逃げた。帰宅部寄りって言ってるけど、正直、ちゃんと入る勇気がなかっただけ。
+    - say:
+        text: 軽く言おうとしているのに、その失敗がいちいち見えてしまう。さわでんの「なんでもない顔」は、こういう時のために先に作られたものなのかもしれない。
+    - goto: player_reply
+
+  player_reply:
+    - choice:
+        options:
+          - text: 入らなくても、好きなら顔を出せばいいと言う
+            set:
+              affection.sawaden: 3
+              flags.encouragedSawadenToReturn: true
+            goto: casual_return
+          - text: 兄のためじゃなく、自分のために見に来てもいいと言う
+            set:
+              affection.sawaden: 3
+              flags.learnedSawadenPast: true
+            goto: for_himself
+
+  casual_return:
+    - say:
+        speaker: "{{player.name}}"
+        text: 入るか入らないかの二択じゃなくていいだろ。好きなら、ときどき来ればいい。練習見て、ボール拾って、帰るだけでも。
+    - say:
+        speaker: さわでん
+        text: ……それ、ありなんだ。
+    - say:
+        speaker: "{{player.name}}"
+        text: ありだよ。野球部員じゃなくても、白線の近くまで行くくらいは誰にも止められない。
+    - say:
+        speaker: さわでん
+        text: そっか。ちゃんと入るかどうかばっか考えてた。入らないなら近づくのも変かなって。
+    - goto: return_decision
+
+  for_himself:
+    - say:
+        speaker: "{{player.name}}"
+        text: 兄ちゃんのために始めたのは本当でも、好きになったのはさわでん自身だろ。だったら、少しくらい自分のために見に来てもいい。
+    - say:
+        speaker: さわでん
+        text: ……自分のため、か。そういう言い方、今まであんまされたことない。
+    - say:
+        speaker: "{{player.name}}"
+        text: 兄ちゃんを忘れろって話じゃない。ただ、思い出があるから近づいちゃだめってことでもないと思う。
+    - say:
+        speaker: さわでん
+        text: うん。なんか、それなら少しだけわかる。
+    - set:
+        flags.learnedSawadenPast: true
+    - goto: return_decision
+
+  return_decision:
+    - background: 校庭
+    - hide: {}
+    - show:
+        character: さわでん
+        expression: default
+        position: center
+    - say:
+        text: 軒下から校庭へ戻ると、練習はまだ続いていた。野球部主将がこちらに気づき、遠慮のない声で手を振る。
+    - say:
+        speaker: 野球部主将
+        text: どうだ、気が変わったか？ 今日じゃなくても、いつでも来いよ。
+    - say:
+        speaker: さわでん
+        text: 入部はしない。たぶん今も、そこは無理。でも……たまに来てもいいなら、顔くらいは出す。
+    - say:
+        speaker: 野球部主将
+        text: 充分だよ。ボール拾いでも見学でも、来たら歓迎する。
+    - motion:
+        character: さわでん
+        name: うなずき
+    - say:
+        speaker: さわでん
+        text: じゃあ、たまに。暇そうな時だけな。
+    - say:
+        text: その返事は軽い冗談みたいだったが、逃げるための言い方ではなかった。完全に背を向けるでもなく、無理に戻るでもなく、さわでんなりの距離で白線の近くに立ち直したのだ。
+    - goto: ending_walk
+
+  ending_walk:
+    - background: 帰り道
+    - hide: {}
+    - show:
+        character: さわでん
+        expression: smile
+        position: center
+    - say:
+        speaker: さわでん
+        text: なんか変だな。入らないって決めたのに、前よりちょっとだけ楽。
+    - say:
+        speaker: "{{player.name}}"
+        text: ちゃんと逃げずに見たからじゃないか。
+    - say:
+        speaker: さわでん
+        text: かも。……ありがと。今日、お前と来てよかった。
+    - set:
+        flags.sawadenWillVisitBaseball: true
+        flags.chapter7Clear: true
+        affection.sawaden: 2
+    - bgm: stop
+    - say:
+        text: こうして{{player.name}}は、さわでんが野球を始めた理由と、やめた理由の両方を知った。好きだったからこそ近づけなかった場所へ、彼はようやく自分の歩幅で戻り始める。
+    - say:
+        text: 野球部には入らない。それでも、ときどき顔を出して、白線の外側からボールの音を聞くことになるのだろう。
+    - say:
+        text: 第七章・了

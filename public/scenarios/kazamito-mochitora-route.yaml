@@ -1,0 +1,443 @@
+title: 風見塔のラストノート 番外編 餅虎と、舞台袖の本音
+dateLabel: 5月24日
+
+player:
+  title: 主人公の名前を決める
+  prompt: 呼ばれたい名前を入力してください。
+  defaultName: 湊
+  presets:
+    - 湊
+    - 悠真
+
+variables:
+  flags:
+    mochitoraRouteClear: false
+    teasedMochitora: false
+    sawBackstage: false
+    saidSomethingHonest: false
+    stayedTillEnd: false
+  affection:
+    mochitora: 5
+
+characters:
+  餅虎:
+    name: 餅虎
+
+start: broadcast_prep
+
+nodes:
+  broadcast_prep:
+    - date: 5月24日 土曜日 放課後
+    - background: 廊下
+    - bgm:
+        id: 共通ルート 日常
+        volume: 0.44
+        loop: true
+    - say:
+        text: 企画の広報チラシ修正を頼まれて、印刷室の前を通りかかったとき、廊下に餅虎の声が漏れていた。
+    - show:
+        character: 餅虎
+        expression: default
+        position: center
+    - say:
+        text: ドアが少し開いている。覗くつもりはなかったが、足が止まった。
+    - say:
+        speaker: 餅虎
+        text: ……ちがう。この写真、明るすぎる。もっと塔が引き立つやつ。
+    - say:
+        text: 一人で印刷サンプルを並べ直していた。机の上に十枚以上。全部、広報チラシの試し刷りだ。
+    - say:
+        text: ノックして入ると、餅虎が顔を上げた。一瞬だけ驚いた顔をして、すぐに元の表情に戻した。
+    - say:
+        speaker: 餅虎
+        text: あ、{{player.name}}。見た？ 今のあたし、かなり地味なとこ。
+    - choice:
+        options:
+          - text: 「手伝うよ」と言う
+            goto: offer_help
+          - text: 「地味どころか、ちゃんとしてて怖かった」と正直に言う
+            set:
+              flags.teasedMochitora: true
+            goto: honest_reaction
+
+  honest_reaction:
+    - say:
+        speaker: "{{player.name}}"
+        text: 地味どころか、ちゃんとしすぎてて少し怖かった。
+    - say:
+        speaker: 餅虎
+        text: ……怖い、って何？
+    - say:
+        text: 眉が上がった。怒ってはいない。でも反応が読めない顔をしている。
+    - say:
+        speaker: "{{player.name}}"
+        text: 表のキラキラを全部一人で作ってたんだと思って。
+    - say:
+        speaker: 餅虎
+        text: ……あー。そういう意味ね。
+    - say:
+        text: 餅虎が少しだけ口元をゆるめた。褒められた時とは違う、どこか安心したような笑い方だった。
+    - say:
+        speaker: 餅虎
+        text: まあ、手伝えるなら手伝って。捨てるやつと残すやつ分けてくれたら助かる。
+    - goto: sort_prints
+
+  offer_help:
+    - say:
+        speaker: "{{player.name}}"
+        text: 手伝うよ。何してるの？
+    - say:
+        speaker: 餅虎
+        text: チラシの写真選び。三種類試し刷りしたけど、どれも微妙でさ。
+    - say:
+        text: 机に広げられたサンプルを見せてくれた。どれも悪くないが、確かに決め手が違う。
+    - say:
+        speaker: 餅虎
+        text: 二枚目と三枚目で迷ってる。どっちが「見に来たくなる感じ」する？
+    - goto: sort_prints
+
+  sort_prints:
+    - say:
+        text: 二人でサンプルを手に取りながら比べた。餅虎は指摘が細かかった。余白の幅、フォントの太さ、写真の明度。ひとつひとつに根拠がある。
+    - say:
+        speaker: 餅虎
+        text: 広報って、本番じゃないから軽く思われがちなんだよ。でも、来る人が決まるのここだから。本番より先に勝負してんの、あたしは。
+    - say:
+        speaker: "{{player.name}}"
+        text: それ、アガサに言った？
+    - say:
+        speaker: 餅虎
+        text: 言う必要ある？ あたしがやる、それだけ。
+    - say:
+        text: あっさりしていた。でも、それが餅虎の流儀なんだとわかった。
+    - choice:
+        options:
+          - text: 「そういうとこ、かっこいいな」
+            set:
+              affection.mochitora: 2
+            goto: compliment_work
+          - text: 「二枚目の方が塔が生きてる」と意見を言う
+            goto: give_opinion
+
+  compliment_work:
+    - say:
+        speaker: 餅虎
+        text: ……いきなりそういうこと言う？
+    - say:
+        text: 餅虎が机に目を落とした。耳の先が少し赤い。
+    - say:
+        speaker: 餅虎
+        text: まあ……かっこいいとか言われ慣れてるけど、仕事に対して言われたのは初めてかも。
+    - say:
+        speaker: "{{player.name}}"
+        text: じゃあ今後も仕事に言う。
+    - say:
+        speaker: 餅虎
+        text: やめて、照れるから。……でも少しだけうれしい。
+    - set:
+        flags.saidSomethingHonest: true
+    - goto: give_opinion
+
+  give_opinion:
+    - say:
+        speaker: "{{player.name}}"
+        text: 二枚目の方が、塔が空に食い込んでる感じがある。見に来たくなる。
+    - say:
+        speaker: 餅虎
+        text: それ、あたしも同じ意見。でも三枚目は顔ぶれが写ってて親しみがある。どっちか一枚に絞れなくて。
+    - say:
+        speaker: "{{player.name}}"
+        text: 用途で分けたら？ チラシは塔メイン、SNSは顔ありで。
+    - say:
+        text: 餅虎が「あ」と小さく言って、鉛筆でメモした。
+    - say:
+        speaker: 餅虎
+        text: それ、なんで自分で思いつかなかったんだろ。一時間悩んでた。
+    - say:
+        speaker: "{{player.name}}"
+        text: 一人で詰め込んでたからじゃないか。
+    - say:
+        speaker: 餅虎
+        text: ……かもね。
+    - goto: after_work
+
+  after_work:
+    - date: 5月24日 土曜日 夕方
+    - say:
+        text: 作業が一段落した頃、窓の外の光が橙色になっていた。
+    - say:
+        speaker: 餅虎
+        text: 思ったより時間かかった。悪かったね、付き合わせて。
+    - say:
+        speaker: "{{player.name}}"
+        text: 呼ばれてないのに入ってきたのはこっちだよ。
+    - say:
+        speaker: 餅虎
+        text: そうだけど。でもまあ……助かった。
+    - say:
+        text: あっさりした口調だったけど、それが餅虎なりの素直さだとわかった。大げさに言わない分、ちゃんと届いた。
+    - say:
+        speaker: 餅虎
+        text: せっかくだし、少し付き合って。印刷室暗くなると気分下がるから外行こ。
+    - goto: walk_outside
+
+  walk_outside:
+    - background: 帰り道
+    - hide: {}
+    - show:
+        character: 餅虎
+        expression: default
+        position: right
+    - bgm:
+        id: 穏やかな恋愛イベント
+        volume: 0.38
+        loop: true
+    - say:
+        text: 渡り廊下を出ると、校庭に夕風が吹いていた。餅虎は空を見上げて、少し目を細めた。
+    - say:
+        speaker: 餅虎
+        text: 広報やってると、みんな「映えること考えてればいいでしょ」みたいな目で見てくるんだよね。
+    - say:
+        speaker: "{{player.name}}"
+        text: 思ってたより全然違った。
+    - say:
+        speaker: 餅虎
+        text: でしょ。来た人に「思ってたより良かった」って言わせるの、そんな簡単じゃないんだよ。
+    - say:
+        text: 軽い言い方だったけど、その奥に誇りがある。餅虎は自分の仕事をちゃんとわかっている。
+    - say:
+        speaker: 餅虎
+        text: ねえ{{player.name}}って、あたしのこと最初どう思った？
+    - choice:
+        options:
+          - text: 「自信家で、でも空回りしてない人だと思った」
+            set:
+              affection.mochitora: 2
+            goto: answer_honestly
+          - text: 「印象より、実はいろいろ考えてる人だなと思った」
+            set:
+              affection.mochitora: 1
+            goto: answer_impression
+
+  answer_honestly:
+    - say:
+        speaker: "{{player.name}}"
+        text: 自信家だけど、空回りしてない人だなって。
+    - say:
+        speaker: 餅虎
+        text: ……ちゃんと見てたんだ。
+    - say:
+        text: 意外そうな顔をした。すぐ笑顔に戻したけど、その前の一瞬が本音だった。
+    - say:
+        speaker: 餅虎
+        text: まあ、自信はあるよ。でも確認はもっとする。それがあたしのやり方。
+    - set:
+        flags.sawBackstage: true
+    - goto: mochitora_past
+
+  answer_impression:
+    - say:
+        speaker: "{{player.name}}"
+        text: 印象より、実はいろいろ考えてる人だなと。
+    - say:
+        speaker: 餅虎
+        text: 「実は」って、表は何も考えてないみたいじゃん。
+    - say:
+        speaker: "{{player.name}}"
+        text: そういう意味じゃなかった。見えてる以上に、ってこと。
+    - say:
+        speaker: 餅虎
+        text: ……それならまあ、許す。
+    - set:
+        flags.sawBackstage: true
+    - goto: mochitora_past
+
+  mochitora_past:
+    - say:
+        text: 二人で校庭の端を歩いた。風見塔のシルエットが、夕空の中にくっきり浮かんでいる。
+    - say:
+        speaker: 餅虎
+        text: あの塔さ、最初は「再生企画なんか成功するわけない」って思ってた。
+    - say:
+        speaker: "{{player.name}}"
+        text: 今は？
+    - say:
+        speaker: 餅虎
+        text: 成功させる気でいる。あたしが関わってるから。
+    - say:
+        text: 言い方はいつも強気だけど、今回は笑いが混じらなかった。本気の顔だった。
+    - say:
+        speaker: 餅虎
+        text: あたし、うまくいかなかったこと一回あって。中学の文化祭。気合入れすぎて、逆に浮いた。
+    - say:
+        text: 少し間があった。珍しく、続きを選ぶような間だった。
+    - say:
+        speaker: 餅虎
+        text: だからこっちに来てから、まずちゃんと仕事してから目立つようにした。順番変えたの。
+    - choice:
+        options:
+          - text: 「それで今の餅虎になったのか」
+            set:
+              affection.mochitora: 2
+            goto: reflect_change
+          - text: 「その話、誰かに言ったことある？」
+            goto: ask_told_anyone
+
+  ask_told_anyone:
+    - say:
+        speaker: "{{player.name}}"
+        text: その話、誰かに話したことある？
+    - say:
+        speaker: 餅虎
+        text: ……ない。なんで聞くの。
+    - say:
+        speaker: "{{player.name}}"
+        text: あんまり人に見せない面だなと思って。
+    - say:
+        speaker: 餅虎
+        text: ……{{player.name}}だから話した、みたいなこと言わせようとしてる？
+    - say:
+        speaker: "{{player.name}}"
+        text: そんなつもりじゃ。
+    - say:
+        speaker: 餅虎
+        text: 半分そうだけど、半分は違う。なんか今日、話しやすかっただけ。
+    - say:
+        text: 餅虎が前を向いて歩き続けた。こちらを見ないまま言ったのに、声がいつもより柔らかかった。
+    - set:
+        flags.saidSomethingHonest: true
+    - goto: reflect_change
+
+  reflect_change:
+    - say:
+        speaker: "{{player.name}}"
+        text: それで今の餅虎になったのか。
+    - say:
+        speaker: 餅虎
+        text: うん。遠回りしたけどね。
+    - say:
+        text: 笑った。今日見た笑顔の中で、一番飾りが少ない笑い方だった。
+    - goto: evening_bench
+
+  evening_bench:
+    - background: 校庭
+    - hide: {}
+    - show:
+        character: 餅虎
+        expression: default
+        position: right
+    - bgm:
+        id: 切ない会話・すれ違い
+        volume: 0.33
+        loop: true
+    - say:
+        text: 校庭の端のベンチに、自然と二人で腰を下ろした。風見塔が真正面に見える位置だった。
+    - say:
+        speaker: 餅虎
+        text: 星潮祭、うまくいったらあたし、塔の前で写真撮りたい。
+    - say:
+        speaker: "{{player.name}}"
+        text: チームで？
+    - say:
+        speaker: 餅虎
+        text: それもするけど。……できれば、{{player.name}}と二人でも。
+    - say:
+        text: 前を向いたまま言った。さっきまでの強さが、少しだけ抜けた声だった。
+    - say:
+        speaker: "{{player.name}}"
+        text: それは、どういう意味で言ってるの？
+    - say:
+        speaker: 餅虎
+        text: どういう意味だと思う？
+    - say:
+        text: 今度はこちらを見た。逃げない目だった。
+    - choice:
+        options:
+          - text: 「特別に誘ってる、ってこと？」
+            set:
+              affection.mochitora: 2
+            goto: invite_meaning
+          - text: 「答え聞いてから答える」
+            set:
+              affection.mochitora: 1
+            goto: ask_back
+
+  ask_back:
+    - say:
+        speaker: "{{player.name}}"
+        text: 先に答えを聞いてから、こっちも答える。
+    - say:
+        speaker: 餅虎
+        text: ずるい。でもまあいい。
+    - say:
+        text: 餅虎が少し考える顔をした。珍しく、言葉を選んでいた。
+    - say:
+        speaker: 餅虎
+        text: 今日みたいに、舞台袖のあたしを知ってる人と撮りたい。それだけ。
+    - say:
+        speaker: "{{player.name}}"
+        text: それ、もう答えになってる。
+    - say:
+        speaker: 餅虎
+        text: ……気づいてたなら最初から言ってよ。
+    - goto: final_moment
+
+  invite_meaning:
+    - say:
+        speaker: "{{player.name}}"
+        text: 特別に誘ってる、ってこと？
+    - say:
+        speaker: 餅虎
+        text: ……正解。でも「特別」なんて言葉、あたしが使うと重くなるから言わなかった。
+    - say:
+        text: 餅虎が小さく笑った。肩の力が少し落ちている。
+    - say:
+        speaker: 餅虎
+        text: 舞台袖も、地味な作業も、今日みたいなとこも全部見てた人と、一緒に写りたい。
+    - goto: final_moment
+
+  final_moment:
+    - say:
+        speaker: "{{player.name}}"
+        text: 撮ろう。星潮祭が終わったら。
+    - say:
+        speaker: 餅虎
+        text: 約束ね。
+    - say:
+        text: 餅虎が前を向いた。風見塔の風見が、夕風の中でゆっくり回っていた。
+    - say:
+        speaker: 餅虎
+        text: ……今日ね、実は最初から一人でやりきるつもりだった。
+    - say:
+        speaker: "{{player.name}}"
+        text: わかってた。
+    - say:
+        speaker: 餅虎
+        text: じゃあなんで入ってきたの。
+    - say:
+        speaker: "{{player.name}}"
+        text: 足が止まったから。
+    - say:
+        text: 餅虎がそれを聞いて、少しだけ黙った。
+    - say:
+        speaker: 餅虎
+        text: ……止まってくれてよかった。
+    - say:
+        text: 声がいつもより低かった。飾らない、素のままの声だった。
+    - set:
+        flags.stayedTillEnd: true
+    - goto: ending
+
+  ending:
+    - bgm: stop
+    - hide: {}
+    - say:
+        text: 夕暮れが深くなって、風見塔の影が校庭を長く渡っていた。
+    - say:
+        text: 餅虎は最後まで「好き」とは言わなかった。でも今日の全部が、そういうことだった。
+    - say:
+        text: 舞台袖を知ってる人間だけが受け取れる、餅虎なりの言い方で。
+    - set:
+        flags.mochitoraRouteClear: true
+    - say:
+        text: 番外編・了

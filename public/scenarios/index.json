@@ -1,5 +1,10 @@
 [
   {
+    "url": "scenarios/kazamito-mochitora-route.yaml",
+    "title": "風見塔のラストノート 番外編 餅虎と、舞台袖の本音",
+    "description": "放課後の印刷室で一人チラシ選びをしていた餅虎に付き合うことになった番外編。表の完璧さを支える裏側と、飾らない素顔に触れる。"
+  },
+  {
     "url": "scenarios/kazamito-amu-tokyo-date.yaml",
     "title": "風見塔のラストノート 番外編 あむと、東京の続き",
     "description": "ゴールデンウィーク、あむに誘われて東京へ。浅草観光から夜景、そしてホテルの夜へ続く番外編。"

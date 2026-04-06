@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-06T17:38:31.436Z",
+  "generatedAt": "2026-04-06T18:16:29.638Z",
   "backgrounds": {
     "aonagi-gate-morning": "assets/backgrounds/aonagi-gate-morning.png",
     "aonagi-oldtower-corridor-morning": "assets/backgrounds/aonagi-oldtower-corridor-morning.png",
@@ -20,6 +20,8 @@
     "kazamito-sea-trip-shore": "assets/backgrounds/kazamito-sea-trip-shore.png",
     "project-meeting-classroom-evening": "assets/backgrounds/project-meeting-classroom-evening.png",
     "station-evening": "assets/backgrounds/station-evening.png",
+    "ホテル・ロビー": "assets/backgrounds/ホテル・ロビー.svg",
+    "ホテル・客室・夜": "assets/backgrounds/ホテル・客室・夜.svg",
     "体育館": "assets/backgrounds/体育館.png",
     "保健室": "assets/backgrounds/保健室.png",
     "図書館": "assets/backgrounds/図書館.png",
@@ -29,14 +31,15 @@
     "教室・昼": "assets/backgrounds/教室・昼.png",
     "映画館・ロビー": "assets/backgrounds/映画館・ロビー.svg",
     "映画館・上映中": "assets/backgrounds/映画館・上映中.svg",
+    "東京・夜景": "assets/backgrounds/東京・夜景.svg",
+    "東京・浅草・昼": "assets/backgrounds/東京・浅草・昼.svg",
     "校庭": "assets/backgrounds/校庭.png",
     "校舎外・夕方": "assets/backgrounds/校舎外・夕方.svg",
+    "温泉旅館・和室": "assets/backgrounds/温泉旅館・和室.svg",
+    "温泉旅館・玄関": "assets/backgrounds/温泉旅館・玄関.svg",
     "職員室": "assets/backgrounds/職員室.svg",
     "部室": "assets/backgrounds/部室.png",
-    "東京・浅草・昼": "assets/backgrounds/東京・浅草・昼.svg",
-    "東京・夜景": "assets/backgrounds/東京・夜景.svg",
-    "ホテル・ロビー": "assets/backgrounds/ホテル・ロビー.svg",
-    "ホテル・客室・夜": "assets/backgrounds/ホテル・客室・夜.svg"
+    "露天風呂・夜": "assets/backgrounds/露天風呂・夜.svg"
   },
   "characters": {
     "i5": {

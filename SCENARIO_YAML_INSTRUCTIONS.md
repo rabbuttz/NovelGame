@@ -151,6 +151,7 @@ nodes:
 ```
 
 本文と発話者名には `{{player.name}}` のような変数展開が使えます。
+値が `{{player.name}}` のような変数展開で始まる場合は、YAML 上で文字列をダブルクォートしてください。例: `text: "{{player.name}}は？ どう思ってる。"`
 
 ### 6. `choice`
 
@@ -377,6 +378,7 @@ YAML:
 - `characters` には、シナリオ中で `speaker` や `show.character` に使うキャラだけを書いてください
 - 主人公名入力を使いたい場合だけ `player` を書いてください
 - `{{player.name}}` を使う場合は `player.defaultName` も入れてください
+- 値が `{{player.name}}` のような変数展開で始まる文字列は、`text: "{{player.name}}..."` のようにダブルクォートしてください
 - `choice.options` は空にしないでください
 - `goto` 先ノードは必ず定義してください
 - 無限ループを作る場合は意図があるときだけにしてください

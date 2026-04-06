@@ -10,6 +10,11 @@
     "description": "ロクロとごんたが抱える教師側の責任に触れ、風見塔閉鎖当日の記録が現在へつながり始める共通ルート第九章。"
   },
   {
+    "url": "scenarios/kazamito-kiryu-suzu-past.yaml",
+    "title": "風見塔のラストノート 番外編 一年生の春、旧棟で",
+    "description": "放課後の廊下で目撃したきりゅうとすずどらの無言のやり取り。きりゅうが語り始めた、ふたりの出会いの話。"
+  },
+  {
     "url": "scenarios/kazamito-gonta-support.yaml",
     "title": "風見塔のラストノート 番外編 ごんた先生の救助メニュー",
     "description": "追加見学日の準備で不足と疲れが噴き出す中、体育教師ごんたが妙な調子でチームを助け回る番外編。"

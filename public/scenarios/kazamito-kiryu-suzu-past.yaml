@@ -1,0 +1,300 @@
+title: 風見塔のラストノート 番外編 一年生の春、旧棟で
+dateLabel: ――
+
+player:
+  title: 主人公の名前を決める
+  prompt: 呼ばれたい名前を入力してください。
+  defaultName: 湊
+  presets:
+    - 湊
+    - 悠真
+
+variables:
+  flags:
+    askedAboutPast: false
+    askedRelationship: false
+  affection:
+    kiryu: 2
+    suzudora: 1
+
+characters:
+  きりゅう:
+    name: きりゅう
+  すずどら:
+    name: すずどら
+
+start: hallway_present
+
+nodes:
+  hallway_present:
+    - date: ある放課後
+    - background: 廊下
+    - bgm:
+        id: 共通ルート 日常
+        volume: 0.5
+        loop: true
+    - say:
+        text: 放課後の廊下は、人の波が引いたあとの独特の静けさに包まれていた。遠くで部活の掛け声が届くが、ここにはもう誰もいない――と思っていた。
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: すずどら
+        expression: default
+        position: right
+    - say:
+        text: 角を曲がったところで、きりゅうとすずどらが向き合っていた。言葉は交わしていない。きりゅうが軽くうなずき、すずどらが視線を逸らして歩き出す。
+    - say:
+        text: ただそれだけ。なのにふたりの間には、書き込みの多い本のような、厚みのある何かが確かにあった。
+    - hide:
+        position: right
+    - say:
+        speaker: きりゅう
+        text: ……なんだ、見てたのか。
+    - say:
+        speaker: "{{player.name}}"
+        text: ごめん、たまたま。きりゅう先輩と、すずどら先輩って、仲いいの？
+    - say:
+        speaker: きりゅう
+        text: 仲がいい……その言葉が合うかは分からん。ただ、知り合いだ。昔から。
+    - choice:
+        options:
+          - text: 「昔から？」と訊き返す
+            set:
+              flags.askedAboutPast: true
+            goto: ask_about_past
+          - text: そっとしておく
+            goto: leave_it
+
+  leave_it:
+    - say:
+        speaker: "{{player.name}}"
+        text: そっか。なんか……いい雰囲気だった、ふたり。
+    - say:
+        speaker: きりゅう
+        text: ……まあな。
+    - say:
+        text: きりゅうはそれ以上何も言わなかった。廊下に午後の光がゆっくりと伸びる。
+    - say:
+        text: 言葉にしなくていいものが、人と人の間にはある。そのことを、今日はじめて少しだけ知った気がした。
+    - goto: end_scene
+
+  ask_about_past:
+    - say:
+        speaker: "{{player.name}}"
+        text: 昔から、って……入学前から？
+    - say:
+        speaker: きりゅう
+        text: いや。入学してすぐ。一年の春だ。
+    - say:
+        text: きりゅうは少し間を置いてから、歩き出した。ついてきて、とだけ言う。
+    - goto: move_to_clubroom
+
+  move_to_clubroom:
+    - background: 部室
+    - bgm:
+        id: 切ない会話・すれ違い
+        volume: 0.45
+        loop: true
+    - say:
+        text: 部室には夕方の光が差し込んで、埃っぽいのに妙に落ち着く空気があった。きりゅうは窓際に立ったまま、外を向いて話し始めた。
+    - show:
+        character: きりゅう
+        expression: default
+        position: right
+    - say:
+        speaker: きりゅう
+        text: 一年の四月、旧棟の点検を頼まれた。担当の先生が急病で、誰かに頼むしかなかったらしい。当時の俺はまだ整備委員でもなかったけど、なぜか声がかかった。
+    - say:
+        speaker: きりゅう
+        text: 旧棟の四階、東側の廊下。手すりが一本、根元から浮いてた。工具は一式持っていったが、ひとりじゃ押さえながら締めるのは無理なサイズだった。
+    - say:
+        speaker: "{{player.name}}"
+        text: それで、すずどら先輩が？
+    - say:
+        speaker: きりゅう
+        text: ああ。たまたま、そこを通りかかった。
+    - goto: flashback_start
+
+  flashback_start:
+    - background: aonagi-oldtower-corridor-morning
+    - bgm:
+        id: 共通ルート 日常
+        volume: 0.4
+        loop: true
+    - say:
+        text: ―― 二年前、四月。
+    - say:
+        text: 旧棟の廊下には誰もいなかった。古い校舎特有の、木と埃と時間の混ざったにおい。きりゅうはひとりで、壁から浮いた手すりと向き合っていた。
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - say:
+        speaker: きりゅう
+        text: （片方を押さえながら締めるには、あと一本腕が足りない。壁に何か噛ませて……いや、それじゃ固定できない。）
+    - say:
+        text: 廊下の奥から足音がした。迷いのない、均等な歩調。
+    - show:
+        character: すずどら
+        expression: default
+        position: right
+    - say:
+        text: 一年生にしては場慣れした目をしている。きりゅうには見覚えのない顔だった。
+    - say:
+        speaker: すずどら
+        text: 何をしている。
+    - say:
+        speaker: きりゅう
+        text: 手すりの修理。根元が浮いてる。押さえる人間がいなくて止まってる。
+    - say:
+        speaker: すずどら
+        text: ひとりで来たのか。
+    - say:
+        speaker: きりゅう
+        text: 頼める人間がいなかった。
+    - say:
+        text: すずどらはしばらく黙って、浮いた手すりの根元を見た。指で押して、遊びを確認する。
+    - say:
+        speaker: すずどら
+        text: ……ここを押さえていればいいか。
+    - say:
+        speaker: きりゅう
+        text: え？
+    - say:
+        speaker: すずどら
+        text: 聞こえなかったか。ここを押さえていればいいか、と訊いた。
+    - say:
+        text: 名乗りもなく、事情も語らず、ただ手を差し出す。きりゅうは一瞬戸惑ったが、断る理由もなかった。
+    - say:
+        speaker: きりゅう
+        text: ……助かる。右の根元を両手で押さえてくれ。
+    - goto: flashback_repair
+
+  flashback_repair:
+    - say:
+        text: それからしばらく、ふたりは無言で作業した。すずどらは言われた通りの場所を迷いなく押さえ、余計な動きをしない。きりゅうは工具を回し、締め付けを丁寧に確認する。
+    - say:
+        text: 人が通ったら危ない、という認識だけを共有して、言葉はいらなかった。
+    - motion:
+        character: きりゅう
+        name: うなずき
+    - say:
+        speaker: きりゅう
+        text: 固まった。手、離していい。
+    - say:
+        text: すずどらが手を引いた。手すりを軽く揺らして確認する。動かない。
+    - say:
+        speaker: すずどら
+        text: 悪くない。
+    - say:
+        speaker: きりゅう
+        text: お前、こんな時間に旧棟になんで。
+    - say:
+        speaker: すずどら
+        text: 用があった。
+    - say:
+        speaker: きりゅう
+        text: 用、ね。……名前は。
+    - say:
+        speaker: すずどら
+        text: すずどら。一年一組。
+    - say:
+        speaker: きりゅう
+        text: きりゅう。一年三組。
+    - say:
+        text: それだけで、すずどらは踵を返した。話は終わりだと言うように、足音はすぐに遠ざかる。
+    - say:
+        speaker: きりゅう
+        text: ……何しに来てたんだ、あいつ。
+    - say:
+        text: 誰もいない廊下に向かって、きりゅうはひとりそうつぶやいた。
+    - goto: back_to_present
+
+  back_to_present:
+    - hide: {}
+    - background: 部室
+    - bgm:
+        id: 穏やかな恋愛イベント
+        volume: 0.4
+        loop: true
+    - show:
+        character: きりゅう
+        expression: default
+        position: right
+    - say:
+        speaker: きりゅう
+        text: それだけだ。あいつが何をしに来てたのかは、その時は分からなかった。
+    - say:
+        speaker: "{{player.name}}"
+        text: その時は？
+    - say:
+        speaker: きりゅう
+        text: 一年後に知った。あの廊下で、前の年に後輩が転んで骨折してる。でも記録の提出が遅れて、正式な事故報告になっていなかった。
+    - say:
+        speaker: きりゅう
+        text: すずどらはそれを知って、自分で確認しに来てた。一年生のくせに、誰かが見落としたことを拾いに。
+    - say:
+        speaker: "{{player.name}}"
+        text: ……すずどら先輩が言ってたの？
+    - say:
+        speaker: きりゅう
+        text: いや。俺が後から調べた。あいつは何も言わなかった。たぶんこれからも言わない。
+    - say:
+        text: きりゅうは窓の外を見た。夕暮れの校庭で、誰かがボールを追っている。
+    - choice:
+        options:
+          - text: 「それで、ふたりの関係はどうなったの」と訊く
+            set:
+              flags.askedRelationship: true
+            goto: ask_relationship
+          - text: 黙って聞いていた
+            goto: silent_listen
+
+  ask_relationship:
+    - say:
+        speaker: "{{player.name}}"
+        text: それで、それからふたりは仲良くなったの？
+    - say:
+        speaker: きりゅう
+        text: 仲良く、は違う。あいつは馴れ合わない。でも……俺の仕事を邪魔しないし、俺もあいつの判断は信用する。
+    - say:
+        speaker: きりゅう
+        text: 一年以上かかったけど、それくらいの距離感に落ち着いた。
+    - say:
+        speaker: "{{player.name}}"
+        text: なんか……いいな、それ。
+    - say:
+        speaker: きりゅう
+        text: そうか？ 普通だと思ってたけど。
+    - say:
+        text: 照れているわけでも、誇っているわけでもない。きりゅうにとってそれは本当に「ただそういうもの」なのだと、{{player.name}}には分かった。
+    - set:
+        affection.kiryu: 3
+    - goto: end_scene
+
+  silent_listen:
+    - say:
+        text: "{{player.name}}は何も言わなかった。言わなくていいと思った。"
+    - say:
+        speaker: きりゅう
+        text: ……なんか、変な話したな。
+    - say:
+        speaker: "{{player.name}}"
+        text: ううん。教えてくれてよかった。
+    - say:
+        text: きりゅうは少し目を細めて、また外を向いた。夕暮れが部室の床に斜めに伸びていく。
+    - set:
+        affection.kiryu: 3
+    - goto: end_scene
+
+  end_scene:
+    - say:
+        text: 廊下ですれ違ったときの、あのうなずきの意味が、今は少しだけ分かる気がした。
+    - say:
+        text: 言葉にしない分だけ、しっかりした何かが――ふたりの間には、もうずっと根を張っていた。
+    - bgm: stop
+    - hide: {}
+    - say:
+        text: 番外編・了

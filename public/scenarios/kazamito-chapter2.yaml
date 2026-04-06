@@ -1,0 +1,582 @@
+title: 風見塔のラストノート 第二章 役割の輪郭
+dateLabel: 4月11日
+
+player:
+  title: 主人公の名前を決める
+  prompt: 呼ばれたい名前を入力してください。
+  defaultName: 湊
+  presets:
+    - 湊
+    - 悠真
+
+variables:
+  flags:
+    chapter1Clear: true
+    chapter2Clear: false
+    heardTowerRumor: true
+    acceptedProjectTemp: true
+    promisedSupport: true
+    helpedUkiwaFirst: false
+    backedMochitoraPlan: false
+    acceptedMimochiArchivePlan: false
+    joinedGuraInspection: false
+    restWithNemunomi: false
+    acceptedCrossRole: false
+    foundOldCancellationSlip: false
+  affection:
+    kiryu: 2
+    amu: 2
+    agasa: 2
+    ukiwa: 1
+    gura: 1
+    mimochi: 1
+    suzudora: 1
+    nemunomi: 1
+    mochitora: 1
+
+characters:
+  きりゅう:
+    name: きりゅう
+  あむ:
+    name: あむ
+  アガサ:
+    name: アガサ
+  うきわ:
+    name: うきわ
+  ぐら:
+    name: ぐら
+  みもち:
+    name: みもち
+  ねむのみ:
+    name: ねむのみ
+  餅虎:
+    name: 餅虎
+  すずどら:
+    name: すずどら
+
+start: morning_briefing
+
+nodes:
+  morning_briefing:
+    - date: 4月11日 朝
+    - background: 廊下
+    - bgm:
+        id: 共通ルート 日常
+        volume: 0.62
+        loop: true
+    - say:
+        text: 転入二日目の朝。まだ校舎の曲がり角に迷うことはあるが、昨日より先に、人の名前が頭に浮かぶようになっていた。
+    - say:
+        text: 風見塔再生企画の臨時連絡役。その肩書きは仮のはずなのに、朝の時点でもう一日の動き方を決めている。
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: アガサ
+        expression: smile
+        position: right
+    - say:
+        speaker: きりゅう
+        text: おはよう。今日は役割を固める。人手も時間も足りないから、曖昧なまま動くと詰む。
+    - say:
+        speaker: アガサ
+        text: 君にはその間を繋いでもらいたい。誰かの仕事を奪うんじゃなくて、止まりそうな流れを前に戻す係だね。
+    - say:
+        speaker: "{{player.name}}"
+        text: 連絡役、って昨日より責任が増えてない？
+    - say:
+        speaker: アガサ
+        text: 増えてるよ。だから先に説明してる。
+    - motion:
+        character: アガサ
+        name: 喜び
+    - say:
+        speaker: きりゅう
+        text: 笑って言うな。……ともかく、教室に来い。全員の担当を一度整理する。
+    - goto: role_meeting
+
+  role_meeting:
+    - background: 教室・昼
+    - hide: {}
+    - show:
+        character: うきわ
+        expression: smile
+        position: left
+    - show:
+        character: ぐら
+        expression: default
+        position: center
+    - show:
+        character: 餅虎
+        expression: smile
+        position: right
+    - say:
+        text: 昼前の教室には、資料、メジャー、古い見取り図、色見本まで広げられていた。準備というより、小さな現場事務所だ。
+    - say:
+        speaker: うきわ
+        text: はい注目！ ぼく、当日案内と実行委員との連絡表、もう作り始めてるから！
+    - say:
+        speaker: ぐら
+        text: 先に塔の手すりと配線。直せる範囲、今日見ないと危ない。
+    - say:
+        speaker: 餅虎
+        text: 広報は任せて。どうせなら「最後の風見塔」って一発で人を振り向かせたいじゃん？
+    - hide: {}
+    - show:
+        character: ねむのみ
+        expression: smile
+        position: left
+    - show:
+        character: みもち
+        expression: troubled
+        position: center
+    - show:
+        character: すずどら
+        expression: default
+        position: right
+    - say:
+        speaker: ねむのみ
+        text: 来場者の流れだけじゃなくて、休める場所も考えたいな。人も、作業してる側も、詰まると事故になるし。
+    - say:
+        speaker: みもち
+        text: それと、塔の記録を展示したい。噂だけで人が集まると、残したいものが雑音に埋もれるから。
+    - say:
+        speaker: すずどら
+        text: 同感だ。恋愛成就の見世物にするなら、私は公開計画そのものに反対する。
+    - sound: ビシッとツッコミ2
+    - hide: {}
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: アガサ
+        expression: default
+        position: center
+    - show:
+        character: あむ
+        expression: smile
+        position: right
+    - say:
+        speaker: きりゅう
+        text: だから今決める。安全管理、修繕、導線、広報、展示。全部必要で、どれか一つが上でも下でもない。
+    - say:
+        speaker: あむ
+        text: でも最初から全員きれいに噛み合うわけないし、まずは動きながら調整だよな！
+    - say:
+        speaker: アガサ
+        text: 調整役の出番だ。ね、{{player.name}}。もう逃げるには遅い。
+    - say:
+        text: 冗談めいた口調なのに、教室の全員が本気だった。必要な役割の数だけ、ぶつかる理由も増えていく。
+    - goto: first_support_choice
+
+  first_support_choice:
+    - say:
+        text: 会議がひと区切りついた瞬間、机の上の紙が一斉に動き出す。誰かが立てば、別の誰かの作業が宙に浮く。
+    - show:
+        character: うきわ
+        expression: troubled
+        position: left
+    - show:
+        character: ぐら
+        expression: default
+        position: center
+    - show:
+        character: きりゅう
+        expression: default
+        position: right
+    - say:
+        speaker: うきわ
+        text: あっ……待って、案内係の当番、同じ人を二か所に入れてる。これ、今直さないとまずい！
+    - say:
+        speaker: ぐら
+        text: 塔の裏、午前のうちに見たい。錆、昼の湿気で読みにくくなるから。
+    - say:
+        speaker: きりゅう
+        text: どっちも急ぎだ。{{player.name}}、先に回る方を決めろ。
+    - choice:
+        options:
+          - text: まずはうきわの段取りミスを直す
+            set:
+              flags.helpedUkiwaFirst: true
+              affection.ukiwa: 3
+            goto: help_ukiwa_first
+          - text: ぐらの設備点検に同行する
+            set:
+              flags.joinedGuraInspection: true
+              affection.gura: 3
+            goto: join_gura_first
+
+  help_ukiwa_first:
+    - background: 廊下
+    - hide: {}
+    - show:
+        character: うきわ
+        expression: troubled
+        position: center
+    - say:
+        speaker: うきわ
+        text: ごめん、勢いで名簿を埋めたら、階段誘導と受付に同じ子を入れちゃってた……！
+    - say:
+        speaker: "{{player.name}}"
+        text: まだ提出前なら直せる。実行委員の空きと、当日動ける人を照らそう。
+    - say:
+        text: 廊下の窓際で名簿を広げ、空いている時間帯を一つずつ拾い直す。うきわは焦っているのに、手を止めず謝り続けた。
+    - say:
+        speaker: うきわ
+        text: 張り切ると、先に完成図だけ見えちゃうんだよね。形にする前に走っちゃうっていうか。
+    - say:
+        speaker: "{{player.name}}"
+        text: 走るのは悪くないよ。途中で転びそうなら、呼んでくれればいい。
+    - motion:
+        character: うきわ
+        name: 喜び
+    - say:
+        speaker: うきわ
+        text: ……うわ、それ、今めちゃくちゃ助かるやつ。じゃあ遠慮なく頼る！
+    - say:
+        text: 名簿の赤字が減るにつれ、混線していた予定表に一本だけ筋が通った。
+    - goto: promo_archive_conflict
+
+  join_gura_first:
+    - background: kazamito-backyard-shrubbery-morning
+    - hide: {}
+    - show:
+        character: ぐら
+        expression: default
+        position: center
+    - say:
+        text: 塔の裏手は、校舎側よりさらに静かだった。朝の風が低木を鳴らし、金属の継ぎ目だけが冷たく光っている。
+    - say:
+        speaker: ぐら
+        text: 手袋、片方どうぞ。触る前に見る。見たあとで、やっと触る。
+    - say:
+        speaker: "{{player.name}}"
+        text: 了解。俺は持つ係と記録係、どっちがいい？
+    - say:
+        speaker: ぐら
+        text: 両方。……でも無理なら、横で気づいたこと言って。
+    - say:
+        text: ぐらは余計な言葉を使わないまま、緩んだボルト、浮いた板金、古い配線の通り道を次々示していく。静かだが、見落としがない。
+    - say:
+        speaker: ぐら
+        text: ここ、補修跡が二重。前に一回、公開直前で止めた形跡がある。
+    - say:
+        speaker: "{{player.name}}"
+        text: 止めた？
+    - say:
+        speaker: ぐら
+        text: 理由はまだ不明。けど、急いで隠した跡に見える。
+    - say:
+        text: 風見塔は古いだけではないのかもしれない。そう思ったところで、教室側からあむの声が飛んできた。
+    - goto: promo_archive_conflict
+
+  promo_archive_conflict:
+    - date: 4月11日 昼休み
+    - background: 図書館
+    - hide: {}
+    - show:
+        character: 餅虎
+        expression: smile
+        position: left
+    - show:
+        character: みもち
+        expression: troubled
+        position: center
+    - show:
+        character: アガサ
+        expression: default
+        position: right
+    - say:
+        text: 昼休み、場所を図書館の閲覧席に移しても、議題は途切れなかった。むしろ静かな分、意見の違いだけがはっきり聞こえる。
+    - say:
+        speaker: 餅虎
+        text: 最初の一枚は派手でいいんだよ。「最後の風見塔、開く」って打ち出せばみんな見る。見てから中身を知ればいい。
+    - say:
+        speaker: みもち
+        text: 見てもらうだけなら、それでいいかもしれない。でも……塔に残ってる記録が、ただの飾りになるのは嫌だ。
+    - say:
+        speaker: アガサ
+        text: 注目と意味づけ。どちらも正しい。問題は、どちらを先に立てるかだね。
+    - hide:
+        position: right
+    - show:
+        character: すずどら
+        expression: default
+        position: right
+    - say:
+        speaker: すずどら
+        text: 噂だけを餌にした瞬間、この企画は軽くなる。軽くなった企画は、安全の線も軽く踏み越える。
+    - say:
+        text: 正面から否定されたのに、餅虎は目をそらさない。みもちもまた、視線を下げたまま引かない。
+    - choice:
+        options:
+          - text: 餅虎の宣伝案を土台にする
+            set:
+              flags.backedMochitoraPlan: true
+              affection.mochitora: 3
+              affection.mimochi: 2
+            goto: back_mochitora
+          - text: みもちの展示案を先に通す
+            set:
+              flags.acceptedMimochiArchivePlan: true
+              affection.mimochi: 3
+              affection.mochitora: 2
+            goto: back_mimochi
+
+  back_mochitora:
+    - say:
+        speaker: "{{player.name}}"
+        text: 最初の一歩としては、餅虎の案が必要だと思う。見てもらえないと、展示も記録も届かないから。
+    - say:
+        speaker: 餅虎
+        text: だよな。話を聞く前に振り向かせる、それが広報の仕事。
+    - say:
+        speaker: "{{player.name}}"
+        text: ただし言葉は盛りすぎない。みもち、展示の見出しと一緒に組ませてほしい。
+    - say:
+        speaker: みもち
+        text: ……うん。なら、軽くしすぎない形にはできると思う。
+    - say:
+        speaker: すずどら
+        text: その条件なら保留で見よう。煽りだけが独走するなら即座に止める。
+    - goto: nemunomi_break
+
+  back_mimochi:
+    - say:
+        speaker: "{{player.name}}"
+        text: 先に通すなら、みもちの展示案だと思う。何を残したい企画なのか、そこが見えないと広報も薄くなる。
+    - say:
+        speaker: みもち
+        text: ……ありがとう。記録を先に並べられたら、塔の見え方も少し変わるはずだから。
+    - say:
+        speaker: 餅虎
+        text: 了解。じゃあ俺は、その展示を見たくなる言い方を考える。地味に終わらせる気はないけどな。
+    - say:
+        speaker: すずどら
+        text: その順序なら理にかなう。話題性は後からでも乗せられる。
+    - goto: nemunomi_break
+
+  nemunomi_break:
+    - date: 4月11日 放課後
+    - background: 保健室
+    - hide: {}
+    - show:
+        character: ねむのみ
+        expression: smile
+        position: center
+    - say:
+        text: 午後の連絡と修正を終えた頃には、喉が乾いていることさえ忘れていた。保健室の前で、ねむのみが手招きする。
+    - say:
+        speaker: ねむのみ
+        text: ちょっとだけ休憩。来場者の休憩導線を考える前に、連絡役本人が倒れたら困るよ。
+    - say:
+        speaker: "{{player.name}}"
+        text: そんなに顔に出てた？
+    - say:
+        speaker: ねむのみ
+        text: 出てた。ずっと「まだ大丈夫」って言う人の顔。
+    - choice:
+        options:
+          - text: 五分だけ休む
+            set:
+              flags.restWithNemunomi: true
+              affection.nemunomi: 3
+            goto: take_break
+          - text: まだ動けると答える
+            set:
+              affection.nemunomi: 2
+            goto: keep_moving
+
+  take_break:
+    - say:
+        text: 紙コップの水を受け取って椅子に腰を下ろす。静かな部屋でようやく、自分が朝から一度も座っていなかったことに気づいた。
+    - say:
+        speaker: ねむのみ
+        text: 休める場所があるって、甘やかしじゃないんだよ。余裕のなくなった人が無理をしないための、安全策。
+    - say:
+        speaker: "{{player.name}}"
+        text: 来場者だけじゃなくて、準備してる側にも必要なんだな。
+    - say:
+        speaker: ねむのみ
+        text: うん。だから導線って、歩く道だけじゃないの。止まる場所まで含めて設計なんだよ。
+    - goto: cross_role_realization
+
+  keep_moving:
+    - say:
+        speaker: "{{player.name}}"
+        text: まだ平気。今止まると、そのまま置いていかれそうで。
+    - say:
+        speaker: ねむのみ
+        text: 置いていかれるんじゃなくて、自分で自分を追い立ててるだけかもよ。
+    - say:
+        text: ねむのみは強く引き止めず、代わりに小さな包みを渡してきた。中身は飴と、走り書きのメモだった。
+    - say:
+        speaker: ねむのみ
+        text: 後ででも見て。休憩場所の候補、三つ書いてあるから。無理しない人がいると、全体も無理しにくくなる。
+    - goto: cross_role_realization
+
+  cross_role_realization:
+    - background: project-meeting-classroom-evening
+    - hide: {}
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: アガサ
+        expression: default
+        position: center
+    - show:
+        character: あむ
+        expression: smile
+        position: right
+    - say:
+        text: 夕方の打ち合わせで、修正した連絡表、点検メモ、展示案、休憩導線の走り書きを机に並べる。朝より散らかっているのに、不思議と前に進んでいた。
+    - say:
+        speaker: あむ
+        text: すご。もう完全にあちこち回ってるじゃん。昨日まで転入生だったのに。
+    - say:
+        speaker: きりゅう
+        text: いや、だからこそだ。どこにも固定されてないから、全部を繋げる余地がある。
+    - say:
+        speaker: アガサ
+        text: 誰か一人の補助じゃなくて、企画全体の流れを見る役。今日の君は、ちゃんとその位置に立ててた。
+    - set:
+        flags.acceptedCrossRole: true
+    - say:
+        text: ようやく言葉になる。自分の仕事は雑務ではなく、空いた隙間を埋め続けることなのだと。
+    - if:
+        condition: flags.joinedGuraInspection == true
+        then: report_after_gura
+        else: report_after_ukiwa
+
+  report_after_ukiwa:
+    - show:
+        character: うきわ
+        expression: smile
+        position: right
+    - say:
+        speaker: うきわ
+        text: 名簿、提出できた！ まだ粗いけど、最初の形にはなったよ。助かった、ほんと。
+    - say:
+        speaker: きりゅう
+        text: 次は現場の確認だ。ぐらが封鎖区画まわりでもう一度見ると言ってた。
+    - goto: late_inspection_after_errands
+
+  report_after_gura:
+    - show:
+        character: ぐら
+        expression: default
+        position: right
+    - say:
+        speaker: ぐら
+        text: 午前の続き、もう少し見たい場所がある。封鎖区画の外側。今なら人が少ない。
+    - say:
+        speaker: きりゅう
+        text: 単独で入るなよ。{{player.name}}、記録役として同行してくれ。
+    - goto: late_inspection_with_gura
+
+  late_inspection_after_errands:
+    - date: 4月11日 夕方
+    - background: kazamito-backyard-shrubbery-morning
+    - hide: {}
+    - show:
+        character: ぐら
+        expression: default
+        position: center
+    - say:
+        text: 予定表を届け終えて裏手へ回ると、ぐらが低木の影でしゃがみ込み、古い通気口の格子を見上げていた。
+    - say:
+        speaker: ぐら
+        text: ちょうどよかった。人手が足りないって、こういう時にも使う。
+    - say:
+        speaker: "{{player.name}}"
+        text: 何か見つかった？
+    - say:
+        speaker: ぐら
+        text: 中から紙が引っかかってる。新しくはない。でも、完全に捨てられた感じでもない。
+    - sound: 驚く
+    - say:
+        text: 格子の隙間から引き出された紙は、湿気で端が波打っていた。見出しにははっきりと「旧公開中止届」とある。
+    - goto: old_document_found
+
+  late_inspection_with_gura:
+    - date: 4月11日 夕方
+    - background: aonagi-oldtower-corridor-morning
+    - hide: {}
+    - show:
+        character: ぐら
+        expression: default
+        position: left
+    - say:
+        text: 人の気配が引いた旧校舎側は、昼とは別の建物みたいに静かだった。封鎖札の向こうで、ぐらが壁際の古い棚を軽く叩く。
+    - say:
+        speaker: ぐら
+        text: 音が空洞。裏に隙間ある。
+    - say:
+        text: 二人で棚を少しずらすと、壁と板の間から薄い紙束の角がのぞいた。
+    - sound: 驚く
+    - say:
+        text: 慎重に引き抜いた複写紙の見出しには、「旧公開中止届」。提出日だけが読み取れ、その年号は風見塔の最終公開記録と一致していた。
+    - say:
+        speaker: "{{player.name}}"
+        text: これ、どうしてこんな場所に。
+    - say:
+        speaker: ぐら
+        text: 隠したかったか、忘れたくなかったか。どっちにしても、普通の保管じゃない。
+    - goto: old_document_found
+
+  old_document_found:
+    - background: aonagi-oldtower-corridor-morning
+    - hide: {}
+    - show:
+        character: ぐら
+        expression: default
+        position: left
+    - show:
+        character: きりゅう
+        expression: default
+        position: center
+    - show:
+        character: アガサ
+        expression: troubled
+        position: right
+    - bgm:
+        id: 緊張・陰謀・不穏
+        volume: 0.52
+        loop: true
+    - say:
+        speaker: きりゅう
+        text: それを見せろ。……確かに中止届だ。控えの形式も昔の学校書式で合ってる。
+    - say:
+        speaker: アガサ
+        text: 提出者名の欄だけ潰れてる。にじんだというより、意図的に読めなくされてるね。
+    - say:
+        speaker: "{{player.name}}"
+        text: 風見塔が閉じたのって、ただ古くなったからじゃないのか。
+    - say:
+        speaker: きりゅう
+        text: 少なくとも、一度は「公開を止める理由」が正式に出された。その理由だけが残ってない。
+    - say:
+        speaker: ぐら
+        text: 午前の補修跡とも繋がる。塔の傷、思ったより新しい。
+    - say:
+        text: 役割を決めるだけのはずだった二日目の終わりに、企画チームは過去の欠落を拾ってしまった。
+    - say:
+        text: 人の配置も、展示の順番も、休む場所も決め始めたばかりだ。なのに塔のほうは、まだ何一つ説明を終えていない。
+    - goto: ending
+
+  ending:
+    - set:
+        flags.foundOldCancellationSlip: true
+        flags.chapter2Clear: true
+    - bgm: stop
+    - hide: {}
+    - say:
+        text: こうして{{player.name}}は、風見塔再生企画の「横断役」として立ち位置を得た。同時に、塔の過去がまだ隠されていることも知ってしまう。
+    - say:
+        text: 次に必要なのは準備だけではない。誰が、何を、どこまで隠していたのかを見極める目だ。
+    - say:
+        text: 第二章・了

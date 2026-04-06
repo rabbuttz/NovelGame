@@ -267,7 +267,7 @@ body {
 .sprite {
   position: absolute;
   z-index: 0;
-  bottom: -28px;
+  bottom: -46px;
   width: min(34vw, 430px);
   margin: 0;
   opacity: 0;
@@ -1143,7 +1143,7 @@ body {
   .sprite {
     width: min(48vw, 360px);
     max-height: 62vh;
-    bottom: -20px;
+    bottom: -34px;
   }
 
   .sprite[data-position="left"] {
@@ -1189,7 +1189,7 @@ body {
   .sprite {
     width: min(58vw, 320px);
     max-height: 50vh;
-    bottom: -18px;
+    bottom: -30px;
   }
 
   .choices {

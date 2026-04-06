@@ -1,5 +1,10 @@
 [
   {
+    "url": "scenarios/kazamito-chapter2.yaml",
+    "title": "風見塔のラストノート 第二章",
+    "description": "役割分担と最初の摩擦を経て、風見塔の過去に触れ始める共通ルート第二章。"
+  },
+  {
     "url": "scenarios/kazamito-chapter1.yaml",
     "title": "風見塔のラストノート 第一章",
     "description": "転入初日、閉鎖された風見塔で始まる再生企画の序章。"

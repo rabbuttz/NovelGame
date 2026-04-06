@@ -1,0 +1,460 @@
+title: 風見塔のラストノート 第一章 風向きの初日
+dateLabel: 4月10日
+
+player:
+  title: 主人公の名前を決める
+  prompt: 呼ばれたい名前を入力してください。
+  defaultName: 湊
+  presets:
+    - 湊
+    - 悠真
+
+variables:
+  flags:
+    metKiryu: false
+    metAmu: false
+    metAgasa: false
+    heardTowerRumor: false
+    acceptedProjectTemp: false
+    choseCarefulTone: false
+    choseFriendlyTone: false
+    promisedSupport: false
+    chapter1Clear: false
+  affection:
+    kiryu: 0
+    amu: 0
+    agasa: 0
+    ukiwa: 0
+    gura: 0
+    suzudora: 0
+    nemunomi: 0
+    mochitora: 0
+
+characters:
+  きりゅう:
+    name: きりゅう
+  あむ:
+    name: あむ
+  アガサ:
+    name: アガサ
+  うきわ:
+    name: うきわ
+  ぐら:
+    name: ぐら
+  すずどら:
+    name: すずどら
+  ねむのみ:
+    name: ねむのみ
+  餅虎:
+    name: 餅虎
+  さわでん:
+    name: さわでん
+  ロクロ:
+    name: ロクロ
+
+start: opening_transfer
+
+nodes:
+  opening_transfer:
+    - date: 4月10日 朝
+    - background: station-evening
+    - bgm:
+        id: 共通ルート 日常
+        volume: 0.62
+        loop: true
+    - say:
+        text: 四月。潮の匂いが混ざる風の中、{{player.name}}は私立・蒼凪学園の門をくぐった。
+    - say:
+        text: 二年への編入。案内図はある。けれど、校舎の棟は想像以上に多く、坂と渡り廊下が入り組んでいた。
+    - say:
+        text: ホームルームまで、あと二十分。急いでいるのに、矢印はどれも似た方向を向いている。
+    - choice:
+        options:
+          - text: まず職員室を探す
+            set:
+              flags.choseCarefulTone: true
+            goto: corridor_lost
+          - text: とりあえず高い場所を目指す
+            set:
+              flags.choseFriendlyTone: true
+            goto: corridor_lost
+
+  corridor_lost:
+    - background: classroom-night
+    - say:
+        text: 渡り廊下を一つ、階段を二つ。気づけば人の気配が薄く、古い外壁のそばまで来ていた。
+    - say:
+        text: 風鈴みたいな金属音が鳴る。視線の先に、背の高い古塔が見えた。
+    - say:
+        text: 塔の入口には立入禁止の札。だが札のひもは切れ、半分ぶら下がっている。
+    - goto: first_meet_kiryu_amu
+
+  first_meet_kiryu_amu:
+    - background: station-evening
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: あむ
+        expression: smile
+        position: right
+    - set:
+        flags.metKiryu: true
+        flags.metAmu: true
+        affection.kiryu: 1
+        affection.amu: 1
+    - say:
+        speaker: きりゅう
+        text: そこ、足元見ろ。縁が欠けてる。転ぶ。
+    - say:
+        speaker: あむ
+        text: あ、転入生っぽい！ ねえねえ、迷った？ 迷ったよね？
+    - say:
+        text: 背の高い先輩は、切れた札ひもを器用に結び直していた。もう一人は、禁止札の真横で悪びれもなく手を振っている。
+    - say:
+        speaker: きりゅう
+        text: あむ。立入禁止の線は踏むなって言っただろ。
+    - motion:
+        character: あむ
+        name: うなずき
+    - say:
+        speaker: あむ
+        text: はいはい、今出る！ でもこの塔、見たらわかるじゃん。気になるって。
+    - choice:
+        options:
+          - text: 真面目そうな先輩に道を聞く
+            set:
+              affection.kiryu: 1
+            goto: ask_kiryu
+          - text: 元気な生徒に話を合わせる
+            set:
+              affection.amu: 1
+            goto: ask_amu
+
+  ask_kiryu:
+    - say:
+        speaker: "{{player.name}}"
+        text: すみません。二年棟に行きたくて……完全に迷いました。
+    - say:
+        speaker: きりゅう
+        text: 二年棟なら逆だ。ここは旧校舎側。普段は来ない場所だぞ。
+    - say:
+        speaker: きりゅう
+        text: 送る。途中でまた逸れたら面倒だ。
+    - set:
+        flags.choseCarefulTone: true
+    - goto: rumor_intro
+
+  ask_amu:
+    - say:
+        speaker: "{{player.name}}"
+        text: うん、迷った。しかもここ、ちょっと雰囲気あるね。
+    - say:
+        speaker: あむ
+        text: でしょ！ これが風見塔。今は閉まってるけど、噂だけは現役！
+    - say:
+        speaker: きりゅう
+        text: 噂を先に言うな。変な先入観を入れるなって。
+    - set:
+        flags.choseFriendlyTone: true
+    - goto: rumor_intro
+
+  rumor_intro:
+    - say:
+        text: 風が吹き抜け、塔の風見がきしんだ。
+    - say:
+        speaker: あむ
+        text: 有名なんだよ。「あの塔で想いを伝えた二人は結ばれる」って。
+    - set:
+        flags.heardTowerRumor: true
+    - say:
+        speaker: きりゅう
+        text: 面白がるだけならやめとけ。ここは今年で取り壊しだ。安全上の理由でな。
+    - say:
+        text: 軽口の温度が少しだけ下がる。あむも、冗談の続きを飲み込んだ。
+    - sound: 驚く
+    - show:
+        character: さわでん
+        expression: default
+        position: center
+    - say:
+        speaker: さわでん
+        text: うわ、やっぱりいた。ねえ、これ落ちてたんだけど、誰の？
+    - say:
+        text: さわでんが差し出したのは、古い鍵札のついたリングだった。錆びて読めない刻印がある。
+    - say:
+        speaker: きりゅう
+        text: ……それ、どこで拾った。
+    - say:
+        speaker: さわでん
+        text: 塔の裏の植え込み。朝の掃除当番で。
+    - hide:
+        position: center
+    - goto: agasa_arrives
+
+  agasa_arrives:
+    - show:
+        character: アガサ
+        expression: smile
+        position: center
+    - set:
+        flags.metAgasa: true
+        affection.agasa: 1
+    - say:
+        speaker: アガサ
+        text: やあ、集合が早いね。きりゅう、先生に呼ばれてた件は片付いた？
+    - say:
+        speaker: きりゅう
+        text: まだだ。というか、転入生を保護したところだ。
+    - say:
+        speaker: アガサ
+        text: それは朗報。人手を探してたんだ。ね、きみ。今、予定は空いてる？
+    - say:
+        text: 穏やかな笑顔なのに、断りづらい圧がある。あむが楽しそうに身を乗り出した。
+    - motion:
+        character: あむ
+        name: 喜び
+    - say:
+        speaker: あむ
+        text: そうそう！ ちょうどいいんだって。今日の放課後、旧塔の再生企画の顔合わせあるから！
+    - say:
+        speaker: きりゅう
+        text: 先に同意を取れ。巻き込む前提で話すな。
+    - choice:
+        options:
+          - text: 話だけ聞くと答える
+            set:
+              affection.agasa: 1
+            goto: invitation_detail
+          - text: どういう企画か先に確認する
+            set:
+              affection.kiryu: 1
+            goto: invitation_detail
+
+  invitation_detail:
+    - hide:
+        position: center
+    - show:
+        character: アガサ
+        expression: default
+        position: left
+    - show:
+        character: きりゅう
+        expression: default
+        position: center
+    - show:
+        character: あむ
+        expression: default
+        position: right
+    - say:
+        speaker: アガサ
+        text: 星潮祭で、風見塔を一日だけ公開する計画がある。正式名は「再生公開企画」。
+    - say:
+        speaker: きりゅう
+        text: 条件は厳しい。導線、安全柵、見学人数、責任者の配置。どれか欠ければ中止。
+    - say:
+        speaker: あむ
+        text: でもさ、最後に一回くらい灯りつけたいじゃん。なくなる前に。
+    - say:
+        text: 三人の声色は違う。けれど、向いている先は同じ塔だった。
+    - goto: first_group_meeting
+
+  first_group_meeting:
+    - date: 4月10日 放課後
+    - background: classroom-night
+    - hide: {}
+    - show:
+        character: うきわ
+        expression: smile
+        position: left
+    - show:
+        character: ぐら
+        expression: default
+        position: center
+    - show:
+        character: ねむのみ
+        expression: smile
+        position: right
+    - set:
+        affection.ukiwa: 1
+        affection.gura: 1
+        affection.nemunomi: 1
+    - say:
+        speaker: うきわ
+        text: あ、転入生さん！ ぼく、うきわ。資料運びなら任せて！
+    - say:
+        speaker: ぐら
+        text: ん……配線図、見る？ 塔、見た目より古いから。
+    - say:
+        speaker: ねむのみ
+        text: 緊張してるよね。座って、少し水飲もうか。
+    - hide: {}
+    - show:
+        character: 餅虎
+        expression: smile
+        position: left
+    - show:
+        character: すずどら
+        expression: default
+        position: right
+    - set:
+        affection.mochitora: 1
+        affection.suzudora: 1
+    - say:
+        speaker: 餅虎
+        text: 新顔？ いいじゃん、映える。広報に使えるなら大歓迎。
+    - say:
+        speaker: すずどら
+        text: 祭りの熱だけで進める企画ではない。安全に穴があるなら私は止める。
+    - say:
+        text: 一瞬、場の空気が張りつめる。うきわが慌てて配布資料を配り直した。
+    - goto: role_discussion
+
+  role_discussion:
+    - show:
+        character: きりゅう
+        expression: default
+        position: center
+    - say:
+        speaker: きりゅう
+        text: 連絡と雑務が足りない。各担当の間を行き来できる人間が必要だ。
+    - say:
+        speaker: アガサ
+        text: つまり、調整役だね。書類の受け渡し、予定の確認、抜けの洗い出し。
+    - say:
+        speaker: あむ
+        text: それ、今日迷子になった転入生にぴったりじゃない？ 学内ぐるぐるするの、もう得意でしょ。
+    - motion:
+        character: あむ
+        name: 疑問
+    - say:
+        text: 冗談めいているのに、提案は現実的だった。皆の視線がこちらに集まる。
+    - choice:
+        options:
+          - text: やる。正式じゃなくても、まずは手伝う
+            set:
+              flags.acceptedProjectTemp: true
+              flags.promisedSupport: true
+              affection.kiryu: 1
+              affection.agasa: 1
+              affection.amu: 1
+            goto: temporary_accept
+          - text: 不安はあるが、必要なら引き受ける
+            set:
+              flags.acceptedProjectTemp: true
+              flags.promisedSupport: true
+              affection.kiryu: 2
+              affection.agasa: 1
+            goto: temporary_accept
+          - text: ひとまず一週間だけ試したい
+            set:
+              flags.acceptedProjectTemp: true
+              affection.agasa: 2
+            goto: temporary_accept
+
+  temporary_accept:
+    - say:
+        speaker: "{{player.name}}"
+        text: まだ転入初日だけど、必要ならやってみる。迷惑をかけたらその時に直す。
+    - show:
+        character: きりゅう
+        expression: smile
+        position: center
+    - say:
+        speaker: きりゅう
+        text: 充分だ。最初から完璧は求めない。連絡が止まらなければ企画は進む。
+    - show:
+        character: あむ
+        expression: smile
+        position: right
+    - say:
+        speaker: あむ
+        text: よっしゃ！ じゃあ明日から一緒に走ろうぜ、連絡係！
+    - show:
+        character: アガサ
+        expression: smile
+        position: left
+    - say:
+        speaker: アガサ
+        text: 心配しなくていいよ。君が困る前に、困りそうな仕事を僕が先に並べておくから。
+    - say:
+        text: その言葉は助かるはずなのに、なぜか逃げ道まで塞がれた気分にもなった。
+    - goto: teacher_check
+
+  teacher_check:
+    - hide: {}
+    - show:
+        character: ロクロ
+        expression: default
+        position: center
+    - say:
+        speaker: ロクロ
+        text: 話は聞いた。再生公開企画の臨時メンバー登録、今日付で仮受理にする。
+    - say:
+        speaker: ロクロ
+        text: ただし仮だ。安全確認表を一項目でも落としたら、僕が止める。
+    - show:
+        character: すずどら
+        expression: default
+        position: right
+    - say:
+        speaker: すずどら
+        text: 妥当だ。情で基準を曲げるなら、私はこの場で降りる。
+    - show:
+        character: ねむのみ
+        expression: default
+        position: left
+    - say:
+        speaker: ねむのみ
+        text: 厳しいけど、線がある方が安心できるよ。守るものがはっきりするから。
+    - say:
+        text: 厳格さとやさしさが同時に差し出される。初日なのに、もう逃げ場はない。
+    - goto: after_meeting_rooftop
+
+  after_meeting_rooftop:
+    - date: 4月10日 夜
+    - background: station-evening
+    - hide: {}
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: あむ
+        expression: troubled
+        position: center
+    - show:
+        character: アガサ
+        expression: default
+        position: right
+    - say:
+        text: 会議後、三人と並んで風見塔を見上げる。窓のほとんどは暗く、上階だけが月明かりを返していた。
+    - say:
+        speaker: あむ
+        text: あのさ。さっきの鍵札、俺ちょっと気になってる。ああいうの、偶然にしては出来すぎてるし。
+    - say:
+        speaker: きりゅう
+        text: 明日、保管庫を確認する。勝手に探るなよ。
+    - say:
+        speaker: アガサ
+        text: 噂と記録は、たぶん別々に扱ったほうがいい。混ぜると誰かが傷つく。
+    - say:
+        text: 三人の言葉が夜風に溶ける。塔は何も答えないまま、黙ってそこに立っていた。
+    - sound:
+        id: 心臓の鼓動1
+        volume: 0.55
+        loop: false
+    - say:
+        text: 明日から、ここに本気で関わる。そう決めた瞬間、胸の奥が一度だけ強く鳴った。
+    - goto: ending
+
+  ending:
+    - set:
+        flags.chapter1Clear: true
+    - bgm: stop
+    - hide: {}
+    - say:
+        text: こうして{{player.name}}の転入初日は終わった。風見塔再生企画――その連絡役としての、最初の一日が始まったのだ。
+    - say:
+        text: 第一章・了

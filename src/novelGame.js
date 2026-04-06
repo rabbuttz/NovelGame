@@ -6,6 +6,24 @@ const DEFAULT_BGM_VOLUME = 0.75;
 const DEFAULT_SOUND_VOLUME = 0.8;
 const BGM_VOLUME_STORAGE_KEY = "novel-flow-bgm-volume";
 const SOUND_VOLUME_STORAGE_KEY = "novel-flow-sound-volume";
+const EXPRESSION_ALIASES = {
+  default: "default",
+  neutral: "default",
+  normal: "default",
+  smile: "smile",
+  happy: "smile",
+  joy: "smile",
+  cry: "cry",
+  sad: "cry",
+  troubled: "troubled",
+  worry: "troubled",
+  embarrassed: "troubled",
+  困り: "troubled",
+  笑顔: "smile",
+  泣き: "cry",
+  通常: "default",
+  ニュートラル: "default"
+};
 const MOTION_ALIASES = {
   shock: "衝撃",
   surprised: "衝撃",
@@ -1187,15 +1205,14 @@ function resolveCharacterSprite(payload, scenario) {
   }
 
   const character = scenario.characters?.[payload.character];
-  const expression = payload.expression ?? "default";
-  const sprite =
-    character?.sprites?.[expression] ??
-    scenario.assetManifest?.characters?.[payload.character]?.[expression];
+  const expression = normalizeExpressionName(payload.expression);
+  const sprites = character?.sprites ?? scenario.assetManifest?.characters?.[payload.character] ?? {};
+  const sprite = sprites[expression] ?? sprites.default;
 
   if (!sprite) {
     throw new Error(
       [
-        `character \`${payload.character}\` に expression \`${expression}\` がありません。`,
+        `character \`${payload.character}\` に expression \`${expression}\` も default もありません。`,
         "命名規則:",
         "- public/assets/characters/<character>-<expression>.*",
         "- public/assets/characters/<character>/<expression>.*"
@@ -1203,7 +1220,26 @@ function resolveCharacterSprite(payload, scenario) {
     );
   }
 
+  if (expression !== "default" && !sprites[expression] && sprites.default) {
+    console.warn(
+      `[SPRITE] ${payload.character} の expression "${expression}" がないため default にフォールバックしました。`
+    );
+  }
+
   return toAppUrl(sprite);
+}
+
+function normalizeExpressionName(value) {
+  if (value === undefined || value === null || value === "") {
+    return "default";
+  }
+
+  const expression = String(value).trim();
+  if (!expression) {
+    return "default";
+  }
+
+  return EXPRESSION_ALIASES[expression.toLowerCase?.() ?? expression] ?? EXPRESSION_ALIASES[expression] ?? expression;
 }
 
 function resolveCharacterName(characterId, scenario) {

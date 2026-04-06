@@ -17,7 +17,8 @@
 - `start` で指定したノードは必ず `nodes` 内に存在させてください
 - `nodes` の各ノードは配列にしてください
 - 各アクションは `- say: ...` のように **1キーだけ** を持つオブジェクトにしてください
-- キャラクター画像のニュートラル表情は `expression: default` を使ってください
+- 表情は `default` `smile` `cry` `troubled` の4種類を基本にしてください
+- ニュートラル表情は `expression: default` を使ってください
 
 ## このエンジンで使えるトップレベルキー
 
@@ -95,7 +96,7 @@ nodes:
 ```yaml
 - show:
     character: あむ
-    expression: default
+    expression: smile
     position: right
     motion: 疑問
 ```
@@ -105,6 +106,15 @@ nodes:
 - `left`
 - `center`
 - `right`
+
+`expression` の基本値:
+
+- `default` : ニュートラル
+- `smile` : 笑顔
+- `cry` : 泣き
+- `troubled` : 困り
+
+指定した表情画像がまだ存在しない場合、エンジンは自動で `default` にフォールバックします。
 
 `motion` を付けると、表示直後に一度だけモーションを再生できます。
 
@@ -331,7 +341,8 @@ YAML:
 
 これは例えば `public/assets/characters/あむ-default.webp` を指します。
 
-ニュートラル表情は必ず `default` を使ってください。
+基本表情は `default` `smile` `cry` `troubled` を使ってください。
+指定表情の画像が未追加でも、`default` があれば表示は継続されます。
 
 ## 現在このプロジェクトで使えるキャラクター ID
 
@@ -351,8 +362,8 @@ YAML:
 
 ## AI が守るべき実務ルール
 
-- 画像が存在しない表情を勝手に使わないでください
-- 現在は各キャラのニュートラル表情しか保証されていないので、基本は `expression: default` を使ってください
+- 表情は原則 `default` `smile` `cry` `troubled` の範囲で使ってください
+- 画像が未追加の表情は `default` にフォールバックされますが、必要以上に表情の種類を増やさないでください
 - `characters` には、シナリオ中で `speaker` や `show.character` に使うキャラだけを書いてください
 - 主人公名入力を使いたい場合だけ `player` を書いてください
 - `{{player.name}}` を使う場合は `player.defaultName` も入れてください

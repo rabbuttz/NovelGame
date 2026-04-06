@@ -1,0 +1,449 @@
+title: 風見塔のラストノート 番外編 i5のオープンキャンパス
+dateLabel: 7月27日
+
+player:
+  title: 主人公の名前を決める
+  prompt: 呼ばれたい名前を入力してください。
+  defaultName: 湊
+  presets:
+    - 湊
+    - 悠真
+
+variables:
+  flags:
+    i5OpenCampusClear: false
+    choseHandsOnTour: false
+    choseCampusLifeTour: false
+    trustedI5: false
+    foundVisitor: false
+    recoveredFile: false
+    invitedI5: false
+  affection:
+    i5: 0
+    kiryu: 2
+    amu: 2
+
+characters:
+  i5:
+    name: i5
+  きりゅう:
+    name: きりゅう
+  あむ:
+    name: あむ
+  ロクロ:
+    name: ロクロ
+
+start: open_campus_briefing
+
+nodes:
+  open_campus_briefing:
+    - date: 7月27日 朝
+    - background: aonagi-gate-morning
+    - bgm:
+        id: 共通ルート 日常
+        volume: 0.58
+        loop: true
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: あむ
+        expression: default
+        position: right
+    - say:
+        text: 蒼凪学園の夏のオープンキャンパス当日。校門前は見学者と在校生スタッフで朝から落ち着かず、潮風までいつもよりせかせかしている気がした。
+    - say:
+        speaker: きりゅう
+        text: "{{player.name}}、悪い。案内担当が一人熱中症で抜けた。急だが、見学者一人を頼みたい。"
+    - say:
+        speaker: あむ
+        text: しかもその子、けっこう指名っぽいんだよね。「パンフに載ってる綺麗なとこより、実際に人が動いてる場所を見たい」ってさ。
+    - say:
+        speaker: きりゅう
+        text: 名前はi5。中学三年。受付では落ち着いてたが、質問の切れ味が妙に鋭かった。
+    - say:
+        speaker: あむ
+        text: 俺が当たったら三分で試されそうだったから助かった！ {{player.name}}なら変に盛らずに話せるだろ。
+    - say:
+        text: 持たされた見学札には、黒いペンで小さく「i5」と書かれていた。記号みたいなその名前だけで、少しだけ輪郭の鋭い相手を想像する。
+    - goto: meet_i5
+
+  meet_i5:
+    - background: 廊下
+    - hide:
+        position: right
+    - show:
+        character: i5
+        expression: default
+        position: center
+    - say:
+        text: 校舎へ入ったところで、壁際に立つ小柄な見学者がこちらを見た。名札の字と同じく、無駄のない印象だった。
+    - say:
+        speaker: i5
+        text: i5です。案内、お願いします。
+    - say:
+        speaker: "{{player.name}}"
+        text: こちらこそ。見たい場所の希望、かなりはっきり出してたらしいね。
+    - say:
+        speaker: i5
+        text: 飾った説明だけ聞いても、学校のことはわからないので。ちゃんと動いてる場所を見たいです。
+    - motion:
+        character: i5
+        name: うなずき
+    - say:
+        speaker: i5
+        text: あと、都合の悪いところを隠す学校かどうかも。
+    - say:
+        text: 愛想がないわけではない。ただ、相手の答えを最短距離で測ろうとする視線だった。
+    - choice:
+        options:
+          - text: 作業や企画の現場から見せる
+            set:
+              flags.choseHandsOnTour: true
+              affection.i5: 1
+            goto: hands_on_tour
+          - text: まずは学校の日常が見える場所を回る
+            set:
+              flags.choseCampusLifeTour: true
+            goto: campus_life_tour
+
+  hands_on_tour:
+    - background: 部室
+    - say:
+        speaker: "{{player.name}}"
+        text: じゃあ、先に作業してる場所から行こう。綺麗な完成品より、途中の方がこの学校らしい。
+    - say:
+        text: 部室には途中まで組まれた展示台、束ねたコード、書き直しの跡が残る進行表がそのまま置かれていた。整ってはいないが、確かに誰かの手の温度がある。
+    - say:
+        speaker: i5
+        text: ……いい。こういうのを見たいです。完成してないものの方が、その学校の性格が出る。
+    - say:
+        speaker: "{{player.name}}"
+        text: なら次は、いちばん今動いてる企画を見せる。少し騒がしいけど。
+    - goto: tower_preview
+
+  campus_life_tour:
+    - background: 図書館
+    - say:
+        speaker: "{{player.name}}"
+        text: まずは普段の空気から見よう。蒼凪は行事も濃いけど、日常の居心地で決める人も多いから。
+    - say:
+        text: 図書館の窓際、昼休み前の静けさ、読みかけの参考書と貸出札。人の流れが穏やかな場所をいくつか回ると、i5は黙って視線だけを動かした。
+    - say:
+        speaker: i5
+        text: 落ち着いてるのはわかりました。でも、みんなが何に本気なのかは、まだ見えてないです。
+    - say:
+        speaker: "{{player.name}}"
+        text: それならちょうどいい。今、いちばん学校らしい熱が集まってる場所がある。
+    - set:
+        affection.i5: 1
+    - goto: tower_preview
+
+  tower_preview:
+    - date: 7月27日 昼
+    - background: 教室・昼
+    - hide: {}
+    - show:
+        character: あむ
+        expression: default
+        position: left
+    - show:
+        character: i5
+        expression: default
+        position: center
+    - show:
+        character: きりゅう
+        expression: default
+        position: right
+    - say:
+        text: 案内の最後に連れてきたのは、風見塔再生企画の仮展示教室だった。模型、古い写真、公開導線のラフ案。完成前の資料が机いっぱいに広がっている。
+    - say:
+        speaker: あむ
+        text: お、来た！ どう？ 蒼凪、ちゃんと生きてる感じする？
+    - say:
+        speaker: i5
+        text: します。綺麗にまとめる前の方が、むしろ信用できる。
+    - say:
+        speaker: きりゅう
+        text: それはよかった。今は仮展示だが、星潮祭では旧塔を一日だけ公開する計画を進めてる。
+    - say:
+        speaker: i5
+        text: 閉鎖された場所を開けるなら、安全計画が最優先ですね。
+    - say:
+        speaker: きりゅう
+        text: その通りだ。
+    - sound: 驚く
+    - say:
+        text: その時、廊下の向こうで慌ただしい足音が重なった。空気が一瞬で見学用のものではなくなる。
+    - say:
+        speaker: あむ
+        text: きりゅう、やばい！ 受付から預かった来場者連絡ファイルがない！ しかも旧棟側に誘導札が一枚ずれてる！
+    - say:
+        speaker: きりゅう
+        text: 何だと。見学者の確認は。
+    - say:
+        speaker: あむ
+        text: 中三の男の子が一人、スタンプ台以降のチェックがない。さっきまでここで風見塔の模型見てたはずなんだよ！
+    - bgm:
+        id: 緊張・陰謀・不穏
+        volume: 0.53
+        loop: true
+    - say:
+        text: 来場者の所在不明と管理ファイル紛失。オープンキャンパスで起きるには十分すぎる事故だった。
+    - choice:
+        options:
+          - text: まずi5の見たことを聞く
+            set:
+              flags.trustedI5: true
+              affection.i5: 2
+            goto: i5_deduction
+          - text: 報告を入れつつ、すぐ動く
+            set:
+              affection.i5: 1
+            goto: cautious_response
+
+  cautious_response:
+    - say:
+        speaker: "{{player.name}}"
+        text: 勝手に走る前に、共有だけは必要だ。きりゅう先輩、旧棟側を見に行っていい？
+    - say:
+        speaker: きりゅう
+        text: 行け。十分ごとに連絡しろ。見つけたら一人で開けようとするな。
+    - say:
+        speaker: i5
+        text: 了解。話しながら動きます。時間を削りたくないので。
+    - goto: i5_deduction
+
+  i5_deduction:
+    - background: 廊下
+    - hide: {}
+    - show:
+        character: i5
+        expression: default
+        position: center
+    - show:
+        character: きりゅう
+        expression: default
+        position: right
+    - say:
+        speaker: i5
+        text: さっき、見学シールを付けた子が透明のファイルを拾ってました。受付用のものかはわからないけど、戻そうとして周りを見てた。
+    - say:
+        speaker: i5
+        text: それから、旧棟側の矢印だけテープの色が違った。貼り直しです。雑に急いで戻した感じだった。
+    - say:
+        speaker: "{{player.name}}"
+        text: 誰かが故意に、じゃなくて……風で外れた誘導札を直した途中か。
+    - say:
+        speaker: i5
+        text: たぶん。なら、持ち去りじゃなくて「返そうとして迷った」の方が近い。
+    - say:
+        speaker: きりゅう
+        text: 受付側と導線の修正は俺とあむで押さえる。{{player.name}}、i5、旧棟手前まで確認してこい。無茶はするな。
+    - say:
+        text: 見学者を連れている、という感覚はもう薄れていた。i5は短くうなずくと、先に廊下の床を見た。
+    - goto: search_old_corridor
+
+  search_old_corridor:
+    - background: aonagi-oldtower-corridor-morning
+    - hide: {}
+    - show:
+        character: i5
+        expression: default
+        position: center
+    - say:
+        text: 人通りの途切れた旧棟側の廊下は、開け放たれた窓から風が吹き込み、掲示物の端だけを細かく鳴らしていた。
+    - say:
+        speaker: i5
+        text: 見て。パンフの切れ端。踏まれてないから、走って逃げたんじゃない。立ち止まって向きを確かめながら進んでる。
+    - say:
+        speaker: "{{player.name}}"
+        text: こっちの床、車輪の跡もある。案内札の台車を誰かが寄せて、そのまま風でずれたんだ。
+    - say:
+        speaker: i5
+        text: つまり悪意より、連鎖した手落ちです。厄介だけど、その方がまだ追える。
+    - sound:
+        id: 心臓の鼓動1
+        volume: 0.48
+        loop: false
+    - say:
+        text: 角を曲がった先で、ごく小さく金属を叩く音がした。規則的で、助けを呼ぶには遠慮がちな音だった。
+    - goto: rescue_scene
+
+  rescue_scene:
+    - background: kazamito-entrance-morning
+    - hide: {}
+    - show:
+        character: i5
+        expression: default
+        position: left
+    - say:
+        text: 音の先には、保守用の細い扉があった。半端に開いた隙間の向こうで、見学シールを付けた男子生徒がしゃがみ込み、胸に透明のファイルを抱えている。
+    - say:
+        text: 扉の内側には倒れたパンフレットラックが引っかかり、押しても引いても開ききらない。男の子の顔は泣く寸前だった。
+    - say:
+        speaker: 見学者
+        text: ご、ごめんなさい……これ、落ちてたから返そうとして……矢印のほう行ったら、閉まって……。
+    - say:
+        speaker: "{{player.name}}"
+        text: 大丈夫。怪我はしてない？ いま開けるから、扉から少し離れて。
+    - say:
+        speaker: i5
+        text: その扉、外側に手動解錠があります。保守用だから。ほら、消火器表示の下に小さいカバー。
+    - say:
+        text: i5が指さした位置には、確かに古い非常解錠レバーの蓋があった。気づかなければただの補修跡にしか見えない。
+    - sound: ビシッとツッコミ2
+    - say:
+        text: カバーを開けてレバーを引く。重い音のあと、扉の噛み合わせが少しだけ緩んだ。
+    - say:
+        speaker: i5
+        text: 今です。ラックを避けるように、斜めに。
+    - say:
+        text: 二人で扉を押し広げると、男の子はファイルを抱えたままこちらへ転がり出た。すぐに肩を支え、呼吸が落ち着くまで待つ。
+    - set:
+        flags.foundVisitor: true
+        flags.recoveredFile: true
+        affection.i5: 3
+    - say:
+        speaker: 見学者
+        text: すみません……ちゃんと返さなきゃって思って……。
+    - say:
+        speaker: "{{player.name}}"
+        text: 返そうとしてくれたのは助かったよ。怖かったな。もう大丈夫。
+    - motion:
+        character: i5
+        name: うなずき
+    - say:
+        speaker: i5
+        text: 判断は間違ってないです。途中の案内が悪かっただけなので。
+    - goto: incident_resolved
+
+  incident_resolved:
+    - background: 教室・昼
+    - hide: {}
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: あむ
+        expression: default
+        position: center
+    - show:
+        character: ロクロ
+        expression: default
+        position: right
+    - say:
+        text: 教室へ戻るころには、旧棟側の誘導札は正しい位置へ戻され、受付の混乱もどうにか収まり始めていた。連絡ファイルが戻ったことで、来場者確認も止まらずに済む。
+    - say:
+        speaker: あむ
+        text: うわ、無事だった！ しかもファイルまで！ まじで助かった……今日これ止まったら、オープンキャンパスどころじゃなかったぞ。
+    - say:
+        speaker: きりゅう
+        text: 状況は聞いた。風で外れた誘導札を、別のスタッフが仮留めしたまま位置を誤認したらしい。そこへ拾得物と見学者の善意が重なった、最悪の噛み合い方だ。
+    - say:
+        speaker: ロクロ
+        text: 悪意がない事故ほど、止める準備が要る。今回は早かったね。旧棟側を完全封鎖する前に戻せたのは大きい。
+    - say:
+        speaker: "{{player.name}}"
+        text: 解錠レバーに気づいたのはi5だよ。あれがなかったら、もっと時間がかかってた。
+    - say:
+        speaker: あむ
+        text: 見学者なのに即戦力すぎない！？ それ反則だろ！
+    - say:
+        speaker: i5
+        text: たまたま見えただけです。……でも、この学校が問題を隠すんじゃなくて、ちゃんと対処する側なのはわかりました。
+    - if:
+        condition: flags.trustedI5 == true
+        then: trusted_afterglow
+        else: cautious_afterglow
+
+  trusted_afterglow:
+    - say:
+        speaker: i5
+        text: 最初に話を聞いてくれたの、正解でした。見学者の言葉でも、材料にはなるんですね。
+    - say:
+        speaker: "{{player.name}}"
+        text: 助かった。今日のi5は、案内される側って感じじゃなかったし。
+    - goto: gate_evening
+
+  cautious_afterglow:
+    - say:
+        speaker: i5
+        text: 最初に報告を挟んだのも、間違いじゃなかったです。独断だけだと、今日はたぶん崩れてた。
+    - say:
+        speaker: "{{player.name}}"
+        text: それでも、i5の観察がなかったら間に合わなかった。結果的に一緒に動けてよかった。
+    - goto: gate_evening
+
+  gate_evening:
+    - date: 7月27日 夕方
+    - background: 帰り道
+    - hide: {}
+    - show:
+        character: i5
+        expression: default
+        position: center
+    - bgm:
+        id: 穏やかな恋愛イベント
+        volume: 0.5
+        loop: true
+    - say:
+        text: 片づけが一段落したころには、見学者の波もすっかり引いていた。門へ向かう帰り道は、昼の騒ぎが嘘みたいに静かだった。
+    - say:
+        speaker: "{{player.name}}"
+        text: 今日はごめん。案内回ってる途中で、あんな事件に巻き込むとは思わなかった。
+    - say:
+        speaker: i5
+        text: むしろ、あれを見られてよかったです。整ってる時より、崩れた時の方が学校の本質が出るので。
+    - if:
+        condition: flags.choseHandsOnTour == true
+        then: hands_on_close
+        else: campus_life_close
+
+  hands_on_close:
+    - say:
+        speaker: i5
+        text: 最初に作業中の場所を見せたの、正しかったです。あの続きが今日の事件にもつながってたから、全部が一本の線でわかった。
+    - goto: invitation
+
+  campus_life_close:
+    - say:
+        speaker: i5
+        text: 日常の空気も悪くなかったです。でも最後に見たのは、それを守ろうとしてる人たちの顔でした。そっちの方が決め手になりそう。
+    - goto: invitation
+
+  invitation:
+    - say:
+        speaker: "{{player.name}}"
+        text: じゃあもし入学したら、今度は見学じゃなくて一緒にやろう。案内の続きは、その時にちゃんと。
+    - set:
+        flags.invitedI5: true
+    - motion:
+        character: i5
+        name: うなずき
+    - say:
+        speaker: i5
+        text: ……それ、かなり強い勧誘ですね。
+    - say:
+        speaker: "{{player.name}}"
+        text: 使える人材を見つけたら、引き留めたくなるだろ。
+    - say:
+        speaker: i5
+        text: じゃあ、期待を裏切らないように考えます。たぶん今日の時点で、もうだいぶ決まってるけど。
+    - say:
+        text: 夕方の風が、朝より少しだけやわらかく吹く。見学札を外したi5は、それでもまだこちら側の人間みたいな顔で立っていた。
+    - goto: ending
+
+  ending:
+    - set:
+        flags.i5OpenCampusClear: true
+    - bgm: stop
+    - hide: {}
+    - say:
+        text: オープンキャンパスの一日は、案内だけでは終わらなかった。けれど、だからこそi5にはこの学校のほんとうの熱が伝わったのだと思う。
+    - say:
+        text: 次に蒼凪の門をくぐる時、彼はたぶんもう見学者ではない。
+    - say:
+        text: 番外編・了

@@ -1,5 +1,15 @@
 [
   {
+    "url": "scenarios/kazamito-chapter10.yaml",
+    "title": "風見塔のラストノート 第十章",
+    "description": "ごんたが語った閉鎖当日の記憶、あむの素直な感謝、みもちの調査、アガサの観察、きりゅうの本音。それぞれの距離が縮まる転換点の第十章。"
+  },
+  {
+    "url": "scenarios/kazamito-i5-open-campus.yaml",
+    "title": "風見塔のラストノート 番外編 i5のオープンキャンパス",
+    "description": "オープンキャンパスで案内役を任された主人公が、見学に来たi5と学内トラブルを解決し、入学後の約束につなげる番外編。"
+  },
+  {
     "url": "scenarios/kazamito-riyu-advice.yaml",
     "title": "風見塔のラストノート 番外編 りゆの恋バナ査定",
     "description": "家でテレビを見ながら、りゆに今気になっている相手を打ち明けて恋愛アドバイスをもらう番外編。"

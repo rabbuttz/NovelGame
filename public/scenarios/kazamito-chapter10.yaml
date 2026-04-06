@@ -1,0 +1,466 @@
+title: 風見塔のラストノート 第十章 温度が変わる日
+dateLabel: 4月19日
+
+player:
+  title: 主人公の名前を決める
+  prompt: 呼ばれたい名前を入力してください。
+  defaultName: 湊
+  presets:
+    - 湊
+    - 悠真
+
+variables:
+  flags:
+    chapter1Clear: true
+    chapter2Clear: true
+    chapter3Clear: true
+    chapter4Clear: true
+    chapter5Clear: true
+    chapter6Clear: true
+    chapter7Clear: true
+    chapter8Clear: true
+    chapter9Clear: true
+    chapter10Clear: false
+    heardGontaTruth: false
+    sharedMomentWithAmu: false
+    choseMimochiResearch: false
+    kiryuSaidName: false
+  affection:
+    kiryu: 4
+    agasa: 4
+    amu: 4
+    mimochi: 3
+    gonta: 2
+  trust:
+    teacherSide: 2
+  lore:
+    closedTowerRecord: 2
+
+characters:
+  ごんた:
+    name: ごんた
+  きりゅう:
+    name: きりゅう
+  アガサ:
+    name: アガサ
+  あむ:
+    name: あむ
+  みもち:
+    name: みもち
+  ロクロ:
+    name: ロクロ
+
+start: morning_aftermath
+
+nodes:
+  morning_aftermath:
+    - date: 4月19日 朝
+    - background: 教室・昼
+    - bgm:
+        id: 共通ルート 日常
+        volume: 0.55
+        loop: true
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: アガサ
+        expression: default
+        position: center
+    - show:
+        character: あむ
+        expression: default
+        position: right
+    - say:
+        text: 翌朝、あの紙の話は口に出さないまま、全員が同じ机に集まっていた。昨日の出来事は上書きされていない。ただ、続きを決める前に、誰かが口火を切るのを待っている。
+    - say:
+        speaker: きりゅう
+        text: ごんた先生に確認する必要がある。今日の放課後、俺が話す。
+    - say:
+        speaker: あむ
+        text: 一人で行くの？ なんか、責める感じになりそうで怖くない？
+    - say:
+        speaker: きりゅう
+        text: 責めに行くんじゃない。知りたいことがあるだけだ。
+    - say:
+        speaker: アガサ
+        text: それでも、受け取る側は怯えることがある。……誰か一緒に行ったほうがいいと思う。
+    - say:
+        text: きりゅうが少しだけ止まった。視線がこの机の上を一回りした。
+    - say:
+        speaker: きりゅう
+        text: ……{{player.name}}、来るか。
+    - say:
+        text: 名前を出す時、きりゅうの声は普段より低かった。指名というより、隣を確かめるような言い方だった。
+    - choice:
+        options:
+          - text: すぐに「行く」と答える
+            set:
+              affection.kiryu: 1
+            goto: accept_go_with_kiryu
+          - text: みんなで行くことを提案する
+            goto: propose_group
+
+  accept_go_with_kiryu:
+    - say:
+        speaker: "{{player.name}}"
+        text: 行きます。
+    - say:
+        speaker: きりゅう
+        text: ……そうか。
+    - say:
+        text: 短い言葉だったが、きりゅうの肩から何かが少し抜けた。あむがそれを見て、何も言わず前を向いた。
+    - goto: amu_hallway
+
+  propose_group:
+    - say:
+        speaker: "{{player.name}}"
+        text: 全員で行ったほうがいい。先生も一人で向き合わなくて済む。
+    - say:
+        speaker: アガサ
+        text: それが正しい。ひとりに向き合わせると、かえって追い詰める。
+    - say:
+        speaker: きりゅう
+        text: ……わかった。全員で行こう。
+    - say:
+        text: きりゅうが最後にこちらを見た。短く、だが確かに。
+    - goto: amu_hallway
+
+  amu_hallway:
+    - background: 廊下
+    - hide: {}
+    - show:
+        character: あむ
+        expression: default
+        position: center
+    - say:
+        text: 一限が始まる前、廊下であむに呼び止められた。周りに人はいない。珍しい沈黙がある。
+    - say:
+        speaker: あむ
+        text: なあ。昨日のことじゃないんだけど。
+    - say:
+        speaker: "{{player.name}}"
+        text: うん。
+    - say:
+        speaker: あむ
+        text: 音葉の話、したじゃん。塔の前で。
+    - say:
+        text: あむの声に、いつもの跳ね方がない。それだけで、昨日より正直な話だとわかった。
+    - say:
+        speaker: あむ
+        text: あの時さ、話したくなったの久しぶりで。なんか……話せてよかった。
+    - choice:
+        options:
+          - text: 「話してくれてよかった」と返す
+            set:
+              flags.sharedMomentWithAmu: true
+              affection.amu: 1
+            goto: amu_thanks_player
+          - text: 「いつでも聞く」と言う
+            set:
+              flags.sharedMomentWithAmu: true
+            goto: amu_open_offer
+
+  amu_thanks_player:
+    - say:
+        speaker: "{{player.name}}"
+        text: 俺も、話してくれてよかったと思う。
+    - say:
+        speaker: あむ
+        text: ……え、なんか恥ずかしいな。素直すぎ。
+    - say:
+        text: 笑ったが、今日の笑顔には逃げ場がない。あむがあむのまま、そこにいる笑顔だった。
+    - goto: gonta_gym
+
+  amu_open_offer:
+    - say:
+        speaker: "{{player.name}}"
+        text: また話したくなったら、いつでも聞く。
+    - say:
+        speaker: あむ
+        text: うん。……ありがと。
+    - say:
+        text: 短く、でも本物の言葉だった。あむはすぐに廊下の先へ向いたが、最後に少しだけ振り返った。
+    - goto: gonta_gym
+
+  gonta_gym:
+    - date: 4月19日 放課後
+    - background: 体育館
+    - hide: {}
+    - show:
+        character: ごんた
+        expression: default
+        position: center
+    - bgm:
+        id: 切ない会話・すれ違い
+        volume: 0.48
+        loop: true
+    - say:
+        text: 放課後の体育館は、授業が終わったあとの静かな空気がある。ごんたは用具棚の鍵を締めながら、こちらに気づいた。
+    - say:
+        speaker: ごんた
+        text: ん。きりゅう、あと全員か。どうした、こんな時間に揃って。
+    - say:
+        text: ごんたは笑っているが、目が少しだけ先を読んでいる。
+    - say:
+        speaker: "{{player.name}}"
+        text: 昨日、図書館で古い書類を調べていたんです。閉鎖当日の救護対応表が出てきて。
+    - say:
+        speaker: "{{player.name}}"
+        text: 先生のお名前が、署名欄にありました。
+    - say:
+        text: ごんたの手が、鍵の上で止まった。長い間ではない。でもそれは確かにあった。
+    - say:
+        speaker: ごんた
+        text: ……そうか。残ってたか。
+    - choice:
+        options:
+          - text: 「話してもらえますか」と静かに聞く
+            set:
+              flags.heardGontaTruth: true
+              affection.gonta: 1
+            goto: gonta_opens_up
+          - text: 「先生はあの日、何を見たんですか」と直接聞く
+            set:
+              flags.heardGontaTruth: true
+            goto: gonta_direct_question
+
+  gonta_opens_up:
+    - say:
+        speaker: "{{player.name}}"
+        text: 追い詰めたいわけじゃないです。ただ、知りたいんです。先生があの場にいた理由を。
+    - say:
+        speaker: ごんた
+        text: ……座るか。
+    - say:
+        text: ごんたは体育館の縁に腰を下ろした。床の冷たさが足まで伝わってくる。
+    - goto: gonta_story
+
+  gonta_direct_question:
+    - say:
+        speaker: "{{player.name}}"
+        text: 先生はあの日、何を見たんですか。
+    - say:
+        speaker: ごんた
+        text: 直接くるな。……まあいい。座れ。
+    - say:
+        text: ごんたは笑ったが、今度の笑い方には余裕がない。それでも逃げない顔をしていた。
+    - goto: gonta_story
+
+  gonta_story:
+    - say:
+        speaker: ごんた
+        text: 俺が赴任したのは閉鎖の半年前だ。その頃はまだ塔も使われてて、野外活動の集合場所になってた。
+    - say:
+        speaker: ごんた
+        text: ある日、塔の上の展望台から生徒が一人落ちた。死ぬほどの高さじゃなかったが、足を折った。俺は一番近くにいたから、最初に駆けつけた。
+    - say:
+        text: 淡々とした声だったが、その日の空気を体育館に持ち込んでいる。
+    - say:
+        speaker: ごんた
+        text: 搬送は俺がやった。記録は、そのあとのバタバタで誰が何をやったか曖昧になった。でも俺の名前は残した。自分がいたことは、消したくなかったから。
+    - say:
+        speaker: "{{player.name}}"
+        text: 消したくなかった。
+    - say:
+        speaker: ごんた
+        text: 俺は怪我した子をちゃんと連れ出したつもりだ。でも塔を閉めた時、誰も俺に礼を言いにこなかった。それでいいと思ってた。でも、記録から消えたら、俺は何のためにいたかわからなくなる気がした。
+    - say:
+        text: ごんたは視線を床に落とした。
+    - say:
+        speaker: ごんた
+        text: だからまた、この学校に戻ってきた。塔を開ける話を聞いた時、関わりたかった。手伝うことで、あの日の続きをやり直せる気がしてた。
+    - say:
+        text: 体育館が静かだった。ごんたの言葉は自分を飾らない。それが余計に、重かった。
+    - choice:
+        options:
+          - text: 「先生がいたから助かった生徒がいる」と言う
+            set:
+              affection.gonta: 1
+            goto: player_affirms_gonta
+          - text: 「続きは、俺たちと一緒にやりましょう」と言う
+            set:
+              affection.gonta: 1
+            goto: player_invites_gonta
+
+  player_affirms_gonta:
+    - say:
+        speaker: "{{player.name}}"
+        text: 先生がいたから、助かった人がいる。それは変わらないです。
+    - say:
+        speaker: ごんた
+        text: ……そう言ってくれるか。
+    - say:
+        text: ごんたはゆっくりと目を上げた。何かを測るみたいな間があって、それから小さくうなずいた。
+    - say:
+        speaker: ごんた
+        text: お前ら、なんか最初から妙に正面から来るな。もっと遠巻きにするかと思ってた。
+    - goto: gonta_commit
+
+  player_invites_gonta:
+    - say:
+        speaker: "{{player.name}}"
+        text: 続きは、俺たちと一緒にやりましょう。あの日の記録が残っていたなら、先生が最後までいる理由になります。
+    - say:
+        speaker: ごんた
+        text: ……勝手なことを言う。
+    - say:
+        text: 声は低かったが、ごんたは少しだけ笑った。断るための笑い方ではなかった。
+    - goto: gonta_commit
+
+  gonta_commit:
+    - say:
+        speaker: ごんた
+        text: わかった。俺も最後まで関わる。記録に名前を残したなら、結末まで責任を持つのが筋だ。
+    - say:
+        text: ごんたは立ち上がり、用具棚の鍵をポケットに入れた。体育館の外から、夕方の光が斜めに入ってくる。
+    - goto: library_mimochi
+
+  library_mimochi:
+    - date: 4月19日 夕方
+    - background: 図書館
+    - hide: {}
+    - show:
+        character: みもち
+        expression: default
+        position: left
+    - show:
+        character: アガサ
+        expression: smile
+        position: right
+    - bgm:
+        id: 穏やかな恋愛イベント
+        volume: 0.4
+        loop: true
+    - say:
+        text: 図書館に戻ると、みもちが一冊の薄い冊子を机に開いていた。目次のページに付箋が三枚。付箋の色がすべて違う。
+    - say:
+        speaker: みもち
+        text: あ、来た。今日ずっと探してたんだけど。これ、古い学校報告書の別冊で、閉鎖前の安全検査記録なんだよ。
+    - say:
+        speaker: みもち
+        text: 検査員の名前と日程が全部残ってる。一番古いのはごんた先生が赴任した年と重なってる。
+    - say:
+        speaker: アガサ
+        text: みもちが今日一日これを探してたの、知ってる？ 朝から司書さんに何度も聞き回ってたよ。
+    - say:
+        speaker: みもち
+        text: 大げさ。でも……{{player.name}}が昨日、記録が混乱したって話してたのが引っかかって。整理できたら役に立つかなって思って。
+    - say:
+        text: みもちは手元の冊子を少しだけこちらにずらした。一言にしては重い動作だった。
+    - choice:
+        options:
+          - text: 「ありがとう、一緒に読もう」と言う
+            set:
+              flags.choseMimochiResearch: true
+              affection.mimochi: 1
+            goto: mimochi_together
+          - text: 検査記録の内容をすぐ確認する
+            set:
+              flags.choseMimochiResearch: true
+            goto: check_inspection_record
+
+  mimochi_together:
+    - say:
+        speaker: "{{player.name}}"
+        text: ありがとう。一緒に読もう。
+    - say:
+        speaker: みもち
+        text: ……うん。
+    - say:
+        text: みもちの返事は短かった。でも、いつもより顔が机の近くにあった気がした。
+    - goto: agasa_moment
+
+  check_inspection_record:
+    - say:
+        speaker: "{{player.name}}"
+        text: 検査員と日程が揃ってるなら、誰がいつ何を確認したか追えるな。
+    - say:
+        speaker: みもち
+        text: そう。それと、欠けてる検査日があって。閉鎖前の最後の年だけ記録が途切れてる。
+    - say:
+        speaker: アガサ
+        text: 途切れた時期が、ちょうど事故のあった頃と合いそうだね。
+    - goto: agasa_moment
+
+  agasa_moment:
+    - hide: {}
+    - show:
+        character: アガサ
+        expression: default
+        position: center
+    - say:
+        text: みもちが手洗いに立ったあと、アガサが静かに口を開いた。
+    - say:
+        speaker: アガサ
+        text: ねえ、{{player.name}}。
+    - say:
+        speaker: "{{player.name}}"
+        text: うん。
+    - say:
+        speaker: アガサ
+        text: あなた、気づいてる？ ここ最近、きりゅうが口数が増えてるの。
+    - say:
+        speaker: "{{player.name}}"
+        text: ……そうかな。
+    - say:
+        speaker: アガサ
+        text: ごんた先生に声をかけられたのも、あなたが動いてくれたからだと思う。きりゅうは一人じゃ踏み込めなかった。相手を責めてる気がするって、ずっと言ってたから。
+    - say:
+        text: アガサの声は平静だった。でもそこに含まれている観察の量が、今日の一言を別の重さにしている。
+    - say:
+        speaker: アガサ
+        text: あなたが来てから、みんな少しずつ変わってきてる。それ、あなた自身がいちばん見えてないかもしれないけど。
+    - say:
+        speaker: "{{player.name}}"
+        text: ……。
+    - say:
+        text: 返せる言葉がなかった。ただ、その言葉は確かにどこかに届いた。
+    - goto: kiryu_evening
+
+  kiryu_evening:
+    - background: 廊下
+    - hide: {}
+    - show:
+        character: きりゅう
+        expression: default
+        position: center
+    - say:
+        text: 廊下を歩いていると、きりゅうが先に立っていた。行き先がある様子ではなく、ただそこにいる。
+    - say:
+        speaker: きりゅう
+        text: 今日、ごんた先生に話してくれてよかった。俺一人じゃ、あそこまで言えなかったかもしれない。
+    - say:
+        speaker: "{{player.name}}"
+        text: きりゅう先輩が動いてくれたからです。
+    - say:
+        speaker: きりゅう
+        text: それはそうじゃない。俺は先輩だから立ってるだけだった。横に誰かがいなければ、立ってるだけで終わってた。
+    - say:
+        text: きりゅうは少し視線を動かした。窓の外の、夕方の校庭の向こうを見てから、もう一度こちらへ戻す。
+    - say:
+        speaker: きりゅう
+        text: あと少しで、塔が開く。それを、お前と一緒に見られそうで……よかったと思ってる。
+    - set:
+        flags.kiryuSaidName: true
+        affection.kiryu: 1
+    - say:
+        text: きりゅうは何も足さず、先に廊下を歩いていった。夕方の光の中で、その背中が少しだけ軽そうに見えた。
+    - goto: ending
+
+  ending:
+    - set:
+        flags.chapter10Clear: true
+    - bgm: stop
+    - hide: {}
+    - say:
+        text: 一日が終わる。昨日と比べて、何かが大きく変わったわけじゃない。書類も増えたままで、塔はまだ閉じている。
+    - say:
+        text: でも、関わる人たちの重さが少し変わった気がした。ごんたが話してくれた。あむが逃げなかった。みもちが調べてきた。アガサが見ていた。きりゅうが、隣にいてよかったと言った。
+    - say:
+        text: 転入してきた日から数えると、ずっと後ろを追いかけていた。でも今日だけは、同じ場所に立っている感覚がある。
+    - say:
+        text: まだ言っていないことがある人は、全員いる。でも少なくとも今日、全員がこちらに顔を向けていた。
+    - say:
+        text: 第十章・了

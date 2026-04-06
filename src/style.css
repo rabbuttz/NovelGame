@@ -426,6 +426,13 @@ body {
   text-shadow: 0 2px 0 rgba(42, 48, 28, 0.38);
 }
 
+.speaker-badge[data-character="みもち"] {
+  background: linear-gradient(180deg, #78b8f0 0%, #3c74d8 100%);
+  border-color: #5a98e8;
+  box-shadow: 0 6px 0 rgba(46, 86, 168, 0.28);
+  text-shadow: 0 2px 0 rgba(28, 56, 116, 0.38);
+}
+
 .speaker-badge[data-character="ねむのみ"] {
   background: linear-gradient(180deg, #c87830 0%, #8a4e10 100%);
   border-color: #a86220;

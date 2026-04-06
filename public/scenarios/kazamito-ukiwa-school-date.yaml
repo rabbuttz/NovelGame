@@ -412,7 +412,7 @@ nodes:
         text: うきわは夕焼けに向き直して、小さく笑った。
     - say:
         speaker: うきわ
-        text: {{player.name}}は？ どう思ってる。
+        text: "{{player.name}}は？ どう思ってる。"
     - say:
         speaker: "{{player.name}}"
         text: 好きだよ。

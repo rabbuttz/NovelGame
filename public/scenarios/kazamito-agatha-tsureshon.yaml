@@ -1,0 +1,207 @@
+title: 風見塔のラストノート 番外編 ─ 廊下の共犯
+dateLabel: 5月某日
+
+player:
+  title: 主人公の名前を決める
+  prompt: 呼ばれたい名前を入力してください。
+  defaultName: 湊
+  presets:
+    - 湊
+    - 悠真
+
+variables:
+  flags:
+    agathaBond: false
+
+characters:
+  アガサ:
+    name: アガサ
+
+start: start
+
+nodes:
+  start:
+    - date: 5月某日 放課後
+    - background: 廊下
+    - bgm:
+        id: 穏やかな恋愛イベント
+        volume: 0.55
+        loop: true
+    - say:
+        text: 星潮祭の準備が一段落した、ある放課後のこと。
+    - say:
+        text: 会議室から出た{{player.name}}は、廊下の角でぱったりアガサと鉢合わせた。
+    - show:
+        character: アガサ
+        expression: smile
+        position: center
+    - say:
+        speaker: アガサ
+        text: あ、ちょうどよかった。{{player.name}}も、そっちの方角に用があった？
+    - say:
+        speaker: "{{player.name}}"
+        text: ……トイレに行こうと思って。
+    - say:
+        speaker: アガサ
+        text: 奇遇だね。ぼくも。じゃあ一緒に行こうか。
+    - say:
+        text: 断る理由もなく、二人は並んで旧棟の端にある洗面所へ向かった。
+    - goto: restroom_arrive
+
+  restroom_arrive:
+    - say:
+        text: 旧棟のトイレは狭い。改装されていない古い造りで、並んだ小便器の間隔が妙に近かった。
+    - say:
+        text: 二人が隣に並ぶと、互いの腕がほとんど触れるくらいの距離になる。
+    - say:
+        speaker: アガサ
+        text: ……まあ、狭いね。
+    - say:
+        speaker: "{{player.name}}"
+        text: そうだな。
+    - say:
+        text: しばらく、妙な沈黙が続いた。水の音だけが響く。
+    - say:
+        text: 前を向いたまま、アガサが静かに口を開く。
+    - say:
+        speaker: アガサ
+        text: こういう状況、慣れてる？
+    - choice:
+        options:
+          - text: 慣れてるわけないだろ
+            goto: not_used_to
+          - text: 別に……普通だけど
+            goto: acting_calm
+
+  not_used_to:
+    - say:
+        speaker: "{{player.name}}"
+        text: 慣れてるわけないだろ。
+    - show:
+        character: アガサ
+        expression: Joy
+        position: center
+    - say:
+        speaker: アガサ
+        text: 正直でよろしい。ぼくも、実は慣れてないよ。
+    - say:
+        text: 声音はいつも通りなのに、横顔のどこかがいつもより柔らかい気がした。
+    - goto: sink_scene
+
+  acting_calm:
+    - say:
+        speaker: "{{player.name}}"
+        text: 別に……普通、だけど。
+    - show:
+        character: アガサ
+        expression: smile
+        position: center
+    - say:
+        speaker: アガサ
+        text: 嘘。さっきから少しだけ緊張してるの、ぼくにはわかる。
+    - say:
+        text: 返す言葉が出てこなかった。
+    - say:
+        speaker: アガサ
+        text: かわいいな、{{player.name}}って。
+    - say:
+        text: 軽い口調のくせに、心臓のあたりが妙に跳ねた。
+    - goto: sink_scene
+
+  sink_scene:
+    - say:
+        text: 用を済ませて洗面台に並ぶと、鏡の中で視線がかち合った。
+    - show:
+        character: アガサ
+        expression: default
+        position: center
+    - say:
+        speaker: アガサ
+        text: そういえば。
+    - say:
+        speaker: アガサ
+        text: 「連れション」って、仲良い人とするもんだって言うよね。
+    - say:
+        speaker: "{{player.name}}"
+        text: ……まあ、そうらしいな。
+    - say:
+        speaker: アガサ
+        text: ということは、ぼくたちは仲が良い、ということでいい？
+    - say:
+        text: 鏡越しに、アガサが目を細める。いつもの余裕を崩さない笑みのはずなのに、どこかいつもと違う熱がある。
+    - choice:
+        options:
+          - text: そういうことになるな
+            set:
+              flags.agathaBond: true
+            goto: good_end
+          - text: どうかな……
+            goto: normal_end
+
+  good_end:
+    - say:
+        speaker: "{{player.name}}"
+        text: そういうことになるな。
+    - show:
+        character: アガサ
+        expression: Joy
+        position: center
+    - motion:
+        character: アガサ
+        name: 喜び
+    - say:
+        speaker: アガサ
+        text: じゃあ、証明完了。
+    - say:
+        text: そう言って、アガサはタオルで手を拭いながら{{player.name}}の方に一歩踏み込んだ。
+    - say:
+        text: 距離が近い。洗面台のせいで、もう引けない。
+    - say:
+        speaker: アガサ
+        text: 次は、もうちょっとまともな場所で、もうちょっと仲いいことを証明しようか。
+    - say:
+        text: 耳元に落とすような声に、{{player.name}}は言葉を失った。
+    - say:
+        speaker: アガサ
+        text: ……冗談だよ。半分は。
+    - show:
+        character: アガサ
+        expression: smile
+        position: center
+    - say:
+        text: 「半分は」という一言を残して、アガサは先に廊下へ出ていった。
+    - say:
+        text: "{{player.name}}はしばらく、鏡の前で立ち尽くしていた。"
+    - goto: ending
+
+  normal_end:
+    - say:
+        speaker: "{{player.name}}"
+        text: どうかな……。
+    - show:
+        character: アガサ
+        expression: smile
+        position: center
+    - say:
+        speaker: アガサ
+        text: そっか。じゃあ、まだ保留ってことで。
+    - say:
+        text: あっさりした返事なのに、なぜか悔しい気がした。
+    - say:
+        speaker: アガサ
+        text: でも、こうして並んで立ってくれてる時点で、悪い気はしてないでしょ？
+    - say:
+        text: 返答に詰まっている間に、アガサは手を拭いて歩き出す。
+    - say:
+        speaker: アガサ
+        text: 答えは急がなくていいよ。またそのうち、聞きに来るから。
+    - say:
+        text: 廊下に出て行く背中を、{{player.name}}はなんとなく見送った。
+    - goto: ending
+
+  ending:
+    - hide: {}
+    - say:
+        text: 旧棟の廊下に、残された水音と、少しだけ高い体温だけが残った。
+    - say:
+        text: ─ 番外編おわり ─

@@ -28,6 +28,8 @@
     "教室・夕方": "assets/backgrounds/教室・夕方.png",
     "教室・昼": "assets/backgrounds/教室・昼.png",
     "校庭": "assets/backgrounds/校庭.png",
+    "校舎外・夕方": "assets/backgrounds/校舎外・夕方.svg",
+    "職員室": "assets/backgrounds/職員室.svg",
     "部室": "assets/backgrounds/部室.png"
   },
   "characters": {

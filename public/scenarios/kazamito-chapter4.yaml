@@ -1,0 +1,400 @@
+title: 風見塔のラストノート 第四章 置いていかれた朝焼け
+dateLabel: 4月13日
+
+player:
+  title: 主人公の名前を決める
+  prompt: 呼ばれたい名前を入力してください。
+  defaultName: 湊
+  presets:
+    - 湊
+    - 悠真
+
+variables:
+  flags:
+    chapter1Clear: true
+    chapter2Clear: true
+    chapter3Clear: true
+    chapter4Clear: false
+    acceptedProjectTemp: true
+    acceptedCrossRole: true
+    foundOldCancellationSlip: true
+    helpedUkiwaFirst: true
+    spentDailyTimeWithAmuUkiwa: true
+    encouragedUkiwa: false
+    keptUkiwaSecret: false
+    sharedUkiwaBurden: false
+  affection:
+    kiryu: 2
+    amu: 3
+    agasa: 2
+    ukiwa: 4
+    gura: 2
+    mimochi: 2
+    suzudora: 1
+    nemunomi: 2
+    mochitora: 2
+    dori: 1
+
+characters:
+  きりゅう:
+    name: きりゅう
+  あむ:
+    name: あむ
+  アガサ:
+    name: アガサ
+  うきわ:
+    name: うきわ
+  ぐら:
+    name: ぐら
+  ねむのみ:
+    name: ねむのみ
+  ロクロ:
+    name: ロクロ
+  どり:
+    name: どり
+
+start: schedule_pressure
+
+nodes:
+  schedule_pressure:
+    - date: 4月13日 朝
+    - background: project-meeting-classroom-evening
+    - bgm:
+        id: 共通ルート 日常
+        volume: 0.6
+        loop: true
+    - say:
+        text: 正式申請に出す前に、当日の人員配置と準備工程を一度きれいに書き直す必要がある。数字と締切の話になると、教室の空気は急に現実的になる。
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: アガサ
+        expression: default
+        position: center
+    - show:
+        character: うきわ
+        expression: smile
+        position: right
+    - say:
+        speaker: きりゅう
+        text: 今日の放課後までに、実行委員側の配置表を完成させる。仮じゃなく提出用だ。名前の重複も空欄も許されない。
+    - say:
+        speaker: アガサ
+        text: それと、導線案の清書。人が何人流れるかで安全計画も変わる。地味だけど、ここが通らないと先へ進めない。
+    - say:
+        speaker: うきわ
+        text: まかせて！ ぼく、そのへん今日中に全部まとめるから！
+    - say:
+        text: 返事は勢いよく、笑顔もいつも通りだった。けれど机の下で、うきわの指先だけが小さく震えているのが見えた。
+    - goto: signs_of_slip
+
+  signs_of_slip:
+    - background: 廊下
+    - hide: {}
+    - show:
+        character: あむ
+        expression: default
+        position: left
+    - show:
+        character: うきわ
+        expression: smile
+        position: center
+    - say:
+        text: 午前の授業の合間、うきわは何度も廊下を往復していた。先生への確認、委員への声かけ、掲示板の空き確認。動きは速いのに、どこか落ち着かない。
+    - say:
+        speaker: あむ
+        text: うきわ、昼メシ行こーぜ。朝から走りすぎ。見てるだけで息切れするって。
+    - say:
+        speaker: うきわ
+        text: あ、ごめん、先行ってて！ ぼくちょっと名簿の確認だけしてくるから！
+    - hide:
+        position: left
+    - say:
+        text: そう言って曲がり角の向こうへ消えた背中に、あむが首を傾げた。
+    - show:
+        character: あむ
+        expression: troubled
+        position: left
+    - say:
+        speaker: あむ
+        text: あいつ、元気な時ほどわかりやすいのにさ。今の、なんか変じゃなかった？
+    - choice:
+        options:
+          - text: 昼休みにうきわを探しに行く
+            set:
+              affection.ukiwa: 2
+            goto: search_ukiwa
+          - text: 夕方まで様子を見る
+            set:
+              affection.ukiwa: 1
+            goto: afterschool_break
+
+  search_ukiwa:
+    - date: 4月13日 昼休み
+    - background: 体育館
+    - hide: {}
+    - show:
+        character: うきわ
+        expression: troubled
+        position: center
+    - say:
+        text: 体育館裏の器具庫前で、うきわは一人しゃがみ込んでいた。抱えた名簿に赤ペンの跡が増えているのに、修正欄は埋まっていない。
+    - say:
+        speaker: "{{player.name}}"
+        text: 探した。昼、食べてないだろ。
+    - say:
+        speaker: うきわ
+        text: えっ、なんでここ……。いや、その、すぐ戻るつもりだったんだけど。
+    - say:
+        text: 声の明るさが続かない。うきわは笑おうとして失敗し、名簿を胸元に引き寄せた。
+    - goto: reveal_current_mistake
+
+  afterschool_break:
+    - date: 4月13日 放課後
+    - background: project-meeting-classroom-evening
+    - hide: {}
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: アガサ
+        expression: troubled
+        position: center
+    - show:
+        character: うきわ
+        expression: troubled
+        position: right
+    - say:
+        text: 放課後の教室に集まると、提出用の配置表だけが仕上がっていなかった。机の上に広がる紙には、途中まで埋めては消した跡が重なっている。
+    - say:
+        speaker: きりゅう
+        text: うきわ。確認だが、昼の時点で人員確定は済んでいたんじゃないのか。
+    - say:
+        speaker: うきわ
+        text: ……ごめん。二人分、返事待ちのまま確定って書いちゃってた。しかも片方、別の当番と被ってて。
+    - say:
+        speaker: アガサ
+        text: 隠すつもりだった？
+    - say:
+        speaker: うきわ
+        text: 隠すっていうか、直してから出そうと思ってた。ちゃんとできる形にしてから……って。
+    - say:
+        text: その言い方だけで、きりゅうより先に胸が詰まる。直るまで言えないのではなく、直せるまで人に見せられないのだ。
+    - goto: reveal_current_mistake
+
+  reveal_current_mistake:
+    - background: 体育館
+    - hide: {}
+    - show:
+        character: うきわ
+        expression: troubled
+        position: center
+    - say:
+        speaker: うきわ
+        text: ……またやったんだ。返事待ちを見切り発車して、あとで辻褄を合わせようとしてる。去年と同じ。
+    - say:
+        speaker: "{{player.name}}"
+        text: 去年？
+    - say:
+        speaker: うきわ
+        text: 一年の時、星潮祭の前夜に、ぼくが実行委員の物資搬入表を一回飛ばしたんだ。確認したつもりで、できてなくて。
+    - say:
+        text: 言葉が途切れる。器具庫の薄暗さの中で、うきわの視線は名簿ではなく、ずっと床の一点に落ちていた。
+    - say:
+        speaker: うきわ
+        text: そのせいで、朝一の設営が遅れて。人手も足りなくて。三年の先輩が一人で穴埋めに走って、階段で落ちた。大怪我じゃなかったけど、祭りには戻れなかった。
+    - say:
+        speaker: うきわ
+        text: なのに周りには「誰が悪い」とか、そこまで広がらなくて。先輩、自分の確認不足だって言って終わらせた。ぼくの名前は出なかった。
+    - sound:
+        id: しょげる
+        volume: 0.75
+        loop: false
+    - say:
+        speaker: うきわ
+        text: だから余計に、ずっと残ってる。ぼくがやらかしたのに、ぼくだけ普通に次の年を迎えたみたいで。ちゃんとしなきゃって思うほど、先に埋めたくなるんだ。遅れも空欄も、見せる前に消したくなる。
+    - goto: player_response
+
+  player_response:
+    - choice:
+        options:
+          - text: 一人で埋めるな、と伝える
+            set:
+              flags.encouragedUkiwa: true
+              flags.sharedUkiwaBurden: true
+              affection.ukiwa: 3
+            goto: encourage_ukiwa
+          - text: その話はまだ皆に言わなくていい、と伝える
+            set:
+              flags.keptUkiwaSecret: true
+              affection.ukiwa: 2
+            goto: keep_secret_path
+
+  encourage_ukiwa:
+    - say:
+        speaker: "{{player.name}}"
+        text: ちゃんとしなきゃって思うのはわかる。でも、一人で埋めようとするとまた同じになる。空欄のままでも、今のうちに出そう。
+    - say:
+        speaker: うきわ
+        text: でも、それって迷惑かけるってことでしょ。
+    - say:
+        speaker: "{{player.name}}"
+        text: 迷惑は、隠して崩れる方が大きい。今なら一緒に直せる。去年の分まで一人で抱える必要はないよ。
+    - say:
+        text: しばらく黙っていたうきわが、名簿を握る力だけをゆっくり緩める。泣きそうな顔を見せないようにしているのが、かえって痛かった。
+    - show:
+        character: うきわ
+        expression: cry
+        position: center
+    - say:
+        speaker: うきわ
+        text: ……それ、今言われるとずるいよ。ぼく、ほんとはずっと、誰かにそう言ってほしかった。
+    - goto: return_to_team
+
+  keep_secret_path:
+    - say:
+        speaker: "{{player.name}}"
+        text: 今ここで全部言わなくていい。まずは配置表を立て直そう。過去の話まで一気に晒す必要はない。
+    - say:
+        speaker: うきわ
+        text: ……ごめん。助かる。たぶん今、みんなの前で話したら、ぼく途中で止まる。
+    - say:
+        speaker: "{{player.name}}"
+        text: その代わり、今回の空欄は隠さない。そこだけは一緒に戻そう。
+    - say:
+        speaker: うきわ
+        text: うん。もう、できてるふりはしない。
+    - goto: return_to_team
+
+  return_to_team:
+    - date: 4月13日 夕方
+    - background: project-meeting-classroom-evening
+    - hide: {}
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: アガサ
+        expression: default
+        position: center
+    - show:
+        character: うきわ
+        expression: troubled
+        position: right
+    - say:
+        text: 教室へ戻ると、きりゅうとアガサは責める前に席を空けた。そこに座れという無言の合図だった。
+    - say:
+        speaker: うきわ
+        text: ごめん。配置表、未確定のところを確定って扱ってた。今から直す。空いてる枠も、ちゃんと空欄で出す。
+    - say:
+        speaker: きりゅう
+        text: それでいい。ミスの報告は、修正の開始だ。終わってから言うものじゃない。
+    - say:
+        speaker: アガサ
+        text: 足りない人手は、こちらで当たれる。最初から完璧な表なんてないよ。だから調整役がいる。
+    - hide:
+        position: center
+    - show:
+        character: どり
+        expression: default
+        position: center
+    - say:
+        speaker: どり
+        text: 生活委員側なら二枠出せる。搬入だけの短時間なら回せると思う。
+    - say:
+        text: 空欄が埋まり始める。誰か一人の失敗を責めるより、足りない所を探して補う流れが、自然にできていた。
+    - goto: quiet_after
+
+  quiet_after:
+    - date: 4月13日 夜
+    - background: 帰り道
+    - hide: {}
+    - show:
+        character: うきわ
+        expression: troubled
+        position: center
+    - say:
+        text: 帰り道、うきわは珍しく自分から少しゆっくり歩いた。昼間の慌ただしさが嘘みたいに、足音だけが静かに続く。
+    - say:
+        speaker: うきわ
+        text: ぼくさ、役に立ちたいって言うくせに、役に立てなかった時のことばっか覚えてるんだ。
+    - say:
+        speaker: うきわ
+        text: だから先に走るし、先に埋めるし、大丈夫って顔もしちゃう。でもほんとは、置いていかれるのがずっと怖い。
+    - choice:
+        options:
+          - text: 置いていかない、と真っ直ぐ返す
+            set:
+              affection.ukiwa: 3
+              flags.sharedUkiwaBurden: true
+            goto: promise_path
+          - text: 次は隣で確認すると返す
+            set:
+              affection.ukiwa: 2
+              flags.encouragedUkiwa: true
+            goto: beside_path
+
+  promise_path:
+    - show:
+        character: うきわ
+        expression: cry
+        position: left
+    - say:
+        speaker: "{{player.name}}"
+        text: 置いていかない。ミスした時こそ呼んでくれればいい。ちゃんと隣に行くから。
+    - say:
+        speaker: うきわ
+        text: ……そんなの、簡単に信じたらだめかもって思うのに。今は信じたい。
+    - say:
+        text: うきわは泣き笑いみたいな顔で息を吐いた。その表情は弱く見えるのに、やっと本当の重さを降ろし始めた顔でもあった。
+    - goto: next_hook
+
+  beside_path:
+    - say:
+        speaker: "{{player.name}}"
+        text: 次は一人で抱え込む前に見せて。確認なら隣でやる。空欄を埋めるのも、締切に追われるのも、分ければいい。
+    - say:
+        speaker: うきわ
+        text: ……うん。たぶんぼく、そういう当たり前を一回忘れてた。
+    - say:
+        text: うきわは少しだけ照れたように笑った。明るさを取り戻したというより、無理のない顔に戻ったのだと思う。
+    - goto: next_hook
+
+  next_hook:
+    - background: 廊下
+    - hide: {}
+    - show:
+        character: ロクロ
+        expression: default
+        position: center
+    - bgm:
+        id: 切ない会話・すれ違い
+        volume: 0.54
+        loop: true
+    - say:
+        text: 翌朝の提出前、ロクロは修正済みの配置表に目を通し、最後の一枚だけを机に残した。
+    - say:
+        speaker: ロクロ
+        text: ここまで揃えたなら、次は正式な審査だ。数字の整合だけじゃなく、責任者の説明も求められる。
+    - say:
+        speaker: ロクロ
+        text: 通したいなら、気持ちではなく根拠を持ってきて。過去に何があったかも含めてね。
+    - say:
+        text: 風見塔の過去と、今の準備の弱い所。その両方を説明できなければ、次の扉は開かない。
+    - goto: ending
+
+  ending:
+    - set:
+        flags.chapter4Clear: true
+    - bgm: stop
+    - hide: {}
+    - say:
+        text: こうして{{player.name}}は、うきわの明るさの奥に残っていた傷を知った。空回りは性格だけではなく、置いていかれた記憶への反動でもあったのだ。
+    - say:
+        text: それでも、今回の失敗は一人で抱え込まずに戻ってこられた。その小さな違いが、これからの企画を支える。
+    - say:
+        text: 第四章・了

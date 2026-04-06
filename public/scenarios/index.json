@@ -1,5 +1,10 @@
 [
   {
+    "url": "scenarios/kazamito-chapter1.yaml",
+    "title": "風見塔のラストノート 第一章",
+    "description": "転入初日、閉鎖された風見塔で始まる再生企画の序章。"
+  },
+  {
     "url": "scenarios/harbor-romance.yaml",
     "title": "風待ち港の約束",
     "description": "任務前夜の港で、8人の仲間の誰と過ごすかを選ぶ短編恋愛シミュレーション。"

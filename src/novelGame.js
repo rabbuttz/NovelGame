@@ -300,11 +300,11 @@ export function createGame(root) {
               <span class="command-icon">L</span>
               <span class="command-label">Q.Load</span>
             </button>
-            <button class="command-button" type="button" data-command="auto">
+            <button class="command-button" type="button" data-command="auto" data-clickable="true" aria-pressed="false">
               <span class="command-icon">A</span>
               <span class="command-label">Auto</span>
             </button>
-            <button class="command-button" type="button" data-command="skip">
+            <button class="command-button" type="button" data-command="skip" data-clickable="true" aria-pressed="false">
               <span class="command-icon">»</span>
               <span class="command-label">Skip</span>
             </button>
@@ -379,6 +379,8 @@ export function createGame(root) {
     toggleVolumePanel(ui);
   });
   ui.backlogButton.addEventListener("click", () => engine.toggleBacklog());
+  ui.skipButton.addEventListener("click", () => engine.toggleSkip());
+  ui.autoButton.addEventListener("click", () => engine.toggleAuto());
   ui.backlogClose.addEventListener("click", () => engine.closeBacklog());
   ui.backlogPanel.addEventListener("click", (event) => {
     if (event.target === ui.backlogPanel) {
@@ -413,6 +415,10 @@ export function createGame(root) {
     if (event.key === "Escape") {
       engine.closeBacklog();
     }
+
+    if (event.key === "Control" && !event.repeat) {
+      engine.toggleSkip();
+    }
   });
 
   syncVolumeControl(ui.bgmVolumeSlider, ui.bgmVolumeValue, engine.getBgmVolume());
@@ -438,6 +444,8 @@ function getUi(root) {
     scenarioButton: root.querySelector('[data-command="scenario"]'),
     volumeButton: root.querySelector('[data-command="volume"]'),
     backlogButton: root.querySelector('[data-command="backlog"]'),
+    skipButton: root.querySelector('[data-command="skip"]'),
+    autoButton: root.querySelector('[data-command="auto"]'),
     volumePanel: root.querySelector("[data-volume-panel]"),
     bgmVolumeSlider: root.querySelector("[data-bgm-volume-slider]"),
     bgmVolumeValue: root.querySelector("[data-bgm-volume-value]"),
@@ -485,7 +493,11 @@ function createEngine(ui) {
     typingTimer: null,
     typingFullText: "",
     backlog: [],
-    backlogOpen: false
+    backlogOpen: false,
+    skipping: false,
+    skipTimer: null,
+    autoPlay: false,
+    autoTimer: null
   };
 
   const api = {
@@ -516,6 +528,9 @@ function createEngine(ui) {
 
       if (state.typing) {
         completeTypewriter(ui, state);
+        if (state.skipping) {
+          scheduleSkipAdvance(state, ui, api);
+        }
         return;
       }
 
@@ -564,6 +579,36 @@ function createEngine(ui) {
     getSoundVolume() {
       return Math.round(soundPlayer.getMasterVolume() * 100);
     },
+    toggleSkip() {
+      clearTimeout(state.skipTimer);
+      clearTimeout(state.autoTimer);
+      state.skipping = !state.skipping;
+      state.autoPlay = false;
+      syncSkipButton(ui, state);
+      syncAutoButton(ui, state);
+
+      if (state.skipping) {
+        if (state.typing) {
+          completeTypewriter(ui, state);
+        }
+
+        scheduleSkipAdvance(state, ui, api);
+      }
+    },
+
+    toggleAuto() {
+      clearTimeout(state.skipTimer);
+      clearTimeout(state.autoTimer);
+      state.autoPlay = !state.autoPlay;
+      state.skipping = false;
+      syncSkipButton(ui, state);
+      syncAutoButton(ui, state);
+
+      if (state.autoPlay && !state.typing && !state.waitingForChoice && !state.ended) {
+        scheduleAutoAdvance(state, ui, api);
+      }
+    },
+
     toggleBacklog() {
       if (state.backlogOpen) {
         closeBacklog(ui, state);
@@ -595,11 +640,35 @@ async function loadScenario(url) {
   }
 
   const text = await scenarioResponse.text();
-  const scenario = parse(text);
+  let scenario;
+
+  try {
+    scenario = parse(text);
+  } catch (error) {
+    throw new Error(formatYamlParseError(error, text));
+  }
 
   validateScenario(scenario);
   scenario.assetManifest = assetManifest;
   return scenario;
+}
+
+function formatYamlParseError(error, sourceText) {
+  const baseMessage = error instanceof Error ? error.message : String(error);
+  const lineMatch = /line (\d+), column (\d+)/.exec(baseMessage);
+
+  if (!lineMatch) {
+    return baseMessage;
+  }
+
+  const lineNumber = Number.parseInt(lineMatch[1], 10);
+  const lineText = sourceText.split(/\r?\n/)[lineNumber - 1] ?? "";
+
+  if (/:\s*\{\{.+/.test(lineText)) {
+    return `${baseMessage}\nヒント: 値が \`{{...}}\` で始まる行は YAML ではクォートが必要です。例: \`text: "{{player.name}}は？ どう思ってる。"\``;
+  }
+
+  return baseMessage;
 }
 
 async function loadAssetManifest() {
@@ -664,6 +733,10 @@ function prepareScenario(state, scenario, options = {}) {
   state.typingFullText = "";
   state.backlog = [];
   state.backlogOpen = false;
+  clearTimeout(state.skipTimer);
+  clearTimeout(state.autoTimer);
+  state.skipping = false;
+  state.autoPlay = false;
   state.playerConfig = normalizePlayerConfig(scenario.player);
 
   if (state.playerConfig) {
@@ -984,8 +1057,20 @@ function applySay(payload, state, ui) {
     speaker: payload.speaker ? speaker.label : "",
     text
   });
-  startTypewriter(text, ui, state);
-  ui.advanceButton.disabled = false;
+  if (state.skipping) {
+    ui.message.textContent = text;
+    state.typing = false;
+    state.typingFullText = text;
+    ui.advanceButton.disabled = false;
+    scheduleSkipAdvance(state, ui, api);
+  } else {
+    startTypewriter(text, ui, state);
+    ui.advanceButton.disabled = false;
+
+    if (state.autoPlay) {
+      scheduleAutoAdvance(state, ui, api);
+    }
+  }
 }
 
 function applyChoice(payload, state, ui, api) {
@@ -999,6 +1084,12 @@ function applyChoice(payload, state, ui, api) {
     throw new Error(`choice に表示可能な選択肢がありません。 node: ${state.currentNodeId}`);
   }
 
+  clearTimeout(state.skipTimer);
+  clearTimeout(state.autoTimer);
+  state.skipping = false;
+  state.autoPlay = false;
+  syncSkipButton(ui, state);
+  syncAutoButton(ui, state);
   state.waitingForChoice = true;
   ui.advanceButton.disabled = true;
   ui.choices.hidden = false;
@@ -1337,6 +1428,34 @@ function cancelTypewriter(state) {
     clearTimeout(state.typingTimer);
     state.typingTimer = null;
   }
+}
+
+function scheduleSkipAdvance(state, ui, api) {
+  clearTimeout(state.skipTimer);
+  state.skipTimer = window.setTimeout(() => {
+    if (state.skipping) {
+      api.advance();
+    }
+  }, 40);
+}
+
+function scheduleAutoAdvance(state, ui, api) {
+  clearTimeout(state.autoTimer);
+  state.autoTimer = window.setTimeout(() => {
+    if (state.autoPlay) {
+      api.advance();
+    }
+  }, 2000);
+}
+
+function syncSkipButton(ui, state) {
+  ui.skipButton.dataset.active = String(state.skipping);
+  ui.skipButton.setAttribute("aria-pressed", String(state.skipping));
+}
+
+function syncAutoButton(ui, state) {
+  ui.autoButton.dataset.active = String(state.autoPlay);
+  ui.autoButton.setAttribute("aria-pressed", String(state.autoPlay));
 }
 
 function completeTypewriter(ui, state) {

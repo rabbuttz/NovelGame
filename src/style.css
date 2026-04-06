@@ -734,6 +734,17 @@ body {
   border-color: rgba(35, 145, 200, 0.86);
 }
 
+.command-button[data-active="true"] {
+  cursor: pointer;
+  background: linear-gradient(180deg, #d0f0ff 0%, #a8dcf0 100%);
+  border-color: rgba(35, 145, 200, 0.9);
+  color: var(--ink);
+}
+
+.command-button[data-active="true"] .command-icon {
+  background: linear-gradient(180deg, #3aa7da 0%, #1a7aaa 100%);
+}
+
 .command-icon {
   display: inline-grid;
   place-items: center;

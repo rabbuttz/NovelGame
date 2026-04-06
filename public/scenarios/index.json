@@ -1,5 +1,10 @@
 [
   {
+    "url": "scenarios/kazamito-chapter5.yaml",
+    "title": "風見塔のラストノート 第五章",
+    "description": "アガサと日常の雑務を回りながら、笑顔の裏にある負荷と本音に触れる共通ルート第五章。"
+  },
+  {
     "url": "scenarios/kazamito-chapter4.yaml",
     "title": "風見塔のラストノート 第四章",
     "description": "うきわの空回りの理由と、去年のつらい失敗が明かされる共通ルート第四章。"

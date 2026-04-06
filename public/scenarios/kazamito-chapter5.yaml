@@ -1,0 +1,349 @@
+title: 風見塔のラストノート 第五章 笑顔の手順
+dateLabel: 4月14日
+
+player:
+  title: 主人公の名前を決める
+  prompt: 呼ばれたい名前を入力してください。
+  defaultName: 湊
+  presets:
+    - 湊
+    - 悠真
+
+variables:
+  flags:
+    chapter1Clear: true
+    chapter2Clear: true
+    chapter3Clear: true
+    chapter4Clear: true
+    chapter5Clear: false
+    acceptedProjectTemp: true
+    acceptedCrossRole: true
+    foundOldCancellationSlip: true
+    trustedAgasaNegotiation: false
+    readSafetyGuideline: false
+    sharedAgasaBurden: false
+    noticedAgasaFatigue: false
+  affection:
+    kiryu: 2
+    amu: 3
+    agasa: 4
+    ukiwa: 4
+    gura: 2
+    mimochi: 2
+    suzudora: 1
+    nemunomi: 2
+    mochitora: 2
+    dori: 1
+
+characters:
+  アガサ:
+    name: アガサ
+  きりゅう:
+    name: きりゅう
+  すずどら:
+    name: すずどら
+  どり:
+    name: どり
+  ロクロ:
+    name: ロクロ
+
+start: morning_request
+
+nodes:
+  morning_request:
+    - date: 4月14日 朝
+    - background: 廊下
+    - bgm:
+        id: 共通ルート 日常
+        volume: 0.6
+        loop: true
+    - say:
+        text: うきわの配置表を立て直した翌朝、校舎の空気は妙に穏やかだった。大きな問題が片づいたわけではない。ただ、皆が昨日より少しだけ息を合わせられている。
+    - show:
+        character: アガサ
+        expression: smile
+        position: center
+    - say:
+        speaker: アガサ
+        text: おはよう。今日は僕と回ってくれない？ 申請前の細かい確認が多くてね。派手さはないけど、放っておくと後で全部噛みついてくる類の仕事。
+    - say:
+        speaker: "{{player.name}}"
+        text: アガサ先輩がそう言うと、細かい仕事に聞こえないんだけど。
+    - say:
+        speaker: アガサ
+        text: それは困るな。本当に地味だよ。書類の控え、閲覧記録、使用申請の言い回し、あと機嫌のよくない相手との雑談。
+    - say:
+        text: 最後の一項目だけ、少しだけ声色が軽くなる。アガサにとっては、それも日常のうちなのだろう。
+    - goto: library_task
+
+  library_task:
+    - background: 図書館
+    - hide: {}
+    - show:
+        character: アガサ
+        expression: default
+        position: left
+    - show:
+        character: どり
+        expression: default
+        position: right
+    - say:
+        text: 最初に向かったのは図書館だった。古い校内報、過去の星潮祭パンフレット、風見塔閉鎖前の利用規約。そのどれもが、今の企画に直接は見えないのに、あとで必要になる書類ばかりだ。
+    - say:
+        speaker: どり
+        text: 頼まれてた閲覧記録、まとめておいた。年度で分けてある。閉鎖直前だけ抜き出したいなら、この青い付箋の束。
+    - say:
+        speaker: アガサ
+        text: ありがとう。君がいると、僕の半日分が消し飛ぶね。
+    - say:
+        speaker: どり
+        text: 便利に使ってくれていいよ。必要なところが見えてる人の方が、渡しがいがある。
+    - hide:
+        position: right
+    - say:
+        text: どりが去ったあと、アガサは資料を抱えたまま自然な手つきで分類を始めた。読む順番まで、最初から決めてあるらしい。
+    - say:
+        speaker: "{{player.name}}"
+        text: 先回りしすぎじゃないですか。
+    - say:
+        speaker: アガサ
+        text: 先回りしないと、誰かの「今さら言うのも」が増えるからね。黙っているものほど、後で大きい。
+    - goto: corridor_rounds
+
+  corridor_rounds:
+    - background: 廊下
+    - hide: {}
+    - show:
+        character: アガサ
+        expression: smile
+        position: center
+    - say:
+        text: 昼までのあいだ、アガサと一緒に廊下を何往復もした。用件はどれも短い。書類を一枚届ける、判子の順番を確認する、口頭で済む注意を先に伝える。
+    - say:
+        text: そのたびに相手の反応が少しずつ変わる。面倒そうだった顔が和らぎ、保留だった返事が前向きになる。強引ではないのに、流れだけがきれいに整っていく。
+    - say:
+        speaker: "{{player.name}}"
+        text: 先輩、交渉っていうより空気の向き変えてません？
+    - say:
+        speaker: アガサ
+        text: 大げさだな。でも、たぶん半分はそう。正論だけで通るなら、皆もっと楽をしてるよ。
+    - say:
+        text: 言葉は軽いのに、笑顔が一瞬だけ薄くなった。楽しんでやっているように見えて、きっと違う。
+    - set:
+        flags.noticedAgasaFatigue: true
+    - goto: lunch_pause
+
+  lunch_pause:
+    - date: 4月14日 昼休み
+    - background: 図書館
+    - hide: {}
+    - show:
+        character: アガサ
+        expression: default
+        position: center
+    - say:
+        text: 図書館の窓際席でようやく足を止める。昼休みなのに、机の上にはパンではなく修正版の文面案と安全確認表が並んでいた。
+    - say:
+        speaker: "{{player.name}}"
+        text: 先輩、昼は。
+    - say:
+        speaker: アガサ
+        text: ああ、忘れてた。……ううん、正確には後回しにしてた、かな。
+    - choice:
+        options:
+          - text: まず食べるように言う
+            set:
+              affection.agasa: 2
+              flags.sharedAgasaBurden: true
+            goto: insist_lunch
+          - text: 書類を見るのを手伝う
+            set:
+              affection.agasa: 1
+              flags.readSafetyGuideline: true
+            goto: read_documents
+
+  insist_lunch:
+    - say:
+        speaker: "{{player.name}}"
+        text: 後回しにするのをやめてください。根回し役が倒れたら、企画の空気ごと止まります。
+    - say:
+        speaker: アガサ
+        text: ふふ。きりゅうに似たことを言うね。
+    - say:
+        speaker: "{{player.name}}"
+        text: きりゅう先輩が正しい時は、似ることもあります。
+    - motion:
+        character: アガサ
+        name: 喜び
+    - say:
+        speaker: アガサ
+        text: それは一本取られた。じゃあ五分だけ、仕事じゃない時間にしようか。
+    - say:
+        text: 資料の上からパンの袋が置かれる。ほんの五分なのに、アガサが少しだけ年相応の二年生に見えた。
+    - goto: after_lunch_confession
+
+  read_documents:
+    - say:
+        speaker: "{{player.name}}"
+        text: じゃあ、せめて一緒に見ます。どこが詰まりそうなのか、知っておきたい。
+    - say:
+        speaker: アガサ
+        text: いい心がけだね。ここ、見て。安全確認表の文面、同じ意味でも言い方ひとつで受け取り方が変わる。
+    - say:
+        text: アガサの指先が、文面の差し替え箇所を静かにたどる。強い主張を隠し、相手に受け入れられる角度まで丸める。その作業は器用というより、慎重だった。
+    - say:
+        speaker: アガサ
+        text: 通したいだけなら押せばいい。でも、押して通したものは、あとで誰かの反発を呼ぶ。僕はそれが好きじゃない。
+    - set:
+        flags.readSafetyGuideline: true
+    - goto: after_lunch_confession
+
+  after_lunch_confession:
+    - background: 教室・昼
+    - hide: {}
+    - show:
+        character: アガサ
+        expression: troubled
+        position: left
+    - show:
+        character: きりゅう
+        expression: default
+        position: right
+    - say:
+        text: 午後の打ち合わせ前、きりゅうが教室の入口で足を止めた。アガサの手元の紙束を一目見て、眉をわずかに寄せる。
+    - say:
+        speaker: きりゅう
+        text: その量、お前一人で持つ前提で組むな。役割を分けろ。
+    - say:
+        speaker: アガサ
+        text: 分けてるつもりなんだけどね。最後に人の間を通す部分だけは、どうしても残る。
+    - say:
+        speaker: きりゅう
+        text: だからって、全部お前が飲み込んでいい理由にはならない。
+    - hide:
+        position: right
+    - say:
+        text: きりゅうが去ったあと、アガサはしばらく扉を見ていた。笑ってはいるのに、その横顔だけが少し疲れている。
+    - say:
+        speaker: アガサ
+        text: 僕、揉める前に丸めるのが癖なんだ。誰かが強く言われるくらいなら、自分が先に吸ったほうが早いから。
+    - say:
+        speaker: アガサ
+        text: でもそれって、ときどき「本音が見えない」って言われるんだよね。便利な人でいるほど、ほんとの距離は遠くなる。
+    - goto: player_choice
+
+  player_choice:
+    - choice:
+        options:
+          - text: 本音を隠さなくていいと伝える
+            set:
+              affection.agasa: 3
+              flags.sharedAgasaBurden: true
+            goto: share_burden
+          - text: 先輩のやり方を信じると伝える
+            set:
+              affection.agasa: 2
+              flags.trustedAgasaNegotiation: true
+            goto: trust_agasa
+
+  share_burden:
+    - say:
+        speaker: "{{player.name}}"
+        text: 便利な人でいなくていいです。少なくとも俺の前では、丸めないでください。きついならきついって言ってほしい。
+    - say:
+        speaker: アガサ
+        text: ……それ、思ったより効くな。君、案外まっすぐ刺してくる。
+    - say:
+        speaker: "{{player.name}}"
+        text: 遠回しにされると、たぶん気づけないので。
+    - show:
+        character: アガサ
+        expression: smile
+        position: left
+    - say:
+        speaker: アガサ
+        text: じゃあ一つだけ本音を言う。今日は少し、君がいて助かった。
+    - goto: evening_walk
+
+  trust_agasa:
+    - say:
+        speaker: "{{player.name}}"
+        text: 先輩のやり方、嫌いじゃないです。押し通すんじゃなくて、残る反発まで見て動いてるの、ちゃんとわかります。
+    - say:
+        speaker: アガサ
+        text: 信頼の置き方が上手いね、君は。そういう言い方をされると、次も失敗できなくなる。
+    - say:
+        speaker: "{{player.name}}"
+        text: 失敗しないって意味じゃなくて、失敗しても誤魔化さないだろうってことです。
+    - say:
+        speaker: アガサ
+        text: ……なるほど。なら、その信頼は受け取っておく。
+    - set:
+        flags.trustedAgasaNegotiation: true
+    - goto: evening_walk
+
+  evening_walk:
+    - date: 4月14日 夕方
+    - background: 帰り道
+    - hide: {}
+    - show:
+        character: アガサ
+        expression: default
+        position: center
+    - say:
+        text: 打ち合わせを終えて校門まで歩くころには、空がだいぶやわらかい色になっていた。日中の根回しは地味で目立たなかったのに、書類の束だけが朝より薄くなっている。
+    - say:
+        speaker: アガサ
+        text: 今日はずいぶん君を付き合わせたね。退屈じゃなかった？
+    - say:
+        speaker: "{{player.name}}"
+        text: 思ってたより、ずっと忙しかったです。先輩が笑ってるせいで、もっと軽い仕事かと思ってた。
+    - say:
+        speaker: アガサ
+        text: それはたぶん、僕の悪い癖だね。余裕があるように見せたほうが、皆が安心するから。
+    - say:
+        speaker: "{{player.name}}"
+        text: 皆は安心しても、先輩は楽になってないですよね。
+    - say:
+        speaker: アガサ
+        text: ……うん。でも今日みたいに、気づく人が一人いるなら、それだけで少し違う。
+    - goto: next_hook
+
+  next_hook:
+    - background: 廊下
+    - hide: {}
+    - show:
+        character: ロクロ
+        expression: default
+        position: left
+    - show:
+        character: すずどら
+        expression: default
+        position: right
+    - bgm:
+        id: 切ない会話・すれ違い
+        volume: 0.54
+        loop: true
+    - say:
+        text: 翌朝、正式申請の場にはロクロだけでなく、すずどらも同席していた。書類を通す側と止める側、その両方の視線が集まる。
+    - say:
+        speaker: すずどら
+        text: 言葉を整えた書類は嫌いではない。だが、整えた分だけ実態が甘いなら意味がない。
+    - say:
+        speaker: ロクロ
+        text: 君たちの準備が本物かどうかは、ここから先で見るよ。
+    - say:
+        text: 日常のように見えた一日は終わる。けれどアガサが整えていたのは、ただの雑務ではなかった。次に始まる正面の交渉、その前線だったのだ。
+    - goto: ending
+
+  ending:
+    - set:
+        flags.chapter5Clear: true
+    - bgm: stop
+    - hide: {}
+    - say:
+        text: こうして{{player.name}}は、アガサの「笑顔の手順」を知った。人の機嫌、言葉の角度、反発の残り方まで計算しながら、それでも誰かを守るために先回りするやり方を。
+    - say:
+        text: そしてその笑顔の裏に、疲れも本音もちゃんとあることを知る。だからこそ、次の交渉で彼の隣に立つ意味も少しだけ見えてきた。
+    - say:
+        text: 第五章・了

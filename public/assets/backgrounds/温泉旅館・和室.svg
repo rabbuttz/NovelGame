@@ -1,0 +1,188 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="ceiling_grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1008"/>
+      <stop offset="100%" stop-color="#251808"/>
+    </linearGradient>
+    <linearGradient id="tatami" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a3018"/>
+      <stop offset="100%" stop-color="#1a2010"/>
+    </linearGradient>
+    <linearGradient id="wall_back" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#221610"/>
+      <stop offset="100%" stop-color="#1a120a"/>
+    </linearGradient>
+    <linearGradient id="night_sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#080818"/>
+      <stop offset="100%" stop-color="#101828"/>
+    </linearGradient>
+    <radialGradient id="lamp_glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffd880" stop-opacity="1"/>
+      <stop offset="50%" stop-color="#ffb040" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#ff8000" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="room_ambient" cx="50%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#ff9030" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#ff5000" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Ceiling -->
+  <rect width="1280" height="160" fill="url(#ceiling_grad)"/>
+  <!-- Ceiling beam -->
+  <rect x="0" y="70" width="1280" height="18" fill="#140e06"/>
+  <rect x="200" y="0" width="14" height="160" fill="#140e06"/>
+  <rect x="640" y="0" width="14" height="160" fill="#140e06"/>
+  <rect x="1066" y="0" width="14" height="160" fill="#140e06"/>
+
+  <!-- Back wall -->
+  <rect x="0" y="150" width="1280" height="400" fill="url(#wall_back)"/>
+
+  <!-- Ambient room light from lamp -->
+  <rect x="0" y="150" width="1280" height="400" fill="url(#room_ambient)"/>
+
+  <!-- Horizontal wall trim (nageshi) -->
+  <rect x="0" y="380" width="1280" height="10" fill="#2a1c0e"/>
+
+  <!-- Tokonoma (alcove, right side) -->
+  <rect x="950" y="155" width="320" height="235" fill="#1e1408"/>
+  <rect x="952" y="157" width="316" height="231" fill="#221808"/>
+  <!-- Scroll painting in tokonoma (abstract) -->
+  <rect x="1010" y="170" width="200" height="200" rx="2" fill="#f0e8d8" opacity="0.08"/>
+  <rect x="1015" y="175" width="190" height="190" fill="none" stroke="#8a6840" stroke-width="1" opacity="0.3"/>
+  <!-- Simple scroll art - mountain silhouette -->
+  <path d="M1020,340 L1060,240 L1090,290 L1120,220 L1155,295 L1190,260 L1200,340 Z" fill="#4a3820" opacity="0.4"/>
+  <line x1="1005" y1="168" x2="1005" y2="370" stroke="#4a3010" stroke-width="8" rx="3"/>
+  <line x1="1215" y1="168" x2="1215" y2="370" stroke="#4a3010" stroke-width="8" rx="3"/>
+  <!-- Small vase in tokonoma -->
+  <ellipse cx="1110" cy="365" rx="18" ry="8" fill="#2a2018"/>
+  <rect x="1098" y="330" width="24" height="36" rx="8" fill="#5a4030"/>
+  <ellipse cx="1110" cy="330" rx="14" ry="6" fill="#6a5040"/>
+
+  <!-- Shoji screens (back left) -->
+  <rect x="0" y="155" width="940" height="225" fill="#1a1408"/>
+  <!-- Shoji grid -->
+  <rect x="0" y="155" width="940" height="225" fill="#ffe8a0" opacity="0.06"/>
+  <!-- Grid lines vertical -->
+  <line x1="80" y1="155" x2="80" y2="380" stroke="#2a1e10" stroke-width="1.5"/>
+  <line x1="200" y1="155" x2="200" y2="380" stroke="#2a1e10" stroke-width="1.5"/>
+  <line x1="320" y1="155" x2="320" y2="380" stroke="#2a1e10" stroke-width="1.5"/>
+  <line x1="440" y1="155" x2="440" y2="380" stroke="#2a1e10" stroke-width="1.5"/>
+  <line x1="560" y1="155" x2="560" y2="380" stroke="#2a1e10" stroke-width="1.5"/>
+  <line x1="680" y1="155" x2="680" y2="380" stroke="#2a1e10" stroke-width="1.5"/>
+  <line x1="800" y1="155" x2="800" y2="380" stroke="#2a1e10" stroke-width="1.5"/>
+  <line x1="920" y1="155" x2="920" y2="380" stroke="#2a1e10" stroke-width="1.5"/>
+  <!-- Grid lines horizontal -->
+  <line x1="0" y1="220" x2="940" y2="220" stroke="#2a1e10" stroke-width="1.5"/>
+  <line x1="0" y1="300" x2="940" y2="300" stroke="#2a1e10" stroke-width="1.5"/>
+
+  <!-- Night sky visible through shoji (center panel slightly open) -->
+  <rect x="320" y="155" width="120" height="225" fill="url(#night_sky)" opacity="0.9"/>
+  <!-- Stars through shoji gap -->
+  <circle cx="355" cy="175" r="1" fill="#fff" opacity="0.8"/>
+  <circle cx="390" cy="200" r="1.2" fill="#fff" opacity="0.7"/>
+  <circle cx="420" cy="170" r="1" fill="#fff" opacity="0.6"/>
+  <circle cx="370" cy="230" r="1" fill="#fff" opacity="0.5"/>
+  <circle cx="410" cy="255" r="1.2" fill="#fff" opacity="0.7"/>
+  <!-- Moon glow through shoji -->
+  <circle cx="395" cy="190" r="18" fill="#f8f0d8" opacity="0.2"/>
+
+  <!-- Wood frame around shoji -->
+  <rect x="0" y="150" width="1280" height="8" fill="#2a1c0e"/>
+  <rect x="0" y="378" width="1280" height="8" fill="#2a1c0e"/>
+
+  <!-- Tatami floor -->
+  <rect x="0" y="550" width="1280" height="170" fill="url(#tatami)"/>
+  <!-- Tatami seams -->
+  <line x1="0" y1="550" x2="1280" y2="550" stroke="#1a1a08" stroke-width="3"/>
+  <line x1="320" y1="550" x2="320" y2="720" stroke="#1a1a08" stroke-width="2"/>
+  <line x1="640" y1="550" x2="640" y2="720" stroke="#1a1a08" stroke-width="2"/>
+  <line x1="960" y1="550" x2="960" y2="720" stroke="#1a1a08" stroke-width="2"/>
+  <line x1="0" y1="636" x2="1280" y2="636" stroke="#1a1a08" stroke-width="1.5"/>
+  <!-- Tatami texture lines -->
+  <line x1="0" y1="563" x2="320" y2="563" stroke="#202808" stroke-width="0.5" opacity="0.5"/>
+  <line x1="0" y1="578" x2="320" y2="578" stroke="#202808" stroke-width="0.5" opacity="0.5"/>
+  <line x1="0" y1="593" x2="320" y2="593" stroke="#202808" stroke-width="0.5" opacity="0.5"/>
+  <line x1="0" y1="608" x2="320" y2="608" stroke="#202808" stroke-width="0.5" opacity="0.5"/>
+  <line x1="0" y1="623" x2="320" y2="623" stroke="#202808" stroke-width="0.5" opacity="0.5"/>
+
+  <!-- Mid floor section -->
+  <rect x="0" y="388" width="1280" height="162" fill="#201808"/>
+  <!-- Floor board detail -->
+  <line x1="0" y1="420" x2="1280" y2="420" stroke="#181208" stroke-width="1.5"/>
+  <line x1="0" y1="460" x2="1280" y2="460" stroke="#181208" stroke-width="1.5"/>
+  <line x1="0" y1="500" x2="1280" y2="500" stroke="#181208" stroke-width="1.5"/>
+  <line x1="0" y1="540" x2="1280" y2="540" stroke="#181208" stroke-width="1.5"/>
+
+  <!-- Chabudai table (low table) -->
+  <ellipse cx="640" cy="530" rx="280" ry="60" fill="#3a2810"/>
+  <ellipse cx="640" cy="530" rx="274" ry="54" fill="#4a3418"/>
+  <!-- Table top surface -->
+  <ellipse cx="640" cy="515" rx="270" ry="50" fill="#503c1e"/>
+  <ellipse cx="640" cy="515" rx="265" ry="45" fill="#5a4422"/>
+  <!-- Table leg shadows -->
+  <ellipse cx="500" cy="575" rx="20" ry="6" fill="#1a1008" opacity="0.5"/>
+  <ellipse cx="780" cy="575" rx="20" ry="6" fill="#1a1008" opacity="0.5"/>
+
+  <!-- Tea items on table -->
+  <!-- Teapot -->
+  <ellipse cx="600" cy="505" rx="28" ry="18" fill="#5a3820"/>
+  <ellipse cx="600" cy="495" rx="24" ry="16" fill="#6a4828"/>
+  <rect x="575" y="490" width="8" height="20" rx="4" fill="#4a2e18"/>
+  <ellipse cx="600" cy="488" rx="14" ry="6" fill="#5a3820"/>
+  <!-- Cup left -->
+  <ellipse cx="550" cy="507" rx="14" ry="8" fill="#4a3418"/>
+  <rect x="537" y="499" width="26" height="16" rx="3" fill="#543c20"/>
+  <!-- Cup right -->
+  <ellipse cx="680" cy="507" rx="14" ry="8" fill="#4a3418"/>
+  <rect x="667" y="499" width="26" height="16" rx="3" fill="#543c20"/>
+  <!-- Snacks plate -->
+  <ellipse cx="640" cy="508" rx="22" ry="10" fill="#3a2c1a"/>
+  <ellipse cx="640" cy="505" rx="20" ry="8" fill="#4a3820"/>
+  <circle cx="630" cy="504" r="4" fill="#c86040"/>
+  <circle cx="645" cy="502" r="4" fill="#c86040"/>
+  <circle cx="655" cy="505" r="4" fill="#c86040"/>
+
+  <!-- Zabuton cushions (座布団) around table -->
+  <!-- Left cushion -->
+  <ellipse cx="380" cy="548" rx="65" ry="28" fill="#6a2828"/>
+  <ellipse cx="380" cy="546" rx="62" ry="25" fill="#7a3030"/>
+  <rect x="325" y="535" width="110" height="22" rx="8" fill="#7a3030"/>
+  <!-- Right cushion -->
+  <ellipse cx="900" cy="548" rx="65" ry="28" fill="#6a2828"/>
+  <ellipse cx="900" cy="546" rx="62" ry="25" fill="#7a3030"/>
+  <rect x="845" y="535" width="110" height="22" rx="8" fill="#7a3030"/>
+  <!-- Far cushion (near table far side) -->
+  <ellipse cx="640" cy="478" rx="60" ry="22" fill="#4a6828"/>
+  <rect x="590" y="468" width="100" height="20" rx="7" fill="#527230"/>
+
+  <!-- Andon lamp (行灯) - paper floor lamp -->
+  <!-- Right side -->
+  <rect x="1080" y="440" width="70" height="100" rx="3" fill="#1e1408"/>
+  <rect x="1082" y="442" width="66" height="96" rx="2" fill="#ffd880" opacity="0.55" filter="url(#glow)"/>
+  <!-- Lamp frame -->
+  <rect x="1080" y="435" width="70" height="8" rx="2" fill="#2a1c0e"/>
+  <rect x="1080" y="538" width="70" height="8" rx="2" fill="#2a1c0e"/>
+  <line x1="1115" y1="442" x2="1115" y2="538" stroke="#2a1c0e" stroke-width="2"/>
+  <line x1="1080" y1="490" x2="1150" y2="490" stroke="#2a1c0e" stroke-width="2"/>
+  <!-- Lamp glow on floor -->
+  <ellipse cx="1115" cy="560" rx="100" ry="30" fill="url(#lamp_glow)" opacity="0.4"/>
+
+  <!-- Left side small lamp -->
+  <rect x="130" y="455" width="55" height="80" rx="3" fill="#1e1408"/>
+  <rect x="132" y="457" width="51" height="76" rx="2" fill="#ffd880" opacity="0.50" filter="url(#glow)"/>
+  <rect x="130" y="450" width="55" height="8" rx="2" fill="#2a1c0e"/>
+  <rect x="130" y="533" width="55" height="8" rx="2" fill="#2a1c0e"/>
+  <ellipse cx="157" cy="550" rx="80" ry="22" fill="url(#lamp_glow)" opacity="0.3"/>
+
+  <!-- Foreground shadow -->
+  <rect y="680" width="1280" height="40" fill="#050302" opacity="0.6"/>
+</svg>

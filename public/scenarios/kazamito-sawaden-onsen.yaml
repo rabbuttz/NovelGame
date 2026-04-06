@@ -1,0 +1,580 @@
+title: 風見塔のラストノート 番外編 さわでんと、湯けむりの夜
+dateLabel: 6月14日
+
+player:
+  title: 主人公の名前を決める
+  prompt: 呼ばれたい名前を入力してください。
+  defaultName: 湊
+  presets:
+    - 湊
+    - 悠真
+
+variables:
+  flags:
+    onsenClear: false
+    wentToOpenBath: false
+    kissedinSteam: false
+    stayedTogether: false
+  affection:
+    sawaden: 5
+
+characters:
+  さわでん:
+    name: さわでん
+  きりゅう:
+    name: きりゅう
+  あむ:
+    name: あむ
+  うきわ:
+    name: うきわ
+  アガサ:
+    name: アガサ
+  どり:
+    name: どり
+  ねむのみ:
+    name: ねむのみ
+  餅虎:
+    name: 餅虎
+
+start: arrival
+
+nodes:
+  arrival:
+    - date: 6月14日 夕方
+    - background: 温泉旅館・玄関
+    - bgm:
+        id: 穏やかな恋愛イベント
+        volume: 0.45
+        loop: true
+    - say:
+        text: 星潮祭の準備がひと段落したタイミングで、チーム全員が一泊の温泉旅行へ来ることになった。ごんた先生の発案で、きりゅうが渋々まとめ役を引き受けた結果だ。
+    - show:
+        character: うきわ
+        expression: smile
+        position: left
+    - show:
+        character: あむ
+        expression: default
+        position: center
+    - show:
+        character: さわでん
+        expression: smile
+        position: right
+    - say:
+        speaker: うきわ
+        text: 来た来た！ 旅館だよ、旅館！ 露天風呂あるって！
+    - say:
+        speaker: あむ
+        text: テンション高すぎ。荷物、ちゃんと持って来た？
+    - say:
+        speaker: さわでん
+        text: あ、やば。タオル忘れた気がしてきた。
+    - say:
+        speaker: あむ
+        text: …………。
+    - say:
+        text: さわでんはそのまま笑って荷物の中を漁り始め、三秒後に「あった」と言った。
+    - hide: {}
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: アガサ
+        expression: smile
+        position: center
+    - show:
+        character: どり
+        expression: default
+        position: right
+    - say:
+        speaker: きりゅう
+        text: チェックインは三人一組で済ませる。消灯は十二時。温泉の男湯は二十二時まで。勝手に離れるな。
+    - say:
+        speaker: アガサ
+        text: きりゅう、旅行でもそのトーンなんだね。
+    - say:
+        speaker: どり
+        text: でも必要。はしゃぎすぎると明日に響く。
+    - say:
+        text: 旅館の玄関で、全員が揃った。遠征とも合宿とも違う、少し非日常の空気が漂っている。
+    - goto: dinner
+
+  dinner:
+    - date: 6月14日 夜
+    - background: 温泉旅館・和室
+    - hide: {}
+    - show:
+        character: うきわ
+        expression: smile
+        position: left
+    - show:
+        character: 餅虎
+        expression: smile
+        position: center
+    - show:
+        character: ねむのみ
+        expression: default
+        position: right
+    - bgm:
+        id: 共通ルート 日常
+        volume: 0.4
+        loop: true
+    - say:
+        text: 夕食は大きな和室でみんな一緒に。旅館の料理が次々と運ばれてきて、テーブルがすぐに賑やかになった。
+    - say:
+        speaker: うきわ
+        text: 刺身だ！ こんな量……！ ぼく一人でいけそう。
+    - say:
+        speaker: 餅虎
+        text: 食い過ぎると温泉入れなくなるよ。でもこれは食べる。全部。
+    - say:
+        speaker: ねむのみ
+        text: ゆっくり食べて。急がなくていいから。
+    - hide: {}
+    - show:
+        character: さわでん
+        expression: smile
+        position: right
+    - say:
+        text: 気づいたら、隣にさわでんが座っていた。距離が近い。今に始まったことではないが、こういう場だと余計に気になる。
+    - say:
+        speaker: さわでん
+        text: ねえ、この旅館って露天風呂、夜遅くまで入れるの知ってる？
+    - say:
+        speaker: "{{player.name}}"
+        text: 二十二時までって言ってたけど。
+    - say:
+        speaker: さわでん
+        text: うん。でも深夜の貸し切り枠があるって。一組二人まで、二十二時以降で予約制。
+    - say:
+        text: さわでんがスマホを見せてくる。旅館のHPには、確かに「深夜露天風呂・貸切オプション」とある。
+    - say:
+        speaker: さわでん
+        text: 俺、予約しといたんだよね。一緒に入る人、まだ決めてなくてさ。
+    - say:
+        text: 笑顔で、でも視線だけが少し真剣だった。
+    - choice:
+        options:
+          - text: 一緒に行くと答える
+            set:
+              flags.wentToOpenBath: true
+              affection.sawaden: 1
+            goto: agree_bath
+          - text: 他の誰かを誘ったほうがいいと言う
+            goto: hesitate_bath
+
+  hesitate_bath:
+    - say:
+        speaker: "{{player.name}}"
+        text: 他の人と行ったほうがよくない？
+    - say:
+        speaker: さわでん
+        text: …………。他の人でもいいけど、俺は{{player.name}}と行きたいと思ってた。
+    - say:
+        text: さらっと言った。でも、いつもの軽さと少し違う。
+    - say:
+        speaker: さわでん
+        text: 嫌だったら全然いいんだけど。
+    - choice:
+        options:
+          - text: やっぱり行くと伝える
+            set:
+              flags.wentToOpenBath: true
+              affection.sawaden: 1
+            goto: agree_bath
+          - text: 考えてから返事すると言う
+            goto: agree_bath
+
+  agree_bath:
+    - say:
+        speaker: "{{player.name}}"
+        text: わかった。行く。
+    - say:
+        speaker: さわでん
+        text: やった。じゃあ二十二時半に廊下で。
+    - say:
+        text: さわでんが嬉しそうに笑った。料理はそのあともずっと続いたが、なぜかその笑顔だけが頭の中に残った。
+    - goto: pre_bath
+
+  pre_bath:
+    - date: 6月14日 夜 22:00
+    - background: 廊下
+    - hide: {}
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: アガサ
+        expression: default
+        position: center
+    - bgm:
+        id: 切ない会話・すれ違い
+        volume: 0.35
+        loop: true
+    - say:
+        text: 食事のあと、みんなで温泉に入った。きりゅうが点呼を取って、消灯前に一度集まる時間を設ける。
+    - say:
+        speaker: きりゅう
+        text: 全員確認。明日は七時に朝食。六時半に集合。遅刻は置いていく。
+    - say:
+        speaker: アガサ
+        text: 去年の旅行でも同じこと言ってたよ。本当に置いてく人だから信用はできる。
+    - say:
+        text: 各々が部屋に散っていく。廊下に人の気配が減っていく。
+    - goto: late_night_meeting
+
+  late_night_meeting:
+    - date: 6月14日 深夜 22:30
+    - background: 廊下
+    - hide: {}
+    - show:
+        character: さわでん
+        expression: default
+        position: center
+    - say:
+        text: 廊下に出ると、さわでんが先に来ていた。浴衣姿で、タオルを肩にかけている。いつもの制服より少し違って見える。
+    - say:
+        speaker: さわでん
+        text: 来た。待ってたよ。
+    - say:
+        speaker: "{{player.name}}"
+        text: 早いね。
+    - say:
+        speaker: さわでん
+        text: なんかそわそわして。部屋にいるより廊下のほうが落ち着いた。
+    - say:
+        text: 廊下は静かだ。旅館の夜は思っていたより深くて、遠くから風の音だけが聞こえる。
+    - say:
+        speaker: さわでん
+        text: 行こう。
+    - goto: open_bath_arrive
+
+  open_bath_arrive:
+    - background: 露天風呂・夜
+    - hide: {}
+    - show:
+        character: さわでん
+        expression: default
+        position: right
+    - bgm:
+        id: 穏やかな恋愛イベント
+        volume: 0.38
+        loop: true
+    - say:
+        text: 露天風呂は旅館の一番奥にある。暗い廊下を抜けると、ひんやりした外気と一緒に、湯の匂いが漂ってきた。
+    - say:
+        text: 岩で囲まれた湯船に、お湯が満ちている。夜空には星が出ていた。月も出ている。湯気がゆっくりと上に漂って、空に溶けていく。
+    - say:
+        speaker: さわでん
+        text: うわ、きれい。
+    - say:
+        text: さわでんが素直な声で言った。こういう時のさわでんは、嘘がない。
+    - say:
+        speaker: "{{player.name}}"
+        text: 来てよかったかも。
+    - say:
+        speaker: さわでん
+        text: ね。
+    - goto: bath_together
+
+  bath_together:
+    - say:
+        text: お湯の中に入ると、体の力が抜けていく感じがした。昼間の疲れが、少しずつほぐれていく。さわでんは岩に背を預けて、夜空を見ていた。
+    - say:
+        speaker: さわでん
+        text: 星、こんなにあるの、久しぶりに見た気がする。
+    - say:
+        speaker: "{{player.name}}"
+        text: 街中にいると見えないよね。
+    - say:
+        speaker: さわでん
+        text: うん。……なんか、遠くから見るとぜんぶ同じくらいの明るさに見えるけど、ちゃんとそれぞれ違うんだろうな。
+    - say:
+        text: 珍しい言い方をするなと思った。さわでんは続けた。
+    - say:
+        speaker: さわでん
+        text: 俺ってさ、「明るいやつ」って思われてること多いじゃん。それ、別に嘘じゃないんだけど、ぜんぶでもなくて。
+    - say:
+        speaker: "{{player.name}}"
+        text: 知ってる。
+    - say:
+        speaker: さわでん
+        text: ……え。
+    - say:
+        speaker: "{{player.name}}"
+        text: 海の遠足の時から、なんとなく。
+    - say:
+        text: さわでんが少し目を丸くして、それから小さく笑った。いつもの笑顔じゃなくて、もう少し柔らかいやつ。
+    - say:
+        speaker: さわでん
+        text: そっか。……なんか、恥ずかしいな。
+    - goto: steam_close
+
+  steam_close:
+    - say:
+        text: 湯気が濃くなっていく。月明かりがその中に混ざって、輪郭がぼんやりする。気づいたら、さわでんとの距離が縮まっていた。
+    - say:
+        speaker: さわでん
+        text: ……{{player.name}}って、俺のことどう思ってる？
+    - say:
+        text: 唐突に聞かれた。でも声はいつもより低くて、静かだった。
+    - choice:
+        options:
+          - text: 好きだと答える
+            set:
+              affection.sawaden: 3
+            goto: confession_yes
+          - text: どういう意味かと聞き返す
+            goto: confession_clarify
+
+  confession_clarify:
+    - say:
+        speaker: "{{player.name}}"
+        text: どういう意味で聞いてる？
+    - say:
+        speaker: さわでん
+        text: ……ちゃんとした意味で。
+    - say:
+        text: 湯気の中で、さわでんの顔が近い。視線が交わる。嘘をついていない目だった。
+    - say:
+        speaker: "{{player.name}}"
+        text: ……じゃあ、好き。
+    - set:
+        affection.sawaden: 2
+    - goto: sawaden_response
+
+  confession_yes:
+    - say:
+        speaker: "{{player.name}}"
+        text: 好きだよ。さわでんのこと。
+    - goto: sawaden_response
+
+  sawaden_response:
+    - show:
+        character: さわでん
+        expression: troubled
+        position: center
+    - say:
+        text: さわでんがしばらく黙った。湯気の向こうで、月の形がぼんやり動く。
+    - say:
+        speaker: さわでん
+        text: ……俺も。
+    - say:
+        text: 小さい声だったが、確かに聞こえた。
+    - say:
+        speaker: さわでん
+        text: ずっと言えなかった。なんか、{{player.name}}に対してだけ、うまく明るくなれない感じがして。
+    - say:
+        speaker: "{{player.name}}"
+        text: それって、真剣ってこと？
+    - say:
+        speaker: さわでん
+        text: そう。……真剣なんだよ。笑って誤魔化せない感じがして、ずっとむずかしかった。
+    - goto: steam_kiss
+
+  steam_kiss:
+    - show:
+        character: さわでん
+        expression: smile
+        position: center
+    - bgm:
+        id: 緊張・陰謀・不穏
+        volume: 0.28
+        loop: true
+    - say:
+        text: さわでんが、静かに近づいてきた。湯気の中で、互いの体温が混ざる。お湯の温かさとは違う、もっと近い温度。
+    - say:
+        text: 目が合う。さわでんは笑っていなかった。いつもの明るさの後ろ側にある、ちゃんとした顔で、こちらを見ていた。
+    - sound: 心臓の鼓動1
+    - say:
+        text: 唇が、触れた。
+    - say:
+        text: 柔らかくて、少しためらうような触れ方だった。それでも、ちゃんとそこにある。湯の音だけが静かに続いている。
+    - set:
+        flags.kissedinSteam: true
+    - goto: after_kiss
+
+  after_kiss:
+    - say:
+        text: 少しの間があって、さわでんが顔を離した。湯気の中で、耳が赤くなっているのが見えた。
+    - say:
+        speaker: さわでん
+        text: ……ごめん、突然。
+    - say:
+        speaker: "{{player.name}}"
+        text: 謝らなくていい。
+    - say:
+        speaker: さわでん
+        text: ……うん。
+    - say:
+        text: それだけ言って、さわでんはまた夜空を見上げた。さっきより少し、肩の力が抜けているように見える。
+    - say:
+        speaker: さわでん
+        text: 月、きれいだね。
+    - say:
+        text: 今度の「きれい」は、空に向けた言葉じゃない気がした。
+    - goto: back_to_inn
+
+  back_to_inn:
+    - date: 6月14日 深夜 23:30
+    - background: 廊下
+    - hide: {}
+    - show:
+        character: さわでん
+        expression: default
+        position: center
+    - bgm:
+        id: 穏やかな恋愛イベント
+        volume: 0.35
+        loop: true
+    - say:
+        text: 露天風呂を上がって、廊下を歩いて戻る。宿の中は静かで、他の誰も起きていない。さわでんが横に並んで歩いている。
+    - say:
+        speaker: さわでん
+        text: 部屋、どっちだっけ。
+    - say:
+        speaker: "{{player.name}}"
+        text: 奥の方。
+    - say:
+        speaker: さわでん
+        text: あ、俺の部屋の前通る。
+    - say:
+        text: 部屋の前まで来た。さわでんが立ち止まる。
+    - say:
+        speaker: さわでん
+        text: ……もう少し、話せる？
+    - choice:
+        options:
+          - text: いいよ、と答える
+            set:
+              flags.stayedTogether: true
+              affection.sawaden: 2
+            goto: night_together
+          - text: 明日もあるからと答える
+            goto: goodnight_end
+
+  goodnight_end:
+    - say:
+        speaker: "{{player.name}}"
+        text: 明日もあるから。おやすみ、さわでん。
+    - say:
+        speaker: さわでん
+        text: ……うん。おやすみ。
+    - say:
+        text: さわでんが部屋に入っていく。扉が閉まる音がして、廊下が静かになった。
+    - say:
+        text: 胸のあたりが、まだ少し温かかった。
+    - goto: morning
+
+  night_together:
+    - background: 温泉旅館・和室
+    - say:
+        text: さわでんの部屋は、こちらの部屋より少し広かった。布団が二枚、窓に向かって並んでいる。障子の向こうに、月の光が滲んでいた。
+    - say:
+        speaker: さわでん
+        text: 座って。
+    - say:
+        text: 座布団の上に並んで座った。温泉上がりの体はまだ温かくて、肌の表面がほんのり火照っている。
+    - say:
+        speaker: さわでん
+        text: さっきのこと、後悔してない？
+    - say:
+        speaker: "{{player.name}}"
+        text: してない。
+    - say:
+        speaker: さわでん
+        text: よかった。……俺もしてない。
+    - say:
+        text: 窓の外で風が動いた。障子が少しだけ揺れて、月明かりの形が変わる。
+    - say:
+        speaker: さわでん
+        text: 前に話した、弟の話。覚えてる？
+    - say:
+        speaker: "{{player.name}}"
+        text: 覚えてる。
+    - say:
+        speaker: さわでん
+        text: あの時からずっと、誰かに心配かけないようにするのが癖になってた。でも……{{player.name}}にはなんか、ちゃんと見せたいって思う。
+    - say:
+        text: さわでんが、こちらを向いた。湯上がりの顔で、熱が残っている。距離が近い。
+    - say:
+        speaker: さわでん
+        text: ……いてくれる？ 今夜。
+    - choice:
+        options:
+          - text: うん、と答える
+            goto: stay_together
+          - text: さわでんの隣に移動する
+            goto: stay_together
+
+  stay_together:
+    - bgm:
+        id: 切ない会話・すれ違い
+        volume: 0.3
+        loop: true
+    - say:
+        text: 答える代わりに、そのまま寄り添った。さわでんの肩に、自分の肩が触れる。さわでんは何も言わなかったが、腕が少しだけ回ってきた。
+    - say:
+        text: 月明かりの中で、ふたりの影が重なった。
+    - say:
+        text: さわでんの手が、そっと頬に触れた。問いかけるように。
+    - say:
+        text: こちらが目を閉じると、もう一度、唇が重なった。今度はもっと深く。
+    - bgm: stop
+    - say:
+        text: 旅館の夜は、静かに長かった。
+    - goto: morning
+
+  morning:
+    - date: 6月15日 朝
+    - background: 温泉旅館・和室
+    - hide: {}
+    - show:
+        character: さわでん
+        expression: smile
+        position: right
+    - bgm:
+        id: 共通ルート 日常
+        volume: 0.38
+        loop: true
+    - say:
+        text: 朝の光が障子を通して入ってきた。さわでんが先に起きていて、窓の外を見ていた。
+    - say:
+        speaker: さわでん
+        text: おはよ。
+    - say:
+        speaker: "{{player.name}}"
+        text: おはよう。
+    - say:
+        speaker: さわでん
+        text: 朝ごはん、七時だって。もうすぐ集合。
+    - say:
+        text: いつものさわでんだった。明るくて、軽くて、少し呑気で。でも今朝は、その後ろが少し見える気がした。
+    - say:
+        speaker: さわでん
+        text: ……昨日のこと、夢じゃないよね。
+    - say:
+        speaker: "{{player.name}}"
+        text: 夢じゃない。
+    - say:
+        speaker: さわでん
+        text: よかった。……じゃあ、行こう。みんな待ってる。
+    - say:
+        text: さわでんが立ち上がって、こちらに手を差し出してきた。当たり前のように、迷いなく。
+    - say:
+        text: その手を取ると、さわでんが少しだけ照れたように笑った。いつもの笑顔の、もっと内側にあるやつだった。
+    - set:
+        flags.onsenClear: true
+    - goto: ending
+
+  ending:
+    - bgm: stop
+    - hide: {}
+    - say:
+        text: みんなが集まる和室に向かいながら、さわでんの手の温かさが、まだ手の中にある気がした。
+    - say:
+        text: 湯けむりの夜のことは、今日一日だけ自分たちの中に置いておいていい。いつかまた、ちゃんと言葉にする時が来るまで。
+    - say:
+        text: 番外編・了

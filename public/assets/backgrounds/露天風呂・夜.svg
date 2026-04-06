@@ -1,0 +1,229 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="night_sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#05081a"/>
+      <stop offset="50%" stop-color="#0d1230"/>
+      <stop offset="100%" stop-color="#1a1840"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a3048"/>
+      <stop offset="100%" stop-color="#0a1828"/>
+    </linearGradient>
+    <linearGradient id="rock_grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3a3530"/>
+      <stop offset="100%" stop-color="#1e1c18"/>
+    </linearGradient>
+    <linearGradient id="rock_dark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#252220"/>
+      <stop offset="100%" stop-color="#141210"/>
+    </linearGradient>
+    <radialGradient id="lantern_warm" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffc040" stop-opacity="1"/>
+      <stop offset="40%" stop-color="#ff8010" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#ff4000" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="moon_glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#e8f0ff" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#8090c8" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#3040a0" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="water_glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#4080c0" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#1030a0" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="steam_blur">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+    <filter id="soft_glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow_strong">
+      <feGaussianBlur stdDeviation="14" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="steam_filter">
+      <feGaussianBlur stdDeviation="12"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.35"/>
+      </feComponentTransfer>
+    </filter>
+  </defs>
+
+  <!-- Night sky -->
+  <rect width="1280" height="720" fill="url(#night_sky)"/>
+
+  <!-- Stars (many, scattered) -->
+  <circle cx="50" cy="30" r="1.2" fill="#fff" opacity="0.9"/>
+  <circle cx="120" cy="70" r="0.8" fill="#fff" opacity="0.7"/>
+  <circle cx="200" cy="15" r="1.5" fill="#fff" opacity="0.8"/>
+  <circle cx="280" cy="50" r="1" fill="#fff" opacity="0.6"/>
+  <circle cx="360" cy="25" r="1.2" fill="#fff" opacity="0.9"/>
+  <circle cx="440" cy="65" r="0.8" fill="#fff" opacity="0.5"/>
+  <circle cx="520" cy="10" r="1" fill="#fff" opacity="0.7"/>
+  <circle cx="620" cy="45" r="1.3" fill="#fff" opacity="0.8"/>
+  <circle cx="700" cy="20" r="1" fill="#fff" opacity="0.6"/>
+  <circle cx="790" cy="55" r="1.2" fill="#fff" opacity="0.7"/>
+  <circle cx="880" cy="15" r="0.9" fill="#fff" opacity="0.8"/>
+  <circle cx="960" cy="40" r="1.1" fill="#fff" opacity="0.6"/>
+  <circle cx="1040" cy="25" r="1.3" fill="#fff" opacity="0.9"/>
+  <circle cx="1130" cy="60" r="0.8" fill="#fff" opacity="0.5"/>
+  <circle cx="1210" cy="20" r="1" fill="#fff" opacity="0.7"/>
+  <circle cx="1250" cy="50" r="1.2" fill="#fff" opacity="0.8"/>
+  <circle cx="85" cy="120" r="0.9" fill="#fff" opacity="0.5"/>
+  <circle cx="170" cy="100" r="1" fill="#fff" opacity="0.6"/>
+  <circle cx="320" cy="130" r="0.8" fill="#fff" opacity="0.4"/>
+  <circle cx="480" cy="110" r="1.1" fill="#fff" opacity="0.7"/>
+  <circle cx="660" cy="140" r="0.9" fill="#fff" opacity="0.5"/>
+  <circle cx="840" cy="120" r="1" fill="#fff" opacity="0.6"/>
+  <circle cx="1020" cy="150" r="0.8" fill="#fff" opacity="0.4"/>
+  <circle cx="1200" cy="110" r="1.1" fill="#fff" opacity="0.7"/>
+  <!-- Bright star -->
+  <circle cx="750" cy="35" r="2.5" fill="#fff" opacity="0.95" filter="url(#soft_glow)"/>
+  <circle cx="300" cy="80" r="2" fill="#e8f0ff" opacity="0.9" filter="url(#soft_glow)"/>
+
+  <!-- Moon -->
+  <ellipse cx="980" cy="100" rx="70" ry="70" fill="url(#moon_glow)" filter="url(#glow_strong)"/>
+  <circle cx="980" cy="100" r="42" fill="#f0ecd8" opacity="0.95"/>
+  <circle cx="995" cy="90" r="36" fill="#f8f5e8"/>
+  <!-- Moon surface details -->
+  <circle cx="970" cy="85" r="8" fill="#e8e0c8" opacity="0.4"/>
+  <circle cx="990" cy="105" r="5" fill="#e8e0c8" opacity="0.3"/>
+  <circle cx="1005" cy="88" r="3" fill="#e0d8c0" opacity="0.3"/>
+
+  <!-- Mountains silhouette far background -->
+  <path d="M0,380 L100,280 L200,340 L350,220 L500,310 L650,250 L780,300 L900,200 L1050,290 L1180,230 L1280,280 L1280,400 L0,400 Z" fill="#0d1020" opacity="0.9"/>
+  <path d="M0,400 L150,320 L280,360 L400,290 L550,340 L700,280 L830,320 L950,270 L1100,330 L1280,300 L1280,420 L0,420 Z" fill="#0a0e1c"/>
+
+  <!-- Wooden fence / bamboo fence (竹垣) back -->
+  <rect x="0" y="300" width="1280" height="80" fill="#1e1a10"/>
+  <!-- Fence horizontal rails -->
+  <rect x="0" y="310" width="1280" height="8" rx="2" fill="#2a2418"/>
+  <rect x="0" y="340" width="1280" height="8" rx="2" fill="#2a2418"/>
+  <rect x="0" y="366" width="1280" height="8" rx="2" fill="#2a2418"/>
+  <!-- Fence vertical bamboo posts -->
+  <rect x="40" y="298" width="12" height="84" rx="3" fill="#3a3420"/>
+  <rect x="80" y="298" width="12" height="84" rx="3" fill="#302e1c"/>
+  <rect x="120" y="298" width="12" height="84" rx="3" fill="#3a3420"/>
+  <rect x="160" y="298" width="12" height="84" rx="3" fill="#302e1c"/>
+  <rect x="200" y="298" width="12" height="84" rx="3" fill="#3a3420"/>
+  <rect x="240" y="298" width="12" height="84" rx="3" fill="#302e1c"/>
+  <rect x="280" y="298" width="12" height="84" rx="3" fill="#3a3420"/>
+  <rect x="320" y="298" width="12" height="84" rx="3" fill="#302e1c"/>
+  <rect x="360" y="298" width="12" height="84" rx="3" fill="#3a3420"/>
+  <rect x="400" y="298" width="12" height="84" rx="3" fill="#302e1c"/>
+  <rect x="440" y="298" width="12" height="84" rx="3" fill="#3a3420"/>
+  <rect x="480" y="298" width="12" height="84" rx="3" fill="#302e1c"/>
+  <rect x="520" y="298" width="12" height="84" rx="3" fill="#3a3420"/>
+  <rect x="560" y="298" width="12" height="84" rx="3" fill="#302e1c"/>
+  <rect x="600" y="298" width="12" height="84" rx="3" fill="#3a3420"/>
+  <rect x="640" y="298" width="12" height="84" rx="3" fill="#302e1c"/>
+  <rect x="680" y="298" width="12" height="84" rx="3" fill="#3a3420"/>
+  <rect x="720" y="298" width="12" height="84" rx="3" fill="#302e1c"/>
+  <rect x="760" y="298" width="12" height="84" rx="3" fill="#3a3420"/>
+  <rect x="800" y="298" width="12" height="84" rx="3" fill="#302e1c"/>
+  <rect x="840" y="298" width="12" height="84" rx="3" fill="#3a3420"/>
+  <rect x="880" y="298" width="12" height="84" rx="3" fill="#302e1c"/>
+  <rect x="920" y="298" width="12" height="84" rx="3" fill="#3a3420"/>
+  <rect x="960" y="298" width="12" height="84" rx="3" fill="#302e1c"/>
+  <rect x="1000" y="298" width="12" height="84" rx="3" fill="#3a3420"/>
+  <rect x="1040" y="298" width="12" height="84" rx="3" fill="#302e1c"/>
+  <rect x="1080" y="298" width="12" height="84" rx="3" fill="#3a3420"/>
+  <rect x="1120" y="298" width="12" height="84" rx="3" fill="#302e1c"/>
+  <rect x="1160" y="298" width="12" height="84" rx="3" fill="#3a3420"/>
+  <rect x="1200" y="298" width="12" height="84" rx="3" fill="#302e1c"/>
+  <rect x="1240" y="298" width="12" height="84" rx="3" fill="#3a3420"/>
+
+  <!-- Rocky bath edge and surroundings -->
+  <!-- Large rocks forming bath -->
+  <!-- Left rock formation -->
+  <ellipse cx="120" cy="520" rx="160" ry="120" fill="url(#rock_grad)"/>
+  <ellipse cx="80" cy="500" rx="120" ry="100" fill="url(#rock_dark)"/>
+  <ellipse cx="200" cy="560" rx="100" ry="70" fill="url(#rock_grad)"/>
+  <ellipse cx="50" cy="580" rx="90" ry="60" fill="url(#rock_dark)"/>
+
+  <!-- Right rock formation -->
+  <ellipse cx="1160" cy="520" rx="160" ry="120" fill="url(#rock_grad)"/>
+  <ellipse cx="1200" cy="500" rx="120" ry="100" fill="url(#rock_dark)"/>
+  <ellipse cx="1080" cy="560" rx="100" ry="70" fill="url(#rock_grad)"/>
+  <ellipse cx="1230" cy="580" rx="90" ry="60" fill="url(#rock_dark)"/>
+
+  <!-- Back rocks -->
+  <ellipse cx="400" cy="430" rx="120" ry="70" fill="url(#rock_dark)"/>
+  <ellipse cx="640" cy="420" rx="140" ry="65" fill="url(#rock_grad)"/>
+  <ellipse cx="880" cy="430" rx="120" ry="70" fill="url(#rock_dark)"/>
+
+  <!-- Stone steps down to bath (left) -->
+  <rect x="100" y="540" width="140" height="25" rx="3" fill="#302c28"/>
+  <rect x="115" y="562" width="120" height="22" rx="3" fill="#2a2824"/>
+  <rect x="128" y="581" width="100" height="20" rx="3" fill="#252220"/>
+
+  <!-- Bath water -->
+  <ellipse cx="640" cy="580" rx="500" ry="130" fill="url(#water)"/>
+  <ellipse cx="640" cy="575" rx="494" ry="124" fill="#1a3858"/>
+  <!-- Water glow from warmth -->
+  <ellipse cx="640" cy="580" rx="490" ry="120" fill="url(#water_glow)"/>
+  <!-- Water surface ripples -->
+  <ellipse cx="500" cy="570" rx="80" ry="10" fill="none" stroke="#2a5080" stroke-width="1.5" opacity="0.5"/>
+  <ellipse cx="750" cy="590" rx="100" ry="12" fill="none" stroke="#2a5080" stroke-width="1.5" opacity="0.4"/>
+  <ellipse cx="380" cy="600" rx="60" ry="8" fill="none" stroke="#2a5080" stroke-width="1" opacity="0.3"/>
+  <!-- Moon reflection in water -->
+  <ellipse cx="980" cy="595" rx="30" ry="8" fill="#e8e8c0" opacity="0.25"/>
+  <ellipse cx="980" cy="598" rx="20" ry="5" fill="#f0f0d0" opacity="0.2"/>
+
+  <!-- Steam wisps -->
+  <ellipse cx="300" cy="470" rx="60" ry="100" fill="#c8d8e0" filter="url(#steam_filter)"/>
+  <ellipse cx="480" cy="450" rx="50" ry="90" fill="#c8d8e0" filter="url(#steam_filter)"/>
+  <ellipse cx="640" cy="440" rx="80" ry="110" fill="#d0dce4" filter="url(#steam_filter)"/>
+  <ellipse cx="800" cy="455" rx="55" ry="95" fill="#c8d8e0" filter="url(#steam_filter)"/>
+  <ellipse cx="950" cy="465" rx="65" ry="105" fill="#c8d8e0" filter="url(#steam_filter)"/>
+  <!-- Lighter steam tendrils -->
+  <path d="M400,520 Q420,480 410,440 Q400,400 420,370" stroke="#d0dce4" stroke-width="25" fill="none" opacity="0.15" filter="url(#steam_blur)"/>
+  <path d="M640,510 Q655,465 645,420 Q635,380 655,340" stroke="#d0dce4" stroke-width="30" fill="none" opacity="0.18" filter="url(#steam_blur)"/>
+  <path d="M870,515 Q885,470 875,430 Q865,390 880,355" stroke="#d0dce4" stroke-width="22" fill="none" opacity="0.14" filter="url(#steam_blur)"/>
+
+  <!-- Towels on rocks (right side) -->
+  <rect x="1070" y="485" width="80" height="12" rx="3" fill="#e0d0b0" opacity="0.7"/>
+  <rect x="1075" y="496" width="70" height="10" rx="2" fill="#d0c0a0" opacity="0.6"/>
+  <!-- Left towel -->
+  <rect x="170" y="490" width="70" height="11" rx="3" fill="#e0d0b0" opacity="0.7"/>
+
+  <!-- Lanterns on rocks -->
+  <!-- Left lantern -->
+  <rect x="220" y="430" width="26" height="35" rx="3" fill="#ffc840" opacity="0.85" filter="url(#soft_glow)"/>
+  <rect x="218" y="424" width="30" height="8" rx="2" fill="#2a2018"/>
+  <rect x="218" y="463" width="30" height="6" rx="2" fill="#2a2018"/>
+  <line x1="233" y1="430" x2="233" y2="463" stroke="#2a2018" stroke-width="1.5"/>
+  <line x1="218" y1="447" x2="248" y2="447" stroke="#2a2018" stroke-width="1.5"/>
+  <ellipse cx="233" cy="490" rx="60" ry="18" fill="url(#lantern_warm)" opacity="0.5"/>
+
+  <!-- Right lantern -->
+  <rect x="1040" y="430" width="26" height="35" rx="3" fill="#ffc840" opacity="0.85" filter="url(#soft_glow)"/>
+  <rect x="1038" y="424" width="30" height="8" rx="2" fill="#2a2018"/>
+  <rect x="1038" y="463" width="30" height="6" rx="2" fill="#2a2018"/>
+  <line x1="1053" y1="430" x2="1053" y2="463" stroke="#2a2018" stroke-width="1.5"/>
+  <line x1="1038" y1="447" x2="1068" y2="447" stroke="#2a2018" stroke-width="1.5"/>
+  <ellipse cx="1053" cy="490" rx="60" ry="18" fill="url(#lantern_warm)" opacity="0.5"/>
+
+  <!-- Center back lantern on rock (taller post) -->
+  <rect x="630" y="380" width="20" height="50" rx="3" fill="#ffd060" opacity="0.9" filter="url(#soft_glow)"/>
+  <rect x="628" y="373" width="24" height="9" rx="2" fill="#1e1a10"/>
+  <rect x="628" y="428" width="24" height="7" rx="2" fill="#1e1a10"/>
+  <line x1="640" y1="381" x2="640" y2="428" stroke="#1e1a10" stroke-width="1.5"/>
+  <line x1="628" y1="403" x2="652" y2="403" stroke="#1e1a10" stroke-width="1.5"/>
+  <ellipse cx="640" cy="445" rx="80" ry="20" fill="url(#lantern_warm)" opacity="0.4"/>
+  <!-- Lantern pole -->
+  <rect x="637" y="430" width="6" height="60" fill="#2a2018"/>
+
+  <!-- Foreground rocks (silhouette) -->
+  <ellipse cx="0" cy="720" rx="250" ry="150" fill="#0a0a08"/>
+  <ellipse cx="1280" cy="720" rx="250" ry="150" fill="#0a0a08"/>
+  <ellipse cx="200" cy="720" rx="180" ry="100" fill="#0e0e0a"/>
+  <ellipse cx="1080" cy="720" rx="180" ry="100" fill="#0e0e0a"/>
+
+  <!-- Ground / bath surround -->
+  <rect x="0" y="640" width="1280" height="80" fill="#101008" opacity="0.9"/>
+
+  <!-- Foreground shadow vignette -->
+  <rect y="680" width="1280" height="40" fill="#030302" opacity="0.8"/>
+</svg>

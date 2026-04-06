@@ -405,6 +405,13 @@ body {
   text-shadow: 0 2px 0 rgba(36, 56, 72, 0.36);
 }
 
+.speaker-badge[data-character="さわでん"] {
+  background: linear-gradient(180deg, #53b9aa 0%, #248978 100%);
+  border-color: #38a08f;
+  box-shadow: 0 6px 0 rgba(24, 108, 96, 0.28);
+  text-shadow: 0 2px 0 rgba(16, 76, 68, 0.38);
+}
+
 .speaker-badge[data-character="すずどら"] {
   background: linear-gradient(180deg, #c83858 0%, #801858 100%);
   border-color: #a02048;
@@ -412,11 +419,32 @@ body {
   text-shadow: 0 2px 0 rgba(64, 8, 40, 0.44);
 }
 
+.speaker-badge[data-character="どり"] {
+  background: linear-gradient(180deg, #7d8c64 0%, #56613d 100%);
+  border-color: #68764c;
+  box-shadow: 0 6px 0 rgba(62, 72, 40, 0.28);
+  text-shadow: 0 2px 0 rgba(42, 48, 28, 0.38);
+}
+
 .speaker-badge[data-character="ねむのみ"] {
   background: linear-gradient(180deg, #c87830 0%, #8a4e10 100%);
   border-color: #a86220;
   box-shadow: 0 6px 0 rgba(106, 54, 8, 0.30);
   text-shadow: 0 2px 0 rgba(78, 36, 4, 0.40);
+}
+
+.speaker-badge[data-character="りゆ"] {
+  background: linear-gradient(180deg, #f4a8c9 0%, #d96ca4 100%);
+  border-color: #e38ab7;
+  box-shadow: 0 6px 0 rgba(170, 74, 122, 0.26);
+  text-shadow: 0 2px 0 rgba(126, 46, 86, 0.34);
+}
+
+.speaker-badge[data-character="ロクロ"] {
+  background: linear-gradient(180deg, #6e7f92 0%, #435364 100%);
+  border-color: #5a697a;
+  box-shadow: 0 6px 0 rgba(48, 60, 74, 0.30);
+  text-shadow: 0 2px 0 rgba(30, 40, 54, 0.42);
 }
 
 .speaker-badge[data-character="餅虎"] {

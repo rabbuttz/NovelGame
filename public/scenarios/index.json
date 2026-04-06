@@ -1,5 +1,10 @@
 [
   {
+    "url": "scenarios/kazamito-chapter8.yaml",
+    "title": "風見塔のラストノート 第八章",
+    "description": "あむがずっと笑い続けてきた理由と、置いてきてしまった親友・音葉との別れに向き合う共通ルート第八章。"
+  },
+  {
     "url": "scenarios/kazamito-sea-trip.yaml",
     "title": "風見塔のラストノート 番外編 潮風遠足",
     "description": "海辺の遠足でチーム全員がトラブルに巻き込まれ、支え合い方を知る番外編。"

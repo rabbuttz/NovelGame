@@ -1,5 +1,10 @@
 [
   {
+    "url": "scenarios/kazamito-dori-movie-date.yaml",
+    "title": "風見塔のラストノート 番外編 どりと、暗闇の隣で",
+    "description": "ゴールデンウィーク、どりに映画に誘われる番外編。映画館の暗闇の中で生まれる距離感と、帰り道の夕暮れ。"
+  },
+  {
     "url": "scenarios/kazamito-agatha-tsureshon.yaml",
     "title": "風見塔のラストノート 番外編 廊下の共犯",
     "description": "星潮祭の準備が一段落した放課後、廊下でアガサとばったり出くわし、なぜかトイレまで一緒に行くことになった番外編。"

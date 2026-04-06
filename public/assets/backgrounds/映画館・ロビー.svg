@@ -1,0 +1,187 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="ceiling" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1220"/>
+      <stop offset="100%" stop-color="#2c1f3a"/>
+    </linearGradient>
+    <linearGradient id="floor_grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a1e30"/>
+      <stop offset="100%" stop-color="#0e0a14"/>
+    </linearGradient>
+    <linearGradient id="wall_left" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0e0a14"/>
+      <stop offset="100%" stop-color="#1e1628"/>
+    </linearGradient>
+    <linearGradient id="wall_right" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1e1628"/>
+      <stop offset="100%" stop-color="#0e0a14"/>
+    </linearGradient>
+    <linearGradient id="screen_glow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8b6aad" opacity="0.4"/>
+      <stop offset="30%" stop-color="#c4a8e0" opacity="0.7"/>
+      <stop offset="50%" stop-color="#e8d8f8" opacity="0.9"/>
+      <stop offset="70%" stop-color="#c4a8e0" opacity="0.7"/>
+      <stop offset="100%" stop-color="#8b6aad" opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="poster1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c04060"/>
+      <stop offset="100%" stop-color="#601020"/>
+    </linearGradient>
+    <linearGradient id="poster2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2060c0"/>
+      <stop offset="100%" stop-color="#102060"/>
+    </linearGradient>
+    <linearGradient id="poster3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#208040"/>
+      <stop offset="100%" stop-color="#103020"/>
+    </linearGradient>
+    <radialGradient id="pendant_light" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff8e0" stop-opacity="1"/>
+      <stop offset="40%" stop-color="#ffe8a0" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#ff9900" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft_glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="light_glow">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Ceiling -->
+  <rect width="1280" height="200" fill="url(#ceiling)"/>
+
+  <!-- Back wall -->
+  <rect y="0" width="1280" height="720" fill="#130d1c"/>
+
+  <!-- Floor -->
+  <rect y="560" width="1280" height="160" fill="url(#floor_grad)"/>
+
+  <!-- Floor reflection/shine -->
+  <rect y="560" width="1280" height="4" fill="#3a2850" opacity="0.6"/>
+  <ellipse cx="640" cy="562" rx="500" ry="6" fill="#4a3860" opacity="0.3"/>
+
+  <!-- Left wall panel -->
+  <rect x="0" y="0" width="240" height="720" fill="url(#wall_left)"/>
+
+  <!-- Right wall panel -->
+  <rect x="1040" y="0" width="240" height="720" fill="url(#wall_right)"/>
+
+  <!-- Decorative wall trim - left -->
+  <rect x="238" y="0" width="3" height="720" fill="#4a3068" opacity="0.5"/>
+
+  <!-- Decorative wall trim - right -->
+  <rect x="1039" y="0" width="3" height="720" fill="#4a3068" opacity="0.5"/>
+
+  <!-- Movie posters - left wall -->
+  <!-- Poster 1 -->
+  <rect x="30" y="140" width="90" height="135" rx="2" fill="url(#poster1)"/>
+  <rect x="32" y="142" width="86" height="131" rx="1" fill="none" stroke="#ff8090" stroke-width="1" opacity="0.6"/>
+  <rect x="45" y="240" width="60" height="8" rx="1" fill="#ff8090" opacity="0.6"/>
+  <rect x="50" y="252" width="50" height="5" rx="1" fill="#ff8090" opacity="0.4"/>
+
+  <!-- Poster 2 -->
+  <rect x="140" y="140" width="90" height="135" rx="2" fill="url(#poster2)"/>
+  <rect x="142" y="142" width="86" height="131" rx="1" fill="none" stroke="#80a0ff" stroke-width="1" opacity="0.6"/>
+  <rect x="155" y="240" width="60" height="8" rx="1" fill="#80a0ff" opacity="0.6"/>
+  <rect x="160" y="252" width="50" height="5" rx="1" fill="#80a0ff" opacity="0.4"/>
+
+  <!-- Movie posters - right wall -->
+  <!-- Poster 3 -->
+  <rect x="1050" y="140" width="90" height="135" rx="2" fill="url(#poster3)"/>
+  <rect x="1052" y="142" width="86" height="131" rx="1" fill="none" stroke="#80d090" stroke-width="1" opacity="0.6"/>
+  <rect x="1065" y="240" width="60" height="8" rx="1" fill="#80d090" opacity="0.6"/>
+  <rect x="1070" y="252" width="50" height="5" rx="1" fill="#80d090" opacity="0.4"/>
+
+  <!-- Poster 4 - gold/warm -->
+  <rect x="1150" y="140" width="90" height="135" rx="2" fill="#604010"/>
+  <rect x="1152" y="142" width="86" height="131" rx="1" fill="none" stroke="#ffc060" stroke-width="1" opacity="0.6"/>
+  <rect x="1165" y="240" width="60" height="8" rx="1" fill="#ffc060" opacity="0.6"/>
+  <rect x="1170" y="252" width="50" height="5" rx="1" fill="#ffc060" opacity="0.4"/>
+
+  <!-- Main back area - ticket counters and screen display -->
+  <!-- Central display screen (now showing board) -->
+  <rect x="340" y="60" width="600" height="180" rx="8" fill="#0a0814"/>
+  <rect x="342" y="62" width="596" height="176" rx="7" fill="none" stroke="#5a4080" stroke-width="2"/>
+
+  <!-- Screen glow on display -->
+  <rect x="345" y="65" width="590" height="170" rx="5" fill="url(#screen_glow)"/>
+
+  <!-- Movie schedule text lines (decorative) -->
+  <rect x="380" y="90" width="180" height="12" rx="2" fill="#e8d0f8" opacity="0.8"/>
+  <rect x="380" y="112" width="140" height="8" rx="2" fill="#c0a8e0" opacity="0.5"/>
+  <rect x="380" y="128" width="160" height="8" rx="2" fill="#c0a8e0" opacity="0.5"/>
+  <rect x="380" y="144" width="120" height="8" rx="2" fill="#c0a8e0" opacity="0.4"/>
+  <rect x="380" y="160" width="140" height="8" rx="2" fill="#c0a8e0" opacity="0.4"/>
+
+  <rect x="600" y="90" width="180" height="12" rx="2" fill="#e8d0f8" opacity="0.8"/>
+  <rect x="600" y="112" width="140" height="8" rx="2" fill="#c0a8e0" opacity="0.5"/>
+  <rect x="600" y="128" width="160" height="8" rx="2" fill="#c0a8e0" opacity="0.5"/>
+  <rect x="600" y="144" width="120" height="8" rx="2" fill="#c0a8e0" opacity="0.4"/>
+  <rect x="600" y="160" width="140" height="8" rx="2" fill="#c0a8e0" opacity="0.4"/>
+
+  <!-- Ticket counter -->
+  <rect x="340" y="440" width="600" height="120" rx="6" fill="#1a1228"/>
+  <rect x="340" y="440" width="600" height="10" rx="3" fill="#3a2850"/>
+  <!-- Counter top shine -->
+  <rect x="342" y="440" width="596" height="3" fill="#6a4890" opacity="0.4"/>
+  <!-- Counter windows -->
+  <rect x="380" y="460" width="120" height="70" rx="3" fill="#0a0814"/>
+  <rect x="382" y="462" width="116" height="66" rx="2" fill="none" stroke="#5a3870" stroke-width="1" opacity="0.5"/>
+  <rect x="580" y="460" width="120" height="70" rx="3" fill="#0a0814"/>
+  <rect x="582" y="462" width="116" height="66" rx="2" fill="none" stroke="#5a3870" stroke-width="1" opacity="0.5"/>
+  <rect x="780" y="460" width="120" height="70" rx="3" fill="#0a0814"/>
+  <rect x="782" y="462" width="116" height="66" rx="2" fill="none" stroke="#5a3870" stroke-width="1" opacity="0.5"/>
+
+  <!-- Counter "OPEN" signs -->
+  <rect x="410" y="476" width="60" height="18" rx="2" fill="#40c060" opacity="0.7"/>
+  <rect x="610" y="476" width="60" height="18" rx="2" fill="#40c060" opacity="0.7"/>
+  <rect x="810" y="476" width="60" height="18" rx="2" fill="#c04040" opacity="0.7"/>
+
+  <!-- Pendant lights from ceiling -->
+  <!-- Light 1 -->
+  <line x1="320" y1="0" x2="320" y2="55" stroke="#5a4080" stroke-width="1" opacity="0.5"/>
+  <circle cx="320" cy="60" r="10" fill="#ffe890" opacity="0.9"/>
+  <ellipse cx="320" cy="80" rx="70" ry="25" fill="url(#pendant_light)" opacity="0.4" filter="url(#light_glow)"/>
+
+  <!-- Light 2 -->
+  <line x1="640" y1="0" x2="640" y2="50" stroke="#5a4080" stroke-width="1" opacity="0.5"/>
+  <circle cx="640" cy="55" r="12" fill="#ffe890" opacity="0.95"/>
+  <ellipse cx="640" cy="80" rx="90" ry="30" fill="url(#pendant_light)" opacity="0.5" filter="url(#light_glow)"/>
+
+  <!-- Light 3 -->
+  <line x1="960" y1="0" x2="960" y2="55" stroke="#5a4080" stroke-width="1" opacity="0.5"/>
+  <circle cx="960" cy="60" r="10" fill="#ffe890" opacity="0.9"/>
+  <ellipse cx="960" cy="80" rx="70" ry="25" fill="url(#pendant_light)" opacity="0.4" filter="url(#light_glow)"/>
+
+  <!-- Floor lighting strips -->
+  <rect x="240" y="558" width="800" height="4" fill="#6a3090" opacity="0.4"/>
+  <ellipse cx="640" cy="560" rx="400" ry="3" fill="#8a50b0" opacity="0.2"/>
+
+  <!-- Crowd silhouettes (people in lobby) -->
+  <!-- Person 1 -->
+  <ellipse cx="420" cy="535" rx="14" ry="8" fill="#0e0a18"/>
+  <rect x="412" y="505" width="16" height="32" rx="4" fill="#0e0a18"/>
+
+  <!-- Person 2 -->
+  <ellipse cx="460" cy="535" rx="14" ry="8" fill="#0e0a18"/>
+  <rect x="452" y="510" width="16" height="27" rx="4" fill="#0e0a18"/>
+
+  <!-- Person 3 -->
+  <ellipse cx="800" cy="535" rx="14" ry="8" fill="#0e0a18"/>
+  <rect x="792" y="508" width="16" height="29" rx="4" fill="#0e0a18"/>
+
+  <!-- Person 4 -->
+  <ellipse cx="840" cy="535" rx="14" ry="8" fill="#0e0a18"/>
+  <rect x="832" y="513" width="16" height="24" rx="4" fill="#0e0a18"/>
+
+  <!-- Cinema logo/name area (top center) -->
+  <rect x="490" y="10" width="300" height="40" rx="4" fill="none"/>
+  <rect x="490" y="10" width="300" height="40" rx="4" fill="#2a1840" opacity="0.6"/>
+  <rect x="510" y="22" width="260" height="16" rx="2" fill="#c8a8e8" opacity="0.5"/>
+
+  <!-- Foreground ground shadow -->
+  <rect y="640" width="1280" height="80" fill="#050308" opacity="0.7"/>
+</svg>

@@ -1,0 +1,164 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="screen_light" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#b0c8e8" stop-opacity="0.95"/>
+      <stop offset="40%" stop-color="#8aaccc" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#4a7090" stop-opacity="0.5"/>
+    </linearGradient>
+    <radialGradient id="screen_glow_r" cx="50%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#c8dcf0" stop-opacity="0.6"/>
+      <stop offset="60%" stop-color="#8090a8" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#000010" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="floor_dark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#080610"/>
+      <stop offset="100%" stop-color="#030208"/>
+    </linearGradient>
+    <linearGradient id="seat_color" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1e1030"/>
+      <stop offset="100%" stop-color="#0e0820"/>
+    </linearGradient>
+    <linearGradient id="ceiling_dark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#000008"/>
+      <stop offset="100%" stop-color="#080614"/>
+    </linearGradient>
+    <filter id="screen_blur">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="ambient_glow">
+      <feGaussianBlur stdDeviation="20" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Dark ceiling -->
+  <rect width="1280" height="720" fill="#020108"/>
+
+  <!-- Screen area - distant glow at top -->
+  <rect x="100" y="20" width="1080" height="300" rx="4" fill="url(#screen_light)" filter="url(#screen_blur)"/>
+  <!-- Screen inner light -->
+  <rect x="105" y="25" width="1070" height="290" rx="3" fill="#c8d8e8" opacity="0.15"/>
+
+  <!-- Screen ambient glow spreading down -->
+  <rect x="0" y="0" width="1280" height="500" fill="url(#screen_glow_r)" filter="url(#ambient_glow)"/>
+
+  <!-- Side walls - faint ambient from screen -->
+  <rect x="0" y="0" width="100" height="720" fill="#050310" opacity="0.9"/>
+  <rect x="1180" y="0" width="100" height="720" fill="#050310" opacity="0.9"/>
+
+  <!-- Seat rows - back rows (small, dark) -->
+  <!-- Row 1 (farthest) -->
+  <rect x="150" y="340" width="980" height="18" rx="2" fill="#0c0818" opacity="0.95"/>
+  <!-- Seat backs in row 1 -->
+  <rect x="160" y="330" width="30" height="18" rx="3" fill="url(#seat_color)"/>
+  <rect x="205" y="330" width="30" height="18" rx="3" fill="url(#seat_color)"/>
+  <rect x="250" y="330" width="30" height="18" rx="3" fill="url(#seat_color)"/>
+  <rect x="295" y="330" width="30" height="18" rx="3" fill="url(#seat_color)"/>
+  <rect x="340" y="330" width="30" height="18" rx="3" fill="url(#seat_color)"/>
+  <rect x="385" y="330" width="30" height="18" rx="3" fill="url(#seat_color)"/>
+  <rect x="430" y="330" width="30" height="18" rx="3" fill="url(#seat_color)"/>
+  <rect x="475" y="330" width="30" height="18" rx="3" fill="url(#seat_color)"/>
+  <rect x="520" y="330" width="30" height="18" rx="3" fill="url(#seat_color)"/>
+  <rect x="565" y="330" width="30" height="18" rx="3" fill="url(#seat_color)"/>
+  <rect x="610" y="330" width="30" height="18" rx="3" fill="url(#seat_color)"/>
+  <rect x="655" y="330" width="30" height="18" rx="3" fill="url(#seat_color)"/>
+  <rect x="700" y="330" width="30" height="18" rx="3" fill="url(#seat_color)"/>
+  <rect x="745" y="330" width="30" height="18" rx="3" fill="url(#seat_color)"/>
+  <rect x="790" y="330" width="30" height="18" rx="3" fill="url(#seat_color)"/>
+  <rect x="835" y="330" width="30" height="18" rx="3" fill="url(#seat_color)"/>
+  <rect x="880" y="330" width="30" height="18" rx="3" fill="url(#seat_color)"/>
+  <rect x="925" y="330" width="30" height="18" rx="3" fill="url(#seat_color)"/>
+  <rect x="970" y="330" width="30" height="18" rx="3" fill="url(#seat_color)"/>
+  <rect x="1015" y="330" width="30" height="18" rx="3" fill="url(#seat_color)"/>
+  <rect x="1060" y="330" width="30" height="18" rx="3" fill="url(#seat_color)"/>
+
+  <!-- Row 2 -->
+  <rect x="130" y="395" width="1020" height="22" rx="2" fill="#0c0818" opacity="0.97"/>
+  <rect x="140" y="382" width="36" height="20" rx="3" fill="url(#seat_color)"/>
+  <rect x="192" y="382" width="36" height="20" rx="3" fill="url(#seat_color)"/>
+  <rect x="244" y="382" width="36" height="20" rx="3" fill="url(#seat_color)"/>
+  <rect x="296" y="382" width="36" height="20" rx="3" fill="url(#seat_color)"/>
+  <rect x="348" y="382" width="36" height="20" rx="3" fill="url(#seat_color)"/>
+  <rect x="400" y="382" width="36" height="20" rx="3" fill="url(#seat_color)"/>
+  <rect x="452" y="382" width="36" height="20" rx="3" fill="url(#seat_color)"/>
+  <rect x="504" y="382" width="36" height="20" rx="3" fill="url(#seat_color)"/>
+  <rect x="556" y="382" width="36" height="20" rx="3" fill="url(#seat_color)"/>
+  <rect x="608" y="382" width="36" height="20" rx="3" fill="url(#seat_color)"/>
+  <rect x="660" y="382" width="36" height="20" rx="3" fill="url(#seat_color)"/>
+  <rect x="712" y="382" width="36" height="20" rx="3" fill="url(#seat_color)"/>
+  <rect x="764" y="382" width="36" height="20" rx="3" fill="url(#seat_color)"/>
+  <rect x="816" y="382" width="36" height="20" rx="3" fill="url(#seat_color)"/>
+  <rect x="868" y="382" width="36" height="20" rx="3" fill="url(#seat_color)"/>
+  <rect x="920" y="382" width="36" height="20" rx="3" fill="url(#seat_color)"/>
+  <rect x="972" y="382" width="36" height="20" rx="3" fill="url(#seat_color)"/>
+  <rect x="1024" y="382" width="36" height="20" rx="3" fill="url(#seat_color)"/>
+  <rect x="1076" y="382" width="36" height="20" rx="3" fill="url(#seat_color)"/>
+  <rect x="1128" y="382" width="36" height="20" rx="3" fill="url(#seat_color)"/>
+
+  <!-- Row 3 (closer) -->
+  <rect x="100" y="460" width="1080" height="28" rx="2" fill="#0a0616" opacity="0.98"/>
+  <rect x="110" y="443" width="44" height="24" rx="3" fill="url(#seat_color)"/>
+  <rect x="170" y="443" width="44" height="24" rx="3" fill="url(#seat_color)"/>
+  <rect x="230" y="443" width="44" height="24" rx="3" fill="url(#seat_color)"/>
+  <rect x="290" y="443" width="44" height="24" rx="3" fill="url(#seat_color)"/>
+  <rect x="350" y="443" width="44" height="24" rx="3" fill="url(#seat_color)"/>
+  <rect x="410" y="443" width="44" height="24" rx="3" fill="url(#seat_color)"/>
+  <rect x="470" y="443" width="44" height="24" rx="3" fill="url(#seat_color)"/>
+  <rect x="530" y="443" width="44" height="24" rx="3" fill="url(#seat_color)"/>
+  <rect x="590" y="443" width="44" height="24" rx="3" fill="url(#seat_color)"/>
+  <rect x="650" y="443" width="44" height="24" rx="3" fill="url(#seat_color)"/>
+  <rect x="710" y="443" width="44" height="24" rx="3" fill="url(#seat_color)"/>
+  <rect x="770" y="443" width="44" height="24" rx="3" fill="url(#seat_color)"/>
+  <rect x="830" y="443" width="44" height="24" rx="3" fill="url(#seat_color)"/>
+  <rect x="890" y="443" width="44" height="24" rx="3" fill="url(#seat_color)"/>
+  <rect x="950" y="443" width="44" height="24" rx="3" fill="url(#seat_color)"/>
+  <rect x="1010" y="443" width="44" height="24" rx="3" fill="url(#seat_color)"/>
+  <rect x="1070" y="443" width="44" height="24" rx="3" fill="url(#seat_color)"/>
+  <rect x="1130" y="443" width="44" height="24" rx="3" fill="url(#seat_color)"/>
+
+  <!-- Foreground row (viewer row - large, close) -->
+  <rect x="0" y="560" width="1280" height="40" rx="2" fill="#080514" opacity="1"/>
+  <!-- Seat backs in front row - larger -->
+  <rect x="0" y="530" width="60" height="36" rx="4" fill="#100828"/>
+  <rect x="75" y="530" width="60" height="36" rx="4" fill="#100828"/>
+  <rect x="150" y="530" width="60" height="36" rx="4" fill="#100828"/>
+  <rect x="225" y="530" width="60" height="36" rx="4" fill="#100828"/>
+  <rect x="300" y="530" width="60" height="36" rx="4" fill="#100828"/>
+  <rect x="375" y="530" width="60" height="36" rx="4" fill="#100828"/>
+  <!-- Center gap (viewer seats) -->
+  <rect x="450" y="530" width="60" height="36" rx="4" fill="#100828"/>
+  <!-- Two special seats slightly different - our protagonist's area -->
+  <rect x="525" y="528" width="62" height="38" rx="4" fill="#160e30"/>
+  <rect x="603" y="528" width="62" height="38" rx="4" fill="#160e30"/>
+  <rect x="680" y="530" width="60" height="36" rx="4" fill="#100828"/>
+  <rect x="755" y="530" width="60" height="36" rx="4" fill="#100828"/>
+  <rect x="830" y="530" width="60" height="36" rx="4" fill="#100828"/>
+  <rect x="905" y="530" width="60" height="36" rx="4" fill="#100828"/>
+  <rect x="980" y="530" width="60" height="36" rx="4" fill="#100828"/>
+  <rect x="1055" y="530" width="60" height="36" rx="4" fill="#100828"/>
+  <rect x="1130" y="530" width="60" height="36" rx="4" fill="#100828"/>
+  <rect x="1205" y="530" width="75" height="36" rx="4" fill="#100828"/>
+
+  <!-- Floor of cinema -->
+  <rect y="596" width="1280" height="124" fill="#020106"/>
+
+  <!-- Aisle lights (tiny dots on floor) -->
+  <circle cx="95" cy="600" r="2" fill="#4020a0" opacity="0.5"/>
+  <circle cx="95" cy="630" r="2" fill="#4020a0" opacity="0.5"/>
+  <circle cx="95" cy="660" r="2" fill="#4020a0" opacity="0.5"/>
+  <circle cx="95" cy="690" r="2" fill="#4020a0" opacity="0.5"/>
+  <circle cx="1185" cy="600" r="2" fill="#4020a0" opacity="0.5"/>
+  <circle cx="1185" cy="630" r="2" fill="#4020a0" opacity="0.5"/>
+  <circle cx="1185" cy="660" r="2" fill="#4020a0" opacity="0.5"/>
+  <circle cx="1185" cy="690" r="2" fill="#4020a0" opacity="0.5"/>
+
+  <!-- Screen glow reflecting on nearest seats/floor -->
+  <rect x="400" y="520" width="480" height="20" fill="#8090b0" opacity="0.04"/>
+
+  <!-- Overall dark vignette -->
+  <rect width="1280" height="720" fill="radial-gradient(ellipse at center, transparent 40%, #000008 100%)" opacity="0.3"/>
+
+  <!-- Dark foreground overlay for depth -->
+  <rect y="600" width="1280" height="120" fill="#010105" opacity="0.8"/>
+</svg>

@@ -1,0 +1,438 @@
+title: 風見塔のラストノート 番外編 どりと、暗闇の隣で
+dateLabel: 5月3日
+
+player:
+  title: 主人公の名前を決める
+  prompt: 呼ばれたい名前を入力してください。
+  defaultName: 湊
+  presets:
+    - 湊
+    - 悠真
+
+variables:
+  flags:
+    doriMovieDateClear: false
+    heldHandInDark: false
+    pickedHorror: false
+    admittedFeeling: false
+  affection:
+    dori: 5
+
+characters:
+  どり:
+    name: どり
+
+start: holiday_message
+
+nodes:
+  holiday_message:
+    - date: 5月3日 朝
+    - background: 教室・昼
+    - bgm:
+        id: 共通ルート 日常
+        volume: 0.42
+        loop: true
+    - say:
+        text: ゴールデンウィーク、三日目。予定のなかった朝に、スマホが一度振動した。
+    - say:
+        text: 送り主は、どりだった。
+    - say:
+        speaker: どり
+        text: 今日、空いてるか。映画を一本見ようと思ってる。もし一緒に来れるなら。
+    - say:
+        text: 短い文。でも「一緒に」という言葉が、やけにはっきり目に飛び込んだ。
+    - choice:
+        options:
+          - text: もちろん、と返す
+            goto: station_meeting
+          - text: どんな映画か聞いてから決める
+            goto: ask_movie_first
+
+  ask_movie_first:
+    - say:
+        speaker: "{{player.name}}"
+        text: どんな映画ですか。
+    - say:
+        speaker: どり
+        text: まだ決めてない。二人で選ぼうと思ってた。
+    - say:
+        text: 返信が来て、少し間があって、もう一行追加された。
+    - say:
+        speaker: どり
+        text: 来なくていいならそれでもいい。ただ、一人で見るのは今日は気が乗らなくて。
+    - say:
+        text: 「一人では嫌だ」と、どりがそんな言い方をするのは珍しかった。
+    - say:
+        speaker: "{{player.name}}"
+        text: 行きます。
+    - goto: station_meeting
+
+  station_meeting:
+    - date: 5月3日 午前
+    - background: station-evening
+    - bgm:
+        id: 穏やかな恋愛イベント
+        volume: 0.45
+        loop: true
+    - say:
+        text: 約束の駅で、どりはもう来ていた。制服じゃない。薄いグレーのシャツに、落ち着いた色のパンツ。いつもと違う格好で、一瞬だけ見慣れない誰かだと思った。
+    - show:
+        character: どり
+        expression: default
+        position: center
+    - say:
+        speaker: どり
+        text: ……待たせたか。
+    - say:
+        speaker: "{{player.name}}"
+        text: 先輩の方が早かったですよ。
+    - say:
+        speaker: どり
+        text: 少し早く出すぎた。……まあいい。行こう。
+    - say:
+        text: いつものどりより少し、どこか落ち着かない気配がある。それに気づいてから、こちらまで少し心臓がうるさくなった。
+    - goto: cinema_lobby_arrive
+
+  cinema_lobby_arrive:
+    - date: 5月3日 午前
+    - background: 映画館・ロビー
+    - hide: {}
+    - show:
+        character: どり
+        expression: default
+        position: right
+    - say:
+        text: 映画館のロビーは人が多かった。連休中の午前、ポップコーンの香りと子どもの声が混ざり合う。どりはラインナップのボードを静かに見ていた。
+    - say:
+        speaker: どり
+        text: 何でもいい。君が選んでいい。
+    - say:
+        speaker: "{{player.name}}"
+        text: 先輩が見たいやつ選んでください。
+    - say:
+        speaker: どり
+        text: ……俺が誘ったから、君に合わせるつもりだった。
+    - say:
+        speaker: "{{player.name}}"
+        text: じゃあ一緒に選びましょう。
+    - say:
+        text: ボードに並ぶタイトルを、二人で並んで見た。肩が触れる距離。どりの横顔が、少し考え込んでいる。
+    - choice:
+        options:
+          - text: ホラーがある、怖い映画にしようと言う
+            set:
+              flags.pickedHorror: true
+            goto: choose_horror
+          - text: 恋愛ものがある、こっちにしようと言う
+            goto: choose_romance
+
+  choose_horror:
+    - say:
+        speaker: "{{player.name}}"
+        text: これ、ホラーみたいです。どうですか。
+    - say:
+        speaker: どり
+        text: ……怖いのか。
+    - say:
+        speaker: "{{player.name}}"
+        text: 先輩、怖いの苦手ですか。
+    - say:
+        speaker: どり
+        text: 苦手とは言っていない。ただ……まあ、見ればわかる。
+    - say:
+        text: その言い方がちょっとだけ怪しくて、なんとなく楽しみになった。
+    - goto: theater_enter
+
+  choose_romance:
+    - say:
+        speaker: "{{player.name}}"
+        text: これ、恋愛ものらしいです。
+    - say:
+        speaker: どり
+        text: ……そういうのか。
+    - say:
+        text: どりがほんの少しだけ視線をずらした。
+    - say:
+        speaker: "{{player.name}}"
+        text: 嫌だったら別のでもいいです。
+    - say:
+        speaker: どり
+        text: いや。……それでいい。
+    - goto: theater_enter
+
+  theater_enter:
+    - date: 5月3日 午後
+    - background: 映画館・上映中
+    - hide: {}
+    - show:
+        character: どり
+        expression: default
+        position: left
+    - bgm:
+        id: 切ない会話・すれ違い
+        volume: 0.25
+        loop: true
+    - say:
+        text: 場内に入ると、視界が一気に暗くなった。スクリーンだけが遠くで光っている。ふたりの座席は、通路寄りの二席並び。腕の当たる距離に、どりがいる。
+    - say:
+        text: 予告が流れる間、しばらく黙っていた。この静けさが、妙に落ち着かない。
+    - goto: mid_movie_touch
+
+  mid_movie_touch:
+    - say:
+        text: 映画が始まって、しばらくして。暗闇の中で、袖が触れた。どりのシャツの袖と、こちらの腕。どちらも動かなかった。
+    - say:
+        text: 当たっている。わかってる。向こうもわかってるはずで、なのに誰も離さない。
+    - choice:
+        options:
+          - text: そのままにしておく
+            goto: arm_stays
+          - text: さりげなく動かして距離を作る
+            goto: arm_moves
+
+  arm_stays:
+    - say:
+        text: 心臓がやけにはっきり聞こえる。映画の音が遠い。隣の体温が、暗闇の中でちゃんとわかる。
+    - say:
+        speaker: どり
+        text: ……。
+    - say:
+        text: どりは何も言わなかった。ただ、ほんの少しだけ腕が寄った気がした。
+    - goto: movie_branch
+
+  arm_moves:
+    - say:
+        text: 少しだけ腕をずらす。どりはこちらを見なかった。スクリーンを向いたまま、静かにしている。
+    - say:
+        text: それでも、空気はもとに戻らなかった。
+    - goto: movie_branch
+
+  movie_branch:
+    - if:
+        condition: flags.pickedHorror == true
+        then: horror_jump_scare
+        else: romance_charged_scene
+
+  horror_jump_scare:
+    - say:
+        text: スクリーンの影が、突然動いた。音が爆発するように鳴った瞬間、気づいたら、どりの腕をつかんでいた。
+    - say:
+        speaker: どり
+        text: ……。
+    - say:
+        text: どりは何も言わなかった。振り払いもしなかった。腕はそのまま、こちらの手の中にある。
+    - say:
+        text: 暗闇の中で、どりの横顔がぼんやり見えた。耳が、赤い気がした。
+    - set:
+        flags.heldHandInDark: true
+    - goto: after_grab
+
+  after_grab:
+    - say:
+        speaker: "{{player.name}}"
+        text: あ、すみません……。
+    - say:
+        speaker: どり
+        text: ……別に。
+    - say:
+        text: 「別に」。その声が、いつもより少し低かった。
+    - say:
+        text: 手は、ゆっくりとだけ離した。でも、ふたりの間の空気は最後まで映画が終わっても、もとには戻らなかった。
+    - goto: after_movie
+
+  romance_charged_scene:
+    - say:
+        text: スクリーンの中で、男女が向き合っていた。どちらも言葉が出ない。ただそこにいる。
+    - say:
+        text: 妙なタイミングで、横を見たくなった。
+    - say:
+        text: どりも、同じタイミングで、こちらを向いていた。
+    - say:
+        text: 暗闇の中で、視線が交差した。どちらも、すぐには逸らさなかった。
+    - say:
+        speaker: どり
+        text: ……映画、見てるか。
+    - say:
+        speaker: "{{player.name}}"
+        text: 見てます。
+    - say:
+        text: 嘘だった。向こうも嘘をついていると思う。
+    - goto: after_movie
+
+  after_movie:
+    - date: 5月3日 夕方
+    - background: 映画館・ロビー
+    - hide: {}
+    - show:
+        character: どり
+        expression: default
+        position: right
+    - bgm:
+        id: 穏やかな恋愛イベント
+        volume: 0.45
+        loop: true
+    - say:
+        text: 場内の明かりがついた瞬間、現実が戻ってくる感覚がした。どりは立ち上がって、こちらを確認するように見た。
+    - say:
+        speaker: どり
+        text: ……どうだった。
+    - say:
+        speaker: "{{player.name}}"
+        text: よかったです。先輩は？
+    - say:
+        speaker: どり
+        text: ……俺も。
+    - say:
+        text: 短い返事。でも耳の先がまだ少し赤い。ロビーに出て、人混みの中に戻っても、そこだけが消えなかった。
+    - say:
+        speaker: どり
+        text: 何か食べて帰るか。少し歩けば駅前に出る。
+    - say:
+        speaker: "{{player.name}}"
+        text: いいですよ。
+    - goto: evening_street
+
+  evening_street:
+    - date: 5月3日 夕方
+    - background: 帰り道
+    - hide: {}
+    - show:
+        character: どり
+        expression: default
+        position: center
+    - bgm:
+        id: 切ない会話・すれ違い
+        volume: 0.44
+        loop: true
+    - say:
+        text: 夕方の商店街は、連休らしいにぎわいだった。どりは人の流れを自然に避けながら歩く。気づいたら、ふたりの距離がさっきより近い。
+    - say:
+        speaker: "{{player.name}}"
+        text: 先輩、今日は誘ってくれてありがとうございました。
+    - say:
+        speaker: どり
+        text: ……こちらこそ。一人で来るより、よかった。
+    - say:
+        text: どりが「よかった」と言うのは珍しい。いつもは「問題なかった」とか「助かった」とか、そういう言い方をする人だ。
+    - say:
+        speaker: "{{player.name}}"
+        text: 今日、先輩にとっても特別でしたか。
+    - say:
+        speaker: どり
+        text: ……。
+    - choice:
+        options:
+          - text: 黙って答えを待つ
+            goto: wait_for_answer
+          - text: 冗談っぽく流す
+            goto: deflect_joke
+
+  deflect_joke:
+    - say:
+        speaker: "{{player.name}}"
+        text: ……なんて。聞いておいてなんですが、答えなくていいです。
+    - say:
+        speaker: どり
+        text: 答えていい。
+    - say:
+        text: 静かに、でもはっきりした声だった。
+    - say:
+        speaker: どり
+        text: 特別だったよ。今日。
+    - goto: dori_closer_moment
+
+  wait_for_answer:
+    - say:
+        text: どりは少しだけ間を置いて、前を向いたまま答えた。
+    - say:
+        speaker: どり
+        text: ……特別だったと思う。こういう日は、あまりない。
+    - goto: dori_closer_moment
+
+  dori_closer_moment:
+    - say:
+        text: 夕暮れの光の中で、どりの横顔が少し柔らかくなっていた。普段の、どこかを先に見ているような目じゃない。今は、ちゃんとここにいる。
+    - say:
+        speaker: "{{player.name}}"
+        text: 俺も、特別でした。
+    - show:
+        character: どり
+        expression: default
+        position: center
+    - say:
+        text: どりが、こちらを見た。一瞬、止まる。
+    - say:
+        speaker: どり
+        text: そういうこと、言えるんだな。君は。
+    - say:
+        speaker: "{{player.name}}"
+        text: 先輩の前だと、なぜか言えます。
+    - say:
+        text: 人の流れが途切れた路地の角で、ふたりの歩みが少し遅くなった。距離が近い。映画館の中より、もっと近い。
+    - say:
+        speaker: どり
+        text: ……今、少し困ってる。
+    - say:
+        speaker: "{{player.name}}"
+        text: 困ってるって、どういう意味ですか。
+    - say:
+        speaker: どり
+        text: 言葉にしたら戻れない気がして。それでもいいかどうか、まだわからない。
+    - choice:
+        options:
+          - text: 戻れなくていいと言う
+            set:
+              flags.admittedFeeling: true
+            goto: no_going_back
+          - text: 急かさず「ここにいます」と言う
+            goto: just_stay
+
+  no_going_back:
+    - say:
+        speaker: "{{player.name}}"
+        text: 戻れなくていいです。
+    - say:
+        speaker: どり
+        text: ……。
+    - say:
+        text: どりは息を一度、静かに吐いた。そして、ゆっくりとこちらの手に自分の手を重ねた。指を絡めるわけじゃない。ただ、そこにある。
+    - say:
+        speaker: どり
+        text: 急にはできないかもしれない。でも、今日みたいな日を、また重ねたい。
+    - say:
+        speaker: "{{player.name}}"
+        text: ……はい。
+    - say:
+        text: 夕暮れの路地に、ふたりの影が長く伸びていた。どりの手は温かくて、繋ぎ続けるのが当たり前みたいに、ずっとそこにあった。
+    - goto: ending
+
+  just_stay:
+    - say:
+        speaker: "{{player.name}}"
+        text: ここにいます。急がなくていいです。
+    - say:
+        speaker: どり
+        text: ……そういう言い方をされると、かえって困る。
+    - say:
+        text: でも、どりは笑った。ほんの少しだけ、口の端が上がる。普段はあまり見ない顔だ。
+    - say:
+        speaker: どり
+        text: ……もう少し、一緒にいていいか。
+    - say:
+        speaker: "{{player.name}}"
+        text: もちろんです。
+    - say:
+        text: 夕暮れの商店街を、二人でゆっくり歩いた。目的もなく、急ぐでもなく。どりの歩幅が、こちらに合わせてあることに気づいた。
+    - goto: ending
+
+  ending:
+    - set:
+        flags.doriMovieDateClear: true
+    - bgm: stop
+    - hide: {}
+    - say:
+        text: 暗闇の中で触れた温度と、路地の角で止まった時間が、翌朝になっても消えなかった。
+    - say:
+        text: どりは、先に歩きすぎる人だ。でも今日だけは、ずっとそこにいた。
+    - say:
+        text: 番外編・了

@@ -1,0 +1,454 @@
+title: 風見塔のラストノート 第八章 笑い続けた子の話
+dateLabel: 4月17日
+
+player:
+  title: 主人公の名前を決める
+  prompt: 呼ばれたい名前を入力してください。
+  defaultName: 湊
+  presets:
+    - 湊
+    - 悠真
+
+variables:
+  flags:
+    chapter1Clear: true
+    chapter2Clear: true
+    chapter3Clear: true
+    chapter4Clear: true
+    chapter5Clear: true
+    chapter6Clear: true
+    chapter7Clear: true
+    chapter8Clear: false
+    learnedAmuPast: false
+    amuFoundPeace: false
+    gaveSilenceToAmu: false
+    spokeOfOtoha: false
+  affection:
+    kiryu: 2
+    amu: 3
+    agasa: 4
+    ukiwa: 4
+    gura: 2
+    dori: 3
+    nemunomi: 2
+    mochitora: 2
+    mimochi: 2
+    suzudora: 1
+    sawaden: 3
+
+characters:
+  あむ:
+    name: あむ
+  アガサ:
+    name: アガサ
+  きりゅう:
+    name: きりゅう
+
+start: amu_absent
+
+nodes:
+  amu_absent:
+    - date: 4月17日 朝
+    - background: 廊下
+    - bgm:
+        id: 共通ルート 日常
+        volume: 0.6
+        loop: true
+    - show:
+        character: アガサ
+        expression: default
+        position: left
+    - show:
+        character: きりゅう
+        expression: default
+        position: right
+    - say:
+        text: 朝の連絡で、あむの名前だけ返信がなかった。送ったメッセージの既読もついていない。
+    - say:
+        speaker: アガサ
+        text: 今朝の分担確認、あむだけ来てないね。連絡は？
+    - say:
+        speaker: きりゅう
+        text: ない。遅刻の常習ではないし、体調の報告もなかった。
+    - say:
+        speaker: アガサ
+        text: ロクロ先生にも一応報告はしておくよ。{{player.name}}、心当たりがあれば様子を見てきてくれる？
+    - say:
+        text: 朝の廊下を行き来してみる。教室、昇降口、図書館の前、体育館の外。あむの声が届く場所はどこにもない。
+    - say:
+        text: 思い当たる場所は一つだけだった。
+    - hide: {}
+    - goto: search_tower
+
+  search_tower:
+    - background: kazamito-entrance-morning
+    - say:
+        text: 旧校舎を抜けた先、風見塔の入口前。
+    - say:
+        text: あむは石段の角に腰を下ろしていた。膝を立て、両腕でそれを抱え込んでいる。笑ってもいない。手も振らない。ただそこにいる。
+    - show:
+        character: あむ
+        expression: default
+        position: center
+    - say:
+        speaker: あむ
+        text: ……あ。
+    - say:
+        text: 視線が合う。あむは何かを言いかけて、止めた。
+    - choice:
+        options:
+          - text: 静かに隣に座る
+            set:
+              flags.gaveSilenceToAmu: true
+              affection.amu: 2
+            goto: sit_beside
+          - text: 「どうした」と声をかける
+            set:
+              affection.amu: 1
+            goto: ask_directly
+
+  sit_beside:
+    - say:
+        text: 何も言わず、あむの隣の石段に腰を下ろした。冷たい石の感触。風見塔の影が、二人の足元をまとめて覆っている。
+    - say:
+        speaker: あむ
+        text: ……なんで黙って座るんだよ。
+    - say:
+        speaker: "{{player.name}}"
+        text: 話したいなら聞く。話したくないなら、いるだけにする。
+    - say:
+        speaker: あむ
+        text: ……それ、なんか、ずるい。
+    - say:
+        text: あむは膝の上に顎を乗せたまま、正面の塔を見た。しばらく風だけが通った。
+    - goto: amu_deflects
+
+  ask_directly:
+    - say:
+        speaker: "{{player.name}}"
+        text: どうした。会議の時間、過ぎてるぞ。
+    - say:
+        speaker: あむ
+        text: あー……うん。わかってる。
+    - say:
+        text: はっきり答えない。それだけで充分だった。いつもの「わかってる！今行く！」ではない。
+    - say:
+        speaker: "{{player.name}}"
+        text: 急かさない。ただ、何かあったなら聞く。
+    - say:
+        speaker: あむ
+        text: ……ごめん、うまく言えないかも。
+    - goto: amu_deflects
+
+  amu_deflects:
+    - say:
+        speaker: あむ
+        text: 別になんもないよ。ちょっと眠れなかっただけ。いつもどおり笑えばいいのに、今日に限って出てこなくて。
+    - say:
+        speaker: "{{player.name}}"
+        text: 「いつもどおり笑えばいい」って、毎日思ってるのか。
+    - say:
+        speaker: あむ
+        text: ……え。
+    - say:
+        text: あむの目が、初めてこちらを向いた。
+    - say:
+        speaker: あむ
+        text: そんなふうに聞かれたのって、初めてかも。
+    - goto: amu_opens_up
+
+  amu_opens_up:
+    - bgm:
+        id: 切ない会話・すれ違い
+        volume: 0.52
+        loop: true
+    - say:
+        speaker: あむ
+        text: 俺さ、昔から笑ってるタイプなんだよな。元気で、うるさくて、話しかけてくるやつ。それが俺だって、みんなも俺も思ってた。
+    - say:
+        speaker: あむ
+        text: でも最初から、そういう性格だったわけじゃないんだよな。
+    - say:
+        text: あむの声から、いつもの軽さが一枚、剥がれた。
+    - say:
+        speaker: あむ
+        text: 小三の時に、音葉っていう子が転校してきたんだ。
+    - say:
+        text: 話しかけなければ、きっと一生話さなかったような子だった。教室の端に座って、誰とも目を合わせない。笑い方もわからなさそうで、でも、なんか目だけは静かに全部見てて。
+    - say:
+        speaker: あむ
+        text: 俺が話しかけた。「なんで笑わないの？」って。今考えると失礼すぎる。
+    - motion:
+        character: あむ
+        name: うなずき
+    - say:
+        speaker: あむ
+        text: そしたら音葉が「笑い方がわからない」って、まじで普通に答えてさ。俺、その日の帰り道ずっと笑い方の授業やった。
+    - say:
+        text: あむが小さく、でも本当に笑った。今日初めての笑顔だった。
+    - goto: otoha_story
+
+  otoha_story:
+    - say:
+        speaker: あむ
+        text: それからずっと一緒だった。俺がうるさくて、音葉が黙ってて。俺が前に出て、音葉が後ろから全部見てる。俺が何かやらかすたびに、音葉だけがため息をついた。
+    - say:
+        speaker: あむ
+        text: バランスが取れてたのかな。よくわからないけど、あいつがいない席が想像できないくらいには、当たり前になってた。
+    - say:
+        speaker: "{{player.name}}"
+        text: 今は？
+    - say:
+        speaker: あむ
+        text: ……中二の終わりに、親の仕事の都合で引っ越しが決まったって聞いた。
+    - sound:
+        id: しょげる
+        volume: 0.6
+        loop: false
+    - say:
+        text: 風が鳴った。塔の風見がゆっくり向きを変える。
+    - goto: otoha_last_day
+
+  otoha_last_day:
+    - say:
+        speaker: あむ
+        text: 引っ越しの前の日、音葉が「明日、見送りに来てくれる？」って聞いてきたんだ。
+    - say:
+        speaker: あむ
+        text: 俺、「もちろん行く」って言った。その日の夜まではそのつもりだったし、絶対行くって思ってた。
+    - say:
+        text: あむは膝の上の指を、きつく組み直した。
+    - say:
+        speaker: あむ
+        text: 朝になったら、行けなかった。
+    - say:
+        speaker: "{{player.name}}"
+        text: 何かあったのか。
+    - say:
+        speaker: あむ
+        text: なんもない。ただ、怖くて。
+    - say:
+        text: 短い言葉だった。でも、その短さの中に、三年分くらいのものが詰まっている気がした。
+    - goto: amu_confession
+
+  amu_confession:
+    - say:
+        speaker: あむ
+        text: ちゃんと別れを言ったら、終わりになるじゃないか。「また会おう」って言っても、あの時のあいつが遠くなる気がして。笑顔で送り出せる自信もなくて。そのくせ、泣いたら格好悪いって思って。
+    - say:
+        speaker: あむ
+        text: 結局、何もせずに家で転がってた。音葉がいなくなる朝に。
+    - say:
+        text: あむの声は、穏やかなのに、どこかひびが入っていた。感情が入りすぎて、乾ききれなかった言葉みたいだった。
+    - say:
+        speaker: あむ
+        text: 後でメッセージだけ送ったんだ。「ごめん、行けなかった」って。そしたら音葉から、「うん、わかった」だけが来た。
+    - say:
+        speaker: あむ
+        text: それっきり。返信の頻度がどんどん落ちて、年が明けたら既読もつかなくなった。
+    - goto: amu_realizes
+
+  amu_realizes:
+    - say:
+        speaker: あむ
+        text: 俺が逃げたのは一回だけだけど、あいつにとっては、大事な日に来なかった「一回」なんだよな。
+    - say:
+        speaker: "{{player.name}}"
+        text: ……。
+    - say:
+        speaker: あむ
+        text: で、そっから笑おうと決めた。笑い続けてれば大丈夫だって、自分に言い聞かせた。前に進んでれば、止まって後悔する暇ないし。誰かのそばにいれば、音葉が遠くなった分も、ちょっとはごまかせる気がして。
+    - say:
+        speaker: あむ
+        text: でも今日、塔の前通ったら、急に止まれなくなったんだよ。なんでだろ。
+    - say:
+        text: あむは塔を見上げた。解体が決まっているその建物は、何も教えないまま黙っている。
+    - goto: player_choice_response
+
+  player_choice_response:
+    - choice:
+        options:
+          - text: 「逃げたことより、今まで走り続けたことのほうが俺は知ってる」と言う
+            set:
+              affection.amu: 3
+              flags.spokeOfOtoha: true
+            goto: respond_running
+          - text: 「その子、まだどこかにいる。ちゃんと謝れる」と言う
+            set:
+              affection.amu: 3
+              flags.learnedAmuPast: true
+            goto: respond_still_can
+          - text: 何も言わず、あむの隣にいる
+            set:
+              affection.amu: 2
+              flags.gaveSilenceToAmu: true
+              flags.learnedAmuPast: true
+            goto: respond_silence
+
+  respond_running:
+    - say:
+        speaker: "{{player.name}}"
+        text: あむが逃げたのは、その一回だと思う。あとは全部、俺の知る限り、ちゃんと前にいた。
+    - say:
+        speaker: あむ
+        text: ……そういう言い方、するんだな。
+    - say:
+        speaker: "{{player.name}}"
+        text: 転入初日に俺に話しかけてきたのも、塔の企画を最初に面白がったのも、あむだった。誰かのためでも、ごまかしのためでもなかったと思う。
+    - say:
+        speaker: あむ
+        text: ……そう、かな。
+    - say:
+        speaker: "{{player.name}}"
+        text: 音葉さんとのことは、まだ終わってないかもしれない。でも今ここで動いてるあむは、逃げてるやつの顔じゃなかった。
+    - say:
+        text: あむはしばらく黙っていた。それから、小さく息を吐いた。
+    - goto: amu_lets_go
+
+  respond_still_can:
+    - say:
+        speaker: "{{player.name}}"
+        text: その子、今どこにいるかわかるか？
+    - say:
+        speaker: あむ
+        text: ……わからない。連絡先は変わってるかもしれないし。
+    - say:
+        speaker: "{{player.name}}"
+        text: でも、わからないだけで、消えたわけじゃない。
+    - say:
+        speaker: あむ
+        text: それって……。
+    - say:
+        speaker: "{{player.name}}"
+        text: 「言えなかった」は、まだ「言えない」じゃない。怖かったのは本当だし、それで終わったのもひとまず事実だ。でも、終わりにしたのはあむが決めたわけじゃない。
+    - say:
+        speaker: あむ
+        text: ……探してみる、とか、いまさら言っていいのかな。
+    - say:
+        speaker: "{{player.name}}"
+        text: いまさらって言える人間は、まだ気にしてる人間だよ。
+    - set:
+        flags.learnedAmuPast: true
+    - say:
+        text: あむは視線を落とした。指を、今度はゆっくりほどいた。
+    - goto: amu_lets_go
+
+  respond_silence:
+    - say:
+        text: 何も言わなかった。言葉を選ぶより、ただいることのほうが正しい気がした。
+    - say:
+        text: あむも何も言わなかった。風が二人の間を通り抜けた。
+    - say:
+        speaker: あむ
+        text: ……ありがと。変なこと話して、なんか、ちょっと楽になった。
+    - say:
+        speaker: "{{player.name}}"
+        text: 変じゃなかった。
+    - say:
+        speaker: あむ
+        text: そういうところ、ずるいな。お前って。
+    - set:
+        flags.learnedAmuPast: true
+    - say:
+        text: 怒っているわけでも、照れているわけでも、たぶんなかった。ただ、少しだけ力が抜けた顔だった。
+    - goto: amu_lets_go
+
+  amu_lets_go:
+    - say:
+        speaker: あむ
+        text: 俺が笑い続けてたの、半分は自分のためだったのかもな。悲しかったのに悲しくないふりするのが、一番楽だったから。
+    - say:
+        speaker: あむ
+        text: 音葉がいなくなってから、誰かと本気で向き合うのが怖くなってた気がする。また置いていかれたら、また逃げるかもしれないから。
+    - say:
+        speaker: "{{player.name}}"
+        text: だから企画に飛びついたのか。
+    - say:
+        speaker: あむ
+        text: ……なんで俺のことわかるんだよ。
+    - say:
+        speaker: あむ
+        text: 塔がなくなる前に、一回だけちゃんと向き合うとか、そういうこと、たぶんどっかで思ってたのかもしれない。自分でもよくわからないけど。
+    - say:
+        text: あむが立ち上がった。石段の土を、片手でさっと払う。
+    - goto: amu_resolution
+
+  amu_resolution:
+    - bgm:
+        id: 穏やかな恋愛イベント
+        volume: 0.48
+        loop: true
+    - show:
+        character: あむ
+        expression: smile
+        position: center
+    - say:
+        speaker: あむ
+        text: 会議、まだ間に合う？
+    - say:
+        speaker: "{{player.name}}"
+        text: 走れば。
+    - say:
+        speaker: あむ
+        text: じゃあ行くか。……なんかすっきりした。笑えてなかったのに、笑えそうな気がする。不思議なもんだな。
+    - say:
+        text: 転入してから初めて、あむの「笑えそう」という言葉が、軽くなかった。
+    - say:
+        speaker: "{{player.name}}"
+        text: 音葉さんのこと、いつか話せそうになったら、また聞かせてくれ。
+    - say:
+        speaker: あむ
+        text: ……うん。今日みたいに、誰もいない時間に、こっそりな。
+    - say:
+        text: あむは塔を一度だけ振り返った。何かを言うわけでも、手を振るわけでもない。ただ少しの間、その場所を見た。
+    - say:
+        text: それから、先に歩き出す。いつもより少しだけゆっくり、でも確かに前に向かって。
+    - goto: after_meeting
+
+  after_meeting:
+    - date: 4月17日 昼
+    - background: project-meeting-classroom-evening
+    - hide: {}
+    - show:
+        character: アガサ
+        expression: smile
+        position: left
+    - show:
+        character: あむ
+        expression: smile
+        position: center
+    - show:
+        character: きりゅう
+        expression: default
+        position: right
+    - say:
+        text: 打ち合わせは昼まで延びたが、あむはいつもとほぼ変わらなかった。提案し、突っ込み、声を上げる。だが、時々だけ、静かになる瞬間があった。
+    - say:
+        speaker: アガサ
+        text: あむ、今日はいつもよりちゃんと聞いてる。珍しい。
+    - say:
+        speaker: あむ
+        text: うるさいな。たまには聞くほうにも回るんだよ。
+    - say:
+        speaker: きりゅう
+        text: 悪いことじゃない。そのままにしておけ。
+    - say:
+        text: きりゅうの言葉は短いが、否定ではなかった。あむも否定しなかった。
+    - say:
+        text: 笑うことが嘘になるわけじゃない。ただ、今日のあむの笑顔には、昨日より少しだけ隙間があった。その隙間に、音葉の名前がかすかに混じっている気がした。
+    - goto: ending
+
+  ending:
+    - set:
+        flags.chapter8Clear: true
+        flags.learnedAmuPast: true
+    - bgm: stop
+    - hide: {}
+    - say:
+        text: こうして{{player.name}}は、あむがずっと笑い続けてきた理由を知った。
+    - say:
+        text: 前に進むことと、後ろを振り返ることは、同時にできないと思っていた。だがあむはそれを、笑いながらやり続けていたのかもしれない。
+    - say:
+        text: 風見塔が解体される前に、誰かに届けたかった言葉がある。あむはまだ、それが何かをはっきりとは言えていない。でも今日、初めて隣で立ち止まることができた。
+    - say:
+        text: 第八章・了

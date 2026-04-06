@@ -1,0 +1,376 @@
+title: 風見塔のラストノート 第六章 雨のすきま
+dateLabel: 4月15日
+
+player:
+  title: 主人公の名前を決める
+  prompt: 呼ばれたい名前を入力してください。
+  defaultName: 湊
+  presets:
+    - 湊
+    - 悠真
+
+variables:
+  flags:
+    chapter1Clear: true
+    chapter2Clear: true
+    chapter3Clear: true
+    chapter4Clear: true
+    chapter5Clear: true
+    chapter6Clear: false
+    acceptedProjectTemp: true
+    acceptedCrossRole: true
+    reliedOnDori: true
+    learnedDoriPast: false
+    promisedToNoticeDori: false
+    sharedUmbrellaWithDori: false
+    trustedDoriSupport: false
+  affection:
+    kiryu: 2
+    amu: 3
+    agasa: 4
+    ukiwa: 4
+    gura: 2
+    mimochi: 2
+    suzudora: 1
+    nemunomi: 2
+    mochitora: 2
+    dori: 3
+
+characters:
+  どり:
+    name: どり
+  きりゅう:
+    name: きりゅう
+  ねむのみ:
+    name: ねむのみ
+  ロクロ:
+    name: ロクロ
+
+start: rainy_morning
+
+nodes:
+  rainy_morning:
+    - date: 4月15日 朝
+    - background: 廊下
+    - bgm:
+        id: 共通ルート 日常
+        volume: 0.58
+        loop: true
+    - say:
+        text: 朝から雨だった。窓を叩く音が絶えず、渡り廊下は片側通行、旧校舎側の足元は滑りやすいと朝の放送でも繰り返されている。
+    - say:
+        text: こういう日は、ただでさえ細い学内の流れがすぐに詰まる。風見塔の準備も、雨ひとつでやることが増えた。
+    - show:
+        character: どり
+        expression: default
+        position: center
+    - say:
+        speaker: どり
+        text: おはよう。旧校舎側の通路、今日だけ導線変わる。濡れた資材は先に回収するから、手が空いてたら付き合って。
+    - say:
+        speaker: "{{player.name}}"
+        text: 先輩、朝からもう三か所くらい回ってません？
+    - say:
+        speaker: どり
+        text: 四か所。あと一か所で区切れる。……たぶん。
+    - say:
+        text: 淡々とした返事なのに、傘立ての横にはすでに予備のタオルとビニール袋が積まれていた。雨の日の面倒を、誰より先に見越して動いている。
+    - goto: hall_cleanup
+
+  hall_cleanup:
+    - background: aonagi-oldtower-corridor-morning
+    - hide: {}
+    - show:
+        character: どり
+        expression: default
+        position: left
+    - show:
+        character: きりゅう
+        expression: default
+        position: right
+    - say:
+        text: 旧校舎側の廊下には、湿った段ボール、濡れたロープ、使えなくなった案内札が仮置きされていた。たった一晩の雨で、準備の順番がすぐ狂う。
+    - say:
+        speaker: きりゅう
+        text: 導線札は乾いたら作り直す。滑り止めは俺が敷く。どり、濡れた資材の仕分けを頼む。
+    - say:
+        speaker: どり
+        text: わかった。使える物とだめな物、先に分ける。あと、濡れたまま触らせないように掲示も出す。
+    - say:
+        text: 役割を振られた瞬間、どりの手はもう動いていた。誰かが指示を出し終える前に、次に困ることまで片づけようとしている。
+    - say:
+        speaker: "{{player.name}}"
+        text: 先輩、休む前提が最初からないですよね。
+    - say:
+        speaker: どり
+        text: 休める時に休むよ。今はまだ、困る人の方が先。
+    - goto: noon_notice
+
+  noon_notice:
+    - date: 4月15日 昼休み
+    - background: 保健室
+    - hide: {}
+    - show:
+        character: ねむのみ
+        expression: smile
+        position: left
+    - show:
+        character: どり
+        expression: default
+        position: center
+    - say:
+        text: 昼休み、ねむのみが半ば強引にどりを保健室へ連れてきた。制服の肩がまだ少し湿っていて、替えのタオルだけが几帳面に畳まれている。
+    - say:
+        speaker: ねむのみ
+        text: こういう人ほど「あとで休む」って言って、そのあとが来ないんだよね。
+    - say:
+        speaker: どり
+        text: 反論しづらい言い方するなあ。
+    - say:
+        speaker: "{{player.name}}"
+        text: 反論できないってことは、その通りなんじゃ。
+    - hide:
+        position: left
+    - say:
+        text: ねむのみが席を外すと、保健室は急に静かになった。窓ガラスに当たる雨音だけがやけに近い。
+    - say:
+        speaker: "{{player.name}}"
+        text: 先輩、雨の日って特に無理してませんか。
+    - say:
+        speaker: どり
+        text: ……してるように見える？
+    - choice:
+        options:
+          - text: 見える、と正直に言う
+            set:
+              affection.dori: 2
+            goto: honest_answer
+          - text: 今日は俺も手伝うと先に言う
+            set:
+              affection.dori: 1
+              flags.trustedDoriSupport: true
+            goto: support_first
+
+  honest_answer:
+    - say:
+        speaker: "{{player.name}}"
+        text: 見えます。先輩、足りないところを埋めてるっていうより、空いた瞬間に自分で入ってる。
+    - say:
+        speaker: どり
+        text: ……そっか。君はそういうところ、ちゃんと見るんだな。
+    - say:
+        text: 否定しない代わりに、どりは視線を窓の方へ逃がした。雨粒を追う横顔だけが、少し疲れて見える。
+    - goto: afternoon_errand
+
+  support_first:
+    - say:
+        speaker: "{{player.name}}"
+        text: 今日は俺も一緒に入ります。先輩が埋める前に、こっちが手を出せる所は出したい。
+    - say:
+        speaker: どり
+        text: ありがたいけど、無理はしなくていいよ。
+    - say:
+        speaker: "{{player.name}}"
+        text: それ、先輩に返します。
+    - motion:
+        character: どり
+        name: 喜び
+    - say:
+        speaker: どり
+        text: 参ったな。そんな言い方されると断れない。
+    - goto: afternoon_errand
+
+  afternoon_errand:
+    - background: 教室・夕方
+    - hide: {}
+    - show:
+        character: どり
+        expression: default
+        position: center
+    - say:
+        text: 午後の授業後も雨は弱まらなかった。濡れた掲示物の差し替え、移動教室で余った机の片づけ、旧校舎へ近づかないための仮案内。どれも小さいのに、放っておくと誰かが困る。
+    - say:
+        text: どりはその全部に気づいて、全部に手を伸ばそうとした。
+    - say:
+        speaker: "{{player.name}}"
+        text: 先輩、次はどこですか。
+    - say:
+        speaker: どり
+        text: 南棟の傘立て。あと、寮へ戻る一年の送迎確認。濡れた階段は危ないから、今日は遠回りさせる。
+    - say:
+        text: 送り迎え。その単語だけ、どりの声が少し低くなった気がした。
+    - goto: evening_walk
+
+  evening_walk:
+    - date: 4月15日 夕方
+    - background: 帰り道
+    - hide: {}
+    - show:
+        character: どり
+        expression: default
+        position: center
+    - say:
+        text: 最後の見回りを終えるころには、校門の外も薄暗くなっていた。生徒の列はまばらで、傘に当たる雨音だけが一定の速さで続いている。
+    - say:
+        speaker: どり
+        text: ここから先はもう大丈夫。君まで付き合う必要はないよ。
+    - say:
+        speaker: "{{player.name}}"
+        text: ここまで付き合って、そこだけ切り上げる方が変でしょう。
+    - say:
+        text: そう返すと、どりは困ったように少しだけ笑った。いつも人の退路を先に作るくせに、自分の横に誰かを残すのは苦手らしい。
+    - choice:
+        options:
+          - text: 傘を少し寄せる
+            set:
+              flags.sharedUmbrellaWithDori: true
+              affection.dori: 2
+            goto: umbrella_path
+          - text: 黙って隣を歩く
+            set:
+              affection.dori: 1
+            goto: silent_path
+
+  umbrella_path:
+    - say:
+        text: 傘の端を少しだけ寄せる。どりの肩口に落ちていた雨筋が、ようやく途切れた。
+    - say:
+        speaker: どり
+        text: ……そういうこと、自然にやるんだな。
+    - say:
+        speaker: "{{player.name}}"
+        text: 見えてるのに放っておくの、先輩の前だと特にやりづらいです。
+    - goto: dori_past
+
+  silent_path:
+    - say:
+        text: 無理に話題は作らず、歩幅だけ合わせる。沈黙は重くなくて、どりが口を開くのを待てるくらいには静かだった。
+    - goto: dori_past
+
+  dori_past:
+    - show:
+        character: どり
+        expression: troubled
+        position: center
+    - bgm:
+        id: 切ない会話・すれ違い
+        volume: 0.54
+        loop: true
+    - say:
+        speaker: どり
+        text: 雨の日、昔から苦手なんだ。理由を聞かれたことはあるけど、ちゃんと話したのはたぶんない。
+    - say:
+        speaker: どり
+        text: 一年前、生活委員で一緒だった後輩がいた。何でも「大丈夫です」って言うやつで、無理してるのに顔に出さないのが上手かった。
+    - say:
+        text: 雨の音に混じって、どりの声だけが少しずつほどけていく。淡々としているのに、止めどころを見失っているみたいだった。
+    - say:
+        speaker: どり
+        text: あの日も雨だった。校内のトラブルが重なって、俺はあちこちの穴を埋めてた。傘立て、濡れた通路、遅れた搬入、迎えのない一年の誘導。そいつは最後に「資材庫だけ閉めてきます」って言った。
+    - say:
+        speaker: どり
+        text: 本当は熱があった。顔色も悪かったと思う。でも俺、「あと少しなら大丈夫だろ」って、自分で勝手に片づけたんだ。人手が足りなかったから。そっちの方が先だと思ったから。
+    - sound:
+        id: しょげる
+        volume: 0.75
+        loop: false
+    - say:
+        speaker: どり
+        text: そのあと、裏階段で倒れてるのを見つけた。濡れたまま、資材を抱えたまま。肺炎になって、長く入院して、復学できないまま転校した。
+    - say:
+        speaker: "{{player.name}}"
+        text: ……。
+    - say:
+        speaker: どり
+        text: 誰も俺を責めなかったよ。事故だった、無理させた学校全体の問題だって。でも、あいつが最後に言った「大丈夫」を、そのまま通したのは俺だ。
+    - say:
+        speaker: どり
+        text: それからかな。足りない所を見つけるたび、先に埋めないとだめだって思うようになったの。誰かが「平気です」って言う前に、もう動いてたいって。
+    - say:
+        text: どりのやさしさは、最初からやわらかかったわけじゃない。見逃した一人の痛みを、ずっと自分の中で引きずった結果なのだと、ようやくわかる。
+    - goto: answer_dori
+
+  answer_dori:
+    - choice:
+        options:
+          - text: それでも先輩一人で背負うなと伝える
+            set:
+              affection.dori: 3
+              flags.promisedToNoticeDori: true
+              flags.learnedDoriPast: true
+            goto: share_weight
+          - text: その後輩の分まで見ようとしてるんですね、と返す
+            set:
+              affection.dori: 2
+              flags.learnedDoriPast: true
+              flags.trustedDoriSupport: true
+            goto: understand_weight
+
+  share_weight:
+    - say:
+        speaker: "{{player.name}}"
+        text: 見逃したくないのはわかります。でも、その後悔まで先輩一人で持ち続ける必要はないです。今は俺たちもいます。
+    - say:
+        speaker: どり
+        text: ……そう言われると、少し困るな。楽になりたいって思ってるのが、ばれるから。
+    - say:
+        speaker: "{{player.name}}"
+        text: 楽になってください。少なくとも、先輩が濡れてるのに誰も気づかないままにはしたくない。
+    - show:
+        character: どり
+        expression: cry
+        position: center
+    - say:
+        speaker: どり
+        text: 参った。君、そんなふうに言うんだな。……じゃあ次は、ちゃんと頼る努力もしてみる。
+    - goto: next_hook
+
+  understand_weight:
+    - say:
+        speaker: "{{player.name}}"
+        text: その後輩の分まで、今度は誰も置いていかないようにしてるんですね。
+    - say:
+        speaker: どり
+        text: たぶん、そう。正しいやり方かはわからないけど、それしか思いつかなかった。
+    - say:
+        speaker: "{{player.name}}"
+        text: 正しいかどうかは一緒に考えます。先輩一人のやり方にしなくていい。
+    - say:
+        speaker: どり
+        text: ……うん。その言い方、覚えておく。
+    - goto: next_hook
+
+  next_hook:
+    - background: 廊下
+    - hide: {}
+    - show:
+        character: ロクロ
+        expression: default
+        position: left
+    - show:
+        character: きりゅう
+        expression: default
+        position: right
+    - say:
+        text: 翌朝、雨は上がったが、濡れた校舎のにおいはまだ残っていた。ロクロは旧公開中止届の控えと新しい申請資料を並べ、短く告げる。
+    - say:
+        speaker: ロクロ
+        text: 過去の事故や中止理由を避けたまま、公開申請は通せない。次はそこに踏み込むよ。
+    - say:
+        speaker: きりゅう
+        text: 隠し保管の経路も洗う。記録の欠け方が不自然すぎる。
+    - say:
+        text: 足元の水たまりを避けるみたいに進めていた時間は終わる。次に必要なのは、もっと古くて深い痛みに触れる覚悟だった。
+    - goto: ending
+
+  ending:
+    - set:
+        flags.chapter6Clear: true
+    - bgm: stop
+    - hide: {}
+    - say:
+        text: こうして{{player.name}}は、どりが誰より先に動く理由を知った。やさしさの形をしたその習慣は、見逃した一人への悔いから生まれていた。
+    - say:
+        text: そして今、どりの支え方そのものもまた、誰かに支え返される余地を持ち始める。静かな人の痛みを知ったことで、企画チームの見え方もまた少し変わった。
+    - say:
+        text: 第六章・了

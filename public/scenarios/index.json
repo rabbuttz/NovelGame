@@ -1,5 +1,10 @@
 [
   {
+    "url": "scenarios/kazamito-chapter6.yaml",
+    "title": "風見塔のラストノート 第六章",
+    "description": "どりが誰より先に足りない所を埋める理由と、雨の日に残ったつらい過去を掘る共通ルート第六章。"
+  },
+  {
     "url": "scenarios/kazamito-chapter5.yaml",
     "title": "風見塔のラストノート 第五章",
     "description": "アガサと日常の雑務を回りながら、笑顔の裏にある負荷と本音に触れる共通ルート第五章。"

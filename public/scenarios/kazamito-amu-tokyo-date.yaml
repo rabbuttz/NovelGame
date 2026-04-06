@@ -126,7 +126,7 @@ nodes:
         text: あむはそういうタイプだった。混雑を前に沈まない。むしろそこに飛び込んでいく。
     - say:
         speaker: あむ
-        text: {{player.name}}って浅草行ったことある？
+        text: "{{player.name}}って浅草行ったことある？"
     - say:
         speaker: "{{player.name}}"
         text: 一回だけ。

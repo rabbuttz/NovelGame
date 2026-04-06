@@ -1,697 +1,668 @@
 title: 白環館の最後の一人
 dateLabel: 満月の夜
-
 variables:
-flags:
-checkedSpa: false
-trustedAgatha: false
-trustedKiryu: false
-followedVent: false
-knowsSingleSurvivor: false
-knowsAgathaPlan: false
-acceptedTruth: false
-clues:
-truth: 0
-
+  flags:
+    checkedSpa: false
+    trustedAgatha: false
+    trustedKiryu: false
+    followedVent: false
+    knowsSingleSurvivor: false
+    knowsAgathaPlan: false
+    acceptedTruth: false
+  clues:
+    truth: 0
 characters:
-あむ:
-name: あむ
-アガサ:
-name: アガサ
-うきわ:
-name: うきわ
-きりゅう:
-name: きりゅう
-ぐら:
-name: ぐら
-すずどら:
-name: すずどら
-ねむのみ:
-name: ねむのみ
-餅虎:
-name: 餅虎
-
+  あむ:
+    name: あむ
+  アガサ:
+    name: アガサ
+  うきわ:
+    name: うきわ
+  きりゅう:
+    name: きりゅう
+  ぐら:
+    name: ぐら
+  すずどら:
+    name: すずどら
+  ねむのみ:
+    name: ねむのみ
+  餅虎:
+    name: 餅虎
 start: prologue
-
 nodes:
-prologue:
-- date: 満月の夜
-- background: station-evening
-- show:
-character: ねむのみ
-expression: default
-position: center
-- say:
-text: 海霧の向こうに、白く円い研究棟が浮かんでいた。十年前に事故で閉鎖されたはずの海上施設、白環館。そこから届いた一枚の招待状が、今夜、ねむのみをこの場所へ引き寄せた。
-- say:
-speaker: ねむのみ
-text: あの日の真相を知りたければ、満月の夜に来い……。そんなこと、今さら誰が。
-- say:
-text: 胸の奥で、言いようのない既視感が冷たく波打つ。覚えていないはずの夜が、扉の向こうで待っている気がした。
-- goto: arrival
-
-arrival:
-- background: classroom-night
-- hide: {}
-- show:
-character: きりゅう
-expression: default
-position: left
-- show:
-character: ねむのみ
-expression: default
-position: center
-- show:
-character: アガサ
-expression: default
-position: right
-- say:
-speaker: きりゅう
-text: 来たか、ねむのみ。……やっぱり全員呼ばれてるらしいな。
-- say:
-speaker: アガサ
-text: 偶然にしては出来すぎね。しかも八人全員が、同じ夜の記憶だけ綺麗に抜け落ちている。
-- hide: {}
-- show:
-character: あむ
-expression: default
-position: left
-- show:
-character: 餅虎
-expression: default
-position: center
-- show:
-character: うきわ
-expression: default
-position: right
-- say:
-speaker: あむ
-text: 悪趣味な同窓会ってわけか。帰れるなら今すぐ帰りたいんだけど。
-- say:
-speaker: 餅虎
-text: でもさ、ここまで集められて何もないってことはないでしょ。犯人役がいるなら、かなり趣味悪いけど。
-- say:
-speaker: うきわ
-text: と、とにかくみんなで動こうよ。一人にならなきゃ大丈夫、だよね。
-- hide: {}
-- show:
-character: ぐら
-expression: default
-position: left
-- show:
-character: すずどら
-expression: default
-position: right
-- show:
-character: ねむのみ
-expression: default
-position: center
-- say:
-speaker: ぐら
-text: 壁の端末、まだ通電してる……。でも普通の宿泊施設の配線じゃない。隔壁と排水の系統が多すぎる。
-- say:
-speaker: すずどら
-text: ならば罠だ。入った時点で、もう見られていると思え。
-- say:
-text: そのとき、館全体を震わせる低い駆動音が鳴った。外へ続く扉が、ひとつ残らず自動で封鎖される。
-- goto: broadcast
-
-broadcast:
-- hide: {}
-- show:
-character: きりゅう
-expression: default
-position: left
-- show:
-character: ねむのみ
-expression: default
-position: center
-- show:
-character: アガサ
-expression: default
-position: right
-- say:
-text: 非常灯が点き、頭上のスピーカーから機械的な音声が落ちてきた。
-- say:
-text: 被験者八名を収容。白環館・記憶再生試験を開始します。真実に到達できるのは、最後の一名のみです。
-- say:
-speaker: きりゅう
-text: ふざけるな。全員、勝手に散るな。構造を掴むまで俺の見える範囲で動け。
-- say:
-speaker: アガサ
-text: ええ。けれど待っているだけでは沈むわ。先に館内の手がかりを押さえましょう。
-- choice:
-options:
-- text: スパ区画を調べる
-set:
-flags.checkedSpa: true
-clues.truth: 1
-goto: spa_search
-- text: 管理記録を調べる
-set:
-clues.truth: 1
-goto: record_search
-
-spa_search:
-- hide: {}
-- show:
-character: ねむのみ
-expression: default
-position: center
-- show:
-character: 餅虎
-expression: default
-position: right
-- say:
-text: ねむのみが足を踏み入れたスパ区画は、営業停止から十年経っているとは思えないほど湿っていた。浅い水が床に張り、鏡には誰かが指で触れたような跡が残っている。
-- say:
-speaker: 餅虎
-text: ねえ、これ見て。曇った鏡の端、誰かが口紅みたいなので文字を書こうとして消した跡がある。
-- say:
-speaker: ねむのみ
-text: まだ新しい……。今日、ここに僕たち以外の誰かが来たみたいだ。
-- say:
-text: 湯気もないはずの室内に、潮と化粧品の匂いだけが薄く残っていた。
-- goto: mochi_death_from_spa
-
-record_search:
-- hide: {}
-- show:
-character: ねむのみ
-expression: default
-position: center
-- show:
-character: ぐら
-expression: default
-position: right
-- say:
-text: 管理室の端末は大半が壊れていたが、ぐらが一台だけ生かした。画面に浮かんだのは、宿泊名簿ではなく無機質な管理ログだった。
-- say:
-speaker: ぐら
-text: 白環館記憶再生棟、被験者八名、収容準備完了……。これ、来客の記録じゃない。ずっと前の実験ログだ。
-- say:
-speaker: ねむのみ
-text: 記憶再生……。やっぱり、僕たちが忘れている夜に関係してるんだ。
-- say:
-text: 画面の端に、名前ではなく番号だけが並んでいた。胸がざわついたが、読み取る前に電源が落ちた。
-- goto: mochi_death_from_record
-
-mochi_death_from_spa:
-- hide: {}
-- show:
-character: きりゅう
-expression: default
-position: left
-- show:
-character: ねむのみ
-expression: default
-position: center
-- show:
-character: アガサ
-expression: default
-position: right
-- say:
-text: 合流しかけたとき、スパ区画の奥からうきわの悲鳴が響いた。駆けつけると、さっきまで餅虎と見ていた浅い水の中に、その餅虎がうつ伏せで沈んでいた。
-- say:
-text: 鏡には今度こそ、はっきりと赤い文字が残っている。うそつき。
-- say:
-speaker: ねむのみ
-text: そんな……。さっきまで一緒にいたのに。
-- say:
-speaker: アガサ
-text: 浅すぎる水で溺れるなんて不自然すぎる。抵抗した痕もほとんどない……誰かが演出したのね。
-- choice:
-options:
-- text: アガサに意見を聞く
-set:
-flags.trustedAgatha: true
-clues.truth: 2
-goto: talk_agatha
-- text: きりゅうと行動方針を固める
-set:
-flags.trustedKiryu: true
-clues.truth: 2
-goto: talk_kiryu
-
-mochi_death_from_record:
-- hide: {}
-- show:
-character: きりゅう
-expression: default
-position: left
-- show:
-character: ねむのみ
-expression: default
-position: center
-- show:
-character: アガサ
-expression: default
-position: right
-- say:
-text: 合流のためスパ区画へ戻った瞬間、うきわの悲鳴が館に反響した。駆け込んだ先で、餅虎は浅い水の中に沈み、鏡には赤い文字でうそつきと書かれていた。
-- say:
-speaker: きりゅう
-text: 一人になるなと言ったはずだ……。くそ、誰がこんな真似を。
-- say:
-speaker: ねむのみ
-text: 管理室のログに、僕たちのことを被験者って書いてあった。ここ、最初から何かを再現するための施設だったのかもしれない。
-- say:
-speaker: アガサ
-text: なら、この死も誰かの意図通り。感情だけで動けば次も落とされるわ。
-- choice:
-options:
-- text: アガサに意見を聞く
-set:
-flags.trustedAgatha: true
-clues.truth: 2
-goto: talk_agatha
-- text: きりゅうと行動方針を固める
-set:
-flags.trustedKiryu: true
-clues.truth: 2
-goto: talk_kiryu
-
-talk_agatha:
-- hide: {}
-- show:
-character: アガサ
-expression: default
-position: right
-- show:
-character: ねむのみ
-expression: default
-position: center
-- say:
-speaker: アガサ
-text: ねむのみ、覚えておいて。ここで起きているのは単純な殺人じゃないわ。誰かが私たちを、ある順番で追い詰めている。
-- say:
-speaker: ねむのみ
-text: 順番……？
-- say:
-speaker: アガサ
-text: ええ。まるで、あの日の出来事を最初からもう一度やり直させるみたいに。
-- goto: ukiwa_death
-
-talk_kiryu:
-- hide: {}
-- show:
-character: きりゅう
-expression: default
-position: left
-- show:
-character: ねむのみ
-expression: default
-position: center
-- say:
-speaker: きりゅう
-text: 今は犯人探しより生き残る方が先だ。証拠も食料も全部共有する。目を逸らすな、ねむのみ。何が起きたか最後まで自分で見ろ。
-- say:
-speaker: ねむのみ
-text: ……うん。怖くても、見届ける。
-- goto: ukiwa_death
-
-ukiwa_death:
-- hide: {}
-- show:
-character: うきわ
-expression: default
-position: center
-- say:
-text: 餅虎の死で張り詰めた空気を和らげようとしていたのは、最後までうきわだった。食料を配り、濡れた床を拭き、みんなを励ましていた。
-- say:
-speaker: うきわ
-text: だ、大丈夫だよ。ちゃんと協力すれば、ここから出られるって。
-- say:
-text: その数十分後、うきわは備蓄庫へ水を取りに向かったきり戻らなかった。
-- hide: {}
-- show:
-character: すずどら
-expression: default
-position: left
-- show:
-character: ねむのみ
-expression: default
-position: center
-- show:
-character: アガサ
-expression: default
-position: right
-- say:
-text: 救命具保管庫の中央で、うきわは座らされたままロープに縛られ、息絶えていた。壁一面の浮輪が不気味に揺れる。
-- say:
-speaker: すずどら
-text: 見せしめだな。だがこの結びは左手主体だ。俺ならもっと早く終わらせる。
-- say:
-speaker: アガサ
-text: その通り。しかも手首に擦れ傷が少なすぎる。縛られた時には、もう抵抗できなかった可能性が高い。
-- say:
-speaker: ねむのみ
-text: 誰かが冷静に、死に方まで作っている……。
-- choice:
-options:
-- text: あむのダクト調査に同行する
-set:
-flags.followedVent: true
-clues.truth: 3
-goto: vent_follow
-- text: その場に残って待機する
-goto: vent_wait
-
-vent_follow:
-- hide: {}
-- show:
-character: あむ
-expression: default
-position: left
-- show:
-character: ねむのみ
-expression: default
-position: center
-- say:
-text: 通気ダクトは狭く、湿っていた。先を進むあむの声だけが、金属の筒をくぐって響く。
-- say:
-speaker: あむ
-text: 変な部屋を見つけた。子ども用のベッドが八つ……いや、八つ分の名札がある。しかも名前じゃなく、番号付きだ。
-- say:
-speaker: ねむのみ
-text: 番号……どんな。
-- say:
-speaker: あむ
-text: お前だけ違う。ねむのみの札には、N-08って書いてある。
-- say:
-text: その直後、頭上のスピーカーが無機質に告げた。誤った経路への接近を確認。排除します。
-- goto: amu_death
-
-vent_wait:
-- hide: {}
-- show:
-character: あむ
-expression: default
-position: left
-- show:
-character: きりゅう
-expression: default
-position: center
-- show:
-character: ねむのみ
-expression: default
-position: right
-- say:
-text: ねむのみたちは通路で待機し、ダクトの奥へ進んだあむから断続的に報告を受けた。
-- say:
-speaker: あむ
-text: 子ども用のベッドが八つある。名札は番号付きで……おい、ねむのみ、お前だけN-08だぞ。
-- say:
-speaker: きりゅう
-text: すぐ戻れ、あむ。そこはまずい。
-- say:
-text: 返事の代わりに、館内放送が鳴る。誤った経路への接近を確認。排除します。
-- goto: amu_death
-
-amu_death:
-- hide: {}
-- show:
-character: あむ
-expression: default
-position: center
-- show:
-character: ねむのみ
-expression: default
-position: right
-- say:
-text: 次の瞬間、ダクトの一部が隔壁で押し潰された。金属が悲鳴を上げ、あむの体が叩きつけられる。
-- say:
-speaker: ねむのみ
-text: あむ……！
-- say:
-speaker: あむ
-text: ここは……八人のための場所じゃない。誰か一人のための檻だ……。
-- say:
-text: それだけを言い残して、あむの目から光が消えた。館の震動はさらに強まり、下層の浸水警報が赤く点滅する。
-- goto: flood_move
-
-flood_move:
-- hide: {}
-- show:
-character: きりゅう
-expression: default
-position: left
-- show:
-character: すずどら
-expression: default
-position: right
-- show:
-character: ねむのみ
-expression: default
-position: center
-- say:
-text: 水位は一気に上がり、下層区画の通路を濁流が呑み込んだ。残った五人は上層へ向かって走る。
-- say:
-speaker: きりゅう
-text: 先に行け。隔壁を閉めないと全員流される。
-- say:
-speaker: ねむのみ
-text: でも、きりゅうが――
-- say:
-speaker: きりゅう
-text: 目を逸らすな。最後まで見ろ。誰が何をしたか、自分で確かめるんだ。
-- say:
-text: すずどらがねむのみの肩を掴み、無理やり上へ引いた。閉まりかけた扉の向こうで、きりゅうは両腕で水圧に耐え続け、そのまま濁流に呑まれていく。
-- goto: agatha_confession
-
-agatha_confession:
-- hide: {}
-- show:
-character: アガサ
-expression: default
-position: right
-- show:
-character: ぐら
-expression: default
-position: left
-- show:
-character: ねむのみ
-expression: default
-position: center
-- say:
-text: 残ったのはアガサ、ぐら、すずどら、ねむのみの四人だけだった。冷えきった上層区画で、アガサは隠していたファイルを取り出す。
-- say:
-speaker: アガサ
-text: サーバから抜いた断片よ。白環館の正式名称は、記憶再生棟。対象は単一生存者の長期トラウマ復元試験。
-- say:
-speaker: ねむのみ
-text: 単一生存者……？ 八人のうち一人だけが、生き残ったってこと？
-- say:
-speaker: アガサ
-text: そう。少なくとも、この施設は最初からそう書いている。
-- say:
-text: その瞬間、換気口から甘い匂いが流れ込み、アガサの膝が折れた。
-- say:
-speaker: ぐら
-text: 離れて、睡眠系のガスだ……！
-- say:
-speaker: アガサ
-text: ごめんね、ねむのみ。ここまで来ないと、あなたはきっと思い出せなかった。
-- say:
-text: アガサはそれ以上何も言わず、ねむのみの腕の中で静かに息を止めた。
-- goto: gura_room
-
-gura_room:
-- hide: {}
-- show:
-character: ぐら
-expression: default
-position: left
-- show:
-character: ねむのみ
-expression: default
-position: center
-- show:
-character: すずどら
-expression: default
-position: right
-- say:
-text: ぐらは迷いなく管理区画のさらに奥へ進み、厳重なロックのかかった扉をこじ開けた。そこには円筒形のポッドが並び、いくつかは砕け、いくつかは空だった。
-- say:
-text: ポッドの側面には、餅虎、うきわ、あむ、きりゅう、アガサ――死んだ者たちの名前が刻まれている。
-- say:
-speaker: ぐら
-text: ずっと違和感があった。ここで本当に寒がって、眠って、お腹を空かせていたのは、ねむのみだけだった。
-- say:
-speaker: ねむのみ
-text: それ、どういう意味なの。
-- say:
-speaker: ぐら
-text: たぶん……本物なのは、君だけなんだ。
-- say:
-text: 直後に警報が鳴り、機械アームが起動した。ぐらは制御盤へ飛びつき、緊急遮断の操作に手を伸ばす。
-- say:
-speaker: ぐら
-text: 一番やさしい人が、一番ひどい記憶を背負わされるなんて、おかしいから。先へ行って。
-- say:
-text: 閃光が走り、鋼鉄の扉が閉じる。ぐらの姿はその向こうに消えた。
-- goto: suzudora_truth
-
-suzudora_truth:
-- hide: {}
-- show:
-character: すずどら
-expression: default
-position: left
-- show:
-character: ねむのみ
-expression: default
-position: center
-- say:
-text: 施設最深部へ向かう通路には、もはや二人分の足音しか響かなかった。
-- if:
-condition: clues.truth >= 3
-then: suzudora_truth_high
-else: suzudora_truth_low
-
-suzudora_truth_high:
-- say:
-speaker: すずどら
-text: ここまで見れば、もう察しているはずだ。俺たちは俺たちそのものじゃない。記録から作られた、短期間だけ動く再現体だ。
-- say:
-speaker: ねむのみ
-text: じゃあ……みんな、十年前に。
-- say:
-speaker: すずどら
-text: 死んだ。お前だけが違う。十年前も今も、生きているのはお前だけだ。
-- goto: suzudora_barrier
-
-suzudora_truth_low:
-- say:
-speaker: すずどら
-text: 聞け、ねむのみ。俺たちは生存者じゃない。事故で死んだ者たちの癖や声や記憶を寄せ集めて作られた再現体だ。
-- say:
-speaker: ねむのみ
-text: 再現体……そんなの、嘘だ。
-- say:
-speaker: すずどら
-text: だが真実だ。そして本物なのは、お前だけだ。
-- goto: suzudora_barrier
-
-suzudora_barrier:
-- say:
-text: 最深部の手前で自動防衛機構が起動し、赤い光が通路を走った。すずどらは一歩前へ出て、ねむのみを背後へ押しやる。
-- say:
-speaker: すずどら
-text: 俺はここで止める。壊れかけの再現体には、こういう役がちょうどいい。
-- say:
-speaker: ねむのみ
-text: いやだ、もう誰も失いたくない。
-- say:
-speaker: すずどら
-text: 俺たちはお前の記憶の中でしか生きられない。だからせめて、本物のお前だけは生きろ。
-- say:
-text: 黒い影が赤い光の中へ踏み込み、轟音とともに通路が閉ざされる。残されたねむのみは、ただ一人で中央記録室へたどり着いた。
-- goto: core_video
-
-core_video:
-- hide: {}
-- show:
-character: ねむのみ
-expression: default
-position: center
-- say:
-text: 中央記録室は、研究施設というより子ども部屋のようだった。低い天井、丸い照明、八人の拙い絵。中央端末に手をかざすと、画面はあっさり起動した。
-- say:
-text: 認証完了。被験者N-08。最終試験終了。
-- say:
-text: 再生された監視映像には、十年前の白環館が映っていた。浸水事故。逃げ惑う子どもたち。閉じれば二度と開かない隔壁。そして、そのハンドルに手をかける幼いねむのみ。
-- say:
-text: スピーカーから大人の声が告げる。扉を閉めなさい。そうすれば、みんな助かる。
-- say:
-text: それは嘘だった。扉を閉めれば助かるのは、閉めた側にいる一人だけだった。
-- say:
-speaker: ねむのみ
-text: 僕が……閉めたの……？
-- set:
-flags.knowsSingleSurvivor: true
-- choice:
-options:
-- text: 映像から目をそらさない
-set:
-flags.acceptedTruth: true
-clues.truth: 4
-goto: agatha_message
-- text: いったん画面を止める
-goto: incomplete_truth
-
-incomplete_truth:
-- show:
-character: ねむのみ
-expression: default
-position: center
-- say:
-text: 画面を止めても、耳の奥では子どもたちの悲鳴が消えなかった。逃げたところで、この夜は終わらない。ねむのみは震える指で再生ボタンを押し直した。
-- goto: agatha_message
-
-agatha_message:
-- hide: {}
-- show:
-character: アガサ
-expression: default
-position: right
-- show:
-character: ねむのみ
-expression: default
-position: center
-- say:
-text: 最後のデータファイルには、アガサの映像メッセージが残されていた。
-- say:
-speaker: アガサ
-text: ここまで来たなら、全部見たのね、ねむのみ。企業は何度も試験を途中で止め、あなたが真相に辿り着かないようにしていた。
-- say:
-speaker: アガサ
-text: だから今回は、私が壊したの。あなたが最後まで進むしかないように。……最低のやり方だって分かってる。でも、終わらせるにはそれしかなかった。
-- say:
-speaker: アガサ
-text: あなたは被害者よ。でも同時に、扉を閉めた当事者でもある。その事実から逃げずに生きることだけが、みんなへの弔いになる。
-- set:
-flags.knowsAgathaPlan: true
-- if:
-condition: flags.acceptedTruth == true
-then: dawn_accept
-else: dawn_shaken
-
-dawn_accept:
-- background: station-evening
-- hide: {}
-- show:
-character: ねむのみ
-expression: default
-position: center
-- say:
-text: ねむのみは端末の証拠を外部へ送信し、非常用通路から外へ出た。嵐は嘘のように止み、沈みかけた白環館の向こうで夜明けの気配が海を白く染めていた。
-- say:
-speaker: ねむのみ
-text: 忘れない。みんながいたことも、僕がしたことも。全部背負って、外へ出る。
-- goto: ending
-
-dawn_shaken:
-- background: station-evening
-- hide: {}
-- show:
-character: ねむのみ
-expression: default
-position: center
-- say:
-text: ねむのみは震える手で証拠を送信し、非常用通路から外へ出た。白環館は背後で静かに沈み続けている。真実は届いた。それでも、胸の痛みだけは少しも軽くならなかった。
-- say:
-speaker: ねむのみ
-text: 赦されなくてもいい。でも、もう目を逸らさない。
-- goto: ending
-
-ending:
-- hide: {}
-- show:
-character: ねむのみ
-expression: default
-position: center
-- say:
-text: 最後に生き残った一人だけが、真実へ辿り着いた。白環館の夜は終わり、失われた七人の記憶だけが、朝の海に残っていた。
-- say:
-text: おしまい。
+  prologue:
+    - date: 満月の夜
+    - background: station-evening
+    - show:
+        character: ねむのみ
+        expression: default
+        position: center
+    - say:
+        text: 海霧の向こうに、白く円い研究棟が浮かんでいた。十年前に事故で閉鎖されたはずの海上施設、白環館。そこから届いた一枚の招待状が、今夜、ねむのみをこの場所へ引き寄せた。
+    - say:
+        speaker: ねむのみ
+        text: あの日の真相を知りたければ、満月の夜に来い……。そんなこと、今さら誰が。
+    - say:
+        text: 胸の奥で、言いようのない既視感が冷たく波打つ。覚えていないはずの夜が、扉の向こうで待っている気がした。
+    - goto: arrival
+  arrival:
+    - background: classroom-night
+    - hide: {}
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: ねむのみ
+        expression: default
+        position: center
+    - show:
+        character: アガサ
+        expression: default
+        position: right
+    - say:
+        speaker: きりゅう
+        text: 来たか、ねむのみ。……やっぱり全員呼ばれてるらしいな。
+    - say:
+        speaker: アガサ
+        text: 偶然にしては出来すぎね。しかも八人全員が、同じ夜の記憶だけ綺麗に抜け落ちている。
+    - hide: {}
+    - show:
+        character: あむ
+        expression: default
+        position: left
+    - show:
+        character: 餅虎
+        expression: default
+        position: center
+    - show:
+        character: うきわ
+        expression: default
+        position: right
+    - say:
+        speaker: あむ
+        text: 悪趣味な同窓会ってわけか。帰れるなら今すぐ帰りたいんだけど。
+    - say:
+        speaker: 餅虎
+        text: でもさ、ここまで集められて何もないってことはないでしょ。犯人役がいるなら、かなり趣味悪いけど。
+    - say:
+        speaker: うきわ
+        text: と、とにかくみんなで動こうよ。一人にならなきゃ大丈夫、だよね。
+    - hide: {}
+    - show:
+        character: ぐら
+        expression: default
+        position: left
+    - show:
+        character: すずどら
+        expression: default
+        position: right
+    - show:
+        character: ねむのみ
+        expression: default
+        position: center
+    - say:
+        speaker: ぐら
+        text: 壁の端末、まだ通電してる……。でも普通の宿泊施設の配線じゃない。隔壁と排水の系統が多すぎる。
+    - say:
+        speaker: すずどら
+        text: ならば罠だ。入った時点で、もう見られていると思え。
+    - say:
+        text: そのとき、館全体を震わせる低い駆動音が鳴った。外へ続く扉が、ひとつ残らず自動で封鎖される。
+    - goto: broadcast
+  broadcast:
+    - hide: {}
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: ねむのみ
+        expression: default
+        position: center
+    - show:
+        character: アガサ
+        expression: default
+        position: right
+    - say:
+        text: 非常灯が点き、頭上のスピーカーから機械的な音声が落ちてきた。
+    - say:
+        text: 被験者八名を収容。白環館・記憶再生試験を開始します。真実に到達できるのは、最後の一名のみです。
+    - say:
+        speaker: きりゅう
+        text: ふざけるな。全員、勝手に散るな。構造を掴むまで俺の見える範囲で動け。
+    - say:
+        speaker: アガサ
+        text: ええ。けれど待っているだけでは沈むわ。先に館内の手がかりを押さえましょう。
+    - choice:
+        options:
+          - text: スパ区画を調べる
+            set:
+              flags.checkedSpa: true
+              clues.truth: 1
+            goto: spa_search
+          - text: 管理記録を調べる
+            set:
+              clues.truth: 1
+            goto: record_search
+  spa_search:
+    - hide: {}
+    - show:
+        character: ねむのみ
+        expression: default
+        position: center
+    - show:
+        character: 餅虎
+        expression: default
+        position: right
+    - say:
+        text: ねむのみが足を踏み入れたスパ区画は、営業停止から十年経っているとは思えないほど湿っていた。浅い水が床に張り、鏡には誰かが指で触れたような跡が残っている。
+    - say:
+        speaker: 餅虎
+        text: ねえ、これ見て。曇った鏡の端、誰かが口紅みたいなので文字を書こうとして消した跡がある。
+    - say:
+        speaker: ねむのみ
+        text: まだ新しい……。今日、ここに僕たち以外の誰かが来たみたいだ。
+    - say:
+        text: 湯気もないはずの室内に、潮と化粧品の匂いだけが薄く残っていた。
+    - goto: mochi_death_from_spa
+  record_search:
+    - hide: {}
+    - show:
+        character: ねむのみ
+        expression: default
+        position: center
+    - show:
+        character: ぐら
+        expression: default
+        position: right
+    - say:
+        text: 管理室の端末は大半が壊れていたが、ぐらが一台だけ生かした。画面に浮かんだのは、宿泊名簿ではなく無機質な管理ログだった。
+    - say:
+        speaker: ぐら
+        text: 白環館記憶再生棟、被験者八名、収容準備完了……。これ、来客の記録じゃない。ずっと前の実験ログだ。
+    - say:
+        speaker: ねむのみ
+        text: 記憶再生……。やっぱり、僕たちが忘れている夜に関係してるんだ。
+    - say:
+        text: 画面の端に、名前ではなく番号だけが並んでいた。胸がざわついたが、読み取る前に電源が落ちた。
+    - goto: mochi_death_from_record
+  mochi_death_from_spa:
+    - hide: {}
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: ねむのみ
+        expression: default
+        position: center
+    - show:
+        character: アガサ
+        expression: default
+        position: right
+    - say:
+        text: 合流しかけたとき、スパ区画の奥からうきわの悲鳴が響いた。駆けつけると、さっきまで餅虎と見ていた浅い水の中に、その餅虎がうつ伏せで沈んでいた。
+    - say:
+        text: 鏡には今度こそ、はっきりと赤い文字が残っている。うそつき。
+    - say:
+        speaker: ねむのみ
+        text: そんな……。さっきまで一緒にいたのに。
+    - say:
+        speaker: アガサ
+        text: 浅すぎる水で溺れるなんて不自然すぎる。抵抗した痕もほとんどない……誰かが演出したのね。
+    - choice:
+        options:
+          - text: アガサに意見を聞く
+            set:
+              flags.trustedAgatha: true
+              clues.truth: 2
+            goto: talk_agatha
+          - text: きりゅうと行動方針を固める
+            set:
+              flags.trustedKiryu: true
+              clues.truth: 2
+            goto: talk_kiryu
+  mochi_death_from_record:
+    - hide: {}
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: ねむのみ
+        expression: default
+        position: center
+    - show:
+        character: アガサ
+        expression: default
+        position: right
+    - say:
+        text: 合流のためスパ区画へ戻った瞬間、うきわの悲鳴が館に反響した。駆け込んだ先で、餅虎は浅い水の中に沈み、鏡には赤い文字でうそつきと書かれていた。
+    - say:
+        speaker: きりゅう
+        text: 一人になるなと言ったはずだ……。くそ、誰がこんな真似を。
+    - say:
+        speaker: ねむのみ
+        text: 管理室のログに、僕たちのことを被験者って書いてあった。ここ、最初から何かを再現するための施設だったのかもしれない。
+    - say:
+        speaker: アガサ
+        text: なら、この死も誰かの意図通り。感情だけで動けば次も落とされるわ。
+    - choice:
+        options:
+          - text: アガサに意見を聞く
+            set:
+              flags.trustedAgatha: true
+              clues.truth: 2
+            goto: talk_agatha
+          - text: きりゅうと行動方針を固める
+            set:
+              flags.trustedKiryu: true
+              clues.truth: 2
+            goto: talk_kiryu
+  talk_agatha:
+    - hide: {}
+    - show:
+        character: アガサ
+        expression: default
+        position: right
+    - show:
+        character: ねむのみ
+        expression: default
+        position: center
+    - say:
+        speaker: アガサ
+        text: ねむのみ、覚えておいて。ここで起きているのは単純な殺人じゃないわ。誰かが私たちを、ある順番で追い詰めている。
+    - say:
+        speaker: ねむのみ
+        text: 順番……？
+    - say:
+        speaker: アガサ
+        text: ええ。まるで、あの日の出来事を最初からもう一度やり直させるみたいに。
+    - goto: ukiwa_death
+  talk_kiryu:
+    - hide: {}
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: ねむのみ
+        expression: default
+        position: center
+    - say:
+        speaker: きりゅう
+        text: 今は犯人探しより生き残る方が先だ。証拠も食料も全部共有する。目を逸らすな、ねむのみ。何が起きたか最後まで自分で見ろ。
+    - say:
+        speaker: ねむのみ
+        text: ……うん。怖くても、見届ける。
+    - goto: ukiwa_death
+  ukiwa_death:
+    - hide: {}
+    - show:
+        character: うきわ
+        expression: default
+        position: center
+    - say:
+        text: 餅虎の死で張り詰めた空気を和らげようとしていたのは、最後までうきわだった。食料を配り、濡れた床を拭き、みんなを励ましていた。
+    - say:
+        speaker: うきわ
+        text: だ、大丈夫だよ。ちゃんと協力すれば、ここから出られるって。
+    - say:
+        text: その数十分後、うきわは備蓄庫へ水を取りに向かったきり戻らなかった。
+    - hide: {}
+    - show:
+        character: すずどら
+        expression: default
+        position: left
+    - show:
+        character: ねむのみ
+        expression: default
+        position: center
+    - show:
+        character: アガサ
+        expression: default
+        position: right
+    - say:
+        text: 救命具保管庫の中央で、うきわは座らされたままロープに縛られ、息絶えていた。壁一面の浮輪が不気味に揺れる。
+    - say:
+        speaker: すずどら
+        text: 見せしめだな。だがこの結びは左手主体だ。俺ならもっと早く終わらせる。
+    - say:
+        speaker: アガサ
+        text: その通り。しかも手首に擦れ傷が少なすぎる。縛られた時には、もう抵抗できなかった可能性が高い。
+    - say:
+        speaker: ねむのみ
+        text: 誰かが冷静に、死に方まで作っている……。
+    - choice:
+        options:
+          - text: あむのダクト調査に同行する
+            set:
+              flags.followedVent: true
+              clues.truth: 3
+            goto: vent_follow
+          - text: その場に残って待機する
+            goto: vent_wait
+  vent_follow:
+    - hide: {}
+    - show:
+        character: あむ
+        expression: default
+        position: left
+    - show:
+        character: ねむのみ
+        expression: default
+        position: center
+    - say:
+        text: 通気ダクトは狭く、湿っていた。先を進むあむの声だけが、金属の筒をくぐって響く。
+    - say:
+        speaker: あむ
+        text: 変な部屋を見つけた。子ども用のベッドが八つ……いや、八つ分の名札がある。しかも名前じゃなく、番号付きだ。
+    - say:
+        speaker: ねむのみ
+        text: 番号……どんな。
+    - say:
+        speaker: あむ
+        text: お前だけ違う。ねむのみの札には、N-08って書いてある。
+    - say:
+        text: その直後、頭上のスピーカーが無機質に告げた。誤った経路への接近を確認。排除します。
+    - goto: amu_death
+  vent_wait:
+    - hide: {}
+    - show:
+        character: あむ
+        expression: default
+        position: left
+    - show:
+        character: きりゅう
+        expression: default
+        position: center
+    - show:
+        character: ねむのみ
+        expression: default
+        position: right
+    - say:
+        text: ねむのみたちは通路で待機し、ダクトの奥へ進んだあむから断続的に報告を受けた。
+    - say:
+        speaker: あむ
+        text: 子ども用のベッドが八つある。名札は番号付きで……おい、ねむのみ、お前だけN-08だぞ。
+    - say:
+        speaker: きりゅう
+        text: すぐ戻れ、あむ。そこはまずい。
+    - say:
+        text: 返事の代わりに、館内放送が鳴る。誤った経路への接近を確認。排除します。
+    - goto: amu_death
+  amu_death:
+    - hide: {}
+    - show:
+        character: あむ
+        expression: default
+        position: center
+    - show:
+        character: ねむのみ
+        expression: default
+        position: right
+    - say:
+        text: 次の瞬間、ダクトの一部が隔壁で押し潰された。金属が悲鳴を上げ、あむの体が叩きつけられる。
+    - say:
+        speaker: ねむのみ
+        text: あむ……！
+    - say:
+        speaker: あむ
+        text: ここは……八人のための場所じゃない。誰か一人のための檻だ……。
+    - say:
+        text: それだけを言い残して、あむの目から光が消えた。館の震動はさらに強まり、下層の浸水警報が赤く点滅する。
+    - goto: flood_move
+  flood_move:
+    - hide: {}
+    - show:
+        character: きりゅう
+        expression: default
+        position: left
+    - show:
+        character: すずどら
+        expression: default
+        position: right
+    - show:
+        character: ねむのみ
+        expression: default
+        position: center
+    - say:
+        text: 水位は一気に上がり、下層区画の通路を濁流が呑み込んだ。残った五人は上層へ向かって走る。
+    - say:
+        speaker: きりゅう
+        text: 先に行け。隔壁を閉めないと全員流される。
+    - say:
+        speaker: ねむのみ
+        text: でも、きりゅうが――
+    - say:
+        speaker: きりゅう
+        text: 目を逸らすな。最後まで見ろ。誰が何をしたか、自分で確かめるんだ。
+    - say:
+        text: すずどらがねむのみの肩を掴み、無理やり上へ引いた。閉まりかけた扉の向こうで、きりゅうは両腕で水圧に耐え続け、そのまま濁流に呑まれていく。
+    - goto: agatha_confession
+  agatha_confession:
+    - hide: {}
+    - show:
+        character: アガサ
+        expression: default
+        position: right
+    - show:
+        character: ぐら
+        expression: default
+        position: left
+    - show:
+        character: ねむのみ
+        expression: default
+        position: center
+    - say:
+        text: 残ったのはアガサ、ぐら、すずどら、ねむのみの四人だけだった。冷えきった上層区画で、アガサは隠していたファイルを取り出す。
+    - say:
+        speaker: アガサ
+        text: サーバから抜いた断片よ。白環館の正式名称は、記憶再生棟。対象は単一生存者の長期トラウマ復元試験。
+    - say:
+        speaker: ねむのみ
+        text: 単一生存者……？ 八人のうち一人だけが、生き残ったってこと？
+    - say:
+        speaker: アガサ
+        text: そう。少なくとも、この施設は最初からそう書いている。
+    - say:
+        text: その瞬間、換気口から甘い匂いが流れ込み、アガサの膝が折れた。
+    - say:
+        speaker: ぐら
+        text: 離れて、睡眠系のガスだ……！
+    - say:
+        speaker: アガサ
+        text: ごめんね、ねむのみ。ここまで来ないと、あなたはきっと思い出せなかった。
+    - say:
+        text: アガサはそれ以上何も言わず、ねむのみの腕の中で静かに息を止めた。
+    - goto: gura_room
+  gura_room:
+    - hide: {}
+    - show:
+        character: ぐら
+        expression: default
+        position: left
+    - show:
+        character: ねむのみ
+        expression: default
+        position: center
+    - show:
+        character: すずどら
+        expression: default
+        position: right
+    - say:
+        text: ぐらは迷いなく管理区画のさらに奥へ進み、厳重なロックのかかった扉をこじ開けた。そこには円筒形のポッドが並び、いくつかは砕け、いくつかは空だった。
+    - say:
+        text: ポッドの側面には、餅虎、うきわ、あむ、きりゅう、アガサ――死んだ者たちの名前が刻まれている。
+    - say:
+        speaker: ぐら
+        text: ずっと違和感があった。ここで本当に寒がって、眠って、お腹を空かせていたのは、ねむのみだけだった。
+    - say:
+        speaker: ねむのみ
+        text: それ、どういう意味なの。
+    - say:
+        speaker: ぐら
+        text: たぶん……本物なのは、君だけなんだ。
+    - say:
+        text: 直後に警報が鳴り、機械アームが起動した。ぐらは制御盤へ飛びつき、緊急遮断の操作に手を伸ばす。
+    - say:
+        speaker: ぐら
+        text: 一番やさしい人が、一番ひどい記憶を背負わされるなんて、おかしいから。先へ行って。
+    - say:
+        text: 閃光が走り、鋼鉄の扉が閉じる。ぐらの姿はその向こうに消えた。
+    - goto: suzudora_truth
+  suzudora_truth:
+    - hide: {}
+    - show:
+        character: すずどら
+        expression: default
+        position: left
+    - show:
+        character: ねむのみ
+        expression: default
+        position: center
+    - say:
+        text: 施設最深部へ向かう通路には、もはや二人分の足音しか響かなかった。
+    - if:
+        condition: clues.truth >= 3
+        then: suzudora_truth_high
+        else: suzudora_truth_low
+  suzudora_truth_high:
+    - say:
+        speaker: すずどら
+        text: ここまで見れば、もう察しているはずだ。俺たちは俺たちそのものじゃない。記録から作られた、短期間だけ動く再現体だ。
+    - say:
+        speaker: ねむのみ
+        text: じゃあ……みんな、十年前に。
+    - say:
+        speaker: すずどら
+        text: 死んだ。お前だけが違う。十年前も今も、生きているのはお前だけだ。
+    - goto: suzudora_barrier
+  suzudora_truth_low:
+    - say:
+        speaker: すずどら
+        text: 聞け、ねむのみ。俺たちは生存者じゃない。事故で死んだ者たちの癖や声や記憶を寄せ集めて作られた再現体だ。
+    - say:
+        speaker: ねむのみ
+        text: 再現体……そんなの、嘘だ。
+    - say:
+        speaker: すずどら
+        text: だが真実だ。そして本物なのは、お前だけだ。
+    - goto: suzudora_barrier
+  suzudora_barrier:
+    - say:
+        text: 最深部の手前で自動防衛機構が起動し、赤い光が通路を走った。すずどらは一歩前へ出て、ねむのみを背後へ押しやる。
+    - say:
+        speaker: すずどら
+        text: 俺はここで止める。壊れかけの再現体には、こういう役がちょうどいい。
+    - say:
+        speaker: ねむのみ
+        text: いやだ、もう誰も失いたくない。
+    - say:
+        speaker: すずどら
+        text: 俺たちはお前の記憶の中でしか生きられない。だからせめて、本物のお前だけは生きろ。
+    - say:
+        text: 黒い影が赤い光の中へ踏み込み、轟音とともに通路が閉ざされる。残されたねむのみは、ただ一人で中央記録室へたどり着いた。
+    - goto: core_video
+  core_video:
+    - hide: {}
+    - show:
+        character: ねむのみ
+        expression: default
+        position: center
+    - say:
+        text: 中央記録室は、研究施設というより子ども部屋のようだった。低い天井、丸い照明、八人の拙い絵。中央端末に手をかざすと、画面はあっさり起動した。
+    - say:
+        text: 認証完了。被験者N-08。最終試験終了。
+    - say:
+        text: 再生された監視映像には、十年前の白環館が映っていた。浸水事故。逃げ惑う子どもたち。閉じれば二度と開かない隔壁。そして、そのハンドルに手をかける幼いねむのみ。
+    - say:
+        text: スピーカーから大人の声が告げる。扉を閉めなさい。そうすれば、みんな助かる。
+    - say:
+        text: それは嘘だった。扉を閉めれば助かるのは、閉めた側にいる一人だけだった。
+    - say:
+        speaker: ねむのみ
+        text: 僕が……閉めたの……？
+    - set:
+        flags.knowsSingleSurvivor: true
+    - choice:
+        options:
+          - text: 映像から目をそらさない
+            set:
+              flags.acceptedTruth: true
+              clues.truth: 4
+            goto: agatha_message
+          - text: いったん画面を止める
+            goto: incomplete_truth
+  incomplete_truth:
+    - show:
+        character: ねむのみ
+        expression: default
+        position: center
+    - say:
+        text: 画面を止めても、耳の奥では子どもたちの悲鳴が消えなかった。逃げたところで、この夜は終わらない。ねむのみは震える指で再生ボタンを押し直した。
+    - goto: agatha_message
+  agatha_message:
+    - hide: {}
+    - show:
+        character: アガサ
+        expression: default
+        position: right
+    - show:
+        character: ねむのみ
+        expression: default
+        position: center
+    - say:
+        text: 最後のデータファイルには、アガサの映像メッセージが残されていた。
+    - say:
+        speaker: アガサ
+        text: ここまで来たなら、全部見たのね、ねむのみ。企業は何度も試験を途中で止め、あなたが真相に辿り着かないようにしていた。
+    - say:
+        speaker: アガサ
+        text: だから今回は、私が壊したの。あなたが最後まで進むしかないように。……最低のやり方だって分かってる。でも、終わらせるにはそれしかなかった。
+    - say:
+        speaker: アガサ
+        text: あなたは被害者よ。でも同時に、扉を閉めた当事者でもある。その事実から逃げずに生きることだけが、みんなへの弔いになる。
+    - set:
+        flags.knowsAgathaPlan: true
+    - if:
+        condition: flags.acceptedTruth == true
+        then: dawn_accept
+        else: dawn_shaken
+  dawn_accept:
+    - background: station-evening
+    - hide: {}
+    - show:
+        character: ねむのみ
+        expression: default
+        position: center
+    - say:
+        text: ねむのみは端末の証拠を外部へ送信し、非常用通路から外へ出た。嵐は嘘のように止み、沈みかけた白環館の向こうで夜明けの気配が海を白く染めていた。
+    - say:
+        speaker: ねむのみ
+        text: 忘れない。みんながいたことも、僕がしたことも。全部背負って、外へ出る。
+    - goto: ending
+  dawn_shaken:
+    - background: station-evening
+    - hide: {}
+    - show:
+        character: ねむのみ
+        expression: default
+        position: center
+    - say:
+        text: ねむのみは震える手で証拠を送信し、非常用通路から外へ出た。白環館は背後で静かに沈み続けている。真実は届いた。それでも、胸の痛みだけは少しも軽くならなかった。
+    - say:
+        speaker: ねむのみ
+        text: 赦されなくてもいい。でも、もう目を逸らさない。
+    - goto: ending
+  ending:
+    - hide: {}
+    - show:
+        character: ねむのみ
+        expression: default
+        position: center
+    - say:
+        text: 最後に生き残った一人だけが、真実へ辿り着いた。白環館の夜は終わり、失われた七人の記憶だけが、朝の海に残っていた。
+    - say:
+        text: おしまい。

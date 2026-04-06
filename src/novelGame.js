@@ -6,6 +6,11 @@ const DEFAULT_BGM_VOLUME = 0.75;
 const DEFAULT_SOUND_VOLUME = 0.8;
 const BGM_VOLUME_STORAGE_KEY = "novel-flow-bgm-volume";
 const SOUND_VOLUME_STORAGE_KEY = "novel-flow-sound-volume";
+const SCENE_TRANSITION_LOGO_PATH = "assets/logo/風見塔のラストノート.png";
+const SCENE_TRANSITION_SOUND_ID = "革靴で走る";
+const SCENE_TRANSITION_MIN_MS = 900;
+const SCENE_TRANSITION_SWAP_DELAY_MS = 120;
+const SCENE_TRANSITION_OUTRO_MS = 220;
 const EXPRESSION_ALIASES = {
   default: "default",
   neutral: "default",
@@ -244,6 +249,17 @@ export function createGame(root) {
   root.innerHTML = `
     <main class="novel-app">
       <div class="background-layer" data-background></div>
+      <div class="scene-transition" data-scene-transition hidden>
+        <div class="scene-transition__card">
+          <img class="scene-transition__logo" data-scene-transition-logo alt="風見塔のラストノート" />
+          <div class="scene-transition__trail" aria-hidden="true">
+            <span class="scene-transition__step"></span>
+            <span class="scene-transition__step"></span>
+            <span class="scene-transition__step"></span>
+          </div>
+          <p class="scene-transition__copy">移動中…</p>
+        </div>
+      </div>
       <section class="stage">
         <header class="top-bar">
           <div class="date-ribbon" data-date-label>--月--日</div>
@@ -377,6 +393,8 @@ function getUi(root) {
   return {
     root,
     background: root.querySelector("[data-background]"),
+    sceneTransition: root.querySelector("[data-scene-transition]"),
+    sceneTransitionLogo: root.querySelector("[data-scene-transition-logo]"),
     spriteLayer: root.querySelector("[data-sprite-layer]"),
     dateLabel: root.querySelector("[data-date-label]"),
     title: root.querySelector("[data-title]"),
@@ -423,6 +441,8 @@ function createEngine(ui) {
     lastPlayerName: "",
     spriteSerial: 0,
     motionSerial: 0,
+    transitionSerial: 0,
+    isTransitioning: false,
     lastSpeakerLabel: "System",
     lastSpeakerCharacterId: null,
     lastSpeakerPosition: "narration",
@@ -453,7 +473,7 @@ function createEngine(ui) {
     },
 
     advance() {
-      if (!state.scenario || state.waitingForChoice || state.ended || state.awaitingPlayerName) {
+      if (!state.scenario || state.waitingForChoice || state.ended || state.awaitingPlayerName || state.isTransitioning) {
         return;
       }
 
@@ -576,6 +596,8 @@ function validateScenario(scenario) {
 }
 
 function prepareScenario(state, scenario, options = {}) {
+  state.transitionSerial += 1;
+  state.isTransitioning = false;
   state.scenario = scenario;
   state.variables = structuredClone(scenario.variables ?? {});
   state.currentNodeId = scenario.start;
@@ -636,6 +658,7 @@ function renderShell(ui, state) {
   ui.title.textContent = state.scenario.title ?? "Novel Flow";
   ui.dateLabel.textContent = state.dateLabel || "--月--日";
   ui.background.style.backgroundImage = "";
+  hideSceneTransition(ui, state);
   renderSpeakerBadge(ui, "System", "narration");
   ui.message.textContent = state.awaitingPlayerName ? "主人公の名前を決めてください。" : "開始します。";
   ui.advanceButton.disabled = false;
@@ -680,9 +703,19 @@ function executeAction(action, state, ui, api) {
 
   switch (type) {
     case "background":
-      applyBackground(payload, state, ui);
       stepNext(state, ui);
-      return false;
+      applyBackground(payload, state, ui)
+        .then(() => {
+          if (!state.waitingForChoice && !state.ended && !state.awaitingPlayerName) {
+            api.advance();
+          }
+        })
+        .catch((error) => {
+          state.isTransitioning = false;
+          hideSceneTransition(ui, state);
+          renderError(ui, formatError(error));
+        });
+      return true;
     case "date":
       applyDate(payload, state, ui);
       stepNext(state, ui);
@@ -746,9 +779,35 @@ function getActionEntry(action) {
   return entries[0];
 }
 
-function applyBackground(payload, state, ui) {
+async function applyBackground(payload, state, ui) {
   const image = resolveBackground(payload, state.scenario);
+  const transitionId = ++state.transitionSerial;
+  state.isTransitioning = true;
+  ui.advanceButton.disabled = true;
+  showSceneTransition(ui, state.scenario);
+  playSceneTransitionSound(state.scenario);
+
+  await Promise.all([preloadImage(image), wait(SCENE_TRANSITION_MIN_MS)]);
+
+  if (state.transitionSerial !== transitionId) {
+    return;
+  }
+
   ui.background.style.backgroundImage = `url("${image}")`;
+  await wait(SCENE_TRANSITION_SWAP_DELAY_MS);
+
+  if (state.transitionSerial !== transitionId) {
+    return;
+  }
+
+  hideSceneTransition(ui, state, { animate: true });
+  await wait(SCENE_TRANSITION_OUTRO_MS);
+
+  if (state.transitionSerial !== transitionId) {
+    return;
+  }
+
+  state.isTransitioning = false;
 }
 
 function applyDate(payload, state, ui) {
@@ -964,6 +1023,11 @@ function resolveSound(id, scenario) {
   return scenario.sound?.[id] ?? scenario.assetManifest?.sound?.[id] ?? null;
 }
 
+function playSceneTransitionSound(scenario) {
+  const src = resolveSound(SCENE_TRANSITION_SOUND_ID, scenario) ?? `assets/sound/${SCENE_TRANSITION_SOUND_ID}.wav`;
+  soundPlayer.play(toAppUrl(src), { volume: 0.8, loop: false });
+}
+
 function applySet(payload, state) {
   if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
     throw new Error("set はオブジェクトで記述してください。");
@@ -1144,6 +1208,38 @@ function clearChoices(ui) {
   ui.choices.innerHTML = "";
 }
 
+function showSceneTransition(ui, scenario) {
+  ui.sceneTransitionLogo.src = toAppUrl(SCENE_TRANSITION_LOGO_PATH);
+  ui.sceneTransitionLogo.hidden = !shouldShowSceneTransitionLogo(scenario);
+  ui.sceneTransition.hidden = false;
+  ui.sceneTransition.classList.add("is-visible");
+  ui.sceneTransition.classList.remove("is-leaving");
+}
+
+function hideSceneTransition(ui, state, options = {}) {
+  state.isTransitioning = false;
+
+  if (!options.animate) {
+    ui.sceneTransition.hidden = true;
+    ui.sceneTransition.classList.remove("is-visible", "is-leaving");
+    return;
+  }
+
+  ui.sceneTransition.classList.remove("is-visible");
+  ui.sceneTransition.classList.add("is-leaving");
+  window.setTimeout(() => {
+    if (!ui.sceneTransition.classList.contains("is-visible")) {
+      ui.sceneTransition.hidden = true;
+      ui.sceneTransition.classList.remove("is-leaving");
+    }
+  }, SCENE_TRANSITION_OUTRO_MS);
+}
+
+function shouldShowSceneTransitionLogo(scenario) {
+  const title = String(scenario?.title ?? "");
+  return title.includes("風見塔のラストノート");
+}
+
 function renderSpeakerBadge(ui, label, position, characterId) {
   const isNarration = label === "Narration" || label === "System";
   ui.speaker.hidden = isNarration;
@@ -1186,6 +1282,19 @@ function completeTypewriter(ui, state) {
   cancelTypewriter(state);
   ui.message.textContent = state.typingFullText;
   state.typing = false;
+}
+
+function preloadImage(src) {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    image.onload = () => resolve();
+    image.onerror = () => reject(new Error(`背景画像の読み込みに失敗しました: ${src}`));
+    image.src = src;
+  });
+}
+
+function wait(ms) {
+  return new Promise((resolve) => window.setTimeout(resolve, ms));
 }
 
 function syncSpeakerBadgePosition(state, ui) {

@@ -72,6 +72,116 @@ body {
     linear-gradient(180deg, rgba(255, 246, 227, 0.04) 0%, rgba(68, 36, 16, 0.24) 100%);
 }
 
+.scene-transition {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.22), rgba(18, 24, 36, 0.82) 48%, rgba(6, 8, 14, 0.96) 100%);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease;
+}
+
+.scene-transition.is-visible,
+.scene-transition.is-leaving {
+  display: grid;
+}
+
+.scene-transition.is-visible {
+  opacity: 1;
+}
+
+.scene-transition.is-leaving {
+  opacity: 0;
+}
+
+.scene-transition__card {
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  width: min(74vw, 540px);
+  padding: 26px 24px 22px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04)),
+    rgba(15, 20, 32, 0.36);
+  box-shadow:
+    0 24px 48px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+
+.scene-transition__logo {
+  width: min(62vw, 340px);
+  max-height: 38vh;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 24px rgba(255, 255, 255, 0.16));
+  animation: transition-logo-float 1.9s ease-in-out infinite;
+}
+
+.scene-transition__trail {
+  display: inline-flex;
+  align-items: end;
+  gap: 10px;
+  min-height: 20px;
+}
+
+.scene-transition__step {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ffffff, #dff3ff);
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.36);
+  animation: transition-step-hop 0.9s ease-in-out infinite;
+}
+
+.scene-transition__step:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.scene-transition__step:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.scene-transition__copy {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.95);
+  font-family: "M PLUS Rounded 1c", "Zen Kaku Gothic New", sans-serif;
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.24);
+}
+
+@keyframes transition-logo-float {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-6px) scale(1.015);
+  }
+}
+
+@keyframes transition-step-hop {
+  0%,
+  100% {
+    transform: translateY(0) scale(0.9);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: translateY(-8px) scale(1);
+    opacity: 1;
+  }
+}
+
 .stage {
   position: relative;
   z-index: 1;

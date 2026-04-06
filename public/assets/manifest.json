@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-06T13:59:32.800Z",
+  "generatedAt": "2026-04-06T14:12:44.845Z",
   "backgrounds": {
     "aonagi-gate-morning": "assets/backgrounds/aonagi-gate-morning.png",
     "aonagi-oldtower-corridor-morning": "assets/backgrounds/aonagi-oldtower-corridor-morning.png",
@@ -94,6 +94,7 @@
     "目が点になる": "assets/sound/目が点になる.mp3",
     "運命1": "assets/sound/運命1.mp3",
     "間抜け3": "assets/sound/間抜け3.mp3",
+    "革靴で走る": "assets/sound/革靴で走る.wav",
     "食べ物をパクッ": "assets/sound/食べ物をパクッ.mp3",
     "驚く": "assets/sound/驚く.mp3",
     "鳩時計2": "assets/sound/鳩時計2.mp3"

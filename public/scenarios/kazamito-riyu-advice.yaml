@@ -93,6 +93,10 @@ nodes:
             goto: advice_kiryu
           - text: どり
             goto: advice_dori
+          - text: ごんた
+            goto: advice_gonta
+          - text: ロクロ
+            goto: advice_rokuro
           - text: やっぱりまだ迷う
             goto: choose_group
 
@@ -106,6 +110,8 @@ nodes:
             goto: advice_agasa
           - text: すずどら
             goto: advice_suzudora
+          - text: i5
+            goto: advice_i5
           - text: やっぱりまだ迷う
             goto: choose_group
 
@@ -121,6 +127,8 @@ nodes:
             goto: advice_ukiwa
           - text: 餅虎
             goto: advice_mochitora
+          - text: さわでん
+            goto: advice_sawaden
           - text: やっぱりまだ迷う
             goto: choose_group
 
@@ -163,6 +171,30 @@ nodes:
         text: そういう人、自分のことはあとまわしにしがちだから。手伝ってもらった時に、ありがとうと一緒に「今度はわたしの番ね」って言えると強いよ。
     - goto: closing
 
+  advice_gonta:
+    - say:
+        speaker: "{{player.name}}"
+        text: ごんた先生、かも。
+    - say:
+        speaker: りゆ
+        text: ああ、やさしくて頼れる大人枠だねえ。ごんた先生みたいな人には、助けてもらって終わりじゃなくて、ちゃんと助けを受け取るのが大事だよ。
+    - say:
+        speaker: りゆ
+        text: ああいう人って、無理してる子を放っておけないけど、自分が頼られるとむしろ嬉しいの。だから背伸びして平気な顔するより、「今ちょっと助けて」って素直に言えるほうが距離は縮むと思う。
+    - goto: closing
+
+  advice_rokuro:
+    - say:
+        speaker: "{{player.name}}"
+        text: ロクロ先生、かもしれない。
+    - say:
+        speaker: りゆ
+        text: わあ、静かで難しいところ行くねえ。ロクロ先生みたいに線を引く人には、甘えてごまかすのはたぶん逆効果。
+    - say:
+        speaker: りゆ
+        text: でも、厳しい人ほど誠実さはちゃんと見てるから。取り繕うより、迷ってることも不安なことも、そのまま筋道立てて話すといいよ。「ちゃんと向き合う気がある」って伝わるのがいちばん効きそう。
+    - goto: closing
+
   advice_agasa:
     - say:
         speaker: "{{player.name}}"
@@ -185,6 +217,18 @@ nodes:
     - say:
         speaker: りゆ
         text: 正面から見て、ちゃんと自分の言葉で返すこと。褒めるなら強さだけじゃなくて、どこに誇りを持ってるかまで見てあげると刺さると思う。
+    - goto: closing
+
+  advice_i5:
+    - say:
+        speaker: "{{player.name}}"
+        text: i5、かな。
+    - say:
+        speaker: りゆ
+        text: おお、観察タイプだねえ。i5くんみたいに頭の回る子には、ふわっとした好意より「ちゃんと見てるよ」が効くと思う。
+    - say:
+        speaker: りゆ
+        text: たぶんあの子、ことばより先に中身を見てるから。調子のいいこと言うより、気づいたことをそのまま返してあげて。あなたのそういうとこ、助かったよって具体的に言われたら、ぐっとくるはず。
     - goto: closing
 
   advice_amu:
@@ -221,6 +265,18 @@ nodes:
     - say:
         speaker: りゆ
         text: ほんとに届かせたいなら、舞台裏まで見てるって伝えること。きらきらしてる理由を分かってくれる人には、たぶんすごく弱いよ。
+    - goto: closing
+
+  advice_sawaden:
+    - say:
+        speaker: "{{player.name}}"
+        text: さわでん、かも。
+    - say:
+        speaker: りゆ
+        text: さわでんくんみたいな子って、軽く見えても意外とだいじなもの抱えてたりするんだよね。距離は近いのに、本気のところだけするっと逃げちゃう感じ。
+    - say:
+        speaker: りゆ
+        text: だから一緒に笑うのはだいじ。でも、それだけで終わらせないで、「ほんとはどうだった？」ってやさしく拾ってあげて。冗談のあとにちゃんと残ってくれる人には、きっと弱いよ。
     - goto: closing
 
   advice_gura:

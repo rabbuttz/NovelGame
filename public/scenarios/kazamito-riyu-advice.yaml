@@ -1,0 +1,291 @@
+title: 風見塔のラストノート 番外編 りゆの恋バナ査定
+dateLabel: 4月18日
+
+player:
+  title: 主人公の名前を決める
+  prompt: 義姉に呼ばれたい名前を入力してください。
+  defaultName: 湊
+  presets:
+    - 湊
+    - 悠真
+
+variables:
+  flags:
+    riyuAdviceClear: false
+    talkedHonestly: false
+    gotLoveAdvice: false
+  affection:
+    riyu: 1
+
+characters:
+  りゆ:
+    name: りゆ
+
+start: living_room_intro
+
+nodes:
+  living_room_intro:
+    - date: 4月18日 夜
+    - background: 教室・夕方
+    - bgm:
+        id: 穏やかな恋愛イベント
+        volume: 0.48
+        loop: true
+    - show:
+        character: りゆ
+        expression: default
+        position: center
+    - say:
+        text: 夜。家のテレビでは恋愛バラエティの特集が流れていた。にぎやかな効果音と大げさな字幕を横目に、{{player.name}}はソファへ浅く座る。
+    - say:
+        speaker: りゆ
+        text: んー。いまの人、押しが強すぎるねえ。好きって、もっとふわっと近づいていく時間もだいじなのに。
+    - say:
+        text: ぽつりと感想をこぼしたりゆは、マグカップを抱えたままこちらを見た。やわらかい顔をしている時ほど、たぶん勘は鋭い。
+    - say:
+        speaker: りゆ
+        text: ところで{{player.name}}。学園のほうはどう？ いま、ちょっと気になってる人とか……いるでしょ。
+    - choice:
+        options:
+          - text: ごまかそうとする
+            goto: dodge_answer
+          - text: ちゃんと話す
+            set:
+              flags.talkedHonestly: true
+            goto: choose_group
+
+  dodge_answer:
+    - say:
+        speaker: "{{player.name}}"
+        text: なんでそういう話になるの。
+    - say:
+        speaker: りゆ
+        text: その返しをした時点で、だれかいるんだよ。わたし知ってるもん。いない人はもっと雑に「いない」って言うから。
+    - say:
+        speaker: りゆ
+        text: だいじょうぶ、取って食べたりしないよ。ちょっと整理するだけ。はい、査定スタート。
+    - goto: choose_group
+
+  choose_group:
+    - say:
+        speaker: りゆ
+        text: じゃあまず、その人どんな感じ？ 名前をいきなり言いづらいなら、タイプからでもいいよ。
+    - choice:
+        options:
+          - text: 頼れて、背中を追いたくなる人
+            goto: group_reliable
+          - text: 何を考えてるか読みにくい人
+            goto: group_unreadable
+          - text: 元気で、見てると放っておけない人
+            goto: group_lively
+          - text: 静かだけど、気づくと目で追ってる人
+            goto: group_quiet
+          - text: まだ自分でも、よくわからない
+            goto: advice_unsure
+
+  group_reliable:
+    - say:
+        speaker: りゆ
+        text: 頼れる人かあ。そういう人って、安心できるぶん、自分が何を返せるかも気になっちゃうよね。
+    - choice:
+        options:
+          - text: きりゅう
+            goto: advice_kiryu
+          - text: どり
+            goto: advice_dori
+          - text: やっぱりまだ迷う
+            goto: choose_group
+
+  group_unreadable:
+    - say:
+        speaker: りゆ
+        text: ふふ、難しいところ行くねえ。読めない人って、追いかけたくなるけど、こっちも見せないと距離が縮まらないんだよね。
+    - choice:
+        options:
+          - text: アガサ
+            goto: advice_agasa
+          - text: すずどら
+            goto: advice_suzudora
+          - text: やっぱりまだ迷う
+            goto: choose_group
+
+  group_lively:
+    - say:
+        speaker: りゆ
+        text: 元気な人はね、こっちも笑わせてくれるけど、そのぶん真面目な気持ちは見落とされやすいの。
+    - choice:
+        options:
+          - text: あむ
+            goto: advice_amu
+          - text: うきわ
+            goto: advice_ukiwa
+          - text: 餅虎
+            goto: advice_mochitora
+          - text: やっぱりまだ迷う
+            goto: choose_group
+
+  group_quiet:
+    - say:
+        speaker: りゆ
+        text: 静かな人たちだね。こういう人って、急かされると閉じちゃうけど、見ててくれる人にはちゃんと気づくよ。
+    - choice:
+        options:
+          - text: ぐら
+            goto: advice_gura
+          - text: ねむのみ
+            goto: advice_nemunomi
+          - text: みもち
+            goto: advice_mimochi
+          - text: やっぱりまだ迷う
+            goto: choose_group
+
+  advice_kiryu:
+    - say:
+        speaker: "{{player.name}}"
+        text: ……きりゅう、かな。
+    - say:
+        speaker: りゆ
+        text: うんうん。きりゅうくんみたいに責任感が強い人には、「守って」より「一緒にやろう」が効くよ。
+    - say:
+        speaker: りゆ
+        text: 頼るのはだいじ。でも丸投げじゃなくて、横に立つ感じ。あなたがちゃんと踏ん張るところ見せたら、ああいう人は急にやさしくなるから。
+    - goto: closing
+
+  advice_dori:
+    - say:
+        speaker: "{{player.name}}"
+        text: どり先輩、かも。
+    - say:
+        speaker: りゆ
+        text: どりくんみたいな世話焼きさんには、世話を焼かれるだけだとだめ。ちゃんと「休んで」って返してあげて。
+    - say:
+        speaker: りゆ
+        text: そういう人、自分のことはあとまわしにしがちだから。手伝ってもらった時に、ありがとうと一緒に「今度はわたしの番ね」って言えると強いよ。
+    - goto: closing
+
+  advice_agasa:
+    - say:
+        speaker: "{{player.name}}"
+        text: アガサ、かな。
+    - say:
+        speaker: りゆ
+        text: ああ、あのタイプは上手だよ。気づいたら懐に入ってる人。でもね、そういう人に飲まれっぱなしだと、ずっと本心を見せてもらえないの。
+    - say:
+        speaker: りゆ
+        text: だから笑ってる時ほど、一回だけまっすぐ聞いてみて。「今の、ほんとはどう思ってる？」って。やさしく、でも逃がさない感じでね。
+    - goto: closing
+
+  advice_suzudora:
+    - say:
+        speaker: "{{player.name}}"
+        text: すずどら、かもしれない。
+    - say:
+        speaker: りゆ
+        text: 難易度高いところ行くねえ。でも、ああいう人には媚びないのが一番だよ。怖いからって引きすぎると、ずっと遠いままになっちゃう。
+    - say:
+        speaker: りゆ
+        text: 正面から見て、ちゃんと自分の言葉で返すこと。褒めるなら強さだけじゃなくて、どこに誇りを持ってるかまで見てあげると刺さると思う。
+    - goto: closing
+
+  advice_amu:
+    - say:
+        speaker: "{{player.name}}"
+        text: あむ、かな。
+    - say:
+        speaker: りゆ
+        text: あむくんみたいな元気な子には、冗談に乗るだけじゃ足りないよ。本気のところ、ちゃんと見えてるって伝えてあげて。
+    - say:
+        speaker: りゆ
+        text: 明るい人って、明るいから平気だと思われやすいの。だから「ふざけてない時のあなたも好き」っていう目線、すごく効くはず。
+    - goto: closing
+
+  advice_ukiwa:
+    - say:
+        speaker: "{{player.name}}"
+        text: うきわ、かも。
+    - say:
+        speaker: りゆ
+        text: かわいいところ行くねえ。うきわくんには、結果より途中を褒めてあげるのがいいと思う。
+    - say:
+        speaker: りゆ
+        text: がんばり屋さんって、失敗した時に自分で先にしょんぼりしちゃうから。「やってくれたの見てたよ」って早めに言っておくと、安心して近づいてきてくれるよ。
+    - goto: closing
+
+  advice_mochitora:
+    - say:
+        speaker: "{{player.name}}"
+        text: 餅虎、かもしれない。
+    - say:
+        speaker: りゆ
+        text: 華やかな子だねえ。そういう子には、目立ってるところだけ褒めると他の人と一緒になっちゃうの。
+    - say:
+        speaker: りゆ
+        text: ほんとに届かせたいなら、舞台裏まで見てるって伝えること。きらきらしてる理由を分かってくれる人には、たぶんすごく弱いよ。
+    - goto: closing
+
+  advice_gura:
+    - say:
+        speaker: "{{player.name}}"
+        text: ぐら、かな。
+    - say:
+        speaker: りゆ
+        text: ぐらくんみたいな静かな人には、急がないで待てる人が強いよ。沈黙を「気まずい」で埋めないで、一緒にいられることが大事。
+    - say:
+        speaker: りゆ
+        text: それと、頼るのも忘れないこと。ああいう子、必要とされると急に自分の気持ちまで出しやすくなるから。
+    - goto: closing
+
+  advice_nemunomi:
+    - say:
+        speaker: "{{player.name}}"
+        text: ねむのみ、かも。
+    - say:
+        speaker: りゆ
+        text: ねむのみくんには、甘えるだけじゃなくて、甘えさせてもあげて。やさしい人って、自分が寄りかかる場所を後回しにしちゃうから。
+    - say:
+        speaker: りゆ
+        text: 落ち着くって伝えるのはすごくいい。でも、そのあとに「あなたは誰に休ませてもらってるの？」って気にしてあげると、距離がぐっと縮みそう。
+    - goto: closing
+
+  advice_mimochi:
+    - say:
+        speaker: "{{player.name}}"
+        text: みもち、かな。
+    - say:
+        speaker: りゆ
+        text: みもちくんには、決断を急がせないのがいちばん。安心できるって、ちゃんとことばにしてあげて。
+    - say:
+        speaker: りゆ
+        text: 自信のない子って、「好き」より先に「いてもいいんだ」って思えるかが大事なんだよね。あなたのそばだと落ち着くって、すごく効くと思う。
+    - goto: closing
+
+  advice_unsure:
+    - say:
+        speaker: "{{player.name}}"
+        text: まだ自分でも、よくわからないんだ。
+    - say:
+        speaker: りゆ
+        text: それなら、だれを見ると自分がどうなるか考えてみたらいいよ。背筋が伸びるのか、笑っちゃうのか、黙ってても平気なのか。
+    - say:
+        speaker: りゆ
+        text: 好きって、相手の顔より先に、自分の変わり方でわかることあるから。焦って名前を決めなくてもだいじょうぶ。
+    - goto: closing
+
+  closing:
+    - set:
+        flags.gotLoveAdvice: true
+        flags.riyuAdviceClear: true
+    - say:
+        speaker: "{{player.name}}"
+        text: ……なんか、思ったより具体的だった。
+    - say:
+        speaker: りゆ
+        text: えへへ。恋バナって、ふわふわしてるようで案外、観察力がものを言うからね。
+    - say:
+        speaker: りゆ
+        text: でも、いちばんだいじなのは、好きになった相手の前で自分まで無理しすぎないこと。かっこつけるのはちょっとだけでいいよ。
+    - say:
+        text: テレビの中では、ちょうど告白成功のテロップが流れていた。派手な演出より、りゆの最後の一言のほうが、ずっと胸に残る。
+    - bgm: stop
+    - say:
+        text: 番外編・了

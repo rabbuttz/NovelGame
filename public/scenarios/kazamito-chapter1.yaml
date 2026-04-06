@@ -60,7 +60,7 @@ start: opening_transfer
 nodes:
   opening_transfer:
     - date: 4月10日 朝
-    - background: station-evening
+    - background: aonagi-gate-morning
     - bgm:
         id: 共通ルート 日常
         volume: 0.62
@@ -83,7 +83,7 @@ nodes:
             goto: corridor_lost
 
   corridor_lost:
-    - background: classroom-night
+    - background: aonagi-oldtower-corridor-morning
     - say:
         text: 渡り廊下を一つ、階段を二つ。気づけば人の気配が薄く、古い外壁のそばまで来ていた。
     - say:
@@ -93,7 +93,7 @@ nodes:
     - goto: first_meet_kiryu_amu
 
   first_meet_kiryu_amu:
-    - background: station-evening
+    - background: kazamito-entrance-morning
     - show:
         character: きりゅう
         expression: default
@@ -265,7 +265,7 @@ nodes:
 
   first_group_meeting:
     - date: 4月10日 放課後
-    - background: classroom-night
+    - background: project-meeting-classroom-evening
     - hide: {}
     - show:
         character: うきわ
@@ -430,7 +430,7 @@ nodes:
 
   after_meeting_rooftop:
     - date: 4月10日 夜
-    - background: station-evening
+    - background: kazamito-night-overlook
     - hide: {}
     - show:
         character: きりゅう

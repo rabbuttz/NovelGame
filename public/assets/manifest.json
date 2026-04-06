@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-06T12:37:00.880Z",
+  "generatedAt": "2026-04-06T13:06:57.596Z",
   "backgrounds": {
     "classroom-night": "assets/backgrounds/classroom-night.svg",
     "harbor-backstage": "assets/backgrounds/harbor-backstage.svg",
@@ -31,14 +31,31 @@
     "ぐら": {
       "default": "assets/characters/ぐら-default.webp"
     },
+    "さわでん": {
+      "default": "assets/characters/さわでん-default.webp"
+    },
     "すずどら": {
       "default": "assets/characters/すずどら-default.webp"
+    },
+    "どり": {
+      "default": "assets/characters/どり-default.webp"
     },
     "ねむのみ": {
       "default": "assets/characters/ねむのみ-default.webp"
     },
+    "みもち": {
+      "default": "assets/characters/みもち-default.jpg"
+    },
     "アガサ": {
-      "default": "assets/characters/アガサ-default.webp"
+      "default": "assets/characters/アガサ-default.png",
+      "Joy": "assets/characters/アガサ-Joy.png",
+      "sad": "assets/characters/アガサ-sad.png",
+      "smile": "assets/characters/アガサ-smile.png",
+      "surprised": "assets/characters/アガサ-surprised.png",
+      "worry": "assets/characters/アガサ-worry.png"
+    },
+    "ロクロ": {
+      "default": "assets/characters/ロクロ-default.png"
     },
     "餅虎": {
       "default": "assets/characters/餅虎-default.webp"

@@ -1,5 +1,10 @@
 [
   {
+    "url": "scenarios/kazamito-chapter3.yaml",
+    "title": "風見塔のラストノート 第三章",
+    "description": "日常の準備と放課後の寄り道の中で、企画を支える地味な仕事と「どり」の存在が見えてくる第三章。"
+  },
+  {
     "url": "scenarios/kazamito-chapter2.yaml",
     "title": "風見塔のラストノート 第二章",
     "description": "役割分担と最初の摩擦を経て、風見塔の過去に触れ始める共通ルート第二章。"

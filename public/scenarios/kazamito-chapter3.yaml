@@ -1,0 +1,418 @@
+title: 風見塔のラストノート 第三章 つなぐ放課後
+dateLabel: 4月12日
+
+player:
+  title: 主人公の名前を決める
+  prompt: 呼ばれたい名前を入力してください。
+  defaultName: 湊
+  presets:
+    - 湊
+    - 悠真
+
+variables:
+  flags:
+    chapter1Clear: true
+    chapter2Clear: true
+    chapter3Clear: false
+    acceptedProjectTemp: true
+    acceptedCrossRole: true
+    foundOldCancellationSlip: true
+    heardTowerRumor: true
+    helpedMimochiCuration: false
+    sawMochitoraAnxiety: false
+    reliedOnDori: false
+    spentDailyTimeWithAmuUkiwa: false
+    restedAgainWithNemunomi: false
+  affection:
+    kiryu: 2
+    amu: 2
+    agasa: 2
+    ukiwa: 2
+    gura: 2
+    mimochi: 2
+    suzudora: 1
+    nemunomi: 2
+    mochitora: 2
+    dori: 0
+
+characters:
+  きりゅう:
+    name: きりゅう
+  あむ:
+    name: あむ
+  アガサ:
+    name: アガサ
+  うきわ:
+    name: うきわ
+  ぐら:
+    name: ぐら
+  みもち:
+    name: みもち
+  ねむのみ:
+    name: ねむのみ
+  餅虎:
+    name: 餅虎
+  どり:
+    name: どり
+  ロクロ:
+    name: ロクロ
+
+start: ordinary_morning
+
+nodes:
+  ordinary_morning:
+    - date: 4月12日 朝
+    - background: 教室・昼
+    - bgm:
+        id: 共通ルート 日常
+        volume: 0.6
+        loop: true
+    - say:
+        text: 旧公開中止届を見つけた翌朝だというのに、チャイムはいつも通りに鳴った。授業も、当番も、窓の外の海風も、何事もなかったみたいに続いている。
+    - say:
+        text: 風見塔のことだけを考えていられるわけじゃない。蒼凪学園では、日常の中に企画の準備を差し込んでいくしかないのだ。
+    - show:
+        character: あむ
+        expression: smile
+        position: left
+    - show:
+        character: うきわ
+        expression: smile
+        position: center
+    - show:
+        character: きりゅう
+        expression: default
+        position: right
+    - say:
+        speaker: あむ
+        text: おはよー、連絡役。朝から顔がちょっと真面目すぎるって。昨日の紙、まだ引きずってる？
+    - say:
+        speaker: うきわ
+        text: でも今日はちょっと普通の準備が多いよ！ 備品確認とか、展示の台紙とか、当日までに地味にいるやつ！
+    - say:
+        speaker: きりゅう
+        text: その地味なやつが抜けると全部止まる。今日はそこを片づける日だ。
+    - goto: dori_enters
+
+  dori_enters:
+    - hide:
+        position: center
+    - show:
+        character: どり
+        expression: default
+        position: center
+    - say:
+        text: きりゅうの言葉が終わるのとほぼ同時に、教室の前扉が静かに開いた。段ボール箱とファイルを抱えた生徒が、迷いなくこちらへ歩いてくる。
+    - say:
+        speaker: どり
+        text: 風見塔の企画班、これ借用申請の控え。あと、昨日足りてなかったクリップボード。生活委員の棚、空いてたから回しておいた。
+    - say:
+        speaker: "{{player.name}}"
+        text: えっと……ありがとう。もしかして、昨日も足りない物を補ってくれてた人？
+    - say:
+        speaker: どり
+        text: たぶんそう。自己紹介まだだったな。どり。雑務管理って言うと固いけど、足りない所の穴埋めが仕事。
+    - set:
+        affection.dori: 1
+    - say:
+        speaker: あむ
+        text: どり先輩、マジで気づいたらいるんだよな。しかも足りない物だけ置いていくの、ちょっと怖いレベル。
+    - motion:
+        character: あむ
+        name: 疑問
+    - say:
+        speaker: どり
+        text: 怖がられるようなことはしてない。困ってる顔が増える前に動いてるだけだよ。
+    - say:
+        text: 派手な登場ではないのに、箱の中身は今の企画に必要なものばかりだった。日常の裏側を一人で整えているような人だと、すぐにわかる。
+    - goto: lunch_split
+
+  lunch_split:
+    - date: 4月12日 昼休み
+    - background: 廊下
+    - hide: {}
+    - show:
+        character: アガサ
+        expression: default
+        position: left
+    - show:
+        character: みもち
+        expression: troubled
+        position: center
+    - show:
+        character: 餅虎
+        expression: smile
+        position: right
+    - say:
+        speaker: アガサ
+        text: 午後までに片づけたいのは二つ。展示用の写真と文章の仮並べ、それから広報掲示のラフだ。
+    - say:
+        speaker: みもち
+        text: 写真は選べるんだけど、説明文をどこまで短くするか迷ってて……。削りすぎると、残したいことまで薄くなる気がする。
+    - say:
+        speaker: 餅虎
+        text: で、ラフはラフで見てもらわないと始まんない。校内で立ち止まらせる言葉、昼休みのうちに一本作りたいのよ。
+    - hide:
+        position: left
+    - show:
+        character: どり
+        expression: default
+        position: left
+    - say:
+        speaker: どり
+        text: それと、備品倉庫の鍵、今日だけ早めに返却しないといけない。使うなら先に持っていって。
+    - say:
+        text: 仕事の種類は違うのに、全部が同じ時間に重なる。いかにも日常的で、いかにも厄介な詰まり方だった。
+    - choice:
+        options:
+          - text: あむとうきわと一緒に校内の細かい回収を回る
+            set:
+              flags.spentDailyTimeWithAmuUkiwa: true
+              affection.amu: 2
+              affection.ukiwa: 2
+            goto: errand_walk
+          - text: みもちとどりと一緒に展示まわりを整える
+            set:
+              flags.helpedMimochiCuration: true
+              flags.reliedOnDori: true
+              affection.mimochi: 2
+              affection.dori: 2
+            goto: archive_work
+
+  errand_walk:
+    - background: 校庭
+    - hide: {}
+    - show:
+        character: あむ
+        expression: smile
+        position: left
+    - show:
+        character: うきわ
+        expression: smile
+        position: center
+    - say:
+        text: 昼休みから午後の空き時間にかけて、三人で校内をぐるぐる回った。貸し出し札、案内板の土台、使えそうなイーゼル、ついでに失くしたチョーク一本まで。
+    - say:
+        speaker: あむ
+        text: こういうの、地味だけど嫌いじゃないんだよな。動いてる実感あるし。
+    - say:
+        speaker: うきわ
+        text: わかる！ 目立つ仕事じゃなくても、「これで前に進んだ」って見えるとちょっと嬉しい！
+    - sound: 間抜け3
+    - say:
+        text: その直後、うきわが抱えていた案内板の束を一枚落とし、あむが慌てて拾って二枚増やした。
+    - say:
+        speaker: "{{player.name}}"
+        text: 増えてる増えてる。拾ったんじゃなくて別の束まで持ってる。
+    - motion:
+        character: あむ
+        name: 喜び
+    - say:
+        speaker: あむ
+        text: え、ほんとだ。じゃあこれも運べばよくない？
+    - say:
+        text: 雑だけど前向きで、前向きだけど危なっかしい。そんな二人と回っていると、準備の時間まで少しだけ学校生活らしく感じた。
+    - goto: merge_work
+
+  archive_work:
+    - background: 図書館
+    - hide: {}
+    - show:
+        character: みもち
+        expression: troubled
+        position: left
+    - show:
+        character: どり
+        expression: default
+        position: center
+    - say:
+        text: 図書館の隅で写真を並べ替える。古い塔の外観、まだ明るかった頃のラウンジ、名前のない集合写真。みもちは一枚一枚の間に、置くべき言葉を探していた。
+    - say:
+        speaker: みもち
+        text: 説明って、短い方が読みやすいのはわかるんだ。でも短くすると、たぶん誰かの気持ちがこぼれる。
+    - say:
+        speaker: どり
+        text: 全部を一枚に入れなくていい。主の文章と、補足のカードに分ければ読める人だけ深く読める。
+    - say:
+        speaker: "{{player.name}}"
+        text: そのやり方なら、入口は軽くして中身は守れるか。
+    - say:
+        speaker: どり
+        text: うん。見る人の歩幅に合わせる方が、結果的にちゃんと届くこともある。
+    - say:
+        text: どりは大きなことを言わない。ただ、今ある問題をひとつずつ手の届く形に分けていく。それが妙に頼もしかった。
+    - motion:
+        character: みもち
+        name: うなずき
+    - say:
+        speaker: みもち
+        text: ……それなら、できそう。ありがとう。私、一人だと全部抱えて固まっちゃうから。
+    - goto: merge_work
+
+  merge_work:
+    - date: 4月12日 放課後
+    - background: project-meeting-classroom-evening
+    - hide: {}
+    - show:
+        character: 餅虎
+        expression: smile
+        position: left
+    - show:
+        character: どり
+        expression: default
+        position: center
+    - show:
+        character: ねむのみ
+        expression: smile
+        position: right
+    - say:
+        text: 放課後、教室に戻ると作業の山が少しだけ低くなっていた。その真ん中で、餅虎が掲示ラフを持ち上げて首をひねっている。
+    - say:
+        speaker: 餅虎
+        text: うーん。悪くない、悪くないんだけど、あと半歩だけ目を止める力が足んないのよね。
+    - say:
+        speaker: どり
+        text: 見出しの紙、もう少し厚い方がいいなら倉庫にある。今のだと遠目で弱い。
+    - say:
+        speaker: 餅虎
+        text: そう、それ。そういうのすぐ出してくるのずるいって。助かるけど。
+    - say:
+        speaker: ねむのみ
+        text: どりはずっとそうだよ。困る前に困りそうなところを埋めるの、上手なんだ。
+    - choice:
+        options:
+          - text: どりに、もう少し頼っていいか聞く
+            set:
+              flags.reliedOnDori: true
+              affection.dori: 2
+            goto: trust_dori
+          - text: 餅虎の表情の揺れが気になる
+            set:
+              flags.sawMochitoraAnxiety: true
+              affection.mochitora: 2
+            goto: notice_mochitora
+
+  trust_dori:
+    - say:
+        speaker: "{{player.name}}"
+        text: どり先輩、もし迷惑じゃなければ……これからも、足りないところを教えてほしい。たぶん俺、一人じゃ見落とす。
+    - say:
+        speaker: どり
+        text: 迷惑じゃないよ。むしろ、言ってくれた方が動きやすい。気づいても、勝手に入りすぎると邪魔になる時もあるから。
+    - say:
+        speaker: "{{player.name}}"
+        text: じゃあ、頼る。遠慮しないで声かけてください。
+    - say:
+        speaker: どり
+        text: わかった。こっちも遠慮しない。
+    - say:
+        text: それは穏やかな会話だったのに、不思議なくらい安心した。日常の中で頼れる相手が一人増えるだけで、景色は少し変わるらしい。
+    - goto: nemunomi_pause
+
+  notice_mochitora:
+    - say:
+        speaker: "{{player.name}}"
+        text: 餅虎先輩、そのラフ、気に入ってないわけじゃないですよね。
+    - say:
+        speaker: 餅虎
+        text: 気に入ってるわよ。でもね、目立つ言葉って失敗した時いちばん先に刺し返してくるの。盛り上げる役って、外した時は一番目立つから。
+    - say:
+        speaker: "{{player.name}}"
+        text: それでも前に出るの、強いです。
+    - say:
+        speaker: 餅虎
+        text: 強いっていうか、降りたくないだけ。……ほら、そういう顔しない。今のは独り言。
+    - say:
+        text: からかいの調子を崩さないまま、餅虎はラフを持ち直す。派手さの奥にある緊張が、少しだけ見えた気がした。
+    - goto: nemunomi_pause
+
+  nemunomi_pause:
+    - background: 保健室
+    - hide: {}
+    - show:
+        character: ねむのみ
+        expression: smile
+        position: center
+    - say:
+        text: 夕方、資料を運び終えたところで、ねむのみがまた保健室の前で待っていた。今度は何も言わず、人数分の紙コップだけを用意している。
+    - say:
+        speaker: ねむのみ
+        text: 日常の準備って、派手な事件がないぶん、気づいたら疲れるんだよね。だから少しだけ、何も決めない時間。
+    - choice:
+        options:
+          - text: 今回はちゃんと休む
+            set:
+              flags.restedAgainWithNemunomi: true
+              affection.nemunomi: 2
+            goto: rest_evening
+          - text: 一杯だけもらって戻る
+            set:
+              affection.nemunomi: 1
+            goto: short_rest_evening
+
+  rest_evening:
+    - say:
+        speaker: "{{player.name}}"
+        text: 今日は休む。たぶん昨日より、こういう時間が必要なのわかってきた。
+    - say:
+        speaker: ねむのみ
+        text: えらい。頑張るのをやめるんじゃなくて、続けるために区切るのも大事だから。
+    - say:
+        text: 短い休憩を挟んだだけなのに、頭の奥のざわつきが少し遠のいた。日常の整え方を、企画の仲間から教わっている気がした。
+    - goto: evening_hook
+
+  short_rest_evening:
+    - say:
+        speaker: "{{player.name}}"
+        text: 一杯だけ。今日はまだ、終わる前に確認したいことが多いから。
+    - say:
+        speaker: ねむのみ
+        text: そういう日もあるね。でも、飲みきるまでは座ってて。立ったまま休んだことにしないで。
+    - say:
+        text: 優しい指示に従って腰を下ろす。せわしない一日だったはずなのに、その数分だけ時間が静かに流れた。
+    - goto: evening_hook
+
+  evening_hook:
+    - date: 4月12日 夜
+    - background: 帰り道
+    - hide: {}
+    - show:
+        character: アガサ
+        expression: default
+        position: left
+    - show:
+        character: きりゅう
+        expression: default
+        position: center
+    - show:
+        character: ロクロ
+        expression: default
+        position: right
+    - say:
+        text: 日常の作業を一通り終えた帰り際、昇降口でアガサときりゅうがロクロに呼び止められていた。手元には、新しい申請書類の束がある。
+    - say:
+        speaker: ロクロ
+        text: 仮の準備はここまでだ。明日から先は、正式な公開申請の段階に入る。書類も、責任者名も、ごまかしは効かないよ。
+    - say:
+        speaker: アガサ
+        text: いよいよ表の仕事だね。根回しだけでは通らない段階に入る。
+    - say:
+        speaker: きりゅう
+        text: 今日片づけた地味な準備も、全部ここで効いてくる。抜けがあれば、そのまま止まると思え。
+    - say:
+        text: 何でもない放課後みたいだった一日の終わりに、次の章の気配がはっきりと差し込む。
+    - say:
+        text: 塔の過去を拾いながら、今度は学校そのものと向き合わなければならない。明日からは、企画の「表」が始まる。
+    - goto: ending
+
+  ending:
+    - set:
+        flags.chapter3Clear: true
+    - bgm: stop
+    - hide: {}
+    - say:
+        text: こうして{{player.name}}は、風見塔再生企画の中にある日常を知った。目立たない作業、何気ない寄り道、静かな支え。その積み重ねが、次の難しい交渉を支える土台になる。
+    - say:
+        text: そして、気づけばいつも足りないところを埋めている先輩――どりの存在もまた、この企画に欠かせないものになり始めていた。
+    - say:
+        text: 第三章・了

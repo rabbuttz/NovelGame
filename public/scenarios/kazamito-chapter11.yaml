@@ -1,0 +1,459 @@
+title: 風見塔のラストノート 第十一章 空白が語るもの
+dateLabel: 4月21日
+
+player:
+  title: 主人公の名前を決める
+  prompt: 呼ばれたい名前を入力してください。
+  defaultName: 湊
+  presets:
+    - 湊
+    - 悠真
+
+variables:
+  flags:
+    chapter1Clear: true
+    chapter2Clear: true
+    chapter3Clear: true
+    chapter4Clear: true
+    chapter5Clear: true
+    chapter6Clear: true
+    chapter7Clear: true
+    chapter8Clear: true
+    chapter9Clear: true
+    chapter10Clear: true
+    chapter11Clear: false
+    heardKiryuReason: false
+    foundMissingRecord: false
+    petitionSubmitted: false
+    agasaAgreedToSign: false
+  affection:
+    kiryu: 5
+    agasa: 5
+    amu: 5
+    mimochi: 4
+    gonta: 3
+  trust:
+    teacherSide: 2
+  lore:
+    closedTowerRecord: 2
+
+characters:
+  きりゅう:
+    name: きりゅう
+  アガサ:
+    name: アガサ
+  あむ:
+    name: あむ
+  みもち:
+    name: みもち
+  ごんた:
+    name: ごんた
+  ロクロ:
+    name: ロクロ
+
+start: morning_records
+
+nodes:
+  morning_records:
+    - date: 4月21日 朝
+    - background: 図書館
+    - bgm:
+        id: 共通ルート 日常
+        volume: 0.5
+        loop: true
+    - show:
+        character: みもち
+        expression: default
+        position: left
+    - show:
+        character: きりゅう
+        expression: default
+        position: center
+    - show:
+        character: アガサ
+        expression: default
+        position: right
+    - say:
+        text: 土曜の朝、図書館に集まったのは五人全員だった。みもちが前日の夜から続きを調べていたらしく、机の上には新しいメモが増えている。
+    - say:
+        speaker: みもち
+        text: やっぱり確かなんだよ。閉鎖前の最後の年、安全検査の記録だけ完全に抜けてる。日程も、担当者の名前も何もない。
+    - say:
+        speaker: アガサ
+        text: 意図的に消された、というより、最初から記録されていなかったのかもしれない。
+    - say:
+        speaker: きりゅう
+        text: 検査がされなかった可能性がある。事故のあとで、閉鎖を急いだとしたら。
+    - say:
+        speaker: あむ
+        text: それって、塔を閉めた理由の一番根っこじゃない？ 検査できないくらい何かがやばかった？
+    - say:
+        text: 誰も答えられなかった。でも全員が同じ方向を向いている。
+    - choice:
+        options:
+          - text: 「検査を担当するはずだった人を探せるかもしれない」と言う
+            goto: suggest_find_inspector
+          - text: 「記録がない理由より、今どうするかを考えよう」と言う
+            goto: suggest_next_step
+
+  suggest_find_inspector:
+    - say:
+        speaker: "{{player.name}}"
+        text: 検査を担当するはずだった人間が誰か特定できれば、当時何があったか聞けるかもしれない。
+    - say:
+        speaker: みもち
+        text: それ、私も考えてた。別冊に前年の検査員名がある。同じ担当者だったなら、その人が今もいるか調べられる。
+    - say:
+        speaker: きりゅう
+        text: 調べる価値はある。みもち、頼めるか。
+    - say:
+        speaker: みもち
+        text: うん。今日中にわかるか試してみる。
+    - goto: kiryu_window
+
+  suggest_next_step:
+    - say:
+        speaker: "{{player.name}}"
+        text: 理由がわからなくても、今俺たちにできることを積み上げるほうが早い。空白があるなら、それを埋める手続きを踏むだけだ。
+    - say:
+        speaker: きりゅう
+        text: ……お前はいつもそういう言い方をする。
+    - say:
+        speaker: "{{player.name}}"
+        text: 何かまずかった？
+    - say:
+        speaker: きりゅう
+        text: いや。正しい。ただ、なぜそこまで動けるのかと思って。
+    - say:
+        text: きりゅうの言い方に、責める色はなかった。純粋に、不思議そうだった。
+    - say:
+        speaker: みもち
+        text: とりあえず私は前年の検査員名から調べてみる。何か手がかりになるかもしれないから。
+    - goto: kiryu_window
+
+  kiryu_window:
+    - background: 図書館
+    - hide: {}
+    - show:
+        character: きりゅう
+        expression: default
+        position: center
+    - say:
+        text: みもちとアガサが資料の棚へ移動したあと、きりゅうが窓のそばに立ったままでいた。外には、まだ閉じたままの塔が見える。
+    - say:
+        speaker: "{{player.name}}"
+        text: きりゅう先輩。
+    - say:
+        speaker: きりゅう
+        text: ……塔、見てた。
+    - say:
+        text: きりゅうが振り向かずに言った。
+    - say:
+        speaker: きりゅう
+        text: 俺が一年生の頃、あそこはまだ使われてた。秋の合同授業で、クラスごとに展望台に上がる日があった。
+    - say:
+        text: きりゅうの声は淡々としていたが、続きを持っていた。
+    - say:
+        speaker: きりゅう
+        text: その日、一緒に上がった同級生が足を滑らせた。俺は近くにいたが、間に合わなかった。ごんた先生が駆けてきた時、俺はただ立っていた。
+    - say:
+        speaker: "{{player.name}}"
+        text: ……。
+    - say:
+        speaker: きりゅう
+        text: 怪我した同級生は今は元気だ。会えばちゃんと話す。でも俺の中には、あの時動けなかったことがずっと残ってる。
+    - choice:
+        options:
+          - text: 「だから塔の再開に関わってるんですか」と聞く
+            set:
+              flags.heardKiryuReason: true
+              affection.kiryu: 1
+            goto: kiryu_reason_yes
+          - text: 黙ってきりゅうの話を聞く
+            set:
+              flags.heardKiryuReason: true
+            goto: kiryu_reason_listen
+
+  kiryu_reason_yes:
+    - say:
+        speaker: "{{player.name}}"
+        text: だから、塔の再開に関わってるんですか。
+    - say:
+        speaker: きりゅう
+        text: ……半分はそうだ。もう半分は、あの塔が使われなくなったことで、後輩たちが同じ場所を知らないままになるのが嫌だったから。
+    - say:
+        text: きりゅうが窓から離れて、こちらを向いた。
+    - say:
+        speaker: きりゅう
+        text: 俺一人が関わっても何も変えられない。でもお前たちがいるなら、最後まで動けると思えた。
+    - goto: kiryu_continues
+
+  kiryu_reason_listen:
+    - say:
+        text: 何も言わなかった。きりゅうが続けるなら続ければいい。そう思って待った。
+    - say:
+        speaker: きりゅう
+        text: 塔を再開させることで何かが変わるとは限らない。でも、閉じたままにしておくことで変わらないままになるものはある。俺にとってはそれが大きかった。
+    - say:
+        text: きりゅうは視線をこちらに戻した。
+    - say:
+        speaker: きりゅう
+        text: 転入してきたお前がここまで動いてくれるとは思ってなかった。正直、最初は邪魔になると思っていた。
+    - say:
+        speaker: "{{player.name}}"
+        text: ……それはかなりはっきり言いますね。
+    - say:
+        speaker: きりゅう
+        text: 嘘をつくより正確だと思って。
+    - goto: kiryu_continues
+
+  kiryu_continues:
+    - say:
+        speaker: きりゅう
+        text: あと少しだ。記録の空白が何かを指しているとしたら、それを見届けてから終わりたい。
+    - say:
+        speaker: "{{player.name}}"
+        text: 一緒に見届けましょう。
+    - say:
+        text: きりゅうは何も言わなかった。ただ、少しだけうなずいた。それで十分だった。
+    - goto: mimochi_discovery
+
+  mimochi_discovery:
+    - date: 4月21日 昼
+    - background: 図書館
+    - hide: {}
+    - show:
+        character: みもち
+        expression: default
+        position: left
+    - show:
+        character: あむ
+        expression: default
+        position: right
+    - bgm:
+        id: 穏やかな恋愛イベント
+        volume: 0.4
+        loop: true
+    - say:
+        text: 昼過ぎ、みもちが資料の一角から戻ってきた。手に薄い紙を数枚持っている。
+    - say:
+        speaker: みもち
+        text: 見つけた。前年の担当検査員の名前が、退職者名簿と照合できた。その人、今もこの市内にいる。
+    - say:
+        speaker: あむ
+        text: 連絡できるってこと？
+    - say:
+        speaker: みもち
+        text: 直接じゃないけど。学校に問い合わせ状を出せば、OB経由で繋いでもらえるかもしれない。
+    - say:
+        text: みもちは手の中の紙を机に広げた。名前、退職年、そして最後の勤務地が並んでいる。
+    - say:
+        speaker: みもち
+        text: もう一個。これ、別冊の最後のページに挟まってた付箋。前の利用者が残したんだと思うけど……「検査延期の通知あり」って手書きで書いてある。
+    - say:
+        speaker: あむ
+        text: 延期？ じゃあ検査はしようとしてたけど、間に合わなかったってこと？
+    - say:
+        speaker: みもち
+        text: たぶん。事故のあと、閉鎖を急いだ。検査の日程を組み直す前に封鎖してしまった。記録がないのは消えたんじゃなくて、最初から作られなかった。
+    - say:
+        text: 全員が黙った。欠けていた理由が埋まった瞬間の、静けさだった。
+    - set:
+        flags.foundMissingRecord: true
+        lore.closedTowerRecord: 3
+    - choice:
+        options:
+          - text: 「なら今、ちゃんと検査を通せばいい」と言う
+            goto: player_proposes_inspection
+          - text: みもちに「よく見つけたね」と伝える
+            set:
+              affection.mimochi: 1
+            goto: praise_mimochi
+
+  praise_mimochi:
+    - say:
+        speaker: "{{player.name}}"
+        text: みもち、よく見つけたね。
+    - say:
+        speaker: みもち
+        text: ……べつに。付箋がたまたまあっただけ。
+    - say:
+        speaker: あむ
+        text: いやいや、前日から探してたんでしょ。素直に受け取りなよ。
+    - say:
+        speaker: みもち
+        text: うるさい。
+    - say:
+        text: みもちは横を向いたが、耳が少し赤かった。
+    - goto: player_proposes_inspection
+
+  player_proposes_inspection:
+    - say:
+        speaker: "{{player.name}}"
+        text: 検査が途中だったなら、今から正式に申請して通せばいい。空白の理由がわかったんだから、学校側に説明できる。
+    - say:
+        speaker: あむ
+        text: ロクロ先生に話す？
+    - say:
+        speaker: "{{player.name}}"
+        text: そうしよう。午後に時間をもらえるか聞いてみる。
+    - goto: agasa_hallway
+
+  agasa_hallway:
+    - background: 廊下
+    - hide: {}
+    - show:
+        character: アガサ
+        expression: default
+        position: center
+    - say:
+        text: 図書館から出たところで、アガサが廊下で待っていた。
+    - say:
+        speaker: アガサ
+        text: みもちの話、聞こえてた。付箋のこと。
+    - say:
+        speaker: "{{player.name}}"
+        text: 見てたんだ。
+    - say:
+        speaker: アガサ
+        text: 私はいつも見てるよ。……ねえ、申請書を出す時、私の名前も入れて。
+    - say:
+        speaker: "{{player.name}}"
+        text: もちろん。でも、急に決めたの？
+    - say:
+        speaker: アガサ
+        text: 急じゃない。きりゅうが窓のそばで話してたの、遠くから見てた。あなたと話してる時のきりゅうは、普段と全然違う。それを見て、私も最後まで名前を出したいと思った。
+    - say:
+        text: アガサは静かに笑った。いつも人を観察している人間が、自分の中を見せている顔だった。
+    - set:
+        flags.agasaAgreedToSign: true
+        affection.agasa: 1
+    - choice:
+        options:
+          - text: 「アガサが見てくれてるのは心強い」と言う
+            goto: agasa_encouraged
+          - text: 「ありがとう。全員で出そう」と言う
+            goto: agasa_together
+
+  agasa_encouraged:
+    - say:
+        speaker: "{{player.name}}"
+        text: アガサがいつも見ててくれてるのは、心強い。
+    - say:
+        speaker: アガサ
+        text: ……それは照れる言い方。でも、ありがとう。
+    - say:
+        text: アガサが少し目を細めた。照れているのではなく、何かを確認するような目だった。
+    - goto: rokuro_meeting
+
+  agasa_together:
+    - say:
+        speaker: "{{player.name}}"
+        text: ありがとう。全員の名前で出そう。
+    - say:
+        speaker: アガサ
+        text: うん。それがいい。
+    - say:
+        text: 廊下の向こうから、あむの声が聞こえてくる。全員がそれぞれの場所にいる。でも向いている方向は同じだ。
+    - goto: rokuro_meeting
+
+  rokuro_meeting:
+    - date: 4月21日 午後
+    - background: 職員室
+    - hide: {}
+    - show:
+        character: ロクロ
+        expression: default
+        position: center
+    - bgm:
+        id: 切ない会話・すれ違い
+        volume: 0.4
+        loop: true
+    - say:
+        text: 職員室のロクロは、書類の束から顔を上げて五人を見渡した。
+    - say:
+        speaker: ロクロ
+        text: 揃いも揃って。何かあったか。
+    - say:
+        speaker: "{{player.name}}"
+        text: 閉鎖前の安全検査が未実施だったことがわかりました。延期の通知が出たまま、検査を通さずに封鎖されていたみたいです。
+    - say:
+        speaker: ロクロ
+        text: ……そうか。それはうちの代よりも前の話だが。
+    - say:
+        speaker: きりゅう
+        text: だから今から正式に申請できます。現在の基準で安全検査を通す手続きを踏む。それが済めば、再開の見通しが立ちます。
+    - say:
+        text: ロクロは少し考えてから、腕を組んだ。
+    - say:
+        speaker: ロクロ
+        text: わかった。申請書の様式は教頭から取る。生徒側の連名で出すなら、担任の確認も要る。段取りはお前たちで組め。俺は話を通す。
+    - say:
+        speaker: あむ
+        text: 先生が通してくれるんですか？
+    - say:
+        speaker: ロクロ
+        text: 俺が通さなかったら、お前たちは学校中に直談判して回るだろう。先に動く。
+    - say:
+        text: ロクロの声は乾いていたが、押さえた笑みがあった。
+    - set:
+        flags.petitionSubmitted: true
+        trust.teacherSide: 3
+    - goto: gonta_corridor
+
+  gonta_corridor:
+    - background: 廊下
+    - hide: {}
+    - show:
+        character: ごんた
+        expression: default
+        position: center
+    - say:
+        text: 職員室の前の廊下で、ごんたとすれ違った。
+    - say:
+        speaker: ごんた
+        text: ロクロに話したか。顔に出てるぞ。
+    - say:
+        speaker: "{{player.name}}"
+        text: 申請を出します。安全検査を正式に通す手続きです。
+    - say:
+        speaker: ごんた
+        text: そうか。……あの日、誰も終わらせなかったことを、お前たちが終わらせるんだな。
+    - say:
+        text: ごんたは小さく息をついた。安堵と、少しだけ遠い目をした。
+    - say:
+        speaker: ごんた
+        text: 俺も書類があれば名前を出す。何かあれば言え。
+    - say:
+        text: ごんたは先に歩いていった。その背中は、以前よりも真っ直ぐに見えた。
+    - goto: ending_scene
+
+  ending_scene:
+    - date: 4月21日 夕方
+    - background: 校舎外・夕方
+    - hide: {}
+    - bgm: stop
+    - show:
+        character: きりゅう
+        expression: default
+        position: right
+    - say:
+        text: 学校の外に出ると、夕方の光が長く伸びていた。校舎の陰に、塔の輪郭がある。
+    - say:
+        speaker: きりゅう
+        text: 申請が通れば、次は検査員の日程調整だ。早ければ二週間以内に動ける。
+    - say:
+        speaker: "{{player.name}}"
+        text: あと少しですね。
+    - say:
+        speaker: きりゅう
+        text: ……ああ。
+    - say:
+        text: 短い返事だったが、きりゅうの声には今日一日分の重さがある。一年生の頃から持ち続けてきたものが、少しずつ形になっている。
+    - say:
+        text: 塔はまだ閉じている。でも今日、その扉に向かう道筋がはっきりした。記録の空白が、ようやく言葉を持ち始めている。
+    - set:
+        flags.chapter11Clear: true
+    - say:
+        text: 第十一章・了
+

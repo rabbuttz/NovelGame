@@ -1,5 +1,15 @@
 [
   {
+    "url": "scenarios/kazamito-ukiwa-school-date.yaml",
+    "title": "風見塔のラストノート 番外編 うきわと、学校で",
+    "description": "土曜日の放課後、委員会を終えたうきわに誘われて二人で学校をうろうろする番外編。図書館、体育館裏、夕焼けの廊下。"
+  },
+  {
+    "url": "scenarios/kazamito-chapter11.yaml",
+    "title": "風見塔のラストノート 第十一章",
+    "description": "検査記録の空白の理由が判明し、安全検査の正式申請へ。きりゅうが塔への個人的な想いを語る転機の第十一章。"
+  },
+  {
     "url": "scenarios/kazamito-chapter10.yaml",
     "title": "風見塔のラストノート 第十章",
     "description": "ごんたが語った閉鎖当日の記憶、あむの素直な感謝、みもちの調査、アガサの観察、きりゅうの本音。それぞれの距離が縮まる転換点の第十章。"

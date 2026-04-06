@@ -1,0 +1,442 @@
+title: 風見塔のラストノート 番外編 うきわと、学校で
+dateLabel: 4月19日
+
+player:
+  title: 主人公の名前を決める
+  prompt: 呼ばれたい名前を入力してください。
+  defaultName: 湊
+  presets:
+    - 湊
+    - 悠真
+
+variables:
+  flags:
+    ukiwaDateClear: false
+    toldUkiwaHonestly: false
+    stayedAtGym: false
+  affection:
+    ukiwa: 4
+
+characters:
+  うきわ:
+    name: うきわ
+
+start: saturday_classroom
+
+nodes:
+  saturday_classroom:
+    - date: 4月19日 土曜日 午後
+    - background: 教室・昼
+    - bgm:
+        id: 共通ルート 日常
+        volume: 0.45
+        loop: true
+    - say:
+        text: 土曜日の午後。委員会の作業が伸びて、{{player.name}}は誰もいない教室に一人残っていた。窓の外の校庭では、誰かのサッカーボールがころころ転がっている。
+    - say:
+        text: ノートにまとめた数字を見直して、顔を上げたら、廊下のほうから足音が来た。
+    - show:
+        character: うきわ
+        expression: smile
+        position: center
+    - say:
+        speaker: うきわ
+        text: あ、いた！ まだいてくれた。
+    - say:
+        text: 扉のふちに体半分引っかけて、うきわはちょっと照れたような顔をしていた。
+    - say:
+        speaker: "{{player.name}}"
+        text: うきわ、委員会は？
+    - say:
+        speaker: うきわ
+        text: さっき終わった。……で、その、なんていうか。もう少し学校にいてもいいかなって思って。
+    - say:
+        speaker: うきわ
+        text: よかったら、一緒にうろうろしない？ 土曜日の学校って、雰囲気ちがくて好きなんだよね。
+    - choice:
+        options:
+          - text: いいよ
+            goto: agree_walk
+          - text: なにそれ、デートみたいじゃん
+            set:
+              flags.toldUkiwaHonestly: true
+            goto: tease_date
+
+  tease_date:
+    - say:
+        speaker: "{{player.name}}"
+        text: なにそれ。デートみたいじゃん。
+    - say:
+        speaker: うきわ
+        text: ……っ、そ、そういうつもりではないけど！ でもまあその、嫌なら別に。
+    - say:
+        text: うきわの耳がほんのり赤い。こういう時だけ言い訳が小さくなる。
+    - say:
+        speaker: "{{player.name}}"
+        text: 嫌じゃないよ。行こう。
+    - say:
+        speaker: うきわ
+        text: ……うん。行こう。
+    - goto: walk_to_library
+
+  agree_walk:
+    - say:
+        speaker: "{{player.name}}"
+        text: いいよ。どこ行く？
+    - say:
+        speaker: うきわ
+        text: えっ、ほんと？ じゃあまず図書館！ 借りたい本があって。
+    - say:
+        text: うきわはぱっと顔が明るくなって、先に廊下へ出た。やっぱり先に走るのはいつも通りだ。
+    - goto: walk_to_library
+
+  walk_to_library:
+    - date: 4月19日 土曜日 午後
+    - background: 廊下
+    - hide: {}
+    - show:
+        character: うきわ
+        expression: smile
+        position: right
+    - bgm:
+        id: 穏やかな恋愛イベント
+        volume: 0.48
+        loop: true
+    - say:
+        text: 土曜日の廊下は静かだった。靴の音だけが響いて、いつもと同じ景色がすこし違って見える。
+    - say:
+        speaker: うきわ
+        text: ぼくさ、土曜日に学校来る時って、なんか堂々と探検できる気がして。
+    - say:
+        speaker: "{{player.name}}"
+        text: 探検って、毎日来てるじゃん。
+    - say:
+        speaker: うきわ
+        text: 毎日は授業があるからさ、ちゃんと見られないんだよ。たとえばこの廊下の窓、午後になるとすごくきれいな光が入るんだけど、授業中には絶対見られないじゃん。
+    - say:
+        text: うきわが窓の外を指さした。斜めに差し込む午後の光が廊下の床を照らして、確かに見慣れない角度の光だった。
+    - say:
+        speaker: "{{player.name}}"
+        text: ……本当だ。知らなかった。
+    - say:
+        speaker: うきわ
+        text: でしょ！ ぼくこういうの、なんか好きなんだよね。普段の場所が、ちょっと違う顔してる瞬間。
+    - goto: in_library
+
+  in_library:
+    - date: 4月19日 土曜日 午後
+    - background: 図書館
+    - hide: {}
+    - show:
+        character: うきわ
+        expression: default
+        position: center
+    - say:
+        text: 図書館には司書の先生がいるだけで、他に生徒はいなかった。うきわは迷いなく棚の奥へ向かう。
+    - say:
+        speaker: うきわ
+        text: あった。これ。
+    - say:
+        text: 差し出したのは薄い郷土資料集だった。表紙に「校内建築の変遷」と書いてある。
+    - say:
+        speaker: "{{player.name}}"
+        text: ……風見塔の調べ物？
+    - say:
+        speaker: うきわ
+        text: ちがうよ。……まあちょっとはそうかもしれないけど。なんか、建物の歴史を読んでると面白くて。
+    - say:
+        speaker: うきわ
+        text: この学校のことを、全部ぼくが知ってるわけじゃないんだなって思ったら、もっと知りたくなったんだよね。
+    - say:
+        text: うきわはぱらぱらとページをめくる。その横顔は普段の元気な動きと違って、静かに何かを読んでいた。
+    - choice:
+        options:
+          - text: 隣に座って一緒に読む
+            goto: read_together
+          - text: 他の棚を眺める
+            goto: browse_shelves
+
+  read_together:
+    - say:
+        speaker: "{{player.name}}"
+        text: ちょっと見せて。
+    - say:
+        speaker: うきわ
+        text: え、いいの？ じゃあこっち来て。ここが風見塔の図なんだけど。
+    - say:
+        text: 肩が触れる距離で、ふたりで本を覗き込んだ。うきわの声が少し小さくなる。
+    - say:
+        speaker: うきわ
+        text: ……昔の風見塔、今よりもっと目立つ場所にあったんだって。今の校舎が増築された時に、端っこになっちゃったみたい。
+    - say:
+        speaker: "{{player.name}}"
+        text: 端っこになっても、残ってたんだね。
+    - say:
+        speaker: うきわ
+        text: そうなんだよね。……なんか、それいいなって思って。
+    - say:
+        text: うきわは静かに本を閉じた。その顔に、いつもの強引な元気さはなかった。
+    - goto: library_window
+
+  browse_shelves:
+    - say:
+        speaker: "{{player.name}}"
+        text: じゃあぼくはちょっと別の棚見てる。
+    - say:
+        speaker: うきわ
+        text: うん。呼んだら来て。
+    - say:
+        text: しばらく各自でぱらぱらしていた。図書館の静けさが、ふたりの間に落ち着いた空気を作っていた。
+    - say:
+        text: 「{{player.name}}」とうきわに呼ばれて振り向くと、うきわが本を開いたまま窓のそばに立っていた。
+    - say:
+        speaker: うきわ
+        text: ねえ、これ見て。昔の風見塔の写真。今より全然違う場所にあるんだよ。
+    - goto: library_window
+
+  library_window:
+    - say:
+        text: 図書館の窓の外に、今の風見塔が見えた。うきわはしばらくそれを眺めていた。
+    - say:
+        speaker: うきわ
+        text: ぼく、最初はあの塔のことよくわかってなかったんだよね。企画に乗っかった感じで。
+    - say:
+        speaker: "{{player.name}}"
+        text: 今は？
+    - say:
+        speaker: うきわ
+        text: 今は……なんか、ちゃんと残したいって思ってる。場所というか、その場所にくっついてる時間というか。
+    - say:
+        text: うきわはちょっと照れたように笑った。
+    - say:
+        speaker: うきわ
+        text: なんか、難しいこと言おうとしたら変になった。
+    - say:
+        speaker: "{{player.name}}"
+        text: 変じゃない。わかる。
+    - say:
+        speaker: うきわ
+        text: ……ありがと。
+    - goto: to_gym
+
+  to_gym:
+    - date: 4月19日 土曜日 夕方
+    - background: 廊下
+    - hide: {}
+    - show:
+        character: うきわ
+        expression: smile
+        position: center
+    - say:
+        text: 図書館を出た頃には、廊下の光がオレンジに変わり始めていた。
+    - say:
+        speaker: うきわ
+        text: 次どこ行く？ 体育館裏、行ってみない？
+    - say:
+        speaker: "{{player.name}}"
+        text: ……器具庫のとこ？
+    - say:
+        speaker: うきわ
+        text: そうそこ。なんか、あそこもう一回ちゃんと行きたくて。
+    - say:
+        text: うきわは笑いながら言ったけど、少しだけ目が逸れた。
+    - goto: at_gym
+
+  at_gym:
+    - date: 4月19日 土曜日 夕方
+    - background: 体育館
+    - hide: {}
+    - show:
+        character: うきわ
+        expression: default
+        position: center
+    - say:
+        text: 器具庫の前は、夕方でも少し薄暗かった。扉の鍵は閉まっている。うきわはその前でしゃがみ込んだ。あの日と、同じ姿勢で。
+    - say:
+        speaker: うきわ
+        text: ……なんか、戻ってきちゃった。
+    - say:
+        speaker: "{{player.name}}"
+        text: うん。
+    - say:
+        speaker: うきわ
+        text: ぼくさ、あの日ここで泣きそうになってたの、覚えてる？
+    - say:
+        speaker: "{{player.name}}"
+        text: 覚えてるよ。
+    - say:
+        speaker: うきわ
+        text: あの時、かっこ悪かったな。でもなんか今は……それでよかったかもって思う。一人で引っ張ってたら、絶対もっとひどいことになってた。
+    - choice:
+        options:
+          - text: かっこ悪くなかった、と返す
+            goto: reply_cool
+          - text: 見えてくれてよかった、と返す
+            set:
+              flags.stayedAtGym: true
+            goto: reply_helped
+
+  reply_cool:
+    - say:
+        speaker: "{{player.name}}"
+        text: かっこ悪くなかったよ。ちゃんと限界まで走ってたじゃん。
+    - say:
+        speaker: うきわ
+        text: ……それはそれで、だいぶ問題な気もするけど。
+    - say:
+        speaker: うきわ
+        text: でも、ありがと。
+    - goto: after_gym
+
+  reply_helped:
+    - say:
+        speaker: "{{player.name}}"
+        text: 見えてくれてよかった。隠されてたら、たぶん届かなかった。
+    - say:
+        speaker: うきわ
+        text: ……ぼく、ずっとかっこつけたかったんだよ。でも{{player.name}}の前では、なんか無理だった。
+    - say:
+        text: うきわは立ち上がって、扉の錆びた金具を軽くさわった。
+    - say:
+        speaker: うきわ
+        text: それが、ちょっと嬉しかったりするんだけどね。
+    - goto: after_gym
+
+  after_gym:
+    - show:
+        character: うきわ
+        expression: smile
+        position: center
+    - say:
+        text: うきわは立ち上がって、体の埃を払った。
+    - say:
+        speaker: うきわ
+        text: じゃあ最後、廊下の窓から夕焼け見に行こう。さっきとは違う角度なの。
+    - say:
+        speaker: "{{player.name}}"
+        text: さっきも廊下だったじゃん。
+    - say:
+        speaker: うきわ
+        text: 光の角度が違うの！ 夕方はまた全然ちがうから。
+    - goto: evening_hallway
+
+  evening_hallway:
+    - date: 4月19日 土曜日 夕方
+    - background: 廊下
+    - hide: {}
+    - show:
+        character: うきわ
+        expression: smile
+        position: center
+    - bgm:
+        id: 切ない会話・すれ違い
+        volume: 0.42
+        loop: true
+    - say:
+        text: 夕方の廊下は、午後とまた違う色をしていた。窓の外の空がオレンジで、廊下の床に長い影が伸びている。
+    - say:
+        speaker: うきわ
+        text: ほら、こっちのほうが全然きれいでしょ。
+    - say:
+        speaker: "{{player.name}}"
+        text: ……本当だ。
+    - say:
+        text: ふたりで窓の外を見た。誰もいない校庭。遠くの住宅地。その向こうに沈みかけの太陽。
+    - say:
+        speaker: うきわ
+        text: ぼくさ、今日みたいな土曜日の学校って、誰かと来たかったんだよね。
+    - say:
+        speaker: "{{player.name}}"
+        text: 誰か、って。
+    - say:
+        speaker: うきわ
+        text: ……{{player.name}}と、って言えばよかったね。ちょっとかっこつけようとした。
+    - say:
+        text: うきわはそのまま窓枠にもたれて、こちらを見た。夕日が横顔に当たって、いつもより少し大人に見える。
+    - say:
+        speaker: うきわ
+        text: ぼく、{{player.name}}のこと好きなんだと思う。なんか前からそんな気はしてたけど、今日でちゃんとわかった。
+    - say:
+        text: 言い終わってから、うきわは少しだけ息を吸って、待つように黙った。
+    - choice:
+        options:
+          - text: ぼくも、と返す
+            goto: mutual_end
+          - text: どのへんでわかったの、と聞く
+            goto: ask_more
+
+  mutual_end:
+    - say:
+        speaker: "{{player.name}}"
+        text: ぼくも。
+    - say:
+        speaker: うきわ
+        text: ……え。
+    - say:
+        speaker: "{{player.name}}"
+        text: 好きだよ。今日、ちゃんとわかった。
+    - show:
+        character: うきわ
+        expression: cry
+        position: center
+    - say:
+        text: うきわの顔が崩れた。笑おうとして、うまくいかなくて、また笑って。
+    - say:
+        speaker: うきわ
+        text: なんで先に言うんだよ。こっちがちゃんと言ったのに。
+    - say:
+        speaker: "{{player.name}}"
+        text: 順番どっちでもよくない？
+    - say:
+        speaker: うきわ
+        text: よくない。……でも、嬉しい。
+    - goto: ending
+
+  ask_more:
+    - say:
+        speaker: "{{player.name}}"
+        text: どのへんでわかったの。
+    - say:
+        speaker: うきわ
+        text: えっ、そういうこと聞く？
+    - say:
+        speaker: "{{player.name}}"
+        text: 聞く。
+    - say:
+        speaker: うきわ
+        text: ……図書館で一緒に本読んだ時かな。なんか、この人と隣にいると落ち着くなって思ったら、あ、これ好きなんだって。
+    - say:
+        speaker: うきわ
+        text: あとは体育館で、あの日のことちゃんと覚えてくれてたこと。嫌な思い出じゃなく持ってくれてる感じがして。
+    - say:
+        text: うきわは夕焼けに向き直して、小さく笑った。
+    - say:
+        speaker: うきわ
+        text: {{player.name}}は？ どう思ってる。
+    - say:
+        speaker: "{{player.name}}"
+        text: 好きだよ。
+    - show:
+        character: うきわ
+        expression: cry
+        position: center
+    - say:
+        speaker: うきわ
+        text: ……一言かよ。
+    - say:
+        speaker: "{{player.name}}"
+        text: うきわが全部言ったから、もういいかなって。
+    - say:
+        speaker: うきわ
+        text: よくない！ でも……ありがと。
+    - goto: ending
+
+  ending:
+    - set:
+        flags.ukiwaDateClear: true
+    - bgm: stop
+    - hide: {}
+    - say:
+        text: 日が沈んで、廊下の光が藍色に変わっていった。帰り道はずっとふたりで歩いた。うきわは珍しく何も喋らなかったけど、歩くペースが揃っていた。
+    - say:
+        text: 土曜日の学校。誰もいない廊下。夕焼けと、少し赤い顔。それだけで、十分だった。
